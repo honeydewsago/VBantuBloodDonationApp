@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">VBantu</string>
+    <string name="homeTitle">Blood Donation</string>
+    <string name="communityTitle">Community</string>
+    <string name="profileTitle">Profile</string>
     <string name="welcome">Welcome Back To VBantu</string>
     <string name="loginToContinue">Login/Sign Up to Continue</string>
     <string name="login">Login</string>
