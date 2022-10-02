@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".LoginFragment">
+
+    <EditText
+        android:id="@+id/fl_etUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/input_box"
+        android:ems="10"
+        android:hint="@string/Username"
+        android:inputType="textPersonName"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/fl_etPassword"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/input_box"
+        android:ems="10"
+        android:hint="@string/Password"
+        android:inputType="textPassword"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/fl_etUsername"
+        app:layout_constraintStart_toStartOf="@+id/fl_etUsername"
+        app:layout_constraintTop_toBottomOf="@+id/fl_etUsername" />
+
+    <CheckBox
+        android:id="@+id/fl_checkboxRemember"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/rememberMe"
+        android:textColor="@color/medium_grey"
+        app:layout_constraintStart_toStartOf="@+id/fl_etPassword"
+        app:layout_constraintTop_toBottomOf="@+id/fl_etPassword" />
+
+    <TextView
+        android:id="@+id/fl_tvForgotPassLink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/forgotPassword"
+        android:textColor="@color/red"
+        android:textSize="12sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/fl_checkboxRemember"
+        app:layout_constraintEnd_toEndOf="@+id/fl_etPassword" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/fl_btnSubmit"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/red"
+        android:insetLeft="0dp"
+        android:insetTop="0dp"
+        android:insetRight="0dp"
+        android:insetBottom="0dp"
+        app:cornerRadius="24dp"
+        app:icon="@drawable/ic_arrow_right_24"
+        app:iconGravity="textEnd"
+        app:iconPadding="0dp"
+        app:iconSize="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/fl_tvForgotPassLink"
+        app:layout_constraintStart_toStartOf="@+id/fl_checkboxRemember"
+        app:layout_constraintTop_toBottomOf="@+id/fl_checkboxRemember" />
+</androidx.constraintlayout.widget.ConstraintLayout>
