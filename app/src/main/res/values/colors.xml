@@ -10,4 +10,6 @@
     <color name="beige">#FFEBD4CB</color>
     <color name="red">#FFC83E4D</color>
     <color name="pink">#FFF2D5D8</color>
+    <color name="light_grey">#FFE5E5E5</color>
+    <color name="medium_grey">#FF999999</color>
 </resources>

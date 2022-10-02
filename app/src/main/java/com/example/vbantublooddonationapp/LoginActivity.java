@@ -25,12 +25,12 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(v);
 
         mViewPagerAdapter = new LoginViewPagerAdapter(this);
-        binding.viewPager.setAdapter(mViewPagerAdapter);
+        binding.alViewPager.setAdapter(mViewPagerAdapter);
 
-        binding.tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        binding.alTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                binding.viewPager.setCurrentItem(tab.getPosition());
+                binding.alViewPager.setCurrentItem(tab.getPosition());
             }
 
             @Override
@@ -44,11 +44,11 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        binding.viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+        binding.alViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
-                binding.tabLayout.getTabAt(position).select();
+                binding.alTabLayout.getTabAt(position).select();
             }
         });
     }
