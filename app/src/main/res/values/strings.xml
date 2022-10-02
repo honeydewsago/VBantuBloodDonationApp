@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">VBantu</string>
+    <string name="welcome">Welcome Back To VBantu</string>
+    <string name="loginToContinue">Login to Continue</string>
+    <string name="login">Login</string>
+    <string name="signup">Signup</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
