@@ -17,6 +17,9 @@
             android:name=".RegisterUser"
             android:exported="false" />
         <activity
+            android:name=".CommunityNewPost"
+            android:exported="false" />
+        <activity
             android:name=".HomeActivity"
             android:exported="false" />
         <activity
