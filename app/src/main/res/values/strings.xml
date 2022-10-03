@@ -23,4 +23,5 @@
     <string name="commentAmount">00 Comments</string>
     <string name="minutes">00 minutes ago</string>
     <string name="comment">Comment</string>
+    <string name="AddANewPost">Add A New Post</string>
 </resources>
