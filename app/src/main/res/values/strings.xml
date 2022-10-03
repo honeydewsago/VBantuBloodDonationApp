@@ -26,4 +26,6 @@
     <string name="Welcome">Welcome To VBantu</string>
     <string name="clickToSelect">Click To Select</string>
     <string name="dateOfBirth">Date of Birth:</string>
+    <string name="IcNo">IC No</string>
+    <string name="ContactNo">Contact No</string>
 </resources>
