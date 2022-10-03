@@ -16,4 +16,11 @@
     <string name="Email">Email</string>
     <string name="ConfirmPassword">Confirm Password</string>
     <string name="CompanyName">Company Name</string>
+    <string name="newPost">New post</string>
+    <string name="like">Like</string>
+    <string name="caption">Caption</string>
+    <string name="likeAmount">00 Likes</string>
+    <string name="commentAmount">00 Comments</string>
+    <string name="minutes">00 minutes ago</string>
+    <string name="comment">Comment</string>
 </resources>
