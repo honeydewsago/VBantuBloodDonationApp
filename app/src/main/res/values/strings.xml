@@ -30,4 +30,6 @@
     <string name="likes">Likes</string>
     <string name="close">Close</string>
     <string name="Comments">Comments</string>
+    <string name="background">Background</string>
+    <string name="send">Send</string>
 </resources>
