@@ -53,7 +53,8 @@
                 android:layout_marginBottom="20dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/avatar" />
+                app:srcCompat="@drawable/avatar"
+                android:contentDescription="@string/avatar"/>
 
             <TextView
                 android:id="@+id/ac_AddNewPost_Tv_Username"
@@ -76,7 +77,8 @@
                 android:layout_marginEnd="20dp"
                 android:src="@drawable/ic_done"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="@string/done"/>
 
             <EditText
                 android:id="@+id/ac_AddNewPost_Et_Caption"
@@ -100,6 +102,7 @@
                 app:layout_constraintTop_toBottomOf="@id/ac_AddNewPost_Iv_Avatar" />
 
             <ImageView
+                android:contentDescription="@string/image"
                 android:id="@+id/ac_AddNewPost_Iv_Image"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"

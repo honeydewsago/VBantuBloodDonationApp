@@ -31,6 +31,7 @@
                 android:layout_weight="1">
 
                 <ImageView
+                    android:contentDescription="@string/avatar"
                     android:id="@+id/ac_CvIv_Avatar"
                     android:layout_width="75dp"
                     android:layout_height="75dp"
@@ -81,6 +82,7 @@
                 android:layout_weight="1">
 
                 <ImageView
+                    android:contentDescription="@string/image"
                     android:id="@+id/ac_CvIv_Image"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
@@ -94,6 +96,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <LinearLayout
+                android:baselineAligned="false"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
