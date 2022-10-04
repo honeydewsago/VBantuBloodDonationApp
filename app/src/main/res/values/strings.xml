@@ -27,4 +27,7 @@
     <string name="avatar">Avatar</string>
     <string name="done">Done</string>
     <string name="image">Image</string>
+    <string name="likes">Likes</string>
+    <string name="close">Close</string>
+    <string name="Comments">Comments</string>
 </resources>
