@@ -24,4 +24,7 @@
     <string name="minutes">00 minutes ago</string>
     <string name="comment">Comment</string>
     <string name="AddANewPost">Add A New Post</string>
+    <string name="avatar">Avatar</string>
+    <string name="done">Done</string>
+    <string name="image">Image</string>
 </resources>
