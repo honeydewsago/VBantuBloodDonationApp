@@ -4,18 +4,30 @@
     <string name="communityTitle">Community</string>
     <string name="profileTitle">Profile</string>
     <string name="welcome">Welcome Back To VBantu</string>
+    <string name="WelcomeBack">Welcome Back To VBantu</string>
     <string name="loginToContinue">Login/Sign Up to Continue</string>
     <string name="login">Login</string>
     <string name="signup">Sign Up</string>
     <string name="rememberMe">Remember Me</string>
     <string name="forgotPassword">Forgot Password?</string>
+    <string name="RememberMe">Remember Me</string>
+    <string name="ForgotPassword">Forgot Password?</string>
     <string name="Username">Username</string>
     <string name="Password">Password</string>
     <string name="donor">Donor</string>
     <string name="organiser">Organiser</string>
+    <string name="Donor">Donor</string>
+    <string name="Organiser">Organiser</string>
     <string name="Email">Email</string>
     <string name="ConfirmPassword">Confirm Password</string>
     <string name="CompanyName">Company Name</string>
+    <string name="Fullname">Full Name</string>
+    <string name="FillInPersonalInfo">Please fill in your personal information</string>
+    <string name="Welcome">Welcome To VBantu</string>
+    <string name="clickToSelect">Click To Select</string>
+    <string name="dateOfBirth">Date of Birth:</string>
+    <string name="IcNo">IC No (Eg:xxxxxxxxxxxx)</string>
+    <string name="ContactNo">Contact No</string>
     <string name="newPost">New post</string>
     <string name="like">Like</string>
     <string name="caption">Caption</string>
@@ -32,4 +44,19 @@
     <string name="Comments">Comments</string>
     <string name="background">Background</string>
     <string name="send">Send</string>
+    <string name="bloodType">Blood Type:</string>
+    <string name="female">Female</string>
+    <string name="male">Male</string>
+    <string name="gender">Gender:</string>
+
+    <string-array name="bloodGroupValues">
+        <item>A+</item>
+        <item>A-</item>
+        <item>AB+</item>
+        <item>AB-</item>
+        <item>B+</item>
+        <item>B-</item>
+        <item>O+</item>
+        <item>O-</item>
+    </string-array>
 </resources>
