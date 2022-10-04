@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/outline_grey"
-        app:cardCornerRadius="20dp"
+        app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,7 +40,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_launcher_background" />
+                    app:srcCompat="@drawable/avatar" />
 
                 <TextView
                     android:id="@+id/communityPost_Username"
@@ -90,7 +90,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_loginbg" />
+                    app:srcCompat="@drawable/placeholder" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <LinearLayout
@@ -157,35 +157,26 @@
                 android:orientation="horizontal"
                 android:weightSum="6">
 
-                <Button
-                    android:id="@+id/ac_CvBtn_Like"
+                <ImageView
+                    android:id="@+id/ac_CvIv_Like"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginEnd="5dp"
-                    android:layout_weight="4"
-                    android:backgroundTint="@color/white"
-                    android:drawableLeft="@drawable/ic_thumb_up"
+                    android:layout_weight="5"
+                    android:contentDescription="@string/like"
                     android:padding="10dp"
-                    android:paddingStart="20dp"
-                    android:text="@string/like"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:src="@drawable/ic_thumb_up" />
 
-                <Button
-                    android:id="@+id/ac_CvBtn_Comment"
+                <ImageView
+                    android:id="@+id/ac_CvIv_Comment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginEnd="5dp"
-                    android:layout_weight="3"
-                    android:backgroundTint="@color/white"
-                    android:drawableLeft="@drawable/ic_comment"
+                    android:layout_weight="5"
+                    android:contentDescription="@string/comment"
                     android:padding="10dp"
-                    android:paddingStart="20dp"
-                    android:text="@string/comment"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:src="@drawable/ic_comment" />
 
             </LinearLayout>
         </LinearLayout>
