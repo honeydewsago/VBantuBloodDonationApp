@@ -29,12 +29,12 @@
             android:id="@+id/ac_CvIv_Close"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/ic_close"
+            android:layout_marginEnd="20dp"
             android:contentDescription="@string/close"
-            app:layout_constraintTop_toTopOf="@id/ac_CvTv_Likes"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/ic_close"
             app:layout_constraintBottom_toBottomOf="@id/ac_CvTv_Likes"
-            android:layout_marginEnd="20dp"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/ac_CvTv_Likes" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/ac_Rv_LikesList"

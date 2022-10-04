@@ -37,8 +37,8 @@
         android:text="@string/comment"
         android:textColor="@color/black"
         android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/ac_CommentsList_Avatar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ac_CommentsList_Avatar"
-        app:layout_constraintBottom_toBottomOf="@+id/ac_CommentsList_Avatar" />
+        app:layout_constraintStart_toEndOf="@+id/ac_CommentsList_Avatar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
