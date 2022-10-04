@@ -4,17 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 
 import java.util.Objects;
 
-public class CommunityNewPost extends AppCompatActivity {
+public class CommunityCommentActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_community_new_post);
+        setContentView(R.layout.activity_community_comment);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.community_toolbar);
 

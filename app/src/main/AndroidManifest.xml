@@ -14,7 +14,10 @@
         android:theme="@style/Theme.VBantuBloodDonationApp"
         tools:targetApi="31">
         <activity
-            android:name=".CommunityNewPost"
+            android:name=".CommunityCommentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CommunityNewPostActivity"
             android:exported="false" />
         <activity
             android:name=".HomeActivity"
