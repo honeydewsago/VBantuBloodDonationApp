@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CommunityCommentActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/community_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:actionBarSize"
+        android:background="@color/red"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/ac_Tv_Comments"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/Comments"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/ac_Comments_Rv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/community_toolbar" />
+
+    <ImageView
+        android:id="@+id/ac_Comments_Iv_Background"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="2dp"
+        android:background="@drawable/outline_grey"
+        android:contentDescription="@string/background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/ac_Comments_Et_Comment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:hint="@string/comment"
+        android:inputType="textMultiLine"
+        android:lines="1"
+        android:padding="8dp"
+        android:scrollHorizontally="false"
+        app:layout_constraintBottom_toBottomOf="@+id/ac_Comments_Iv_Background"
+        app:layout_constraintEnd_toStartOf="@+id/ac_Comments_Iv_Send"
+        app:layout_constraintStart_toStartOf="@+id/ac_Comments_Iv_Background"
+        app:layout_constraintTop_toTopOf="@+id/ac_Comments_Iv_Background" />
+
+    <ImageView
+        android:id="@+id/ac_Comments_Iv_Send"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="10dp"
+        android:contentDescription="@string/send"
+        android:src="@drawable/ic_send"
+        app:layout_constraintBottom_toBottomOf="@id/ac_Comments_Iv_Background"
+        app:layout_constraintEnd_toEndOf="@id/ac_Comments_Iv_Background"
+        app:layout_constraintTop_toTopOf="@id/ac_Comments_Iv_Background" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

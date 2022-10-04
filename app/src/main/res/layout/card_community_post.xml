@@ -31,13 +31,13 @@
                 android:layout_weight="1">
 
                 <ImageView
-                    android:contentDescription="@string/avatar"
                     android:id="@+id/ac_CvIv_Avatar"
                     android:layout_width="75dp"
                     android:layout_height="75dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
+                    android:contentDescription="@string/avatar"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -82,11 +82,11 @@
                 android:layout_weight="1">
 
                 <ImageView
-                    android:contentDescription="@string/image"
                     android:id="@+id/ac_CvIv_Image"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
                     android:layout_marginTop="8dp"
+                    android:contentDescription="@string/image"
                     android:scaleType="fitXY"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -96,12 +96,12 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <LinearLayout
-                android:baselineAligned="false"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_weight="1"
+                android:baselineAligned="false"
                 android:orientation="horizontal"
                 android:weightSum="4">
 

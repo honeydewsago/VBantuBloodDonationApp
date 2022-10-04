@@ -1,49 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/pink"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".CommunityFragment">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/community_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?android:actionBarSize"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/community_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:actionBarSize"
+        android:background="@color/red"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/ac_Tv_Community"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/communityTitle"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/ac_IBtn_NewPost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginEnd="10dp"
             android:background="@color/red"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/ac_Tv_Community"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/communityTitle"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:textStyle="bold"/>
-
-            <ImageButton
-                android:id="@+id/ac_IBtn_NewPost"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:layout_gravity="end"
-                android:background="@color/red"
-                android:src="@drawable/ic_edit"
-                android:contentDescription="@string/newPost" />
-        </androidx.appcompat.widget.Toolbar>
+            android:contentDescription="@string/newPost"
+            android:src="@drawable/ic_edit" />
+    </androidx.appcompat.widget.Toolbar>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/ac_Cv_Leaderboard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/ac_Rv_CommunityPosts"
-        app:layout_constraintTop_toBottomOf="@+id/community_toolbar"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/community_toolbar" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/ac_Rv_CommunityPosts"
@@ -54,6 +54,6 @@
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ac_Cv_Leaderboard"
-        app:layout_constraintVertical_bias="0"/>
+        app:layout_constraintVertical_bias="0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

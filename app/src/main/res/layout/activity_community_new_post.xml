@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/pink"
-    tools:context=".CommunityNewPost">
+    tools:context=".CommunityNewPostActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/community_toolbar"
@@ -51,10 +51,10 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
+                android:contentDescription="@string/avatar"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/avatar"
-                android:contentDescription="@string/avatar"/>
+                app:srcCompat="@drawable/avatar" />
 
             <TextView
                 android:id="@+id/ac_AddNewPost_Tv_Username"
@@ -75,10 +75,10 @@
                 android:layout_height="35dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
+                android:contentDescription="@string/done"
                 android:src="@drawable/ic_done"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:contentDescription="@string/done"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
                 android:id="@+id/ac_AddNewPost_Et_Caption"
@@ -102,13 +102,13 @@
                 app:layout_constraintTop_toBottomOf="@id/ac_AddNewPost_Iv_Avatar" />
 
             <ImageView
-                android:contentDescription="@string/image"
                 android:id="@+id/ac_AddNewPost_Iv_Image"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="20dp"
+                android:contentDescription="@string/image"
                 android:scaleType="fitXY"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
