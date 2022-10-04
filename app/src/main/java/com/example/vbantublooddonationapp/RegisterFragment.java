@@ -1,5 +1,6 @@
 package com.example.vbantublooddonationapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -44,6 +45,16 @@ public class RegisterFragment extends Fragment {
                         userType = "";
                         Toast.makeText(getActivity(), "Please select donor/organiser", Toast.LENGTH_SHORT).show();
                     }
+                }
+            }
+        });
+
+        binding.frBtnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (userType == "donor") {
+                    Intent i = new Intent(getActivity(), RegisterUser.class);
+                    startActivity(i);
                 }
             }
         });

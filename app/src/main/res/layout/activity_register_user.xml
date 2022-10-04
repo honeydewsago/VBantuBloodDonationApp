@@ -43,12 +43,13 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/ic_login_box"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/aru_tvFillInPersonalInfo">
 
@@ -71,119 +72,181 @@
             android:layout_marginStart="16dp"
             android:drawableEnd="@drawable/ic_arrow_down_24"
             android:text="@string/clickToSelect"
-            android:textColor="@color/medium_grey"
+            android:textColor="@color/dark_grey"
             app:layout_constraintStart_toEndOf="@+id/aru_tvDateOfBirth"
             app:layout_constraintTop_toTopOf="@+id/aru_tvDateOfBirth" />
 
+        <TextView
+            android:id="@+id/aru_tvSelectBloodType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/bloodType"
+            android:textColor="@color/red"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/aru_tvDateOfBirth"
+            app:layout_constraintTop_toBottomOf="@+id/aru_tvSelectDateOfBirth" />
+
+        <Spinner
+            android:id="@+id/aru_spinnerBloodType"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:entries="@array/bloodGroupValues"
+            app:layout_constraintEnd_toEndOf="@+id/aru_tvSelectDateOfBirth"
+            app:layout_constraintStart_toStartOf="@+id/aru_tvSelectDateOfBirth"
+            app:layout_constraintTop_toTopOf="@+id/aru_tvSelectBloodType" />
+
+        <RadioGroup
+            android:id="@+id/aru_rgGender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toEndOf="@+id/aru_tvGender"
+            app:layout_constraintTop_toTopOf="@+id/aru_tvGender">
+
+            <RadioButton
+                android:id="@+id/aru_rbFemale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/female"
+                android:textColor="@color/dark_grey"
+                android:textSize="12sp" />
+
+            <RadioButton
+                android:id="@+id/aru_rbMale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="@string/male"
+                android:textColor="@color/dark_grey"
+                android:textSize="12sp" />
+
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/aru_tvGender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/gender"
+            android:textColor="@color/red"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/aru_tvSelectBloodType"
+            app:layout_constraintTop_toBottomOf="@+id/aru_spinnerBloodType" />
+
         <EditText
             android:id="@+id/aru_etUsername"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
             android:background="@drawable/input_box"
             android:ems="10"
             android:hint="@string/Username"
             android:inputType="textPersonName"
             android:paddingLeft="20dp"
-            android:paddingTop="5dp"
-            android:paddingRight="10dp"
-            android:paddingBottom="5dp"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/aru_tvDateOfBirth" />
-
-        <EditText
-            android:id="@+id/aru_etFullname"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/input_box"
-            android:ems="10"
-            android:hint="@string/Fullname"
-            android:inputType="textPersonName"
-            android:paddingLeft="20dp"
-            android:paddingTop="5dp"
+            android:paddingTop="10dp"
             android:paddingRight="10dp"
             android:paddingBottom="10dp"
             android:textSize="16sp"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="103dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/aru_tvGender"
+            app:layout_constraintTop_toBottomOf="@+id/aru_rgGender" />
 
         <EditText
             android:id="@+id/aru_etIcNo"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:background="@drawable/input_box"
             android:ems="10"
             android:hint="@string/IcNo"
-            android:inputType="textPersonName"
+            android:inputType="number"
             android:paddingLeft="20dp"
-            android:paddingTop="5dp"
+            android:paddingTop="10dp"
             android:paddingRight="10dp"
             android:paddingBottom="10dp"
             android:textSize="16sp"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="140dp" />
+            app:layout_constraintEnd_toEndOf="@+id/aru_etUsername"
+            app:layout_constraintStart_toStartOf="@+id/aru_etUsername"
+            app:layout_constraintTop_toBottomOf="@+id/aru_etUsername" />
 
         <EditText
             android:id="@+id/aru_etContactNo"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:background="@drawable/input_box"
             android:ems="10"
             android:hint="@string/ContactNo"
-            android:inputType="textPersonName"
+            android:inputType="number"
             android:paddingLeft="20dp"
-            android:paddingTop="5dp"
+            android:paddingTop="10dp"
             android:paddingRight="10dp"
             android:paddingBottom="10dp"
             android:textSize="16sp"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="177dp" />
+            app:layout_constraintEnd_toEndOf="@+id/aru_etIcNo"
+            app:layout_constraintStart_toStartOf="@+id/aru_etIcNo"
+            app:layout_constraintTop_toBottomOf="@+id/aru_etIcNo" />
 
         <EditText
             android:id="@+id/aru_etPassword"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:background="@drawable/input_box"
             android:ems="10"
             android:hint="@string/Password"
             android:inputType="textPersonName"
             android:paddingLeft="20dp"
-            android:paddingTop="5dp"
+            android:paddingTop="10dp"
             android:paddingRight="10dp"
             android:paddingBottom="10dp"
             android:textSize="16sp"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="214dp" />
+            app:layout_constraintEnd_toEndOf="@+id/aru_etContactNo"
+            app:layout_constraintStart_toStartOf="@+id/aru_etContactNo"
+            app:layout_constraintTop_toBottomOf="@+id/aru_etContactNo" />
 
         <EditText
             android:id="@+id/aru_etConfirmPassword"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:background="@drawable/input_box"
             android:ems="10"
             android:hint="@string/ConfirmPassword"
             android:inputType="textPersonName"
             android:paddingLeft="20dp"
-            android:paddingTop="5dp"
+            android:paddingTop="10dp"
             android:paddingRight="10dp"
             android:paddingBottom="10dp"
             android:textSize="16sp"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="251dp" />
+            app:layout_constraintEnd_toEndOf="@+id/aru_etPassword"
+            app:layout_constraintStart_toStartOf="@+id/aru_etPassword"
+            app:layout_constraintTop_toBottomOf="@+id/aru_etPassword" />
 
-        <TextView
-            android:id="@+id/aru_tvSelectDateOfBirth2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableEnd="@drawable/ic_arrow_down_24"
-            android:text="Blood Type"
-            android:textColor="@color/medium_grey"
-            tools:layout_editor_absoluteX="100dp"
-            tools:layout_editor_absoluteY="309dp" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/fr_btnSubmit"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/red"
+            android:insetLeft="0dp"
+            android:insetTop="0dp"
+            android:insetRight="0dp"
+            android:insetBottom="0dp"
+            app:cornerRadius="24dp"
+            app:icon="@drawable/ic_arrow_right_24"
+            app:iconGravity="textEnd"
+            app:iconPadding="0dp"
+            app:iconSize="40dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/aru_etConfirmPassword"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="@+id/aru_etConfirmPassword"
+            app:layout_constraintTop_toBottomOf="@+id/aru_etConfirmPassword" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
