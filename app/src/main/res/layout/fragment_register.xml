@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:paddingLeft="40dp"
             android:paddingRight="40dp"
-            android:text="@string/Donor"
+            android:text="@string/donor"
             app:layout_constraintStart_toStartOf="@+id/fr_toggleBtnGrp"
             app:layout_constraintTop_toTopOf="@+id/fr_toggleBtnGrp" />
 
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
-            android:text="@string/Organiser"
+            android:text="@string/organiser"
             app:layout_constraintStart_toEndOf="@+id/button"
             app:layout_constraintTop_toTopOf="@+id/button" />
     </com.google.android.material.button.MaterialButtonToggleGroup>
@@ -48,7 +48,7 @@
         android:layout_marginEnd="24dp"
         android:background="@drawable/input_box"
         android:ems="10"
-        android:hint="@string/Email"
+        android:hint="@string/email"
         android:inputType="textPersonName"
         android:paddingLeft="20dp"
         android:paddingTop="10dp"
@@ -65,7 +65,7 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/input_box"
         android:ems="10"
-        android:hint="@string/Fullname"
+        android:hint="@string/fullname"
         android:inputType="textPersonName"
         android:paddingLeft="20dp"
         android:paddingTop="10dp"

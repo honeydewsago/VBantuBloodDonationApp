@@ -53,7 +53,7 @@ public class RegisterFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (userType == "donor") {
-                    Intent i = new Intent(getActivity(), RegisterUser.class);
+                    Intent i = new Intent(getActivity(), RegisterUserActivity.class);
                     startActivity(i);
                 }
             }
