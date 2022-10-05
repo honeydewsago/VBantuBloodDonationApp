@@ -32,11 +32,11 @@ public class RegisterFragment extends Fragment {
             public void onButtonChecked(MaterialButtonToggleGroup group, int checkedId, boolean isChecked) {
                 if (isChecked){
                     if (checkedId == R.id.fr_btnDonor) {
-                        binding.frEtFullName.setHint(R.string.Fullname);
+                        binding.frEtFullName.setHint(R.string.fullname);
                         userType = "donor";
                     }
                     else if (checkedId == R.id.fr_btnOrganiser){
-                        binding.frEtFullName.setHint(R.string.CompanyName);
+                        binding.frEtFullName.setHint(R.string.companyName);
                         userType = "organiser";
                     }
                 }
@@ -53,7 +53,7 @@ public class RegisterFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (userType == "donor") {
-                    Intent i = new Intent(getActivity(), RegisterUser.class);
+                    Intent i = new Intent(getActivity(), RegisterUserActivity.class);
                     startActivity(i);
                 }
             }
