@@ -31,6 +31,14 @@ public class LoginFragment extends Fragment {
             }
         });
 
+        binding.flTvForgotPassLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent forgotPass = new Intent(getActivity(),ForgotPasswordActivity.class);
+                startActivity(forgotPass);
+            }
+        });
+
         // Inflate the layout for this fragment
         return view;
         //return inflater.inflate(R.layout.fragment_login, container, false);

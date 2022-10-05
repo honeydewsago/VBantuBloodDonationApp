@@ -44,6 +44,8 @@
     <string name="male">Male</string>
     <string name="gender">Gender:</string>
     <string name="youCameToTheRightPlace">You Came To The Right Place</string>
+    <string name="enterYourEmailHere">Enter Your Email Here</string>
+    <string name="toGetAPasswordReset">To get a password reset</string>
 
     <string-array name="bloodGroupValues">
         <item>A+</item>
