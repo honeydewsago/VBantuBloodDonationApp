@@ -1,5 +1,6 @@
 package com.example.vbantublooddonationapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -31,11 +32,11 @@ public class RegisterFragment extends Fragment {
             public void onButtonChecked(MaterialButtonToggleGroup group, int checkedId, boolean isChecked) {
                 if (isChecked){
                     if (checkedId == R.id.fr_btnDonor) {
-                        binding.frEtUsername.setHint(R.string.Username);
+                        binding.frEtFullName.setHint(R.string.fullname);
                         userType = "donor";
                     }
                     else if (checkedId == R.id.fr_btnOrganiser){
-                        binding.frEtUsername.setHint(R.string.CompanyName);
+                        binding.frEtFullName.setHint(R.string.companyName);
                         userType = "organiser";
                     }
                 }
@@ -44,6 +45,16 @@ public class RegisterFragment extends Fragment {
                         userType = "";
                         Toast.makeText(getActivity(), "Please select donor/organiser", Toast.LENGTH_SHORT).show();
                     }
+                }
+            }
+        });
+
+        binding.frBtnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (userType == "donor") {
+                    Intent i = new Intent(getActivity(), RegisterUserActivity.class);
+                    startActivity(i);
                 }
             }
         });

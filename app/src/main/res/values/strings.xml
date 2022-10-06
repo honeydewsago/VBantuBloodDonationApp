@@ -3,19 +3,26 @@
     <string name="homeTitle">Blood Donation</string>
     <string name="communityTitle">Community</string>
     <string name="profileTitle">Profile</string>
-    <string name="welcome">Welcome Back To VBantu</string>
+    <string name="welcome">Welcome To VBantu</string>
+    <string name="welcomeBack">Welcome Back To VBantu</string>
     <string name="loginToContinue">Login/Sign Up to Continue</string>
     <string name="login">Login</string>
     <string name="signup">Sign Up</string>
     <string name="rememberMe">Remember Me</string>
     <string name="forgotPassword">Forgot Password?</string>
-    <string name="Username">Username</string>
-    <string name="Password">Password</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
     <string name="donor">Donor</string>
     <string name="organiser">Organiser</string>
-    <string name="Email">Email</string>
-    <string name="ConfirmPassword">Confirm Password</string>
-    <string name="CompanyName">Company Name</string>
+    <string name="email">Email</string>
+    <string name="confirmPassword">Confirm Password</string>
+    <string name="companyName">Company Name</string>
+    <string name="fullname">Full Name</string>
+    <string name="fillInPersonalInfo">Please fill in your personal information</string>
+    <string name="clickToSelect">Click To Select</string>
+    <string name="dateOfBirth">Date of Birth:</string>
+    <string name="icNo">IC No (Eg:xxxxxxxxxxxx)</string>
+    <string name="contactNo">Contact No</string>
     <string name="newPost">New post</string>
     <string name="like">Like</string>
     <string name="caption">Caption</string>
@@ -33,4 +40,22 @@
     <string name="background">Background</string>
     <string name="send">Send</string>
     <string name="commentsHint">Write your comment here…</string>
+    <string name="bloodType">Blood Type:</string>
+    <string name="female">Female</string>
+    <string name="male">Male</string>
+    <string name="gender">Gender:</string>
+    <string name="youCameToTheRightPlace">You Came To The Right Place</string>
+    <string name="enterYourEmailHere">Enter Your Email Here</string>
+    <string name="toGetAPasswordReset">To get a password reset</string>
+
+    <string-array name="bloodGroupValues">
+        <item>A+</item>
+        <item>A-</item>
+        <item>AB+</item>
+        <item>AB-</item>
+        <item>B+</item>
+        <item>B-</item>
+        <item>O+</item>
+        <item>O-</item>
+    </string-array>
 </resources>
