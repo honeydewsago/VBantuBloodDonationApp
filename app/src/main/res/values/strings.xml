@@ -32,4 +32,5 @@
     <string name="Comments">Comments</string>
     <string name="background">Background</string>
     <string name="send">Send</string>
+    <string name="commentsHint">Write your comment here…</string>
 </resources>
