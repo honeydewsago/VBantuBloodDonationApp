@@ -227,7 +227,7 @@
             app:layout_constraintTop_toBottomOf="@+id/aru_etPassword" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/fr_btnSubmit"
+            android:id="@+id/aru_btnSubmit"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginTop="16dp"

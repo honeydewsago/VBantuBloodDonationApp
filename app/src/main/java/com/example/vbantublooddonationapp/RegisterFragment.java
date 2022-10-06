@@ -14,6 +14,8 @@ import com.example.vbantublooddonationapp.databinding.ActivityLoginBinding;
 import com.example.vbantublooddonationapp.databinding.FragmentRegisterBinding;
 import com.google.android.material.button.MaterialButtonToggleGroup;
 
+import java.util.Objects;
+
 public class RegisterFragment extends Fragment {
 
     private FragmentRegisterBinding binding;
@@ -52,9 +54,16 @@ public class RegisterFragment extends Fragment {
         binding.frBtnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (userType == "donor") {
-                    Intent i = new Intent(getActivity(), RegisterUserActivity.class);
-                    startActivity(i);
+                if (userType.equals("donor")) {
+                    Intent ru = new Intent(getActivity(), RegisterUserActivity.class);
+                    startActivity(ru);
+                }
+                else if (userType.equals("organiser")) {
+                    Intent ro = new Intent(getActivity(), RegisterOrganiserActivity.class);
+                    startActivity(ro);
+                }
+                else {
+                    Toast.makeText(getActivity(), "Please select donor/organiser", Toast.LENGTH_SHORT).show();
                 }
             }
         });
