@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_loginbg"
+    tools:context=".RegisterOrganiserActivity">
+
+    <ImageView
+        android:id="@+id/aro_imageView"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/red_box" />
+
+    <TextView
+        android:id="@+id/aro_tvWelcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="52dp"
+        android:text="@string/welcome"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/aro_imageView" />
+
+    <TextView
+        android:id="@+id/aro_tvFillInPersonalInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/fillInPersonalInfo"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/aro_tvWelcome"
+        app:layout_constraintTop_toBottomOf="@+id/aro_tvWelcome" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/ic_login_box"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/aro_tvFillInPersonalInfo">
+
+        <TextView
+            android:id="@+id/aro_tvOrganisationInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/organisationInformation"
+            android:textColor="@color/dark_grey"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/aro_etPicName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/input_box"
+            android:ems="10"
+            android:hint="@string/nameOfPic"
+            android:inputType="textPersonName"
+            android:paddingLeft="20dp"
+            android:paddingTop="6dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/aro_tvOrganisationInfo"
+            app:layout_constraintTop_toBottomOf="@+id/aro_tvOrganisationInfo" />
+
+        <EditText
+            android:id="@+id/aro_etContactNo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/input_box"
+            android:ems="10"
+            android:hint="@string/contactNo"
+            android:inputType="number"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@+id/aro_etPicName"
+            app:layout_constraintStart_toStartOf="@+id/aro_etPicName"
+            app:layout_constraintTop_toBottomOf="@+id/aro_etPicName" />
+
+        <EditText
+            android:id="@+id/aro_etIcNo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/input_box"
+            android:ems="10"
+            android:hint="@string/icNo"
+            android:inputType="number"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@+id/aro_etContactNo"
+            app:layout_constraintStart_toStartOf="@+id/aro_etContactNo"
+            app:layout_constraintTop_toBottomOf="@+id/aro_etContactNo" />
+
+        <EditText
+            android:id="@+id/aro_etAddress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/input_box"
+            android:ems="10"
+            android:hint="@string/organisationAddress"
+            android:inputType="textMultiLine"
+            android:lines="3"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp"
+            android:scrollHorizontally="false"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@+id/aro_etIcNo"
+            app:layout_constraintStart_toStartOf="@+id/aro_etIcNo"
+            app:layout_constraintTop_toBottomOf="@+id/aro_etIcNo" />
+
+        <EditText
+            android:id="@+id/aro_etPassword"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/input_box"
+            android:ems="10"
+            android:hint="@string/password"
+            android:inputType="textPersonName"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@+id/aro_etAddress"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/aro_etAddress"
+            app:layout_constraintTop_toBottomOf="@+id/aro_etAddress" />
+
+        <EditText
+            android:id="@+id/aro_etConfirmPassword"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/input_box"
+            android:ems="10"
+            android:hint="@string/confirmPassword"
+            android:inputType="textPersonName"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@+id/aro_etPassword"
+            app:layout_constraintStart_toStartOf="@+id/aro_etPassword"
+            app:layout_constraintTop_toBottomOf="@+id/aro_etPassword" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/aro_btnSubmit"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:backgroundTint="@color/red"
+            android:insetLeft="0dp"
+            android:insetTop="0dp"
+            android:insetRight="0dp"
+            android:insetBottom="0dp"
+            app:cornerRadius="24dp"
+            app:icon="@drawable/ic_arrow_right_24"
+            app:iconGravity="textEnd"
+            app:iconPadding="0dp"
+            app:iconSize="40dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/aro_checkBoxSubscribe"
+            app:layout_constraintStart_toStartOf="@+id/aro_checkBoxSubscribe"
+            app:layout_constraintTop_toBottomOf="@+id/aro_checkBoxSubscribe" />
+
+        <CheckBox
+            android:id="@+id/aro_checkBoxAgreeTnC"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/agreeToTnC"
+            android:textColor="@color/red"
+            android:textSize="10sp"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="@+id/aro_etConfirmPassword"
+            app:layout_constraintStart_toStartOf="@+id/aro_etConfirmPassword"
+            app:layout_constraintTop_toBottomOf="@+id/aro_etConfirmPassword" />
+
+        <CheckBox
+            android:id="@+id/aro_checkBoxSubscribe"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:text="@string/subscribeToNewsFeed"
+            android:textColor="@color/dark_grey"
+            android:textSize="10sp"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="@+id/aro_checkBoxAgreeTnC"
+            app:layout_constraintStart_toStartOf="@+id/aro_checkBoxAgreeTnC"
+            app:layout_constraintTop_toBottomOf="@+id/aro_checkBoxAgreeTnC" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

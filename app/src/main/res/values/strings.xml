@@ -49,6 +49,11 @@
     <string name="toGetAPasswordReset">To get a password reset</string>
     <string name="urgentRequest">Urgent Request</string>
     <string name="location">Location</string>
+    <string name="organisationInformation">Organisation Information</string>
+    <string name="nameOfPic">Name of Person In Charge</string>
+    <string name="organisationAddress">Organisation Address</string>
+    <string name="agreeToTnC"><![CDATA[I agree to the terms and conditions & privacy policy stated.]]></string>
+    <string name="subscribeToNewsFeed">Subscribe to our latest newsfeed for upcoming updates.</string>
 
     <string-array name="bloodGroupValues">
         <item>A+</item>
