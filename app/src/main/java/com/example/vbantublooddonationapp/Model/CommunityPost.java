@@ -23,6 +23,4 @@ public class CommunityPost {
     @ColumnInfo(name = "postDateTime")
     public String postDateTime;
 
-    @ColumnInfo(name = "commentDesc")
-    public String commentDesc;
 }
