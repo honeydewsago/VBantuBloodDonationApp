@@ -3,6 +3,8 @@ package com.example.vbantublooddonationapp;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -17,11 +19,19 @@ public class LoginFragment extends Fragment {
     private FragmentLoginBinding binding;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentLoginBinding.inflate(getLayoutInflater());
-        View view = binding.getRoot();
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         binding.flBtnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,9 +48,5 @@ public class LoginFragment extends Fragment {
                 startActivity(forgotPass);
             }
         });
-
-        // Inflate the layout for this fragment
-        return view;
-        //return inflater.inflate(R.layout.fragment_login, container, false);
     }
 }

@@ -72,6 +72,7 @@
             android:layout_marginStart="16dp"
             android:drawableEnd="@drawable/ic_arrow_down_24"
             android:text="@string/clickToSelect"
+            android:onClick="tvSelectDateOfBirth_clicked"
             android:textColor="@color/dark_grey"
             app:layout_constraintStart_toEndOf="@+id/aru_tvDateOfBirth"
             app:layout_constraintTop_toTopOf="@+id/aru_tvDateOfBirth" />
@@ -110,6 +111,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/female"
+                android:onClick="rgGender_clicked"
                 android:textColor="@color/dark_grey"
                 android:textSize="12sp" />
 
@@ -119,6 +121,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:text="@string/male"
+                android:onClick="rgGender_clicked"
                 android:textColor="@color/dark_grey"
                 android:textSize="12sp" />
 

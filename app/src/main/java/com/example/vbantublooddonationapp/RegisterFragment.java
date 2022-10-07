@@ -3,8 +3,12 @@ package com.example.vbantublooddonationapp;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.room.ColumnInfo;
 
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,12 +26,19 @@ public class RegisterFragment extends Fragment {
     private String userType="";
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentRegisterBinding.inflate(getLayoutInflater());
-        View view = binding.getRoot();
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         binding.frToggleBtnGrp.addOnButtonCheckedListener(new MaterialButtonToggleGroup.OnButtonCheckedListener() {
             @Override
@@ -54,20 +65,50 @@ public class RegisterFragment extends Fragment {
         binding.frBtnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (userType.equals("donor")) {
-                    Intent ru = new Intent(getActivity(), RegisterUserActivity.class);
-                    startActivity(ru);
-                }
-                else if (userType.equals("organiser")) {
-                    Intent ro = new Intent(getActivity(), RegisterOrganiserActivity.class);
-                    startActivity(ro);
-                }
-                else {
-                    Toast.makeText(getActivity(), "Please select donor/organiser", Toast.LENGTH_SHORT).show();
-                }
+                registerAccount();
             }
         });
-        //return inflater.inflate(R.layout.fragment_register, container, false);
-        return view;
+    }
+
+    private void registerAccount(){
+        //get user or organiser data
+        String email = binding.frEtEmail.getText().toString();
+        String fullName = binding.frEtFullName.getText().toString();
+
+        //validate to check if email is empty
+        if (email.isEmpty()) {
+            binding.frEtEmail.setError("Email is required!");
+            binding.frEtEmail.requestFocus();
+            return;
+        }
+        //validate to check if email format is invalid
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            binding.frEtEmail.setError("Email address is invalid!");
+            binding.frEtEmail.requestFocus();
+            return;
+        }
+
+        //validate to check if full name or company name is empty
+        if (fullName.isEmpty()) {
+            binding.frEtFullName.setError("Name is required!");
+            binding.frEtFullName.requestFocus();
+            return;
+        }
+
+        if (userType.equals("donor")) {
+            Intent ru = new Intent(getActivity(), RegisterUserActivity.class);
+            ru.putExtra("user_email", email);
+            ru.putExtra("user_fullName", fullName);
+            startActivity(ru);
+        }
+        else if (userType.equals("organiser")) {
+            Intent ro = new Intent(getActivity(), RegisterOrganiserActivity.class);
+            ro.putExtra("organiser_email", email);
+            ro.putExtra("company_name", fullName);
+            startActivity(ro);
+        }
+        else {
+            Toast.makeText(getActivity(), "Please select donor/organiser", Toast.LENGTH_SHORT).show();
+        }
     }
 }

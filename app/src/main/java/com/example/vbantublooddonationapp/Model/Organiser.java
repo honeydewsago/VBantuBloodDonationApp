@@ -27,8 +27,8 @@ public class Organiser {
     @ColumnInfo(name = "contact")
     public String contact;
 
-    @ColumnInfo(name = "picICNo")
-    public String picICNo;
+    @ColumnInfo(name = "picIcNo")
+    public String picIcNo;
 
     @ColumnInfo(name = "address")
     public String address;
