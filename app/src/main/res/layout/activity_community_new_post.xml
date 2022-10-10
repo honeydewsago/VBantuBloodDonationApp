@@ -8,7 +8,7 @@
     tools:context=".CommunityNewPostActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/community_toolbar"
+        android:id="@+id/acnp_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?android:actionBarSize"
         android:background="@color/red"
@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/ac_Tv_AddANewPost"
+            android:id="@+id/acnp_tvAddANewPost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -28,7 +28,7 @@
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/ac_Cv_NewPost"
+        android:id="@+id/acnp_cvNewPost"
         android:layout_width="match_parent"
         android:layout_height="500dp"
         android:layout_marginStart="10dp"
@@ -37,7 +37,7 @@
         app:cardCornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/community_toolbar">
+        app:layout_constraintTop_toBottomOf="@id/acnp_toolbar">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -45,7 +45,7 @@
             android:layout_weight="1">
 
             <ImageView
-                android:id="@+id/ac_AddNewPost_Iv_Avatar"
+                android:id="@+id/acnp_ivAvatar"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="20dp"
@@ -57,7 +57,7 @@
                 app:srcCompat="@drawable/avatar" />
 
             <TextView
-                android:id="@+id/ac_AddNewPost_Tv_Username"
+                android:id="@+id/acnp_tvUsername"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -65,12 +65,12 @@
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/ac_AddNewPost_Iv_Avatar"
-                app:layout_constraintStart_toEndOf="@+id/ac_AddNewPost_Iv_Avatar"
-                app:layout_constraintTop_toTopOf="@+id/ac_AddNewPost_Iv_Avatar" />
+                app:layout_constraintBottom_toBottomOf="@+id/acnp_ivAvatar"
+                app:layout_constraintStart_toEndOf="@+id/acnp_ivAvatar"
+                app:layout_constraintTop_toTopOf="@+id/acnp_ivAvatar" />
 
             <ImageView
-                android:id="@+id/ac_AddNewPost_Iv_Done"
+                android:id="@+id/acnp_ivDone"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_marginTop="20dp"
@@ -81,7 +81,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/ac_AddNewPost_Et_Caption"
+                android:id="@+id/acnp_etCaption"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -96,13 +96,13 @@
                 android:scrollbars="vertical"
                 android:scrollHorizontally="false"
                 android:textSize="18sp"
-                app:layout_constraintBottom_toTopOf="@+id/ac_AddNewPost_Iv_Image"
+                app:layout_constraintBottom_toTopOf="@+id/acnp_ivPostImage"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ac_AddNewPost_Iv_Avatar" />
+                app:layout_constraintTop_toBottomOf="@id/acnp_ivAvatar" />
 
             <ImageView
-                android:id="@+id/ac_AddNewPost_Iv_Image"
+                android:id="@+id/acnp_ivPostImage"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_marginStart="20dp"

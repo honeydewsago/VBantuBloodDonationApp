@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/ac_CommentsList_Avatar"
+        android:id="@+id/ccc_ivAvatar"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="20dp"
@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/ac_CommentsList_Username"
+        android:id="@+id/ccc_tvUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -25,11 +25,11 @@
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/ac_CommentsList_Avatar"
-        app:layout_constraintTop_toTopOf="@+id/ac_CommentsList_Avatar" />
+        app:layout_constraintStart_toEndOf="@+id/ccc_ivAvatar"
+        app:layout_constraintTop_toTopOf="@+id/ccc_ivAvatar" />
 
     <TextView
-        android:id="@+id/ac_CommentsList_Comment"
+        android:id="@+id/ccc_tvComment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -37,8 +37,8 @@
         android:text="@string/comment"
         android:textColor="@color/black"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/ac_CommentsList_Avatar"
+        app:layout_constraintBottom_toBottomOf="@+id/ccc_ivAvatar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ac_CommentsList_Avatar" />
+        app:layout_constraintStart_toEndOf="@+id/ccc_ivAvatar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

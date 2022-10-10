@@ -7,7 +7,7 @@
     tools:context=".CommunityCommentActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/community_toolbar"
+        android:id="@+id/acc_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?android:actionBarSize"
         android:background="@color/red"
@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/ac_Tv_Comments"
+            android:id="@+id/acc_tvComments"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -28,16 +28,16 @@
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/ac_Comments_Rv"
+        android:id="@+id/acc_rvComments"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/community_toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/acc_toolbar" />
 
     <ImageView
-        android:id="@+id/ac_Comments_Iv_Background"
+        android:id="@+id/acc_ivCommentsBackground"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginBottom="2dp"
@@ -48,7 +48,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/ac_Comments_Et_Comment"
+        android:id="@+id/acc_etComment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -58,20 +58,20 @@
         android:lines="1"
         android:padding="8dp"
         android:scrollHorizontally="false"
-        app:layout_constraintBottom_toBottomOf="@+id/ac_Comments_Iv_Background"
-        app:layout_constraintEnd_toStartOf="@+id/ac_Comments_Iv_Send"
-        app:layout_constraintStart_toStartOf="@+id/ac_Comments_Iv_Background"
-        app:layout_constraintTop_toTopOf="@+id/ac_Comments_Iv_Background" />
+        app:layout_constraintBottom_toBottomOf="@+id/acc_ivCommentsBackground"
+        app:layout_constraintEnd_toStartOf="@+id/acc_ivCommentsSend"
+        app:layout_constraintStart_toStartOf="@+id/acc_ivCommentsBackground"
+        app:layout_constraintTop_toTopOf="@+id/acc_ivCommentsBackground" />
 
     <ImageView
-        android:id="@+id/ac_Comments_Iv_Send"
+        android:id="@+id/acc_ivCommentsSend"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginEnd="10dp"
         android:contentDescription="@string/send"
         android:src="@drawable/ic_send"
-        app:layout_constraintBottom_toBottomOf="@id/ac_Comments_Iv_Background"
-        app:layout_constraintEnd_toEndOf="@id/ac_Comments_Iv_Background"
-        app:layout_constraintTop_toTopOf="@id/ac_Comments_Iv_Background" />
+        app:layout_constraintBottom_toBottomOf="@id/acc_ivCommentsBackground"
+        app:layout_constraintEnd_toEndOf="@id/acc_ivCommentsBackground"
+        app:layout_constraintTop_toTopOf="@id/acc_ivCommentsBackground" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
