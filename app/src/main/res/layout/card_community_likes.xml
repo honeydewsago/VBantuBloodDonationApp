@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/ac_LikeList_Avatar"
+        android:id="@+id/ccl_ivAvatar"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="20dp"
@@ -17,15 +17,15 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/ac_LikeList_Username"
+        android:id="@+id/ccl_tvUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:text="@string/username"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/ac_LikeList_Avatar"
-        app:layout_constraintStart_toEndOf="@+id/ac_LikeList_Avatar"
-        app:layout_constraintTop_toTopOf="@+id/ac_LikeList_Avatar" />
+        app:layout_constraintBottom_toBottomOf="@+id/ccl_ivAvatar"
+        app:layout_constraintStart_toEndOf="@+id/ccl_ivAvatar"
+        app:layout_constraintTop_toTopOf="@+id/ccl_ivAvatar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,7 +7,7 @@
     tools:context=".HomeFragment">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/home_toolbar"
+        android:id="@+id/fh_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?android:actionBarSize"
         android:background="@color/red"
@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/ac_Tv_Community"
+            android:id="@+id/fh_tvCommunity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -27,7 +27,7 @@
     </androidx.appcompat.widget.Toolbar>
 
     <SearchView
-        android:id="@+id/bd_Sv_SearchBar"
+        android:id="@+id/fh_svSearchBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -35,10 +35,10 @@
         android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/home_toolbar" />
+        app:layout_constraintTop_toBottomOf="@id/fh_toolbar" />
 
     <TextView
-        android:id="@+id/bd_Tv_UrgentRequest"
+        android:id="@+id/fh_tvUrgentRequest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -47,10 +47,10 @@
         android:textColor="@color/red"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bd_Sv_SearchBar" />
+        app:layout_constraintTop_toBottomOf="@id/fh_svSearchBar" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/bd_Rv_UrgentRequest"
+        android:id="@+id/fh_rvUrgentRequest"
         android:layout_width="match_parent"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
@@ -58,10 +58,10 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bd_Tv_UrgentRequest" />
+        app:layout_constraintTop_toBottomOf="@+id/fh_tvUrgentRequest" />
 
     <TextView
-        android:id="@+id/bd_Tv_Location"
+        android:id="@+id/fh_tvLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -70,10 +70,10 @@
         android:textColor="@color/red"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bd_Rv_UrgentRequest" />
+        app:layout_constraintTop_toBottomOf="@id/fh_rvUrgentRequest" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/bd_Rv_Location"
+        android:id="@+id/fh_rvLocation"
         android:layout_width="match_parent"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
@@ -81,7 +81,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bd_Tv_Location" />
+        app:layout_constraintTop_toBottomOf="@+id/fh_tvLocation" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

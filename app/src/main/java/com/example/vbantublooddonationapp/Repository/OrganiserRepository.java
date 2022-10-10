@@ -4,24 +4,21 @@ import android.app.Application;
 import android.os.AsyncTask;
 
 import com.example.vbantublooddonationapp.BloodRoomDatabase;
+import com.example.vbantublooddonationapp.DAO.OrganiserDao;
 import com.example.vbantublooddonationapp.DAO.UserDao;
 import com.example.vbantublooddonationapp.Model.LoginParams;
+import com.example.vbantublooddonationapp.Model.Organiser;
 import com.example.vbantublooddonationapp.Model.User;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-public class UserRepository {
+public class OrganiserRepository {
+    private OrganiserDao mOrganiserDao;
 
-    private UserDao mUserDao;
-
-    public UserRepository(Application application) {
+    public OrganiserRepository(Application application) {
         BloodRoomDatabase db = BloodRoomDatabase.getINSTANCE(application);
-        mUserDao = db.userDao();
-    }
-
-    public void insert(User user) {
-        new insertAsyncTask(mUserDao).execute(user);
+        mOrganiserDao = db.organiserDao();
     }
 
     private static class insertAsyncTask extends AsyncTask<User, Void, Void> {
@@ -38,12 +35,12 @@ public class UserRepository {
         }
     }
 
-    public List<User> loginUser(String email, String password) {
+    public List<Organiser> loginOrganiser(String email, String password) {
         LoginParams params = new LoginParams(email, password);
 
-        List<User> list = null;
+        List<Organiser> list = null;
         try {
-            list = new loginAsyncTask(mUserDao).execute(params).get();
+            list = new loginAsyncTask(mOrganiserDao).execute(params).get();
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -53,18 +50,17 @@ public class UserRepository {
         return list;
     }
 
-    private static class loginAsyncTask extends AsyncTask<LoginParams, Void, List<User>> {
-        private UserDao mSyncTaskDao;
+    private static class loginAsyncTask extends AsyncTask<LoginParams, Void, List<Organiser>> {
+        private OrganiserDao mSyncTaskDao;
 
-        loginAsyncTask(UserDao dao) {
+        loginAsyncTask(OrganiserDao dao) {
             mSyncTaskDao = dao;
         }
 
         @Override
-        protected List<User> doInBackground(LoginParams... loginParams) {
-            List<User> userList = mSyncTaskDao.loginUser(loginParams[0].getEmail(), loginParams[0].getPassword());
-            return userList;
+        protected List<Organiser> doInBackground(LoginParams... loginParams) {
+            List<Organiser> organiserList = mSyncTaskDao.loginOrganiser(loginParams[0].getEmail(), loginParams[0].getPassword());
+            return organiserList;
         }
     }
-
 }

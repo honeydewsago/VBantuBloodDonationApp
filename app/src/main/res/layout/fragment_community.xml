@@ -8,7 +8,7 @@
     tools:context=".CommunityFragment">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/community_toolbar"
+        android:id="@+id/fc_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?android:actionBarSize"
         android:background="@color/red"
@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/ac_Tv_Community"
+            android:id="@+id/fc_tvCommunity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -27,7 +27,7 @@
             android:textStyle="bold" />
 
         <ImageButton
-            android:id="@+id/ac_IBtn_NewPost"
+            android:id="@+id/fc_btnNewPost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
@@ -38,22 +38,22 @@
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/ac_Cv_Leaderboard"
+        android:id="@+id/fc_cvLeaderboard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/ac_Rv_CommunityPosts"
+        app:layout_constraintBottom_toTopOf="@+id/fc_rvCommunityPosts"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/community_toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/fc_toolbar" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/ac_Rv_CommunityPosts"
+        android:id="@+id/fc_rvCommunityPosts"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ac_Cv_Leaderboard"
+        app:layout_constraintTop_toBottomOf="@id/fc_cvLeaderboard"
         app:layout_constraintVertical_bias="0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
