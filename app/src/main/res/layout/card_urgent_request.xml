@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/outline_grey"
+    app:cardCornerRadius="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="1.0"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_bias="0.0">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/cur_ivOrganiser"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:src="@drawable/placeholder"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_margin="5dp"
+            />
+
+        <TextView
+            android:id="@+id/cur_tvOrganiser"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/companyName"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/cur_btnOrganiserDonate"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cur_ivOrganiser"
+            android:textColor="@color/dark_grey"
+            android:padding="4dp"/>
+
+        <TextView
+            android:id="@+id/cur_tvRequestInfo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:text="@string/requestInfo"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/cur_tvOrganiser"
+            app:layout_constraintStart_toStartOf="@+id/cur_tvOrganiser"
+            app:layout_constraintTop_toBottomOf="@+id/cur_tvOrganiser"/>
+
+        <TextView
+            android:id="@+id/cur_tvOrganiserBloodShortageType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Blood Shortage Type: "
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/cur_tvRequestInfo"
+            app:layout_constraintTop_toBottomOf="@+id/cur_tvRequestInfo"
+            android:textStyle="bold"
+            android:textColor="@color/red"
+            android:padding="4dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/cur_rvBloodType"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="@+id/cur_tvRequestInfo"
+            app:layout_constraintStart_toEndOf="@+id/cur_tvOrganiserBloodShortageType"
+            app:layout_constraintTop_toBottomOf="@+id/cur_tvRequestInfo" />
+
+        <Button
+            android:id="@+id/cur_btnOrganiserDonate"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/ic_arrow_forward_ios"
+            app:layout_constraintBottom_toBottomOf="@+id/cur_tvRequestInfo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cur_tvOrganiser" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>
