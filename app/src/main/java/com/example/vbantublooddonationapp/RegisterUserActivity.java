@@ -1,6 +1,7 @@
 package com.example.vbantublooddonationapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -10,6 +11,7 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.example.vbantublooddonationapp.Model.User;
+import com.example.vbantublooddonationapp.ViewModel.UserViewModel;
 import com.example.vbantublooddonationapp.databinding.ActivityRegisterUserBinding;
 
 import java.util.Calendar;
@@ -17,7 +19,8 @@ import java.util.Calendar;
 public class RegisterUserActivity extends AppCompatActivity {
 
     private ActivityRegisterUserBinding binding;
-    private String gender = "";
+    private UserViewModel mUserViewModel;
+    private String gender="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +29,8 @@ public class RegisterUserActivity extends AppCompatActivity {
         binding = ActivityRegisterUserBinding.inflate(getLayoutInflater());
         View v = binding.getRoot();
         setContentView(v);
+
+        mUserViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
         Intent i = getIntent();
         String email = i.getStringExtra("user_email");
@@ -41,6 +46,7 @@ public class RegisterUserActivity extends AppCompatActivity {
 
     private void registerUser(String email, String fullName){
         String dateOfBirth = binding.aruTvSelectDateOfBirth.getText().toString().trim();
+        String bloodType = binding.aruSpinnerBloodType.getSelectedItem().toString();
         String username = binding.aruEtUsername.getText().toString();
         String icNo = binding.aruEtIcNo.getText().toString();
         String contactNo = binding.aruEtContactNo.getText().toString();
@@ -53,6 +59,7 @@ public class RegisterUserActivity extends AppCompatActivity {
             binding.aruTvSelectDateOfBirth.requestFocus();
             return;
         }
+
         //validate to check if gender is empty
         if (gender.isEmpty()) {
             Toast.makeText(this, "Gender is required!", Toast.LENGTH_SHORT).show();
@@ -114,7 +121,15 @@ public class RegisterUserActivity extends AppCompatActivity {
             return;
         }
 
-        User user = new User(username,password,fullName,email,icNo,dateOfBirth,gender,contactNo,"A+");
+        User user = new User(username,password,fullName,email,icNo,dateOfBirth,gender,contactNo,bloodType);
+
+        //insert the user object
+        mUserViewModel.insertUser(user);
+
+        //toast message to inform users the registration is successful
+        Toast.makeText(RegisterUserActivity.this, "User Registered Successfully", Toast.LENGTH_SHORT).show();
+
+        startActivity(new Intent(RegisterUserActivity.this, HomeActivity.class));
     }
 
     public void tvSelectDateOfBirth_clicked(View view) {
