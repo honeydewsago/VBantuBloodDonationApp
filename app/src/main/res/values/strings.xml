@@ -58,6 +58,8 @@
     <string name="dateOfBirthRequiredToast">Date of birth is required!</string>
     <string name="userRegisterSuccessfully">User Registered Successfully!</string>
     <string name="userLoginSuccessfully">User Login Successfully!</string>
+    <string name="requestInfo">Request Info</string>
+    <string name="bloodA">A+</string>
 
     <string-array name="bloodGroupValues">
         <item>A+</item>
