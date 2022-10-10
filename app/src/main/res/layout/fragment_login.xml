@@ -7,7 +7,7 @@
     tools:context=".LoginFragment">
 
     <EditText
-        android:id="@+id/fl_etUsername"
+        android:id="@+id/fl_etEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -15,7 +15,7 @@
         android:layout_marginEnd="24dp"
         android:background="@drawable/input_box"
         android:ems="10"
-        android:hint="@string/username"
+        android:hint="@string/email"
         android:inputType="textPersonName"
         android:paddingLeft="20dp"
         android:paddingTop="10dp"
@@ -39,9 +39,9 @@
         android:paddingTop="10dp"
         android:paddingRight="10dp"
         android:paddingBottom="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/fl_etUsername"
-        app:layout_constraintStart_toStartOf="@+id/fl_etUsername"
-        app:layout_constraintTop_toBottomOf="@+id/fl_etUsername" />
+        app:layout_constraintEnd_toEndOf="@+id/fl_etEmail"
+        app:layout_constraintStart_toStartOf="@+id/fl_etEmail"
+        app:layout_constraintTop_toBottomOf="@+id/fl_etEmail" />
 
     <CheckBox
         android:id="@+id/fl_checkboxRemember"

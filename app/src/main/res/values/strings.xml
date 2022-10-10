@@ -54,6 +54,10 @@
     <string name="organisationAddress">Organisation Address</string>
     <string name="agreeToTnC"><![CDATA[I agree to the terms and conditions & privacy policy stated.]]></string>
     <string name="subscribeToNewsFeed">Subscribe to our latest newsfeed for upcoming updates.</string>
+    <string name="genderRequiredToast">Gender is required!</string>
+    <string name="dateOfBirthRequiredToast">Date of birth is required!</string>
+    <string name="userRegisterSuccessfully">User Registered Successfully!</string>
+    <string name="userLoginSuccessfully">User Login Successfully!</string>
 
     <string-array name="bloodGroupValues">
         <item>A+</item>

@@ -8,6 +8,7 @@ import com.example.vbantublooddonationapp.DAO.UserDao;
 import com.example.vbantublooddonationapp.Model.User;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class UserRepository {
 
@@ -19,13 +20,13 @@ public class UserRepository {
     }
 
     public void insert(User user) {
-        new insertAsynTask(mUserDao).execute(user);
+        new insertAsyncTask(mUserDao).execute(user);
     }
 
-    private static class insertAsynTask extends AsyncTask<User, Void, Void> {
+    private static class insertAsyncTask extends AsyncTask<User, Void, Void> {
         private UserDao mSyncTaskDao;
 
-        insertAsynTask(UserDao dao) {
+        insertAsyncTask(UserDao dao) {
             mSyncTaskDao = dao;
         }
 
@@ -35,4 +36,51 @@ public class UserRepository {
             return null;
         }
     }
+
+    public List<User> loginUser(String email, String password) {
+        loginParams params = new loginParams(email, password);
+
+        List<User> list = null;
+        try {
+            list = new loginAsyncTask(mUserDao).execute(params).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
+    private static class loginParams {
+        String email;
+        String password;
+
+        public loginParams(String email, String password) {
+            this.email = email;
+            this.password = password;
+        }
+
+        public String getEmail() {
+            return email;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+    }
+    private static class loginAsyncTask extends AsyncTask<loginParams, Void, List<User>> {
+        private UserDao mSyncTaskDao;
+
+        loginAsyncTask(UserDao dao) {
+            mSyncTaskDao = dao;
+        }
+
+        @Override
+        protected List<User> doInBackground(loginParams... loginParams) {
+            List<User> userList = mSyncTaskDao.loginUser(loginParams[0].getEmail(), loginParams[0].getPassword());
+            return userList;
+        }
+    }
+
 }

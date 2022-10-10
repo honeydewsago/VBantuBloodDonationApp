@@ -21,4 +21,9 @@ public class UserViewModel extends AndroidViewModel {
     public void insertUser(User user){
         mRepository.insert(user);
     }
+
+    public List<User> loginUser(String email, String password){
+        return mRepository.loginUser(email,password);
+    }
+
 }

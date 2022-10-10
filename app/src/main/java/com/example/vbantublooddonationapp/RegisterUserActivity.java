@@ -54,15 +54,15 @@ public class RegisterUserActivity extends AppCompatActivity {
         String confirmPassword = binding.aruEtConfirmPassword.getText().toString();
 
         //validate to check if date of birth is empty
-        if (dateOfBirth.equals("Click To Select")) {
-            Toast.makeText(this, "Date of birth is required!", Toast.LENGTH_SHORT).show();
+        if (dateOfBirth.equals(R.string.clickToSelect)) {
+            Toast.makeText(this, R.string.dateOfBirthRequiredToast, Toast.LENGTH_SHORT).show();
             binding.aruTvSelectDateOfBirth.requestFocus();
             return;
         }
 
         //validate to check if gender is empty
         if (gender.isEmpty()) {
-            Toast.makeText(this, "Gender is required!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.genderRequiredToast, Toast.LENGTH_SHORT).show();
             binding.aruRgGender.requestFocus();
             return;
         }
@@ -127,7 +127,7 @@ public class RegisterUserActivity extends AppCompatActivity {
         mUserViewModel.insertUser(user);
 
         //toast message to inform users the registration is successful
-        Toast.makeText(RegisterUserActivity.this, "User Registered Successfully", Toast.LENGTH_SHORT).show();
+        Toast.makeText(RegisterUserActivity.this, R.string.userRegisterSuccessfully, Toast.LENGTH_SHORT).show();
 
         startActivity(new Intent(RegisterUserActivity.this, HomeActivity.class));
     }
