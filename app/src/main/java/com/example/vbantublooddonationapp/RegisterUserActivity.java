@@ -46,12 +46,12 @@ public class RegisterUserActivity extends AppCompatActivity {
 
     private void registerUser(String email, String fullName){
         String dateOfBirth = binding.aruTvSelectDateOfBirth.getText().toString().trim();
-        String bloodType = binding.aruSpinnerBloodType.getSelectedItem().toString();
-        String username = binding.aruEtUsername.getText().toString();
-        String icNo = binding.aruEtIcNo.getText().toString();
-        String contactNo = binding.aruEtContactNo.getText().toString();
-        String password = binding.aruEtPassword.getText().toString();
-        String confirmPassword = binding.aruEtConfirmPassword.getText().toString();
+        String bloodType = binding.aruSpinnerBloodType.getSelectedItem().toString().trim();
+        String username = binding.aruEtUsername.getText().toString().trim();
+        String icNo = binding.aruEtIcNo.getText().toString().trim();
+        String contactNo = binding.aruEtContactNo.getText().toString().trim();
+        String password = binding.aruEtPassword.getText().toString().trim();
+        String confirmPassword = binding.aruEtConfirmPassword.getText().toString().trim();
 
         //validate to check if date of birth is empty
         if (dateOfBirth.equals(R.string.clickToSelect)) {
@@ -68,55 +68,55 @@ public class RegisterUserActivity extends AppCompatActivity {
         }
         //validate to check if username is empty
         if (username.isEmpty()) {
-            binding.aruEtUsername.setError("Username is required!");
+            binding.aruEtUsername.setError(getText(R.string.usernameRequired));
             binding.aruEtUsername.requestFocus();
             return;
         }
         //validate to check if ic number is empty
         if (icNo.isEmpty()) {
-            binding.aruEtIcNo.setError("IC number is required!");
+            binding.aruEtIcNo.setError(getText(R.string.icNumberRequired));
             binding.aruEtIcNo.requestFocus();
             return;
         }
         //validate to check if ic number is equal to 12 characters
         if (icNo.length() != 12) {
-            binding.aruEtIcNo.setError("IC number must be 12 characters!");
+            binding.aruEtIcNo.setError(getText(R.string.icNumAtLeast12Char));
             binding.aruEtIcNo.requestFocus();
             return;
         }
         //validate to check if contact number is empty
         if (contactNo.isEmpty()) {
-            binding.aruEtContactNo.setError("Contact number is required!");
+            binding.aruEtContactNo.setError(getText(R.string.contactNumberRequired));
             binding.aruEtContactNo.requestFocus();
             return;
         }
         //validate to check if contact number is less than 10 characters
         if (contactNo.length() < 10) {
-            binding.aruEtContactNo.setError("Contact number must be at least 10 characters!");
+            binding.aruEtContactNo.setError(getText(R.string.contactNumAtLeast10Char));
             binding.aruEtContactNo.requestFocus();
             return;
         }
         //validate to check if password is empty
         if (password.isEmpty()) {
-            binding.aruEtPassword.setError("Password is required!");
+            binding.aruEtPassword.setError(getText(R.string.passwordRequired));
             binding.aruEtPassword.requestFocus();
             return;
         }
         //validate to check if password is less than 8 characters
         if (password.length() < 8) {
-            binding.aruEtPassword.setError("Password should contain at least 8 characters!");
+            binding.aruEtPassword.setError(getText(R.string.passwordAtLeast8Char));
             binding.aruEtPassword.requestFocus();
             return;
         }
         //validate to check if confirm password is empty
         if (confirmPassword.isEmpty()) {
-            binding.aruEtConfirmPassword.setError("Confirm password is required!");
+            binding.aruEtConfirmPassword.setError(getText(R.string.confirmPasswordRequired));
             binding.aruEtConfirmPassword.requestFocus();
             return;
         }
         //validate to check if both password match
         if (!confirmPassword.equals(password)) {
-            binding.aruEtConfirmPassword.setError("Both passwords does not match!");
+            binding.aruEtConfirmPassword.setError(getText(R.string.bothPasswordDoNotMatch));
             binding.aruEtConfirmPassword.requestFocus();
             return;
         }
