@@ -1,0 +1,306 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "6d802f9087ab4fa206b6c3809b7eed0f",
+    "entities": [
+      {
+        "tableName": "user_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`userID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `username` TEXT, `password` TEXT, `fullName` TEXT, `email` TEXT, `icNo` TEXT, `dateOfBirth` TEXT, `gender` TEXT, `contact` TEXT, `bloodType` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "userID",
+            "columnName": "userID",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "username",
+            "columnName": "username",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "password",
+            "columnName": "password",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "fullName",
+            "columnName": "fullName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "email",
+            "columnName": "email",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "icNo",
+            "columnName": "icNo",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "dateOfBirth",
+            "columnName": "dateOfBirth",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "gender",
+            "columnName": "gender",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "contact",
+            "columnName": "contact",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "bloodType",
+            "columnName": "bloodType",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "userID"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "organiser_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`organiserID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `email` TEXT, `companyName` TEXT, `password` TEXT, `picName` TEXT, `contact` TEXT, `picIcNo` TEXT, `address` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "organiserID",
+            "columnName": "organiserID",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "email",
+            "columnName": "email",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "companyName",
+            "columnName": "companyName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "password",
+            "columnName": "password",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "picName",
+            "columnName": "picName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "contact",
+            "columnName": "contact",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "picIcNo",
+            "columnName": "picIcNo",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "address",
+            "columnName": "address",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "organiserID"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "appointment_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`appointmentID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `userID` INTEGER NOT NULL, `organiserID` INTEGER NOT NULL, `appointmentTime` TEXT, `appointmentDate` TEXT, `donationBefore` TEXT, `bloodAmt` TEXT, `status` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "appointmentID",
+            "columnName": "appointmentID",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "userID",
+            "columnName": "userID",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "organiserID",
+            "columnName": "organiserID",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "appointmentTime",
+            "columnName": "appointmentTime",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "appointmentDate",
+            "columnName": "appointmentDate",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "donationBefore",
+            "columnName": "donationBefore",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "bloodAmt",
+            "columnName": "bloodAmt",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "status",
+            "columnName": "status",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "appointmentID"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "blood_request_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`requestID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `organiserID` INTEGER NOT NULL, `requestInfo` TEXT, `shortageType` TEXT, `dateTime` TEXT, `active` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "requestID",
+            "columnName": "requestID",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "organiserID",
+            "columnName": "organiserID",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "requestInfo",
+            "columnName": "requestInfo",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "shortageType",
+            "columnName": "shortageType",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "dateTime",
+            "columnName": "dateTime",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "active",
+            "columnName": "active",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "requestID"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "community_post_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`postID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `userID` INTEGER NOT NULL, `organiserID` INTEGER NOT NULL, `postDesc` TEXT, `postDateTime` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "postID",
+            "columnName": "postID",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "userID",
+            "columnName": "userID",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "organiserID",
+            "columnName": "organiserID",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "postDesc",
+            "columnName": "postDesc",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "postDateTime",
+            "columnName": "postDateTime",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "postID"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '6d802f9087ab4fa206b6c3809b7eed0f')"
+    ]
+  }
+}

@@ -4,6 +4,7 @@ import android.app.Application;
 
 import androidx.lifecycle.AndroidViewModel;
 
+import com.example.vbantublooddonationapp.DAO.OrganiserDao;
 import com.example.vbantublooddonationapp.Model.Organiser;
 import com.example.vbantublooddonationapp.Model.User;
 import com.example.vbantublooddonationapp.Repository.OrganiserRepository;
@@ -18,6 +19,10 @@ public class OrganiserViewModel extends AndroidViewModel {
     public OrganiserViewModel (Application application){
         super(application);
         mRepository = new OrganiserRepository(application);
+    }
+
+    public void insertOrganiser(Organiser organiser){
+        mRepository.insert(organiser);
     }
 
     public List<Organiser> loginOrganiser(String email, String password){
