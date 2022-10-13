@@ -16,7 +16,7 @@ public class CommunityNewPostActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_community_new_post);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.community_toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.acnp_toolbar);
 
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
