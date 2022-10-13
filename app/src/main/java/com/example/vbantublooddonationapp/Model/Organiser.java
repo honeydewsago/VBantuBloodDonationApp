@@ -32,4 +32,14 @@ public class Organiser {
 
     @ColumnInfo(name = "address")
     public String address;
+
+    public Organiser(String email, String companyName, String password, String picName, String contact, String picIcNo, String address) {
+        this.email = email;
+        this.companyName = companyName;
+        this.password = password;
+        this.picName = picName;
+        this.contact = contact;
+        this.picIcNo = picIcNo;
+        this.address = address;
+    }
 }

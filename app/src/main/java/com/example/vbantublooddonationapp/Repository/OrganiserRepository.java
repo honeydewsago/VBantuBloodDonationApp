@@ -21,16 +21,20 @@ public class OrganiserRepository {
         mOrganiserDao = db.organiserDao();
     }
 
-    private static class insertAsyncTask extends AsyncTask<User, Void, Void> {
-        private UserDao mSyncTaskDao;
+    public void insert(Organiser organiser) {
+        new insertAsyncTask(mOrganiserDao).execute(organiser);
+    }
 
-        insertAsyncTask(UserDao dao) {
+    private static class insertAsyncTask extends AsyncTask<Organiser, Void, Void> {
+        private OrganiserDao mSyncTaskDao;
+
+        insertAsyncTask(OrganiserDao dao) {
             mSyncTaskDao = dao;
         }
 
         @Override
-        protected Void doInBackground(User... users) {
-            mSyncTaskDao.insert(users[0]);
+        protected Void doInBackground(Organiser...organisers) {
+            mSyncTaskDao.insert(organisers[0]);
             return null;
         }
     }
