@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat;
 
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import java.util.Objects;
 
@@ -22,5 +23,15 @@ public class CommunityNewPostActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbar.setNavigationIcon(ContextCompat.getDrawable(this, R.drawable.ic_arrow_back_ios));
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            //close activity
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
