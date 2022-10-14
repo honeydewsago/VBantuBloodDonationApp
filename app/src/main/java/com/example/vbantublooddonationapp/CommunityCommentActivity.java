@@ -15,7 +15,7 @@ public class CommunityCommentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_community_comment);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.community_toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.acc_toolbar);
 
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);

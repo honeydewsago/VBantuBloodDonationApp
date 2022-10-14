@@ -58,6 +58,19 @@
     <string name="dateOfBirthRequiredToast">Date of birth is required!</string>
     <string name="userRegisterSuccessfully">User Registered Successfully!</string>
     <string name="userLoginSuccessfully">User Login Successfully!</string>
+    <string name="requestInfo">Request Info</string>
+    <string name="bloodA">A+</string>
+    <string name="nameOfPicRequired">Name of person in charge is required!</string>
+    <string name="contactNumberRequired">Contact number is required!</string>
+    <string name="contactNumAtLeast10Char">Contact number must be at least 10 characters!</string>
+    <string name="icNumberRequired">IC number is required!</string>
+    <string name="icNumAtLeast12Char">IC number must be 12 characters!</string>
+    <string name="passwordRequired">Password is required!</string>
+    <string name="passwordAtLeast8Char">Password should contain at least 8 characters!</string>
+    <string name="confirmPasswordRequired">Confirm password is required!</string>
+    <string name="bothPasswordDoNotMatch">Both passwords does not match!</string>
+    <string name="usernameRequired">Username is required!</string>
+    <string name="orgnAddressRequired">Organisation address is required!</string>
 
     <string-array name="bloodGroupValues">
         <item>A+</item>
