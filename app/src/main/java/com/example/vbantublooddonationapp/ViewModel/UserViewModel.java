@@ -18,6 +18,10 @@ public class UserViewModel extends AndroidViewModel {
         mRepository = new UserRepository(application);
     }
 
+    public List<String> getAllUserEmails() {
+        return mRepository.getAllUserEmails();
+    }
+
     public void insertUser(User user){
         mRepository.insert(user);
     }
