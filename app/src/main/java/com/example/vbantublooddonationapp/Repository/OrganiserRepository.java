@@ -3,6 +3,8 @@ package com.example.vbantublooddonationapp.Repository;
 import android.app.Application;
 import android.os.AsyncTask;
 
+import androidx.lifecycle.LiveData;
+
 import com.example.vbantublooddonationapp.BloodRoomDatabase;
 import com.example.vbantublooddonationapp.DAO.OrganiserDao;
 import com.example.vbantublooddonationapp.DAO.UserDao;
@@ -15,10 +17,17 @@ import java.util.concurrent.ExecutionException;
 
 public class OrganiserRepository {
     private OrganiserDao mOrganiserDao;
+    private LiveData<List<Organiser>> mAllOrganisers;
 
     public OrganiserRepository(Application application) {
         BloodRoomDatabase db = BloodRoomDatabase.getINSTANCE(application);
         mOrganiserDao = db.organiserDao();
+
+        mAllOrganisers = mOrganiserDao.getAllOrganisers();
+    }
+
+    public LiveData<List<Organiser>> getAllOrganisers() {
+        return mAllOrganisers;
     }
 
     public void insert(Organiser organiser) {
