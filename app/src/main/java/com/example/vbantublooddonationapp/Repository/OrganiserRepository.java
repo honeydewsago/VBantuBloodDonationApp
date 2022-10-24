@@ -77,6 +77,32 @@ public class OrganiserRepository {
         }
     }
 
+    public List<String> getAllOrganiserEmails() {
+        List<String> list = null;
+        try {
+            list = new getOrganiserEmailAsyncTask(mOrganiserDao).execute().get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    private static class getOrganiserEmailAsyncTask extends AsyncTask<Void, Void, List<String>> {
+        private OrganiserDao mSyncTaskDao;
+
+        getOrganiserEmailAsyncTask(OrganiserDao dao) {
+            mSyncTaskDao = dao;
+        }
+
+        @Override
+        protected List<String> doInBackground(Void...params) {
+            List<String> emailList = mSyncTaskDao.getAllOrganiserEmails();
+            return emailList;
+        }
+    }
+
     public List<Organiser> getOrganiserById(int id) {
         List<Organiser> list = null;
 

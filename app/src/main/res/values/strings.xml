@@ -73,6 +73,7 @@
     <string name="orgnAddressRequired">Organisation address is required!</string>
     <string name="bloodDonation">Blood Donation</string>
     <string name="makeYourAppointmentNow">Make Your Appointment Now</string>
+    <string name="emailAddressAlreadyExist">An account with this email address already exists, please choose another email</string>
 
     <string-array name="bloodGroupValues">
         <item>A+</item>

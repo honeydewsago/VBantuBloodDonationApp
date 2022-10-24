@@ -32,6 +32,10 @@ public class OrganiserViewModel extends AndroidViewModel {
         mRepository.insert(organiser);
     }
 
+    public List<String> getAllOrganiserEmails() {
+        return mRepository.getAllOrganiserEmails();
+    }
+
     public List<Organiser> loginOrganiser(String email, String password){
         return mRepository.loginOrganiser(email,password);
     }
