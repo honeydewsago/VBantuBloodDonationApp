@@ -1,24 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:backgroundTint="@color/red"
-    app:cardCornerRadius="5dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
 
-    <TextView
-        android:id="@+id/cbt_tvBloodType"
+    <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:text="@string/bloodA"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:textSize="10sp"
-        android:paddingTop="2dp"
-        android:paddingBottom="2dp"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
-        />
+        android:backgroundTint="@color/red"
+        app:cardCornerRadius="5dp"
+        android:layout_marginRight="4dp">
 
-</androidx.cardview.widget.CardView>
+        <TextView
+            android:id="@+id/cbt_tvBloodType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="@string/bloodA"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="10sp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp" />
+
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

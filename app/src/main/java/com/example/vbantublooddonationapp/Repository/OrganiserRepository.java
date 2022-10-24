@@ -71,9 +71,63 @@ public class OrganiserRepository {
         }
 
         @Override
-        protected List<Organiser> doInBackground(LoginParams... loginParams) {
+        protected List<Organiser> doInBackground(LoginParams...loginParams) {
             List<Organiser> organiserList = mSyncTaskDao.loginOrganiser(loginParams[0].getEmail(), loginParams[0].getPassword());
             return organiserList;
         }
     }
+
+    public List<String> getAllOrganiserEmails() {
+        List<String> list = null;
+        try {
+            list = new getOrganiserEmailAsyncTask(mOrganiserDao).execute().get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    private static class getOrganiserEmailAsyncTask extends AsyncTask<Void, Void, List<String>> {
+        private OrganiserDao mSyncTaskDao;
+
+        getOrganiserEmailAsyncTask(OrganiserDao dao) {
+            mSyncTaskDao = dao;
+        }
+
+        @Override
+        protected List<String> doInBackground(Void...params) {
+            List<String> emailList = mSyncTaskDao.getAllOrganiserEmails();
+            return emailList;
+        }
+    }
+
+    public List<Organiser> getOrganiserById(int id) {
+        List<Organiser> list = null;
+
+        try {
+            list = new getOrganiserAsyncTask(mOrganiserDao).execute(id).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    private static class getOrganiserAsyncTask extends AsyncTask<Integer, Void, List<Organiser>> {
+        private OrganiserDao mSyncTaskDao;
+
+        getOrganiserAsyncTask(OrganiserDao dao) {
+            mSyncTaskDao = dao;
+        }
+
+        @Override
+        protected List<Organiser> doInBackground(Integer...id) {
+            List<Organiser> organiserList = mSyncTaskDao.getOrganiserById(id[0]);
+            return organiserList;
+        }
+    }
+
 }

@@ -18,11 +18,9 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_login);
 
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
-        View v = binding.getRoot();
-        setContentView(v);
+        setContentView(binding.getRoot());
 
         mViewPagerAdapter = new LoginViewPagerAdapter(this);
         binding.alViewPager.setAdapter(mViewPagerAdapter);

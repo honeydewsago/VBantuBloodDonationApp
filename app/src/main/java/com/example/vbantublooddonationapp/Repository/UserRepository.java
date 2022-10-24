@@ -4,6 +4,7 @@ import android.app.Application;
 import android.os.AsyncTask;
 
 import com.example.vbantublooddonationapp.BloodRoomDatabase;
+import com.example.vbantublooddonationapp.DAO.OrganiserDao;
 import com.example.vbantublooddonationapp.DAO.UserDao;
 import com.example.vbantublooddonationapp.Model.LoginParams;
 import com.example.vbantublooddonationapp.Model.User;
@@ -35,6 +36,32 @@ public class UserRepository {
         protected Void doInBackground(User... users) {
             mSyncTaskDao.insert(users[0]);
             return null;
+        }
+    }
+
+    public List<String> getAllUserEmails() {
+        List<String> list = null;
+        try {
+            list = new getUserEmailAsyncTask(mUserDao).execute().get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    private static class getUserEmailAsyncTask extends AsyncTask<Void, Void, List<String>> {
+        private UserDao mSyncTaskDao;
+
+        getUserEmailAsyncTask(UserDao dao) {
+            mSyncTaskDao = dao;
+        }
+
+        @Override
+        protected List<String> doInBackground(Void...params) {
+            List<String> emailList = mSyncTaskDao.getAllUserEmails();
+            return emailList;
         }
     }
 

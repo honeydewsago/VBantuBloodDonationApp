@@ -71,34 +71,6 @@
     <string name="bothPasswordDoNotMatch">Both passwords does not match!</string>
     <string name="usernameRequired">Username is required!</string>
     <string name="orgnAddressRequired">Organisation address is required!</string>
-    <string name="makeAppointment">Make Your Appointment Now</string>
-    <string name="ic">IC No</string>
-    <string name="fullNameInput">Type in your full name</string>
-    <string name="contactNoExp">012-3456789</string>
-    <string name="address">Address</string>
-    <string name="fullNameLabel">Full Name:</string>
-    <string name="icLabel">IC No:</string>
-    <string name="contactNoLabel">Contact No:</string>
-    <string name="emailLabel">Email:</string>
-    <string name="addressLabel">Address:</string>
-    <string name="bloodDonationCenterLabel" />
-    <string name="bloodDonationCenter">Blood Donation Center:</string>
-    <string name="appointmentDateLabel">Appointment Date:</string>
-    <string name="dateFormat">DD/MM/YYYY</string>
-    <string name="appointmentTimeLabel">Appointment Time:</string>
-    <string name="SelectTime">Select available time slot</string>
-    <string name="bloodDonationHistoryQuestion">Have you had a donation before?</string>
-    <string name="yes">Yes</string>
-    <string name="no">No</string>
-    <string name="bloodGroupLabel">Blood Group:</string>
-    <string name="selectBloodType">Select blood type</string>
-    <string name="reminder">Reminder:</string>
-    <string name="reminder1">Please make sure you are not on long term medications and has not been intoxicated by alcohol within 24 hours prior to donation.</string>
-    <string name="reminder2">You should not be fasting and have had enough sleep(more than 5 hours) the night before donating.</string>
-    <string name="reminder3">Minimum interval of 3 months since last donation.</string>
-    <string name="reminder4"><![CDATA[Body weight at least 45kg & no chronic medical illness]]></string>
-    <string name="reset">Reset</string>
-    <string name="submit">Submit</string>
 
     <string-array name="bloodGroupValues">
         <item>A+</item>

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.room.ColumnInfo;
 
 import android.util.Patterns;
@@ -14,16 +15,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.vbantublooddonationapp.ViewModel.OrganiserViewModel;
+import com.example.vbantublooddonationapp.ViewModel.UserViewModel;
 import com.example.vbantublooddonationapp.databinding.ActivityLoginBinding;
 import com.example.vbantublooddonationapp.databinding.FragmentRegisterBinding;
 import com.google.android.material.button.MaterialButtonToggleGroup;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class RegisterFragment extends Fragment {
 
     private FragmentRegisterBinding binding;
     private String userType="";
+    private OrganiserViewModel mOrganiserViewModel;
+    private UserViewModel mUserViewModel;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,6 +46,8 @@ public class RegisterFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mOrganiserViewModel = new ViewModelProvider(this).get(OrganiserViewModel.class);
+        mUserViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
         binding.frToggleBtnGrp.addOnButtonCheckedListener(new MaterialButtonToggleGroup.OnButtonCheckedListener() {
             @Override
@@ -93,6 +102,23 @@ public class RegisterFragment extends Fragment {
             binding.frEtFullName.setError("Name is required!");
             binding.frEtFullName.requestFocus();
             return;
+        }
+
+        List<String> organiserEmailsList= mOrganiserViewModel.getAllOrganiserEmails();
+        List<String> userEmailsList= mUserViewModel.getAllUserEmails();
+
+        for (String organiserEmail : organiserEmailsList) {
+            if (organiserEmail.equals(email)) {
+                Toast.makeText(getActivity(), R.string.emailAddressAlreadyExist, Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }
+
+        for (String userEmail : userEmailsList) {
+            if (userEmail.equals(email)) {
+                Toast.makeText(getActivity(), R.string.emailAddressAlreadyExist, Toast.LENGTH_SHORT).show();
+                return;
+            }
         }
 
         if (userType.equals("donor")) {
