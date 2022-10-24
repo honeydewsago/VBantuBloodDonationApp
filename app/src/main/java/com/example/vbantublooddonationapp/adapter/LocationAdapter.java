@@ -2,8 +2,10 @@ package com.example.vbantublooddonationapp.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -12,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vbantublooddonationapp.DAO.OrganiserDao;
 import com.example.vbantublooddonationapp.Model.Organiser;
+import com.example.vbantublooddonationapp.SingleBloodBankLocation;
 import com.example.vbantublooddonationapp.databinding.CardBloodTypeBinding;
 import com.example.vbantublooddonationapp.databinding.CardLocationBinding;
 
@@ -78,13 +81,29 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Locati
         private TextView mTvOrganiser;
         private TextView mTvAddress;
         private RecyclerView mRvBloodType;
+        private Button mBtnMoreInfo;
 
         public LocationHolder(CardLocationBinding itemBinding) {
             super(itemBinding.getRoot());
             mTvOrganiser = itemBinding.clTvOrganiser;
             mTvAddress = itemBinding.clTvAddress;
             mRvBloodType = itemBinding.clRvBloodType;
+            mBtnMoreInfo = itemBinding.clBtnOrganiserMoreInfo;
+
+            mBtnMoreInfo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Organiser currentOrganiser = mOrganiserList.get(getAdapterPosition());
+
+                    Intent i = new Intent(mActivity, SingleBloodBankLocation.class);
+
+                    i.putExtra("currentOrganiserID", currentOrganiser.getOrganiserID());
+
+                    mActivity.startActivity(i);
+                }
+            });
         }
+
     }
 }
 
