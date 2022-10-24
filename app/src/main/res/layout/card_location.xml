@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/outline_grey"
+    app:cardCornerRadius="20dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/cl_ivOrganiser"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:src="@drawable/placeholder"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/cl_tvOrganiser"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:padding="4dp"
+            android:text="@string/companyName"
+            android:textColor="@color/dark_grey"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/cl_btnOrganiserDonate"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cl_ivOrganiser" />
+
+        <TextView
+            android:id="@+id/cl_tvAddress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:text="@string/organisationAddress"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@+id/cl_tvOrganiser"
+            app:layout_constraintStart_toStartOf="@+id/cl_tvOrganiser"
+            app:layout_constraintTop_toBottomOf="@+id/cl_tvOrganiser"/>
+
+        <TextView
+            android:id="@+id/cl_tvBloodShortageType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:padding="4dp"
+            android:text="Blood Shortage Type: "
+            android:textColor="@color/red"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/cl_tvAddress"
+            app:layout_constraintTop_toBottomOf="@+id/cl_tvAddress" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/cl_rvBloodType"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="4dp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="@+id/cl_tvBloodShortageType"
+            app:layout_constraintEnd_toEndOf="@+id/cl_tvAddress"
+            app:layout_constraintStart_toEndOf="@+id/cl_tvBloodShortageType"
+            app:layout_constraintTop_toBottomOf="@+id/cl_tvAddress" />
+
+        <Button
+            android:id="@+id/cl_btnOrganiserDonate"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/ic_arrow_forward_ios"
+            app:layout_constraintBottom_toBottomOf="@+id/cl_tvBloodShortageType"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cl_ivOrganiser" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
