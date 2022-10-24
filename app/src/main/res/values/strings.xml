@@ -71,6 +71,8 @@
     <string name="bothPasswordDoNotMatch">Both passwords does not match!</string>
     <string name="usernameRequired">Username is required!</string>
     <string name="orgnAddressRequired">Organisation address is required!</string>
+    <string name="bloodDonation">Blood Donation</string>
+    <string name="makeYourAppointmentNow">Make Your Appointment Now</string>
 
     <string-array name="bloodGroupValues">
         <item>A+</item>
