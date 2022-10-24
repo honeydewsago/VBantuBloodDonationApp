@@ -1,5 +1,6 @@
 package com.example.vbantublooddonationapp.DAO;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
@@ -11,6 +12,9 @@ import java.util.List;
 
 @Dao
 public interface OrganiserDao {
+
+    @Query("Select * from organiser_table ORDER By organiserID")
+    LiveData<List<Organiser>> getAllOrganisers();
 
     @Insert
     void insert(Organiser...organiser);
