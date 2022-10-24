@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/asbbl_tvAddANewPost"
+            android:id="@+id/asbbl_tvBloodDonation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -98,10 +98,10 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/asbbl_rvBloodType"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
         android:orientation="horizontal"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="@+id/asbbl_tvBloodShortageType"
         app:layout_constraintEnd_toEndOf="@+id/asbbl_tvContact"
         app:layout_constraintStart_toEndOf="@+id/asbbl_tvBloodShortageType"
         app:layout_constraintTop_toTopOf="@+id/asbbl_tvBloodShortageType" />

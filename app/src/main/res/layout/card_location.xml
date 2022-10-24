@@ -72,6 +72,7 @@
                 android:id="@+id/cl_rvBloodType"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:layout_marginTop="2dp"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="@+id/cl_tvBloodShortageType"

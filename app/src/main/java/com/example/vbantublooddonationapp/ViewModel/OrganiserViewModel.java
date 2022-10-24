@@ -36,4 +36,8 @@ public class OrganiserViewModel extends AndroidViewModel {
         return mRepository.loginOrganiser(email,password);
     }
 
+    public List<Organiser> getOrganiserById(int id){
+        return mRepository.getOrganiserById(id);
+    }
+
 }

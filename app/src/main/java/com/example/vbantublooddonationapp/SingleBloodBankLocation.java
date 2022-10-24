@@ -12,9 +12,12 @@ import android.view.View;
 
 import com.example.vbantublooddonationapp.Model.Organiser;
 import com.example.vbantublooddonationapp.ViewModel.OrganiserViewModel;
+import com.example.vbantublooddonationapp.adapter.BloodTypeAdapter;
 import com.example.vbantublooddonationapp.databinding.ActivityLoginBinding;
 import com.example.vbantublooddonationapp.databinding.ActivitySingleBloodBankLocationBinding;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class SingleBloodBankLocation extends AppCompatActivity {
@@ -22,6 +25,8 @@ public class SingleBloodBankLocation extends AppCompatActivity {
     private ActivitySingleBloodBankLocationBinding binding;
     private OrganiserViewModel mOrganiserViewModel;
     private Organiser mOrganiser;
+    private ArrayList<String> mBloodTypeList;
+    private BloodTypeAdapter mBloodTypeAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +34,10 @@ public class SingleBloodBankLocation extends AppCompatActivity {
 
         binding = ActivitySingleBloodBankLocationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        mOrganiserViewModel = new ViewModelProvider(this).get(OrganiserViewModel.class);
+        mBloodTypeAdapter = new BloodTypeAdapter(this);
+        mBloodTypeList = new ArrayList<String>();
 
         Toolbar toolbar = binding.asbblToolbar;
 
@@ -40,8 +49,19 @@ public class SingleBloodBankLocation extends AppCompatActivity {
         Intent i = getIntent();
         int organiserID = i.getIntExtra("currentOrganiserID", 0);
 
-        mOrganiserViewModel = new ViewModelProvider(this).get(OrganiserViewModel.class);
+        List<Organiser> mOrganiserList = mOrganiserViewModel.getOrganiserById(organiserID);
+        mOrganiser = mOrganiserList.get(0);
 
+        binding.asbblTvOrganiser.setText(mOrganiser.getCompanyName());
+        binding.asbblTvAddress.setText(mOrganiser.getAddress());
+        binding.asbblTvContact.setText(mOrganiser.getContact());
+
+        mBloodTypeList.add("AB");
+        mBloodTypeList.add("A");
+        mBloodTypeList.add("B");
+        mBloodTypeList.add("O");
+        mBloodTypeAdapter.setBloodTypeList(mBloodTypeList);
+        binding.asbblRvBloodType.setAdapter(mBloodTypeAdapter);
     }
 
     @Override
