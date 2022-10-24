@@ -24,8 +24,7 @@ public class RegisterOrganiserActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register_organiser);
 
         binding = ActivityRegisterOrganiserBinding.inflate(getLayoutInflater());
-        View v = binding.getRoot();
-        setContentView(v);
+        setContentView(binding.getRoot());
 
         mOrganiserViewModel = new ViewModelProvider(this).get(OrganiserViewModel.class);
 
