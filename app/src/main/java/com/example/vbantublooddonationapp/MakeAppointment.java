@@ -20,7 +20,7 @@ public class MakeAppointment extends AppCompatActivity {
     private DatePickerDialog datePickerDialog;
     private ActivityMakeAppointmentBinding binding;
     private String gender = "";
-    private String donateHistory = "";
+    private String donationBefore = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,12 +30,7 @@ public class MakeAppointment extends AppCompatActivity {
         View v = binding.getRoot();
         setContentView(v);
 
-        binding.amaBtnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        binding.amaBtnBack.setOnClickListener(view -> finish());
         
         //Date session
         initDatePicker();
@@ -58,8 +53,8 @@ public class MakeAppointment extends AppCompatActivity {
         String contactNo = binding.amaEtContactNo.getText().toString().trim();
         String email = binding.amaEtEmail.getText().toString().trim();
         String address = binding.amaEtAddress.getText().toString().trim();
-        String pickDate = binding.amaTvPickDate.getText().toString().trim();
-        String pickTime = binding.amaSpPickTime.getSelectedItem().toString().trim();
+        String appointmentDate = binding.amaTvPickDate.getText().toString().trim();
+        String appointmentTime = binding.amaSpPickTime.getSelectedItem().toString().trim();
         String pickBlood = binding.amaSpPickBlood.getSelectedItem().toString().trim();
 
 
@@ -127,21 +122,20 @@ public class MakeAppointment extends AppCompatActivity {
         }
 
         //pickDate validation
-        if (pickDate.equals("DD/MM/YYYY")){
+        if (appointmentDate.equals("DD/MM/YYYY")){
             Toast.makeText(this, "Please select your appointment date", Toast.LENGTH_SHORT).show();
             binding.amaTvPickDate.requestFocus();
             return;
         }
 
-        if (donateHistory.isEmpty()){
+        if (donationBefore.isEmpty()){
             Toast.makeText(this, "Please select your donation history experience", Toast.LENGTH_SHORT).show();
             binding.amaRgDonateHistory.requestFocus();
             return;
         }
 
         //if all success
-        Toast.makeText(this, "YEET", Toast.LENGTH_SHORT).show();
-
+        //assign value and insert to database
     }
 
 
@@ -185,7 +179,7 @@ public class MakeAppointment extends AppCompatActivity {
     public void rgDonateHistory_clicked(View view) {
         int x = binding.amaRgDonateHistory.getCheckedRadioButtonId();
         RadioButton r = findViewById(x);
-        donateHistory = r.getText().toString().trim();
+        donationBefore = r.getText().toString().trim();
     }
     
 }
