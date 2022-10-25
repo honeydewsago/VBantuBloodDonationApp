@@ -26,6 +26,10 @@
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/fragment_profile.xml" value="0.1" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/fragment_register.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1" />
+        <entry key="..\:/Users/lauwa/StudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/activity_community_new_post.xml" value="0.25" />
+        <entry key="..\:/Users/lauwa/StudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/activity_forgot_password.xml" value="0.25" />
+        <entry key="..\:/Users/lauwa/StudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/dialog_community_likeslist.xml" value="0.25" />
+        <entry key="..\:/Users/lauwa/StudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/fragment_community.xml" value="0.25" />
       </map>
     </option>
   </component>
