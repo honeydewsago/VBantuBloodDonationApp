@@ -86,20 +86,20 @@ public class RegisterFragment extends Fragment {
 
         //validate to check if email is empty
         if (email.isEmpty()) {
-            binding.frEtEmail.setError("Email is required!");
+            binding.frEtEmail.setError(getText(R.string.emailRequired));
             binding.frEtEmail.requestFocus();
             return;
         }
         //validate to check if email format is invalid
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            binding.frEtEmail.setError("Email address is invalid!");
+            binding.frEtEmail.setError(getText(R.string.emailInvalid));
             binding.frEtEmail.requestFocus();
             return;
         }
 
         //validate to check if full name or company name is empty
         if (fullName.isEmpty()) {
-            binding.frEtFullName.setError("Name is required!");
+            binding.frEtFullName.setError(getText(R.string.nameRequired));
             binding.frEtFullName.requestFocus();
             return;
         }
