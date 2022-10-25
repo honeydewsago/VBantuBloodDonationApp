@@ -108,6 +108,7 @@ public class MakeAppointment extends AppCompatActivity {
             return;
         }
 
+
         //address validation
         if (address.isEmpty()){
             binding.amaEtAddress.setError("Address is required!");
