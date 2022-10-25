@@ -99,6 +99,7 @@
     <string name="nameRequired">Name is required!</string>
     <string name="bloodTypeNeeded">Please select blood type needed</string>
     <string name="requestInfoRequired">Request information is required!</string>
+    <string name="requestSubmittedSuccessfully">Request submitted successfully!</string>
 
     <string-array name="bloodGroupValues">
         <item>A+</item>

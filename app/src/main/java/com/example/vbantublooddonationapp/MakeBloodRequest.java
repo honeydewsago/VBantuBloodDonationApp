@@ -5,6 +5,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -12,11 +13,16 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.Toast;
 
+import com.example.vbantublooddonationapp.Model.BloodRequest;
 import com.example.vbantublooddonationapp.Model.Organiser;
+import com.example.vbantublooddonationapp.ViewModel.BloodRequestViewModel;
 import com.example.vbantublooddonationapp.ViewModel.OrganiserViewModel;
 import com.example.vbantublooddonationapp.databinding.ActivityMakeBloodRequestBinding;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 public class MakeBloodRequest extends AppCompatActivity {
@@ -28,6 +34,7 @@ public class MakeBloodRequest extends AppCompatActivity {
 
     private ActivityMakeBloodRequestBinding binding;
     private OrganiserViewModel mOrganiserViewModel;
+    private BloodRequestViewModel mBloodRequestViewModel;
     private Organiser mOrganiser;
 
     @Override
@@ -37,6 +44,7 @@ public class MakeBloodRequest extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         mOrganiserViewModel = new ViewModelProvider(this).get(OrganiserViewModel.class);
+        mBloodRequestViewModel = new ViewModelProvider(this).get(BloodRequestViewModel.class);
 
         Toolbar toolbar = binding.ambrToolbar;
 
@@ -68,7 +76,7 @@ public class MakeBloodRequest extends AppCompatActivity {
     }
 
     private void submitRequest() {
-        String bloodTypeAB="", bloodTypeA="", bloodTypeB="", bloodTypeO="", allBloodType="";
+        String bloodTypeAB="", bloodTypeA="", bloodTypeB="", bloodTypeO="", combinedBloodType="";
         String requestInfo = binding.ambrEtRequestInfo.getText().toString().trim();
 
         //validate to check if email is empty
@@ -90,9 +98,17 @@ public class MakeBloodRequest extends AppCompatActivity {
         bloodTypeB = checkBloodType(binding.ambrChbBPov, binding.ambrChbBNeg);
         bloodTypeO = checkBloodType(binding.ambrChbOPov, binding.ambrChbONeg);
 
-        allBloodType = bloodTypeAB + bloodTypeA + bloodTypeB + bloodTypeO;
+        combinedBloodType = bloodTypeAB + bloodTypeA + bloodTypeB + bloodTypeO;
 
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault());
+        String currentDateTime = sdf.format(new Date());
 
+        BloodRequest bloodRequest = new BloodRequest(mUserID,requestInfo,combinedBloodType,currentDateTime,1);
+
+        mBloodRequestViewModel.insertBloodRequest(bloodRequest);
+
+        Toast.makeText(this, R.string.requestSubmittedSuccessfully, Toast.LENGTH_SHORT).show();
+        finish();
     }
 
     private String checkBloodType(CheckBox bloodPositive, CheckBox bloodNegative) {
