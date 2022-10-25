@@ -2,22 +2,74 @@ package com.example.vbantublooddonationapp;
 
 import android.app.ActionBar;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.vbantublooddonationapp.Model.Organiser;
+import com.example.vbantublooddonationapp.ViewModel.OrganiserViewModel;
+import com.example.vbantublooddonationapp.adapter.LocationAdapter;
+import com.example.vbantublooddonationapp.databinding.CardLocationBinding;
+import com.example.vbantublooddonationapp.databinding.FragmentHomeBinding;
+
+import java.util.List;
+
 
 public class HomeFragment extends Fragment {
+    private FragmentHomeBinding homeBinding;
+    private LocationAdapter mLocationAdapter;
+    private OrganiserViewModel mOrganiserViewModel;
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        homeBinding = FragmentHomeBinding.inflate(getLayoutInflater());
+        return homeBinding.getRoot();
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
+        mLocationAdapter = new LocationAdapter(getActivity());
+        homeBinding.fhRvLocation.setAdapter(mLocationAdapter);
 
+        //set the layout manager
+        homeBinding.fhRvLocation.setLayoutManager(new GridLayoutManager(
+                view.getContext(),
+                getResources().getInteger(R.integer.grid_column_count)));
+
+        initOrganiserViewModel();
+    }
+
+    private void initOrganiserViewModel() {
+        //initialize the view model from the OrganiserViewModel
+        mOrganiserViewModel = new ViewModelProvider(this).get(OrganiserViewModel.class);
+
+        //initialize the observer to observe the Live Data
+        final Observer<List<Organiser>> organiserListObserver = new Observer<List<Organiser>>() {
+            @Override
+            public void onChanged(List<Organiser> organisers) {
+                mLocationAdapter.setOrganiserList(organisers);
+            }
+        };
+
+        //call the getAllBooks function from the view model and observe the Live Data through bookListObserver
+        mOrganiserViewModel.getAllOrganisers().observe(getViewLifecycleOwner(),organiserListObserver);
+    }
 }

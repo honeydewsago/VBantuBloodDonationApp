@@ -27,8 +27,7 @@ public class RegisterUserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         binding = ActivityRegisterUserBinding.inflate(getLayoutInflater());
-        View v = binding.getRoot();
-        setContentView(v);
+        setContentView(binding.getRoot());
 
         mUserViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
