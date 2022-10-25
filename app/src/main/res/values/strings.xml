@@ -92,8 +92,11 @@
     <string name="A_neg">A-</string>
     <string name="B_neg">B-</string>
     <string name="O_neg">O-</string>
-    <string name="writeYourRequestHere">Write your request here....</string>
+    <string name="writeYourRequestHere">Write your request here.... (max 500 characters)</string>
     <string name="submitRequest">Submit Request</string>
+    <string name="emailRequired">Email is required!</string>
+    <string name="emailInvalid">Email address is invalid!</string>
+    <string name="nameRequired">Name is required!</string>
 
     <string-array name="bloodGroupValues">
         <item>A+</item>

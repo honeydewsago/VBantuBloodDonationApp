@@ -109,7 +109,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="2dp"
         android:text="@string/address"
-        android:textSize="14sp"
+        android:textSize="12sp"
         android:textColor="@color/dark_grey"
         app:layout_constraintEnd_toEndOf="@+id/ambr_tvContactNo"
         app:layout_constraintStart_toEndOf="@+id/ambr_tvAddressTitle"
@@ -118,7 +118,7 @@
     <ImageView
         android:id="@+id/ambr_ivLineBreak1"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="1dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
@@ -152,6 +152,7 @@
         android:minLines="10"
         android:textSize="14sp"
         android:padding="4dp"
+        android:maxLength="500"
         app:layout_constraintEnd_toEndOf="@+id/ambr_tvAddress"
         app:layout_constraintStart_toStartOf="@+id/ambr_tvRequestInfoTitle"
         app:layout_constraintTop_toBottomOf="@+id/ambr_tvRequestInfoTitle" />
@@ -159,7 +160,7 @@
     <ImageView
         android:id="@+id/ambr_ivLineBreak2"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="1dp"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="@+id/ambr_etRequestInfo"
         app:layout_constraintStart_toStartOf="@+id/ambr_etRequestInfo"
@@ -183,6 +184,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/AB_pov"
+        android:textColor="@color/red"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/ambr_tvBloodTypeNeeded"
         app:layout_constraintTop_toBottomOf="@+id/ambr_tvBloodTypeNeeded" />
 
@@ -192,6 +195,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="@string/A_pov"
+        android:textColor="@color/red"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/ambr_chbAB_pov"
         app:layout_constraintTop_toTopOf="@+id/ambr_chbAB_pov" />
 
@@ -201,6 +206,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="@string/B_pov"
+        android:textColor="@color/red"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/ambr_chbA_pov"
         app:layout_constraintTop_toTopOf="@+id/ambr_chbA_pov" />
 
@@ -210,6 +217,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="@string/O_pov"
+        android:textColor="@color/red"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/ambr_chbB_pov"
         app:layout_constraintTop_toTopOf="@+id/ambr_chbB_pov" />
 
@@ -219,6 +228,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/AB_neg"
+        android:textColor="@color/red"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/ambr_chbAB_pov"
         app:layout_constraintTop_toBottomOf="@+id/ambr_chbAB_pov" />
 
@@ -227,6 +238,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/A_neg"
+        android:textColor="@color/red"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/ambr_chbA_pov"
         app:layout_constraintTop_toTopOf="@+id/ambr_chbAB_neg" />
 
@@ -235,6 +248,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/B_neg"
+        android:textColor="@color/red"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/ambr_chbB_pov"
         app:layout_constraintTop_toTopOf="@+id/ambr_chbA_neg" />
 
@@ -243,6 +258,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/O_neg"
+        android:textColor="@color/red"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/ambr_chbO_pov"
         app:layout_constraintTop_toTopOf="@+id/ambr_chbB_neg" />
 
