@@ -1,6 +1,10 @@
 package com.example.vbantublooddonationapp;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.app.ActionBar;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -25,6 +29,12 @@ import java.util.List;
 
 
 public class HomeFragment extends Fragment {
+
+    private final String USERID_KEY = "userid", USERTYPE_KEY = "usertype";
+    private SharedPreferences mPreferences;
+    private int mUserID = 0;
+    private String mUserType = "user";
+
     private FragmentHomeBinding homeBinding;
     private LocationAdapter mLocationAdapter;
     private OrganiserViewModel mOrganiserViewModel;
@@ -45,6 +55,28 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        mPreferences = getActivity().getSharedPreferences("com.example.vbantublooddonationapp",MODE_PRIVATE);
+
+        if (mPreferences.contains(USERID_KEY) && mPreferences.contains(USERTYPE_KEY)) {
+            mUserID = mPreferences.getInt(USERID_KEY,0);
+            mUserType = mPreferences.getString(USERTYPE_KEY, "user");
+        }
+
+        if (mUserType.equals("organiser")) {
+            homeBinding.fhIvBloodRequestHistory.setVisibility(View.VISIBLE);
+        }
+        else {
+            homeBinding.fhIvBloodRequestHistory.setVisibility(View.GONE);
+        }
+
+        homeBinding.fhIvBloodRequestHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(),BloodRequestHistory.class);
+                startActivity(i);
+            }
+        });
 
         mLocationAdapter = new LocationAdapter(getActivity());
         homeBinding.fhRvLocation.setAdapter(mLocationAdapter);

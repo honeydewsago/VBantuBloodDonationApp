@@ -74,6 +74,9 @@
     <string name="bloodDonation">Blood Donation</string>
     <string name="makeYourAppointmentNow">Make Your Appointment Now</string>
     <string name="emailAddressAlreadyExist">An account with this email address already exists, please choose another email</string>
+    <string name="bloodRequestHistory">Blood Request History</string>
+    <string name="makeABloodRequest">Make A Blood Request</string>
+    <string name="bloodRequest">Blood Request</string>
 
     <string-array name="bloodGroupValues">
         <item>A+</item>
