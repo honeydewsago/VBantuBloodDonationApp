@@ -97,6 +97,8 @@
     <string name="emailRequired">Email is required!</string>
     <string name="emailInvalid">Email address is invalid!</string>
     <string name="nameRequired">Name is required!</string>
+    <string name="bloodTypeNeeded">Please select blood type needed</string>
+    <string name="requestInfoRequired">Request information is required!</string>
 
     <string-array name="bloodGroupValues">
         <item>A+</item>
