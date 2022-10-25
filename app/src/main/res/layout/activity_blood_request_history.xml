@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/pink"
-    tools:context=".CommunityFragment">
+    tools:context=".BloodRequestHistory">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/fc_toolbar"
+        android:id="@+id/abrh_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?android:actionBarSize"
         android:background="@color/red"
@@ -17,42 +17,43 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/fc_tvCommunity"
+            android:id="@+id/abrh_tvBloodRequestHistory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/communityTitle"
+            android:text="@string/bloodRequestHistory"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
-
-        <ImageButton
-            android:id="@+id/fc_btnNewPost"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginEnd="10dp"
-            android:background="@color/red"
-            android:contentDescription="@string/newPost"
-            android:src="@drawable/ic_edit" />
     </androidx.appcompat.widget.Toolbar>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/fc_cvLeaderboard"
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/abrh_btnMakeBloodRequest"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:text="@string/makeABloodRequest"
+        android:textColor="@color/red"
+        android:drawableRight="@drawable/ic_edit_24_red"
+        android:backgroundTint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fc_toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/abrh_toolbar" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/fc_rvCommunityPosts"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:id="@+id/abrh_rvBloodRequest"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fc_cvLeaderboard"
-        app:layout_constraintVertical_bias="0" />
+        app:layout_constraintTop_toBottomOf="@+id/abrh_btnMakeBloodRequest"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

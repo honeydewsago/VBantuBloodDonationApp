@@ -47,6 +47,15 @@ public class LoginFragment extends Fragment {
 
         //get the shared preferences file
         mPreferences = getActivity().getSharedPreferences("com.example.vbantublooddonationapp",MODE_PRIVATE);
+
+        //enable auto-login
+        /*
+        if (mPreferences.contains(USERID_KEY) && mPreferences.contains(USERTYPE_KEY)) {
+            Intent i = new Intent(getActivity(),HomeActivity.class);
+            startActivity(i);
+        }
+         */
+
         super.onCreate(savedInstanceState);
     }
 
@@ -69,14 +78,14 @@ public class LoginFragment extends Fragment {
 
                 //validate to check if email is empty
                 if (email.isEmpty()) {
-                    binding.flEtEmail.setError("Email is required!");
+                    binding.flEtEmail.setError(getText(R.string.emailRequired));
                     binding.flEtEmail.requestFocus();
                     return;
                 }
 
                 //validate to check if password is empty
                 if (password.isEmpty()) {
-                    binding.flEtPassword.setError("Password is required!");
+                    binding.flEtPassword.setError(getText(R.string.passwordRequired));
                     binding.flEtPassword.requestFocus();
                     return;
                 }

@@ -26,4 +26,12 @@ public class BloodRequest {
 
     @ColumnInfo(name = "active")
     public int active;
+
+    public BloodRequest(int organiserID, String requestInfo, String shortageType, String dateTime, int active) {
+        this.organiserID = organiserID;
+        this.requestInfo = requestInfo;
+        this.shortageType = shortageType;
+        this.dateTime = dateTime;
+        this.active = active;
+    }
 }

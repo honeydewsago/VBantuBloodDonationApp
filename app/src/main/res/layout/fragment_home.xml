@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/fh_tvCommunity"
+            android:id="@+id/fh_tvBloodDonation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -24,6 +24,16 @@
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/fh_ivBloodRequestHistory"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_history_24"
+            android:layout_gravity="right"
+            android:adjustViewBounds="true"
+            android:layout_marginRight="12dp"
+            android:visibility="gone"/>
     </androidx.appcompat.widget.Toolbar>
 
     <SearchView
@@ -83,6 +93,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fh_tvLocation" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
