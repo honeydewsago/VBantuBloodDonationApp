@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
+    android:background="@drawable/formbg"
     tools:context=".MakeAppointment">
 
     <TableLayout
@@ -17,14 +18,45 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/ama_tbToolBar"
+                android:layout_width="match_parent"
+                android:layout_height="?android:actionBarSize"
+                android:background="@color/red"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/ama_tvToolBarTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:text="@string/bloodDonationAppointment"
+                    android:textColor="@color/white"/>
+
+                <Button
+                    android:id="@+id/ama_btnBack"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/ic_arrow_back_ios"
+                    android:layout_gravity="center_vertical"
+                    android:theme="@style/Theme.AppCompat.DayNight"
+                    />
+
+            </androidx.appcompat.widget.Toolbar>
+
             <RelativeLayout
                 android:id="@+id/ama_rlTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="48dp"
+                android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toBottomOf="@+id/ama_tbToolBar" >
 
                 <ImageView
                     android:layout_width="220dp"
@@ -39,14 +71,13 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/makeAppointment"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="140dp"
-                    android:textStyle="bold"
-                    android:textSize="24sp"
-                    android:textColor="@color/red"
                     android:background="#99FFFFFF"
-                    />
+                    android:text="@string/makeYourAppointmentNow"
+                    android:textColor="@color/red"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
             </RelativeLayout>
 
@@ -89,6 +120,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/edit_text_box"
                 android:hint="@string/icNo"
+                android:inputType="number"
                 app:layout_constraintEnd_toEndOf="@+id/ama_tvIcNo"
                 app:layout_constraintStart_toStartOf="@+id/ama_tvIcNo"
                 app:layout_constraintTop_toBottomOf="@+id/ama_tvIcNo" />
@@ -110,6 +142,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:hint="@string/contactNoExp"
+                android:inputType="number"
                 android:background="@drawable/edit_text_box"
                 app:layout_constraintEnd_toEndOf="@+id/ama_tvContactNo"
                 app:layout_constraintStart_toStartOf="@+id/ama_tvContactNo"
@@ -187,12 +220,14 @@
                     android:id="@+id/ama_rbFemale"
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
+                    android:onClick="rgGender_clicked"
                     android:text="@string/female" />
 
                 <RadioButton
                     android:id="@+id/ama_rbMale"
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
+                    android:onClick="rgGender_clicked"
                     android:text="@string/male"/>
 
 
@@ -260,14 +295,11 @@
                 app:layout_constraintStart_toStartOf="@+id/ama_tvPickDate"
                 app:layout_constraintTop_toBottomOf="@+id/ama_tvPickDate" />
 
-            <TextView
-                android:id="@+id/ama_tvPickTime"
+            <Spinner
+                android:id="@+id/ama_spPickTime"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/text_box"
-                android:textAlignment="center"
-                android:text="@string/SelectTime"
-                style="?android:spinnerStyle"
+                android:layout_height="20dp"
+                android:entries="@array/timeAvailable"
                 app:layout_constraintEnd_toEndOf="@+id/ama_tvAppointmentTime"
                 app:layout_constraintStart_toStartOf="@+id/ama_tvAppointmentTime"
                 app:layout_constraintTop_toBottomOf="@+id/ama_tvAppointmentTime" />
@@ -280,18 +312,15 @@
                 android:text="@string/bloodGroupLabel"
                 android:textColor="@color/dark_grey"
                 android:textSize="15sp"
-                app:layout_constraintEnd_toEndOf="@+id/ama_tvPickTime"
-                app:layout_constraintStart_toStartOf="@+id/ama_tvPickTime"
-                app:layout_constraintTop_toBottomOf="@+id/ama_tvPickTime" />
+                app:layout_constraintEnd_toEndOf="@+id/ama_spPickTime"
+                app:layout_constraintStart_toStartOf="@+id/ama_spPickTime"
+                app:layout_constraintTop_toBottomOf="@+id/ama_spPickTime" />
 
-            <TextView
-                android:id="@+id/ama_tvPickBlood"
-                style="?android:spinnerStyle"
+            <Spinner
+                android:id="@+id/ama_spPickBlood"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/text_box"
-                android:text="@string/selectBloodType"
-                android:textAlignment="center"
+                android:layout_height="20dp"
+                android:entries="@array/bloodGroupValues"
                 app:layout_constraintEnd_toEndOf="@+id/ama_tvBloodGroup"
                 app:layout_constraintStart_toStartOf="@+id/ama_tvBloodGroup"
                 app:layout_constraintTop_toBottomOf="@+id/ama_tvBloodGroup" />
@@ -304,9 +333,9 @@
                 android:textColor="@color/dark_grey"
                 android:textSize="15sp"
                 android:layout_marginTop="16dp"
-                app:layout_constraintEnd_toEndOf="@+id/ama_tvPickBlood"
-                app:layout_constraintStart_toStartOf="@+id/ama_tvPickBlood"
-                app:layout_constraintTop_toBottomOf="@+id/ama_tvPickBlood" />
+                app:layout_constraintEnd_toEndOf="@+id/ama_spPickBlood"
+                app:layout_constraintStart_toStartOf="@+id/ama_spPickBlood"
+                app:layout_constraintTop_toBottomOf="@+id/ama_spPickBlood" />
 
             <RadioGroup
                 android:id="@+id/ama_rgDonateHistory"
@@ -322,12 +351,14 @@
                     android:id="@+id/ama_rbDonateHistoryYes"
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
+                    android:onClick="rgDonateHistory_clicked"
                     android:text="@string/yes" />
 
                 <RadioButton
                     android:id="@+id/ama_rbDonateHistoryNo"
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
+                    android:onClick="rgDonateHistory_clicked"
                     android:text="@string/no"/>
 
             </RadioGroup>

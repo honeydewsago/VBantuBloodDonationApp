@@ -3,29 +3,41 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.202" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/edit_text_box.xml" value="0.2415" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/ic_arrow_back_ios.xml" value="0.2855" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/ic_arrow_down_24.xml" value="0.2855" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/ic_arrow_forward_ios.xml" value="0.2855" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/ic_arrow_right_24.xml" value="0.2855" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/ic_close.xml" value="0.2425" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/ic_comment.xml" value="0.202" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/ic_done.xml" value="0.2425" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/ic_location.xml" value="0.202" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/ic_loginbg.xml" value="0.202" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/ic_nav_blood_background.xml" value="0.1" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/text_box.xml" value="0.2425" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/activity_community_new_post.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/activity_home.xml" value="0.25" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/activity_login.xml" value="0.26268115942028986" />
-        <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/activity_main.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/activity_make_appointment.xml" value="0.67" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/activity_register_user.xml" value="0.18802083333333333" />
-        <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/card_blood_type.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/card_blood_type.xml" value="0.67" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/card_bloodtype_list.xml" value="1.0" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/card_community_comments.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/card_community_likes.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/card_community_likeslist.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/card_community_post.xml" value="0.1" />
-        <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/card_urgent_request.xml" value="0.33" />
-        <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/fragment_community.xml" value="0.1" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/card_location.xml" value="0.1671195652173913" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/card_urgent_request.xml" value="0.25" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/dialog_community_likeslist.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/fragment_community.xml" value="0.22" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/fragment_home.xml" value="0.33" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/fragment_login.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/fragment_profile.xml" value="0.1" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/fragment_profile.xml" value="0.2" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/fragment_register.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/side_menu.xml" value="0.18697916666666667" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/menu/bottom_nav_menu.xml" value="0.22" />
       </map>
     </option>
   </component>

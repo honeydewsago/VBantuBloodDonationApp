@@ -71,6 +71,9 @@
     <string name="bothPasswordDoNotMatch">Both passwords does not match!</string>
     <string name="usernameRequired">Username is required!</string>
     <string name="orgnAddressRequired">Organisation address is required!</string>
+    <string name="bloodDonation">Blood Donation</string>
+    <string name="makeYourAppointmentNow">Make Your Appointment Now</string>
+    <string name="emailAddressAlreadyExist">An account with this email address already exists, please choose another email</string>
     <string name="fullNameLabel">Full Name:</string>
     <string name="fullNameInput">Enter your full name</string>
     <string name="icLabel">IC No:</string>
@@ -95,7 +98,7 @@
     <string name="reminder4"><![CDATA[Body weight at least 45kg & no chronic medical illness]]></string>
     <string name="reset">reset</string>
     <string name="submit">submit</string>
-    <string name="makeAppointment">Make Your Appointment Now</string>
+    <string name="bloodDonationAppointment">Blood Donation Appointment</string>
 
     <string-array name="bloodGroupValues">
         <item>A+</item>
@@ -106,5 +109,15 @@
         <item>B-</item>
         <item>O+</item>
         <item>O-</item>
+    </string-array>
+
+    <string-array name="timeAvailable">
+        <item>9.00 am</item>
+        <item>10.00 am</item>
+        <item>11.00 am</item>
+        <item>12.00 pm</item>
+        <item>1.00 pm</item>
+        <item>2.00 pm</item>
+        <item>3.00 pm</item>
     </string-array>
 </resources>
