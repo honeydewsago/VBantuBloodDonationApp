@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@drawable/formbg"
+    tools:context=".MakeAppointment">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/ama_tbToolBar"
+                android:layout_width="match_parent"
+                android:layout_height="?android:actionBarSize"
+                android:background="@color/red"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/ama_tvToolBarTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:text="@string/bloodDonationAppointment"
+                    android:textColor="@color/white"/>
+
+                <Button
+                    android:id="@+id/ama_btnBack"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/ic_arrow_back_ios"
+                    android:layout_gravity="center_vertical"
+                    android:theme="@style/Theme.AppCompat.DayNight"
+                    />
+
+            </androidx.appcompat.widget.Toolbar>
+
+            <RelativeLayout
+                android:id="@+id/ama_rlTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ama_tbToolBar" >
+
+                <ImageView
+                    android:layout_width="220dp"
+                    android:layout_height="220dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/appointment"
+                    tools:layout_editor_absoluteX="-6dp"
+                    tools:layout_editor_absoluteY="50dp"
+                    android:layout_centerInParent="true"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="140dp"
+                    android:background="#99FFFFFF"
+                    android:text="@string/makeYourAppointmentNow"
+                    android:textColor="@color/red"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/ama_tvFullName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/fullNameLabel"
+                android:textColor="@color/dark_grey"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="@+id/ama_rlTitle"
+                app:layout_constraintStart_toStartOf="@+id/ama_rlTitle"
+                app:layout_constraintTop_toBottomOf="@+id/ama_rlTitle" />
+
+            <EditText
+                android:id="@+id/ama_etFullName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_box"
+                android:hint="@string/fullNameInput"
+                app:layout_constraintEnd_toEndOf="@+id/ama_tvFullName"
+                app:layout_constraintStart_toStartOf="@+id/ama_tvFullName"
+                app:layout_constraintTop_toBottomOf="@+id/ama_tvFullName" />
+
+            <TextView
+                android:id="@+id/ama_tvIcNo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/icLabel"
+                android:textColor="@color/dark_grey"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="@+id/ama_etFullName"
+                app:layout_constraintStart_toStartOf="@+id/ama_etFullName"
+                app:layout_constraintTop_toBottomOf="@+id/ama_etFullName" />
+
+            <EditText
+                android:id="@+id/ama_etIcNo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_box"
+                android:hint="@string/icNo"
+                android:inputType="number"
+                app:layout_constraintEnd_toEndOf="@+id/ama_tvIcNo"
+                app:layout_constraintStart_toStartOf="@+id/ama_tvIcNo"
+                app:layout_constraintTop_toBottomOf="@+id/ama_tvIcNo" />
+
+            <TextView
+                android:id="@+id/ama_tvContactNo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/contactNoLabel"
+                android:textColor="@color/dark_grey"
+                android:layout_marginTop="16dp"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="@+id/ama_etIcNo"
+                app:layout_constraintStart_toStartOf="@+id/ama_etIcNo"
+                app:layout_constraintTop_toBottomOf="@+id/ama_etIcNo" />
+
+            <EditText
+                android:id="@+id/ama_etContactNo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/contactNoExp"
+                android:inputType="number"
+                android:background="@drawable/edit_text_box"
+                app:layout_constraintEnd_toEndOf="@+id/ama_tvContactNo"
+                app:layout_constraintStart_toStartOf="@+id/ama_tvContactNo"
+                app:layout_constraintTop_toBottomOf="@+id/ama_tvContactNo" />
+
+            <TextView
+                android:id="@+id/ama_tvEmail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/emailLabel"
+                android:textColor="@color/dark_grey"
+                android:textSize="15sp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/ama_etContactNo"
+                app:layout_constraintStart_toStartOf="@+id/ama_etContactNo"
+                app:layout_constraintTop_toBottomOf="@+id/ama_etContactNo" />
+
+            <EditText
+                android:id="@+id/ama_etEmail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_box"
+                android:hint="@string/enterYourEmailHere"
+                android:inputType="textEmailAddress"
+                app:layout_constraintEnd_toEndOf="@+id/ama_tvEmail"
+                app:layout_constraintStart_toStartOf="@+id/ama_tvEmail"
+                app:layout_constraintTop_toBottomOf="@+id/ama_tvEmail" />
+
+            <TextView
+                android:id="@+id/ama_tvAddress"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/addressLabel"
+                android:textColor="@color/dark_grey"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="@+id/ama_etContactNo"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/ama_etContactNo"
+                app:layout_constraintTop_toBottomOf="@+id/ama_etEmail" />
+
+            <EditText
+                android:id="@+id/ama_etAddress"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_box"
+                android:hint="House Address"
+                android:lines="3"
+                app:layout_constraintEnd_toEndOf="@+id/ama_tvAddress"
+                app:layout_constraintStart_toStartOf="@+id/ama_tvAddress"
+                app:layout_constraintTop_toBottomOf="@+id/ama_tvAddress" />
+
+            <TextView
+                android:id="@+id/ama_tvGender"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/gender"
+                android:textColor="@color/dark_grey"
+                android:textSize="15sp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/ama_etAddress"
+                app:layout_constraintStart_toStartOf="@+id/ama_etAddress"
+                app:layout_constraintTop_toBottomOf="@+id/ama_etAddress" />
+
+            <RadioGroup
+                android:id="@+id/ama_rgGender"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="@+id/ama_tvGender"
+                app:layout_constraintStart_toStartOf="@+id/ama_tvGender"
+                app:layout_constraintTop_toBottomOf="@+id/ama_tvGender">
+
+                <RadioButton
+                    android:id="@+id/ama_rbFemale"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:onClick="rgGender_clicked"
+                    android:text="@string/female" />
+
+                <RadioButton
+                    android:id="@+id/ama_rbMale"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:onClick="rgGender_clicked"
+                    android:text="@string/male"/>
+
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/ama_tvCenterTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/bloodDonationCenter"
+                android:textSize="15sp"
+                android:textColor="@color/dark_grey"
+                android:layout_marginTop="16sp"
+                app:layout_constraintEnd_toEndOf="@+id/ama_rgGender"
+                app:layout_constraintStart_toStartOf="@+id/ama_rgGender"
+                app:layout_constraintTop_toBottomOf="@+id/ama_rgGender" />
+
+            <TextView
+                android:id="@+id/ama_tvBloodDonationCenter"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/text_box"
+                android:text="Penang Adventist Hospital"
+                android:textColor="@color/dark_grey"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="@+id/ama_tvCenterTitle"
+                app:layout_constraintStart_toStartOf="@+id/ama_tvCenterTitle"
+                app:layout_constraintTop_toBottomOf="@+id/ama_tvCenterTitle" />
+
+            <TextView
+                android:id="@+id/ama_tvAppointmentDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/appointmentDateLabel"
+                android:textColor="@color/dark_grey"
+                android:textSize="15sp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/ama_tvBloodDonationCenter"
+                app:layout_constraintStart_toStartOf="@+id/ama_tvBloodDonationCenter"
+                app:layout_constraintTop_toBottomOf="@+id/ama_tvBloodDonationCenter" />
+
+            <TextView
+                android:id="@+id/ama_tvPickDate"
+                style="?android:spinnerStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/text_box"
+                android:drawableRight="@drawable/ic_baseline_calendar"
+                android:onClick="openDatePicker"
+                android:text="@string/dateFormat"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="@+id/ama_tvAppointmentDate"
+                app:layout_constraintStart_toStartOf="@+id/ama_tvAppointmentDate"
+                app:layout_constraintTop_toBottomOf="@+id/ama_tvAppointmentDate" />
+
+            <TextView
+                android:id="@+id/ama_tvAppointmentTime"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/appointmentTimeLabel"
+                android:textColor="@color/dark_grey"
+                android:textSize="15sp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/ama_tvPickDate"
+                app:layout_constraintStart_toStartOf="@+id/ama_tvPickDate"
+                app:layout_constraintTop_toBottomOf="@+id/ama_tvPickDate" />
+
+            <Spinner
+                android:id="@+id/ama_spPickTime"
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:entries="@array/timeAvailable"
+                app:layout_constraintEnd_toEndOf="@+id/ama_tvAppointmentTime"
+                app:layout_constraintStart_toStartOf="@+id/ama_tvAppointmentTime"
+                app:layout_constraintTop_toBottomOf="@+id/ama_tvAppointmentTime" />
+
+            <TextView
+                android:id="@+id/ama_tvBloodGroup"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/bloodGroupLabel"
+                android:textColor="@color/dark_grey"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="@+id/ama_spPickTime"
+                app:layout_constraintStart_toStartOf="@+id/ama_spPickTime"
+                app:layout_constraintTop_toBottomOf="@+id/ama_spPickTime" />
+
+            <Spinner
+                android:id="@+id/ama_spPickBlood"
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:entries="@array/bloodGroupValues"
+                app:layout_constraintEnd_toEndOf="@+id/ama_tvBloodGroup"
+                app:layout_constraintStart_toStartOf="@+id/ama_tvBloodGroup"
+                app:layout_constraintTop_toBottomOf="@+id/ama_tvBloodGroup" />
+
+            <TextView
+                android:id="@+id/ama_tvDonateHistory"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/bloodDonationHistoryQuestion"
+                android:textColor="@color/dark_grey"
+                android:textSize="15sp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/ama_spPickBlood"
+                app:layout_constraintStart_toStartOf="@+id/ama_spPickBlood"
+                app:layout_constraintTop_toBottomOf="@+id/ama_spPickBlood" />
+
+            <RadioGroup
+                android:id="@+id/ama_rgDonateHistory"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/ama_tvDonateHistory"
+                app:layout_constraintStart_toStartOf="@+id/ama_tvDonateHistory"
+                app:layout_constraintEnd_toEndOf="@+id/ama_tvDonateHistory"
+                >
+
+                <RadioButton
+                    android:id="@+id/ama_rbDonateHistoryYes"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:onClick="rgDonateHistory_clicked"
+                    android:text="@string/yes" />
+
+                <RadioButton
+                    android:id="@+id/ama_rbDonateHistoryNo"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:onClick="rgDonateHistory_clicked"
+                    android:text="@string/no"/>
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/ama_tvReminder"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/reminder"
+                android:textColor="@color/dark_grey"
+                android:textSize="15sp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/ama_rgDonateHistory"
+                app:layout_constraintStart_toStartOf="@+id/ama_rgDonateHistory"
+                app:layout_constraintTop_toBottomOf="@+id/ama_rgDonateHistory" />
+
+            <TextView
+                android:id="@+id/ama_tvReminder1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_done"
+                android:lines="2"
+                android:text="@string/reminder1"
+                android:textSize="10sp"
+                android:textColor="@color/dark_grey"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="@+id/ama_tvReminder"
+                app:layout_constraintTop_toBottomOf="@+id/ama_tvReminder"
+                app:layout_constraintEnd_toEndOf="@id/ama_tvReminder"/>
+
+            <TextView
+                android:id="@+id/ama_tvReminder2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_done"
+                android:lines="2"
+                android:text="@string/reminder2"
+                android:textSize="10sp"
+                android:textColor="@color/dark_grey"
+                app:layout_constraintTop_toBottomOf="@+id/ama_tvReminder1"
+                app:layout_constraintStart_toStartOf="@+id/ama_tvReminder1"
+                app:layout_constraintEnd_toEndOf="@+id/ama_tvReminder1"
+                />
+
+            <TextView
+                android:id="@+id/ama_tvReminder3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_done"
+                android:lines="2"
+                android:text="@string/reminder3"
+                android:textSize="10sp"
+                android:gravity="center_vertical"
+                android:textColor="@color/dark_grey"
+                app:layout_constraintTop_toBottomOf="@+id/ama_tvReminder2"
+                app:layout_constraintStart_toStartOf="@+id/ama_tvReminder2"
+                app:layout_constraintEnd_toEndOf="@+id/ama_tvReminder2"
+                />
+
+            <TextView
+                android:id="@+id/ama_tvReminder4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_done"
+                android:text="@string/reminder4"
+                android:textSize="10sp"
+                android:gravity="center_vertical"
+                android:textColor="@color/dark_grey"
+                app:layout_constraintTop_toBottomOf="@+id/ama_tvReminder3"
+                app:layout_constraintStart_toStartOf="@+id/ama_tvReminder3"
+                app:layout_constraintEnd_toEndOf="@+id/ama_tvReminder3"
+                />
+
+            <LinearLayout
+                android:id="@+id/ama_llButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="@+id/ama_tvReminder4"
+                app:layout_constraintStart_toStartOf="@+id/ama_tvReminder4"
+                app:layout_constraintTop_toBottomOf="@id/ama_tvReminder4">
+
+                <Button
+                    android:id="@+id/ama_btnReset"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:backgroundTint="@color/medium_grey"
+                    android:text="@string/reset"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/ama_btnSubmit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="20dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:text="@string/submit"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </TableLayout>
+
+</ScrollView>
