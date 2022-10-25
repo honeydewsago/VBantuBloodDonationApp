@@ -77,6 +77,23 @@
     <string name="bloodRequestHistory">Blood Request History</string>
     <string name="makeABloodRequest">Make A Blood Request</string>
     <string name="bloodRequest">Blood Request</string>
+    <string name="bloodDonationCenterTitle">Blood Donation Center:</string>
+    <string name="addressTitle">Address:</string>
+    <string name="bloodTypeNeededTitle">Blood Type Needed:</string>
+    <string name="contactNoTitle">Contact No:</string>
+    <string name="requestInformationTitle">Request Information:</string>
+    <string name="address">Address</string>
+    <string name="bloodDonationCenter">Blood Donation Center</string>
+    <string name="AB_pov">AB+</string>
+    <string name="A_pov">A+</string>
+    <string name="B_pov">B+</string>
+    <string name="O_pov">O+</string>
+    <string name="AB_neg">AB-</string>
+    <string name="A_neg">A-</string>
+    <string name="B_neg">B-</string>
+    <string name="O_neg">O-</string>
+    <string name="writeYourRequestHere">Write your request here....</string>
+    <string name="submitRequest">Submit Request</string>
 
     <string-array name="bloodGroupValues">
         <item>A+</item>
