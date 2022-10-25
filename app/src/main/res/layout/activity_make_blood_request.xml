@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/pink"
+    tools:context=".MakeBloodRequest">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/ambr_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:actionBarSize"
+        android:background="@color/red"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/ambr_tvBloodRequest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/bloodRequest"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <ImageView
+        android:id="@+id/ambr_ivRequestBox"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ambr_toolbar"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/white_box" />
+
+    <TextView
+        android:id="@+id/ambr_tvDonationCenterTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/bloodDonationCenterTitle"
+        android:textColor="@color/red"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/ambr_ivRequestBox"
+        app:layout_constraintTop_toTopOf="@+id/ambr_ivRequestBox" />
+
+    <TextView
+        android:id="@+id/ambr_tvDonationCenter"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/bloodDonationCenter"
+        android:textSize="16sp"
+        android:textColor="@color/dark_grey"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/ambr_ivRequestBox"
+        app:layout_constraintStart_toStartOf="@+id/ambr_tvDonationCenterTitle"
+        app:layout_constraintTop_toBottomOf="@+id/ambr_tvDonationCenterTitle" />
+
+    <TextView
+        android:id="@+id/ambr_tvContactNoTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/contactNoTitle"
+        android:textColor="@color/red"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/ambr_tvDonationCenter"
+        app:layout_constraintTop_toBottomOf="@+id/ambr_tvDonationCenter" />
+
+    <TextView
+        android:id="@+id/ambr_tvContactNo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="2dp"
+        android:text="@string/contactNo"
+        android:textSize="14sp"
+        android:textColor="@color/dark_grey"
+        app:layout_constraintEnd_toEndOf="@+id/ambr_tvDonationCenter"
+        app:layout_constraintStart_toEndOf="@+id/ambr_tvContactNoTitle"
+        app:layout_constraintTop_toTopOf="@+id/ambr_tvContactNoTitle" />
+
+    <TextView
+        android:id="@+id/ambr_tvAddressTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/addressTitle"
+        android:textColor="@color/red"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/ambr_tvContactNoTitle"
+        app:layout_constraintTop_toBottomOf="@+id/ambr_tvContactNoTitle" />
+
+    <TextView
+        android:id="@+id/ambr_tvAddress"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="2dp"
+        android:text="@string/address"
+        android:textSize="12sp"
+        android:textColor="@color/dark_grey"
+        app:layout_constraintEnd_toEndOf="@+id/ambr_tvContactNo"
+        app:layout_constraintStart_toEndOf="@+id/ambr_tvAddressTitle"
+        app:layout_constraintTop_toTopOf="@+id/ambr_tvAddressTitle" />
+
+    <ImageView
+        android:id="@+id/ambr_ivLineBreak1"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/ambr_ivRequestBox"
+        app:layout_constraintStart_toStartOf="@+id/ambr_ivRequestBox"
+        app:layout_constraintTop_toBottomOf="@+id/ambr_tvAddress"
+        app:srcCompat="@drawable/line_border_2dp" />
+
+    <TextView
+        android:id="@+id/ambr_tvRequestInfoTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/requestInformationTitle"
+        android:textColor="@color/red"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/ambr_tvAddressTitle"
+        app:layout_constraintTop_toBottomOf="@+id/ambr_ivLineBreak1" />
+
+    <EditText
+        android:id="@+id/ambr_etRequestInfo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/transparent"
+        android:ems="10"
+        android:gravity="top"
+        android:hint="@string/writeYourRequestHere"
+        android:inputType="textMultiLine"
+        android:maxLines="10"
+        android:minLines="10"
+        android:textSize="14sp"
+        android:padding="4dp"
+        android:maxLength="500"
+        app:layout_constraintEnd_toEndOf="@+id/ambr_tvAddress"
+        app:layout_constraintStart_toStartOf="@+id/ambr_tvRequestInfoTitle"
+        app:layout_constraintTop_toBottomOf="@+id/ambr_tvRequestInfoTitle" />
+
+    <ImageView
+        android:id="@+id/ambr_ivLineBreak2"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/ambr_etRequestInfo"
+        app:layout_constraintStart_toStartOf="@+id/ambr_etRequestInfo"
+        app:layout_constraintTop_toBottomOf="@+id/ambr_etRequestInfo"
+        app:srcCompat="@drawable/line_border_2dp" />
+
+    <TextView
+        android:id="@+id/ambr_tvBloodTypeNeeded"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/bloodTypeNeededTitle"
+        android:textColor="@color/red"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/ambr_ivLineBreak2"
+        app:layout_constraintTop_toBottomOf="@+id/ambr_ivLineBreak2" />
+
+    <CheckBox
+        android:id="@+id/ambr_chbAB_pov"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/AB_pov"
+        android:textColor="@color/red"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/ambr_tvBloodTypeNeeded"
+        app:layout_constraintTop_toBottomOf="@+id/ambr_tvBloodTypeNeeded" />
+
+    <CheckBox
+        android:id="@+id/ambr_chbA_pov"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/A_pov"
+        android:textColor="@color/red"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/ambr_chbAB_pov"
+        app:layout_constraintTop_toTopOf="@+id/ambr_chbAB_pov" />
+
+    <CheckBox
+        android:id="@+id/ambr_chbB_pov"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/B_pov"
+        android:textColor="@color/red"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/ambr_chbA_pov"
+        app:layout_constraintTop_toTopOf="@+id/ambr_chbA_pov" />
+
+    <CheckBox
+        android:id="@+id/ambr_chbO_pov"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/O_pov"
+        android:textColor="@color/red"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/ambr_chbB_pov"
+        app:layout_constraintTop_toTopOf="@+id/ambr_chbB_pov" />
+
+    <CheckBox
+        android:id="@+id/ambr_chbAB_neg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/AB_neg"
+        android:textColor="@color/red"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/ambr_chbAB_pov"
+        app:layout_constraintTop_toBottomOf="@+id/ambr_chbAB_pov" />
+
+    <CheckBox
+        android:id="@+id/ambr_chbA_neg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/A_neg"
+        android:textColor="@color/red"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/ambr_chbA_pov"
+        app:layout_constraintTop_toTopOf="@+id/ambr_chbAB_neg" />
+
+    <CheckBox
+        android:id="@+id/ambr_chbB_neg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/B_neg"
+        android:textColor="@color/red"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/ambr_chbB_pov"
+        app:layout_constraintTop_toTopOf="@+id/ambr_chbA_neg" />
+
+    <CheckBox
+        android:id="@+id/ambr_chbO_neg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/O_neg"
+        android:textColor="@color/red"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/ambr_chbO_pov"
+        app:layout_constraintTop_toTopOf="@+id/ambr_chbB_neg" />
+
+    <Button
+        android:id="@+id/ambr_btnSubmitRequest"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/submitRequest"
+        app:layout_constraintEnd_toEndOf="@+id/ambr_ivRequestBox"
+        app:layout_constraintStart_toStartOf="@+id/ambr_chbAB_neg"
+        app:layout_constraintTop_toBottomOf="@+id/ambr_chbAB_neg" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
