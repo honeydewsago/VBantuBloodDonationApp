@@ -3,6 +3,8 @@ package com.example.vbantublooddonationapp.Repository;
 import android.app.Application;
 import android.os.AsyncTask;
 
+import androidx.lifecycle.LiveData;
+
 import com.example.vbantublooddonationapp.BloodRoomDatabase;
 import com.example.vbantublooddonationapp.DAO.UserDao;
 import com.example.vbantublooddonationapp.Model.LoginParams;
@@ -14,10 +16,12 @@ import java.util.concurrent.ExecutionException;
 public class UserRepository {
 
     private UserDao mUserDao;
+    private LiveData<List<User>> mAllUsers;
 
     public UserRepository(Application application) {
         BloodRoomDatabase db = BloodRoomDatabase.getINSTANCE(application);
         mUserDao = db.userDao();
+        mAllUsers = mUserDao.getAllUsers();
     }
 
     public void insert(User user) {
@@ -25,7 +29,7 @@ public class UserRepository {
     }
 
 
-
+    public LiveData<List<User>> getAllUsers(){return mAllUsers;}
     private static class insertAsyncTask extends AsyncTask<User, Void, Void> {
         private UserDao mSyncTaskDao;
 

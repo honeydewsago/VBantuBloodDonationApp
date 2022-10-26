@@ -1,5 +1,6 @@
 package com.example.vbantublooddonationapp.DAO;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
@@ -22,4 +23,7 @@ public interface UserDao {
 
     @Query("Select email from user_table")
     List<String> getAllUserEmails();
+
+    @Query("Select * from user_table ORDER By userID")
+    LiveData<List<User>> getAllUsers();
 }
