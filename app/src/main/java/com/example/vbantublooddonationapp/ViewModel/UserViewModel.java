@@ -30,4 +30,8 @@ public class UserViewModel extends AndroidViewModel {
         return mRepository.loginUser(email,password);
     }
 
+    public List<User> getUserById(int id){
+        return mRepository.getUserById(id);
+    }
+
 }

@@ -19,4 +19,7 @@ public interface UserDao {
 
     @Query("Select email from user_table")
     List<String> getAllUserEmails();
+
+    @Query("Select * from user_table where userID=(:id)")
+    List<User> getUserById(int id);
 }

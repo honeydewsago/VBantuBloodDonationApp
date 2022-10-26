@@ -32,4 +32,14 @@ public class Appointment {
 
     @ColumnInfo(name = "status")
     public int status;
+
+    public Appointment(int userID, int organiserID, String appointmentTime, String appointmentDate, String donationBefore, String bloodAmt, int status) {
+        this.userID = userID;
+        this.organiserID = organiserID;
+        this.appointmentTime = appointmentTime;
+        this.appointmentDate = appointmentDate;
+        this.donationBefore = donationBefore;
+        this.bloodAmt = bloodAmt;
+        this.status = status;
+    }
 }

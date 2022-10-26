@@ -9,5 +9,5 @@ import com.example.vbantublooddonationapp.Model.Appointment;
 public interface AppointmentDao {
 
     @Insert
-    void insert(Appointment...appointment);
+    void insert(Appointment... appointments);
 }
