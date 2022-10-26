@@ -82,9 +82,7 @@ public class HomeFragment extends Fragment {
         homeBinding.fhRvLocation.setAdapter(mLocationAdapter);
 
         //set the layout manager
-        homeBinding.fhRvLocation.setLayoutManager(new GridLayoutManager(
-                view.getContext(),
-                getResources().getInteger(R.integer.grid_column_count)));
+        homeBinding.fhRvLocation.setLayoutManager(new GridLayoutManager(view.getContext(), getResources().getInteger(R.integer.grid_column_count)));
 
         initOrganiserViewModel();
     }

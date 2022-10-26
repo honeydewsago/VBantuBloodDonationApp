@@ -37,10 +37,10 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Locati
         mBloodTypeAdapter = new BloodTypeAdapter(mActivity);
 
         mBloodTypeList = new ArrayList<String>();
-        mBloodTypeList.add("AB+");
-        mBloodTypeList.add("AB+");
-        mBloodTypeList.add("B+");
-        mBloodTypeList.add("O+");
+        mBloodTypeList.add("AB");
+        mBloodTypeList.add("A");
+        mBloodTypeList.add("B");
+        mBloodTypeList.add("O");
     }
 
     public void setOrganiserList(List<Organiser> organiserList) {
@@ -71,9 +71,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Locati
         holder.mRvBloodType.setAdapter(mBloodTypeAdapter);
 
         //set the layout manager
-        holder.mRvBloodType.setLayoutManager(new GridLayoutManager(
-                mActivity.getApplicationContext(),
-                4));
+        holder.mRvBloodType.setLayoutManager(new GridLayoutManager(mActivity.getApplicationContext(), 4));
     }
 
     @Override

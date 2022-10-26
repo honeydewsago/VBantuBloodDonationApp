@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -62,6 +63,9 @@ public class SingleBloodBankLocation extends AppCompatActivity {
         mBloodTypeList.add("O");
         mBloodTypeAdapter.setBloodTypeList(mBloodTypeList);
         binding.asbblRvBloodType.setAdapter(mBloodTypeAdapter);
+
+        //set the layout manager
+        binding.asbblRvBloodType.setLayoutManager(new GridLayoutManager(this, 4));
     }
 
     @Override

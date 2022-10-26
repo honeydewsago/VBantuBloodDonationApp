@@ -99,9 +99,7 @@
         android:id="@+id/asbbl_rvBloodType"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:orientation="horizontal"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="@+id/asbbl_tvContact"
         app:layout_constraintStart_toEndOf="@+id/asbbl_tvBloodShortageType"
         app:layout_constraintTop_toTopOf="@+id/asbbl_tvBloodShortageType" />
@@ -110,12 +108,12 @@
         android:id="@+id/asbbl_btnMakeAppointment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:backgroundTint="@color/mediumRed"
         android:text="@string/makeYourAppointmentNow"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="@+id/asbbl_rvBloodType"
         app:layout_constraintStart_toStartOf="@+id/asbbl_tvBloodShortageType"
-        app:layout_constraintTop_toBottomOf="@+id/asbbl_tvBloodShortageType" />
+        app:layout_constraintTop_toBottomOf="@+id/asbbl_rvBloodType" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
