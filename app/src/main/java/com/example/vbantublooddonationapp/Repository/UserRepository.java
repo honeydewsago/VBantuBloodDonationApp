@@ -4,7 +4,6 @@ import android.app.Application;
 import android.os.AsyncTask;
 
 import com.example.vbantublooddonationapp.BloodRoomDatabase;
-import com.example.vbantublooddonationapp.DAO.OrganiserDao;
 import com.example.vbantublooddonationapp.DAO.UserDao;
 import com.example.vbantublooddonationapp.Model.LoginParams;
 import com.example.vbantublooddonationapp.Model.User;
@@ -24,6 +23,8 @@ public class UserRepository {
     public void insert(User user) {
         new insertAsyncTask(mUserDao).execute(user);
     }
+
+
 
     private static class insertAsyncTask extends AsyncTask<User, Void, Void> {
         private UserDao mSyncTaskDao;
@@ -93,5 +94,34 @@ public class UserRepository {
             return userList;
         }
     }
+
+    public List<User> getUserById(int id) {
+        List<User> list = null;
+
+        try {
+            list = new UserRepository.getUserAsyncTask(mUserDao).execute(id).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    private static class getUserAsyncTask extends AsyncTask<Integer, Void, List<User>> {
+        private UserDao mSyncTaskDao;
+
+        getUserAsyncTask(UserDao dao) {
+            mSyncTaskDao = dao;
+        }
+
+        @Override
+        protected List<User> doInBackground(Integer...id) {
+            List<User> userList = mSyncTaskDao.getUserById(id[0]);
+            return userList;
+        }
+    }
+
+
 
 }

@@ -3,33 +3,27 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/ic_arrow_back_ios.xml" value="0.2855" />
-        <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/ic_arrow_down_24.xml" value="0.2855" />
-        <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/ic_arrow_forward_ios.xml" value="0.2855" />
-        <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/ic_arrow_right_24.xml" value="0.2855" />
-        <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/ic_nav_blood_background.xml" value="0.1" />
-        <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/activity_community_new_post.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/activity_home.xml" value="0.25" />
-        <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/activity_login.xml" value="0.26268115942028986" />
-        <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/activity_main.xml" value="0.358695652173913" />
-        <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/activity_register_user.xml" value="0.18802083333333333" />
-        <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/card_blood_type.xml" value="0.18802083333333333" />
-        <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/card_bloodtype_list.xml" value="1.0" />
-        <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/card_community_comments.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/card_community_likes.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/card_community_likeslist.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/card_community_post.xml" value="0.1" />
-        <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/card_urgent_request.xml" value="0.33" />
-        <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/fragment_community.xml" value="0.1" />
-        <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/fragment_home.xml" value="0.33" />
-        <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/fragment_login.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/fragment_profile.xml" value="0.1" />
-        <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/fragment_register.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/ASUS/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1" />
-        <entry key="..\:/Users/lauwa/StudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/activity_community_new_post.xml" value="0.25" />
-        <entry key="..\:/Users/lauwa/StudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/activity_forgot_password.xml" value="0.25" />
-        <entry key="..\:/Users/lauwa/StudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/dialog_community_likeslist.xml" value="0.25" />
-        <entry key="..\:/Users/lauwa/StudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/fragment_community.xml" value="0.25" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable-v24/profile_info_foreground.xml" value="0.129" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/ic_arrow_back_ios.xml" value="0.209" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/ic_arrow_down_24.xml" value="0.209" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/ic_arrow_forward_ios.xml" value="0.209" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/ic_group_72.xml" value="0.129" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/ic_loginbg.xml" value="0.1" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/ic_qr_code.xml" value="0.258" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/ic_settings.xml" value="0.1" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/personal_info.xml" value="0.1" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/profile_box.xml" value="0.1" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/profile_info.xml" value="0.5" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/red_box.xml" value="0.152" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/red_round_box.xml" value="0.152" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/activity_login.xml" value="0.33" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/activity_main.xml" value="0.2015625" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/fragment_community.xml" value="0.2015625" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/fragment_home.xml" value="0.2015625" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/fragment_login.xml" value="0.33" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/fragment_profile.xml" value="0.33" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/fragment_register.xml" value="0.2015625" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/mipmap-anydpi-v26/profile_info.xml" value="0.1105" />
       </map>
     </option>
   </component>
