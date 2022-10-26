@@ -10,10 +10,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vbantublooddonationapp.DAO.OrganiserDao;
 import com.example.vbantublooddonationapp.Model.Organiser;
+import com.example.vbantublooddonationapp.R;
 import com.example.vbantublooddonationapp.SingleBloodBankLocation;
 import com.example.vbantublooddonationapp.databinding.CardBloodTypeBinding;
 import com.example.vbantublooddonationapp.databinding.CardLocationBinding;
@@ -35,10 +37,10 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Locati
         mBloodTypeAdapter = new BloodTypeAdapter(mActivity);
 
         mBloodTypeList = new ArrayList<String>();
-        mBloodTypeList.add("AB");
-        mBloodTypeList.add("A");
-        mBloodTypeList.add("B");
-        mBloodTypeList.add("O");
+        mBloodTypeList.add("AB+");
+        mBloodTypeList.add("AB+");
+        mBloodTypeList.add("B+");
+        mBloodTypeList.add("O+");
     }
 
     public void setOrganiserList(List<Organiser> organiserList) {
@@ -67,6 +69,11 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Locati
 
         mBloodTypeAdapter.setBloodTypeList(mBloodTypeList);
         holder.mRvBloodType.setAdapter(mBloodTypeAdapter);
+
+        //set the layout manager
+        holder.mRvBloodType.setLayoutManager(new GridLayoutManager(
+                mActivity.getApplicationContext(),
+                4));
     }
 
     @Override
