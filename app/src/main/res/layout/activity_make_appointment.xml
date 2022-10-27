@@ -38,15 +38,6 @@
                     android:text="@string/bloodDonationAppointment"
                     android:textColor="@color/white"/>
 
-                <Button
-                    android:id="@+id/ama_btnBack"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:background="@drawable/ic_arrow_back_ios"
-                    android:layout_gravity="start"
-                    android:theme="@style/Theme.AppCompat.DayNight"
-                    />
-
             </androidx.appcompat.widget.Toolbar>
 
             <RelativeLayout

@@ -1,6 +1,8 @@
 package com.example.vbantublooddonationapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.app.AlertDialog;
@@ -9,6 +11,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Patterns;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.Toast;
@@ -23,6 +26,7 @@ import com.example.vbantublooddonationapp.databinding.ActivityMakeAppointmentBin
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.Objects;
 
 public class MakeAppointment extends AppCompatActivity {
 
@@ -50,6 +54,13 @@ public class MakeAppointment extends AppCompatActivity {
         View v = binding.getRoot();
         setContentView(v);
 
+        Toolbar toolbar = binding.amaTbToolBar;
+
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        toolbar.setNavigationIcon(ContextCompat.getDrawable(this, R.drawable.ic_arrow_back_ios));
+
         Intent i = getIntent();
         int organiserID = i.getIntExtra("currentOrganiserID", 0);
 
@@ -74,15 +85,6 @@ public class MakeAppointment extends AppCompatActivity {
         binding.amaTvBloodDonationCenter.setText(mOrganiser.address);
         initUserInfo(mUser);
 
-
-
-        binding.amaBtnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-        
         //Date session
         initDatePicker();
         binding.amaTvPickDate.setText(R.string.dateFormat);
@@ -244,6 +246,16 @@ public class MakeAppointment extends AppCompatActivity {
         int x = binding.amaRgDonateHistory.getCheckedRadioButtonId();
         RadioButton r = findViewById(x);
         donationBefore = r.getText().toString().trim();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            //close the current activity
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
     
 }
