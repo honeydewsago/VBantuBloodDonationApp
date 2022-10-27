@@ -16,6 +16,9 @@ public interface BloodRequestDao {
     @Insert
     void insert(BloodRequest...bloodRequest);
 
-    @Query("Select * from blood_request_table where active=1 ORDER By organiserID DESC")
+    @Query("Select * from blood_request_table where active=1 ORDER By requestID DESC")
     LiveData<List<BloodRequest>> getAllActiveRequests();
+
+    @Query("Select * from blood_request_table where requestID=(:id)")
+    List<BloodRequest> getRequestById(int id);
 }

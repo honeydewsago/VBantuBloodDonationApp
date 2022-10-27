@@ -13,5 +13,6 @@
     <color name="pink">#FFF2D5D8</color>
     <color name="light_grey">#FFE5E5E5</color>
     <color name="medium_grey">#FF999999</color>
+    <color name="medium_dark_grey">#FF666666</color>
     <color name="dark_grey">#FF434343</color>
 </resources>

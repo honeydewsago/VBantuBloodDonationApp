@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -28,7 +29,7 @@ public class CommunityNewPostActivity extends AppCompatActivity {
 
     private final String USERID_KEY = "userid", USERTYPE_KEY = "usertype";
     private SharedPreferences mPreferences;
-    private int mUserID = 0;
+    private int mUserID = 1;
     private String mUserType = "user";
 
     private Organiser mOrganiser;
@@ -42,6 +43,9 @@ public class CommunityNewPostActivity extends AppCompatActivity {
         mCommunityNewPostBinding = ActivityCommunityNewPostBinding.inflate(getLayoutInflater());
         View v = mCommunityNewPostBinding.getRoot();
         setContentView(v);
+
+        mOrganiserViewModel = new ViewModelProvider(this).get(OrganiserViewModel.class);
+        mUserViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
         //set toolbar and display icon
         Toolbar toolbar = mCommunityNewPostBinding.acnpToolbar;

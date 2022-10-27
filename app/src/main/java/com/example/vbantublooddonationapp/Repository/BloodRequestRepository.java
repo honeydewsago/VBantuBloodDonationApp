@@ -12,6 +12,7 @@ import com.example.vbantublooddonationapp.Model.BloodRequest;
 import com.example.vbantublooddonationapp.Model.Organiser;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class BloodRequestRepository {
     private BloodRequestDao mBloodRequestDao;
@@ -41,5 +42,32 @@ public class BloodRequestRepository {
 
     public LiveData<List<BloodRequest>> getAllActiveRequests() {
         return mBloodRequestDao.getAllActiveRequests();
+    }
+
+    public List<BloodRequest> getRequestById(int id) {
+        List<BloodRequest> list = null;
+
+        try {
+            list = new BloodRequestRepository.getRequestAsyncTask(mBloodRequestDao).execute(id).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    private static class getRequestAsyncTask extends AsyncTask<Integer, Void, List<BloodRequest>> {
+        private BloodRequestDao mSyncTaskDao;
+
+        getRequestAsyncTask(BloodRequestDao dao) {
+            mSyncTaskDao = dao;
+        }
+
+        @Override
+        protected List<BloodRequest> doInBackground(Integer...id) {
+            List<BloodRequest> requestList = mSyncTaskDao.getRequestById(id[0]);
+            return requestList;
+        }
     }
 }
