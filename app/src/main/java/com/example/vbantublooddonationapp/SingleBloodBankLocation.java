@@ -50,7 +50,7 @@ public class SingleBloodBankLocation extends AppCompatActivity {
         toolbar.setNavigationIcon(ContextCompat.getDrawable(this, R.drawable.ic_arrow_back_ios));
 
         Intent i = getIntent();
-        int organiserID = i.getIntExtra("currentOrganiserID", 0);
+        int organiserID = i.getIntExtra("currentOrganiserID", 1);
 
         List<Organiser> mOrganiserList = mOrganiserViewModel.getOrganiserById(organiserID);
         mOrganiser = mOrganiserList.get(0);

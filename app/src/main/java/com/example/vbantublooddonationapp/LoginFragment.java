@@ -30,7 +30,7 @@ public class LoginFragment extends Fragment {
     //Member variables
     private final String USERID_KEY = "userid", USERTYPE_KEY = "usertype";
     private SharedPreferences mPreferences;
-    private int mUserID = 0;
+    private int mUserID = 1;
     private String mUserType = "";
 
     private FragmentLoginBinding binding;

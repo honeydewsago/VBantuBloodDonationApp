@@ -28,9 +28,9 @@ import java.util.List;
 public class ProfileFragment extends Fragment {
     private final String USERID_KEY = "userid", USERTYPE_KEY = "usertype";
     private SharedPreferences mPreferences;
-    private int mUserID;
+    private int mUserID = 1;
+    private String mUserType = "user";
     private List<User> mUserList;
-    private String mUserType;
 
     private UserViewModel mUserViewModel;
     private OrganiserViewModel mOrganiserViewModel;
@@ -53,7 +53,7 @@ public class ProfileFragment extends Fragment {
         mPreferences = getActivity().getSharedPreferences("com.example.vbantublooddonationapp",MODE_PRIVATE);
 
         if (mPreferences.contains(USERID_KEY) && mPreferences.contains(USERTYPE_KEY)) {
-            mUserID = mPreferences.getInt(USERID_KEY,0);
+            mUserID = mPreferences.getInt(USERID_KEY,1);
             mUserType = mPreferences.getString(USERTYPE_KEY, "user");
         }
 

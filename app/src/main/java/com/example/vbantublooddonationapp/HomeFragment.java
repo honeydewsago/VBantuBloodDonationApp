@@ -32,7 +32,7 @@ public class HomeFragment extends Fragment {
 
     private final String USERID_KEY = "userid", USERTYPE_KEY = "usertype";
     private SharedPreferences mPreferences;
-    private int mUserID = 0;
+    private int mUserID = 1;
     private String mUserType = "user";
 
     private FragmentHomeBinding homeBinding;
@@ -59,7 +59,7 @@ public class HomeFragment extends Fragment {
         mPreferences = getActivity().getSharedPreferences("com.example.vbantublooddonationapp",MODE_PRIVATE);
 
         if (mPreferences.contains(USERID_KEY) && mPreferences.contains(USERTYPE_KEY)) {
-            mUserID = mPreferences.getInt(USERID_KEY,0);
+            mUserID = mPreferences.getInt(USERID_KEY,1);
             mUserType = mPreferences.getString(USERTYPE_KEY, "user");
         }
 

@@ -33,8 +33,8 @@ public class MakeAppointment extends AppCompatActivity {
 
     private final String USERID_KEY = "userid", USERTYPE_KEY = "usertype";
     private SharedPreferences mPreferences;
-    private int mUserID = 0;
-    private int mOrganiserID = 0;
+    private int mUserID = 1;
+    private int mOrganiserID = 1;
     private String mUserType = "user";
     private UserViewModel mUserViewModel;
     private OrganiserViewModel mOrganiserViewModel;
@@ -62,7 +62,7 @@ public class MakeAppointment extends AppCompatActivity {
         toolbar.setNavigationIcon(ContextCompat.getDrawable(this, R.drawable.ic_arrow_back_ios));
 
         Intent i = getIntent();
-        int organiserID = i.getIntExtra("currentOrganiserID", 0);
+        int organiserID = i.getIntExtra("currentOrganiserID", 1);
 
         mUserViewModel = new ViewModelProvider(this).get(UserViewModel.class);
         mOrganiserViewModel = new ViewModelProvider(this).get(OrganiserViewModel.class);
@@ -75,7 +75,7 @@ public class MakeAppointment extends AppCompatActivity {
         mPreferences = getSharedPreferences("com.example.vbantublooddonationapp", MODE_PRIVATE);
 
         if (mPreferences.contains(USERID_KEY) && mPreferences.contains(USERTYPE_KEY)){
-            mUserID = mPreferences.getInt(USERID_KEY, 0);
+            mUserID = mPreferences.getInt(USERID_KEY, 1);
             mUserType = mPreferences.getString(USERTYPE_KEY, "user");
         }
 
