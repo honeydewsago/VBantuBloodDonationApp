@@ -5,21 +5,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto" >
 
     <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
+        android:layout_width="40dp"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/red"
         app:cardCornerRadius="5dp"
-        android:layout_marginRight="4dp">
+        android:layout_marginRight="2dp"
+        android:layout_marginBottom="4dp">
 
         <TextView
             android:id="@+id/cbt_tvBloodType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:text="@string/bloodA"
+            android:text="@string/AB_pov"
             android:textColor="@color/white"
             android:textStyle="bold"
             android:textSize="10sp"
+            android:layout_gravity="center"
             android:paddingTop="2dp"
             android:paddingBottom="2dp"
             android:paddingLeft="10dp"

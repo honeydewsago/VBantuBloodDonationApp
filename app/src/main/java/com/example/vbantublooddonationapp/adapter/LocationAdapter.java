@@ -8,9 +8,11 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vbantublooddonationapp.Model.Organiser;
+import com.example.vbantublooddonationapp.R;
 import com.example.vbantublooddonationapp.SingleBloodBankLocation;
 import com.example.vbantublooddonationapp.databinding.CardLocationBinding;
 
@@ -62,6 +64,9 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Locati
 
         mBloodTypeAdapter.setBloodTypeList(mBloodTypeList);
         holder.mRvBloodType.setAdapter(mBloodTypeAdapter);
+
+        //set the layout manager
+        holder.mRvBloodType.setLayoutManager(new GridLayoutManager(mActivity.getApplicationContext(), 4));
     }
 
     @Override

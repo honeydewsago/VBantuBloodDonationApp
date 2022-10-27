@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
 
 import android.content.Intent;
 import android.nfc.Tag;
@@ -49,7 +50,7 @@ public class SingleBloodBankLocation extends AppCompatActivity {
         toolbar.setNavigationIcon(ContextCompat.getDrawable(this, R.drawable.ic_arrow_back_ios));
 
         Intent i = getIntent();
-        int organiserID = i.getIntExtra("currentOrganiserID", 0);
+        int organiserID = i.getIntExtra("currentOrganiserID", 1);
 
         List<Organiser> mOrganiserList = mOrganiserViewModel.getOrganiserById(organiserID);
         mOrganiser = mOrganiserList.get(0);
@@ -65,14 +66,15 @@ public class SingleBloodBankLocation extends AppCompatActivity {
         mBloodTypeAdapter.setBloodTypeList(mBloodTypeList);
         binding.asbblRvBloodType.setAdapter(mBloodTypeAdapter);
 
+        //set the layout manager
+        binding.asbblRvBloodType.setLayoutManager(new GridLayoutManager(this, 4));
+
         binding.asbblBtnMakeAppointment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("TAG", "Organiser ID wtf = " + mOrganiser.getOrganiserID());
                 Intent intent = new Intent(SingleBloodBankLocation.this, MakeAppointment.class);
                 intent.putExtra("currentOrganiserID", mOrganiser.getOrganiserID());
                 startActivity(intent);
-
             }
         });
     }
