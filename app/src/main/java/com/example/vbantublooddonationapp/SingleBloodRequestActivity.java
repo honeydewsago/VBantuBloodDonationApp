@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.vbantublooddonationapp.Model.BloodRequest;
 import com.example.vbantublooddonationapp.Model.Organiser;
@@ -79,6 +80,15 @@ public class SingleBloodRequestActivity extends AppCompatActivity {
 
         //set the layout manager
         binding.asbrRvBloodType.setLayoutManager(new GridLayoutManager(this, 4));
+
+        binding.asbrBtnMakeAppointment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SingleBloodRequestActivity.this, MakeAppointment.class);
+                intent.putExtra("currentOrganiserID", mBloodRequest.getOrganiserID());
+                startActivity(intent);
+            }
+        });
     }
 
     public String getMonthName(int month_value){
