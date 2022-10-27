@@ -6,7 +6,9 @@ import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -62,6 +64,17 @@ public class SingleBloodBankLocation extends AppCompatActivity {
         mBloodTypeList.add("O");
         mBloodTypeAdapter.setBloodTypeList(mBloodTypeList);
         binding.asbblRvBloodType.setAdapter(mBloodTypeAdapter);
+
+        binding.asbblBtnMakeAppointment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("TAG", "Organiser ID wtf = " + mOrganiser.getOrganiserID());
+                Intent intent = new Intent(SingleBloodBankLocation.this, MakeAppointment.class);
+                intent.putExtra("currentOrganiserID", mOrganiser.getOrganiserID());
+                startActivity(intent);
+
+            }
+        });
     }
 
     @Override

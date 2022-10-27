@@ -26,6 +26,9 @@
             android:name=".ProfileQR"
             android:exported="false" />
         <activity
+            android:name=".AppointmentSuccess"
+            android:exported="false" />
+        <activity
             android:name=".MakeBloodRequest"
             android:exported="false" />
         <activity
@@ -51,6 +54,9 @@
             android:exported="false" />
         <activity
             android:name=".HomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MakeAppointment"
             android:exported="false" />
         <activity
             android:name=".LoginActivity"
