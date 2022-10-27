@@ -56,7 +56,6 @@ public class UrgentRequestAdapter extends RecyclerView.Adapter<UrgentRequestAdap
     public void onBindViewHolder(@NonNull UrgentRequestHolder holder, int position) {
         BloodRequest request = mRequestList.get(position);
         holder.mTvOrganiser.setText(getOrganiserName(request.getOrganiserID()));
-        //holder.mTvRequestInfo.setText(request.getRequestInfo());
 
         String requestInfo = request.getRequestInfo();
         if (requestInfo.length() > 55) {

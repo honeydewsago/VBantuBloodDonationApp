@@ -28,4 +28,8 @@ public class BloodRequestViewModel extends AndroidViewModel {
     public LiveData<List<BloodRequest>> getAllActiveRequests() {
         return mRepository.getAllActiveRequests();
     }
+
+    public List<BloodRequest> getRequestById(int id){
+        return mRepository.getRequestById(id);
+    }
 }
