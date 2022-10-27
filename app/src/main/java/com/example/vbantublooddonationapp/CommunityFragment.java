@@ -15,7 +15,13 @@ import com.example.vbantublooddonationapp.databinding.FragmentCommunityBinding;
 
 
 public class CommunityFragment extends Fragment {
+
     private FragmentCommunityBinding binding;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -28,11 +34,12 @@ public class CommunityFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+
+
         binding.fcBtnNewPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getActivity(),CommunityNewPostActivity.class);
-                //i.putExtra(,);
                 startActivity(i);
             }
         });
