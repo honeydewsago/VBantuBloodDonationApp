@@ -127,6 +127,9 @@
     <string name="thankYou">Thank You!</string>
     <string name="submissionReceived">Your submission has been received.</string>
     <string name="confirmationDetail">Full confirmation details of the appointment will be sent to your email.</string>
+    <string name="dateTitle">Date:</string>
+    <string name="timeTitle">Time:</string>
+    <string name="timeFormat">0000am</string>
 
     <string-array name="bloodGroupValues">
         <item>A+</item>

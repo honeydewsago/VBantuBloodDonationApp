@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vbantublooddonationapp.Model.BloodRequest;
 import com.example.vbantublooddonationapp.Model.Organiser;
+import com.example.vbantublooddonationapp.SingleBloodBankLocation;
+import com.example.vbantublooddonationapp.SingleBloodRequestActivity;
 import com.example.vbantublooddonationapp.ViewModel.OrganiserViewModel;
 import com.example.vbantublooddonationapp.databinding.CardLocationBinding;
 import com.example.vbantublooddonationapp.databinding.CardUrgentRequestBinding;
@@ -71,7 +73,6 @@ public class UrgentRequestAdapter extends RecyclerView.Adapter<UrgentRequestAdap
 
         //set the layout manager
         holder.mRvBloodType.setLayoutManager(new GridLayoutManager(mActivity.getApplicationContext(), 4));
-
     }
 
     @Override
@@ -95,13 +96,29 @@ public class UrgentRequestAdapter extends RecyclerView.Adapter<UrgentRequestAdap
             mRvBloodType = itemBinding.curRvBloodType;
             mBtnMoreInfo = itemBinding.curBtnRequestMoreInfo;
 
+            itemBinding.getRoot().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startSingleRequestActivity(getAdapterPosition());
+                }
+            });
             mBtnMoreInfo.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    startSingleRequestActivity(getAdapterPosition());
                 }
             });
         }
+    }
+
+    public void startSingleRequestActivity(int position){
+        BloodRequest currentRequest = mRequestList.get(position);
+
+        Intent i = new Intent(mActivity, SingleBloodRequestActivity.class);
+
+        i.putExtra("currentRequestID", currentRequest.getRequestID());
+
+        mActivity.startActivity(i);
     }
 
     public String getOrganiserName(int id){
