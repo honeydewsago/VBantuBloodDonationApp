@@ -19,9 +19,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.vbantublooddonationapp.Model.BloodRequest;
 import com.example.vbantublooddonationapp.Model.Organiser;
+import com.example.vbantublooddonationapp.ViewModel.BloodRequestViewModel;
 import com.example.vbantublooddonationapp.ViewModel.OrganiserViewModel;
 import com.example.vbantublooddonationapp.adapter.LocationAdapter;
+import com.example.vbantublooddonationapp.adapter.UrgentRequestAdapter;
 import com.example.vbantublooddonationapp.databinding.CardLocationBinding;
 import com.example.vbantublooddonationapp.databinding.FragmentHomeBinding;
 
@@ -36,7 +39,9 @@ public class HomeFragment extends Fragment {
     private String mUserType = "user";
 
     private FragmentHomeBinding homeBinding;
+    private UrgentRequestAdapter mUrgentRequestAdapter;
     private LocationAdapter mLocationAdapter;
+    private BloodRequestViewModel mBloodRequestViewModel;
     private OrganiserViewModel mOrganiserViewModel;
 
     @Override
@@ -78,13 +83,34 @@ public class HomeFragment extends Fragment {
             }
         });
 
+
+        mUrgentRequestAdapter = new UrgentRequestAdapter(getActivity());
+        homeBinding.fhRvUrgentRequest.setAdapter(mUrgentRequestAdapter);
+
         mLocationAdapter = new LocationAdapter(getActivity());
         homeBinding.fhRvLocation.setAdapter(mLocationAdapter);
 
         //set the layout manager
+        homeBinding.fhRvUrgentRequest.setLayoutManager(new GridLayoutManager(view.getContext(),getResources().getInteger(R.integer.grid_column_count)));
         homeBinding.fhRvLocation.setLayoutManager(new GridLayoutManager(view.getContext(), getResources().getInteger(R.integer.grid_column_count)));
 
+        initUrgentRequestViewModel();
         initOrganiserViewModel();
+    }
+
+    private void initUrgentRequestViewModel() {
+        //initialize the view model from the BloodRequestViewModel
+        mBloodRequestViewModel = new ViewModelProvider(this).get(BloodRequestViewModel.class);
+
+        //initialize the observer to observe the Live Data
+        final Observer<List<BloodRequest>> requestListObserver = new Observer<List<BloodRequest>>() {
+            @Override
+            public void onChanged(List<BloodRequest> requests) {
+                mUrgentRequestAdapter.setRequestList(requests);
+            }
+        };
+
+        mBloodRequestViewModel.getAllActiveRequests().observe(getViewLifecycleOwner(),requestListObserver);
     }
 
     private void initOrganiserViewModel() {
@@ -99,7 +125,6 @@ public class HomeFragment extends Fragment {
             }
         };
 
-        //call the getAllBooks function from the view model and observe the Live Data through bookListObserver
         mOrganiserViewModel.getAllOrganisers().observe(getViewLifecycleOwner(),organiserListObserver);
     }
 }

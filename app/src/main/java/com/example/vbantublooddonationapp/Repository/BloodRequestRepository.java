@@ -3,11 +3,15 @@ package com.example.vbantublooddonationapp.Repository;
 import android.app.Application;
 import android.os.AsyncTask;
 
+import androidx.lifecycle.LiveData;
+
 import com.example.vbantublooddonationapp.BloodRoomDatabase;
 import com.example.vbantublooddonationapp.DAO.BloodRequestDao;
 import com.example.vbantublooddonationapp.DAO.OrganiserDao;
 import com.example.vbantublooddonationapp.Model.BloodRequest;
 import com.example.vbantublooddonationapp.Model.Organiser;
+
+import java.util.List;
 
 public class BloodRequestRepository {
     private BloodRequestDao mBloodRequestDao;
@@ -33,5 +37,9 @@ public class BloodRequestRepository {
             mSyncTaskDao.insert(bloodRequests[0]);
             return null;
         }
+    }
+
+    public LiveData<List<BloodRequest>> getAllActiveRequests() {
+        return mBloodRequestDao.getAllActiveRequests();
     }
 }
