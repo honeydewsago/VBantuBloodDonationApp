@@ -7,7 +7,9 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -66,6 +68,15 @@ public class SingleBloodBankLocation extends AppCompatActivity {
 
         //set the layout manager
         binding.asbblRvBloodType.setLayoutManager(new GridLayoutManager(this, 4));
+
+        binding.asbblBtnMakeAppointment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SingleBloodBankLocation.this, MakeAppointment.class);
+                intent.putExtra("currentOrganiserID", mOrganiser.getOrganiserID());
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

@@ -14,6 +14,21 @@
         android:theme="@style/Theme.VBantuBloodDonationApp"
         tools:targetApi="31">
         <activity
+            android:name=".RewardsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AppointmentHistory"
+            android:exported="false" />
+        <activity
+            android:name=".ProfileQr"
+            android:exported="false" />
+        <activity
+            android:name=".ProfileQR"
+            android:exported="false" />
+        <activity
+            android:name=".AppointmentSuccess"
+            android:exported="false" />
+        <activity
             android:name=".MakeBloodRequest"
             android:exported="false" />
         <activity
@@ -39,6 +54,9 @@
             android:exported="false" />
         <activity
             android:name=".HomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MakeAppointment"
             android:exported="false" />
         <activity
             android:name=".LoginActivity"

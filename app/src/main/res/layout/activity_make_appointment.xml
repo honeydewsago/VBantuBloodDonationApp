@@ -38,15 +38,6 @@
                     android:text="@string/bloodDonationAppointment"
                     android:textColor="@color/white"/>
 
-                <Button
-                    android:id="@+id/ama_btnBack"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/ic_arrow_back_ios"
-                    android:layout_gravity="center_vertical"
-                    android:theme="@style/Theme.AppCompat.DayNight"
-                    />
-
             </androidx.appcompat.widget.Toolbar>
 
             <RelativeLayout
@@ -98,6 +89,8 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/edit_text_box"
                 android:hint="@string/fullNameInput"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
                 app:layout_constraintEnd_toEndOf="@+id/ama_tvFullName"
                 app:layout_constraintStart_toStartOf="@+id/ama_tvFullName"
                 app:layout_constraintTop_toBottomOf="@+id/ama_tvFullName" />
@@ -121,6 +114,8 @@
                 android:background="@drawable/edit_text_box"
                 android:hint="@string/icNo"
                 android:inputType="number"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
                 app:layout_constraintEnd_toEndOf="@+id/ama_tvIcNo"
                 app:layout_constraintStart_toStartOf="@+id/ama_tvIcNo"
                 app:layout_constraintTop_toBottomOf="@+id/ama_tvIcNo" />
@@ -144,6 +139,8 @@
                 android:hint="@string/contactNoExp"
                 android:inputType="number"
                 android:background="@drawable/edit_text_box"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
                 app:layout_constraintEnd_toEndOf="@+id/ama_tvContactNo"
                 app:layout_constraintStart_toStartOf="@+id/ama_tvContactNo"
                 app:layout_constraintTop_toBottomOf="@+id/ama_tvContactNo" />
@@ -167,6 +164,8 @@
                 android:background="@drawable/edit_text_box"
                 android:hint="@string/enterYourEmailHere"
                 android:inputType="textEmailAddress"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
                 app:layout_constraintEnd_toEndOf="@+id/ama_tvEmail"
                 app:layout_constraintStart_toStartOf="@+id/ama_tvEmail"
                 app:layout_constraintTop_toBottomOf="@+id/ama_tvEmail" />
@@ -191,6 +190,8 @@
                 android:background="@drawable/edit_text_box"
                 android:hint="House Address"
                 android:lines="3"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
                 app:layout_constraintEnd_toEndOf="@+id/ama_tvAddress"
                 app:layout_constraintStart_toStartOf="@+id/ama_tvAddress"
                 app:layout_constraintTop_toBottomOf="@+id/ama_tvAddress" />
@@ -207,31 +208,18 @@
                 app:layout_constraintStart_toStartOf="@+id/ama_etAddress"
                 app:layout_constraintTop_toBottomOf="@+id/ama_etAddress" />
 
-            <RadioGroup
-                android:id="@+id/ama_rgGender"
+            <EditText
+                android:id="@+id/ama_etGender"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:background="@drawable/text_box"
+                android:textAlignment="center"
+                android:hint="@string/gender"
+                android:textColor="@color/dark_grey"
                 app:layout_constraintEnd_toEndOf="@+id/ama_tvGender"
                 app:layout_constraintStart_toStartOf="@+id/ama_tvGender"
-                app:layout_constraintTop_toBottomOf="@+id/ama_tvGender">
+                app:layout_constraintTop_toBottomOf="@+id/ama_tvGender" />
 
-                <RadioButton
-                    android:id="@+id/ama_rbFemale"
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:onClick="rgGender_clicked"
-                    android:text="@string/female" />
-
-                <RadioButton
-                    android:id="@+id/ama_rbMale"
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:onClick="rgGender_clicked"
-                    android:text="@string/male"/>
-
-
-            </RadioGroup>
 
             <TextView
                 android:id="@+id/ama_tvCenterTitle"
@@ -241,9 +229,9 @@
                 android:textSize="15sp"
                 android:textColor="@color/dark_grey"
                 android:layout_marginTop="16sp"
-                app:layout_constraintEnd_toEndOf="@+id/ama_rgGender"
-                app:layout_constraintStart_toStartOf="@+id/ama_rgGender"
-                app:layout_constraintTop_toBottomOf="@+id/ama_rgGender" />
+                app:layout_constraintEnd_toEndOf="@+id/ama_etGender"
+                app:layout_constraintStart_toStartOf="@+id/ama_etGender"
+                app:layout_constraintTop_toBottomOf="@+id/ama_etGender" />
 
             <TextView
                 android:id="@+id/ama_tvBloodDonationCenter"
@@ -316,11 +304,14 @@
                 app:layout_constraintStart_toStartOf="@+id/ama_spPickTime"
                 app:layout_constraintTop_toBottomOf="@+id/ama_spPickTime" />
 
-            <Spinner
-                android:id="@+id/ama_spPickBlood"
+            <TextView
+                android:id="@+id/ama_tvPickBlood"
                 android:layout_width="0dp"
                 android:layout_height="20dp"
-                android:entries="@array/bloodGroupValues"
+                android:background="@drawable/text_box"
+                android:textColor="@color/dark_grey"
+                android:text="@string/bloodA"
+                android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="@+id/ama_tvBloodGroup"
                 app:layout_constraintStart_toStartOf="@+id/ama_tvBloodGroup"
                 app:layout_constraintTop_toBottomOf="@+id/ama_tvBloodGroup" />
@@ -333,9 +324,9 @@
                 android:textColor="@color/dark_grey"
                 android:textSize="15sp"
                 android:layout_marginTop="16dp"
-                app:layout_constraintEnd_toEndOf="@+id/ama_spPickBlood"
-                app:layout_constraintStart_toStartOf="@+id/ama_spPickBlood"
-                app:layout_constraintTop_toBottomOf="@+id/ama_spPickBlood" />
+                app:layout_constraintEnd_toEndOf="@+id/ama_tvPickBlood"
+                app:layout_constraintStart_toStartOf="@+id/ama_tvPickBlood"
+                app:layout_constraintTop_toBottomOf="@+id/ama_tvPickBlood" />
 
             <RadioGroup
                 android:id="@+id/ama_rgDonateHistory"
