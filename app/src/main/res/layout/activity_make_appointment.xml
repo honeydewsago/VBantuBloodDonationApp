@@ -74,7 +74,7 @@
             </RelativeLayout>
 
             <TextView
-                android:id="@+id/ama_tvFullName"
+                android:id="@+id/ama_tvFullNameTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
@@ -86,19 +86,31 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ama_rlTitle" />
 
-            <EditText
-                android:id="@+id/ama_etFullName"
+            <TextView
+                android:id="@+id/ama_tvFullName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/edit_text_box"
+                android:background="@drawable/text_box"
                 android:hint="@string/fullNameInput"
                 android:paddingTop="4dp"
                 android:paddingBottom="4dp"
                 android:paddingRight="10dp"
                 android:paddingLeft="10dp"
                 android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="@+id/ama_tvFullName"
+                app:layout_constraintEnd_toEndOf="@+id/ama_tvFullNameTitle"
                 app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/ama_tvFullNameTitle"
+                app:layout_constraintTop_toBottomOf="@+id/ama_tvFullNameTitle" />
+
+            <TextView
+                android:id="@+id/ama_tvIcNoTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/icLabel"
+                android:textColor="@color/medium_dark_grey"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="@+id/ama_tvFullName"
                 app:layout_constraintStart_toStartOf="@+id/ama_tvFullName"
                 app:layout_constraintTop_toBottomOf="@+id/ama_tvFullName" />
 
@@ -106,19 +118,7 @@
                 android:id="@+id/ama_tvIcNo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/icLabel"
-                android:textColor="@color/medium_dark_grey"
-                android:textSize="15sp"
-                app:layout_constraintEnd_toEndOf="@+id/ama_etFullName"
-                app:layout_constraintStart_toStartOf="@+id/ama_etFullName"
-                app:layout_constraintTop_toBottomOf="@+id/ama_etFullName" />
-
-            <EditText
-                android:id="@+id/ama_etIcNo"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/edit_text_box"
+                android:background="@drawable/text_box"
                 android:hint="@string/icNo"
                 android:inputType="number"
                 android:paddingTop="4dp"
@@ -126,6 +126,18 @@
                 android:paddingRight="10dp"
                 android:paddingLeft="10dp"
                 android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/ama_tvIcNoTitle"
+                app:layout_constraintStart_toStartOf="@+id/ama_tvIcNoTitle"
+                app:layout_constraintTop_toBottomOf="@+id/ama_tvIcNoTitle" />
+
+            <TextView
+                android:id="@+id/ama_tvContactNoTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/contactNoLabel"
+                android:textColor="@color/medium_dark_grey"
+                android:layout_marginTop="16dp"
+                android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="@+id/ama_tvIcNo"
                 app:layout_constraintStart_toStartOf="@+id/ama_tvIcNo"
                 app:layout_constraintTop_toBottomOf="@+id/ama_tvIcNo" />
@@ -134,26 +146,26 @@
                 android:id="@+id/ama_tvContactNo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/contactNoLabel"
-                android:textColor="@color/medium_dark_grey"
-                android:layout_marginTop="16dp"
-                android:textSize="15sp"
-                app:layout_constraintEnd_toEndOf="@+id/ama_etIcNo"
-                app:layout_constraintStart_toStartOf="@+id/ama_etIcNo"
-                app:layout_constraintTop_toBottomOf="@+id/ama_etIcNo" />
-
-            <EditText
-                android:id="@+id/ama_etContactNo"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
                 android:hint="@string/contactNoExp"
                 android:inputType="number"
-                android:background="@drawable/edit_text_box"
+                android:background="@drawable/text_box"
                 android:paddingTop="4dp"
                 android:paddingBottom="4dp"
                 android:paddingRight="10dp"
                 android:paddingLeft="10dp"
                 android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/ama_tvContactNoTitle"
+                app:layout_constraintStart_toStartOf="@+id/ama_tvContactNoTitle"
+                app:layout_constraintTop_toBottomOf="@+id/ama_tvContactNoTitle" />
+
+            <TextView
+                android:id="@+id/ama_tvEmailTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/emailLabel"
+                android:textColor="@color/medium_dark_grey"
+                android:textSize="15sp"
+                android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="@+id/ama_tvContactNo"
                 app:layout_constraintStart_toStartOf="@+id/ama_tvContactNo"
                 app:layout_constraintTop_toBottomOf="@+id/ama_tvContactNo" />
@@ -162,19 +174,7 @@
                 android:id="@+id/ama_tvEmail"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/emailLabel"
-                android:textColor="@color/medium_dark_grey"
-                android:textSize="15sp"
-                android:layout_marginTop="16dp"
-                app:layout_constraintEnd_toEndOf="@+id/ama_etContactNo"
-                app:layout_constraintStart_toStartOf="@+id/ama_etContactNo"
-                app:layout_constraintTop_toBottomOf="@+id/ama_etContactNo" />
-
-            <EditText
-                android:id="@+id/ama_etEmail"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/edit_text_box"
+                android:background="@drawable/text_box"
                 android:hint="@string/enterYourEmailHere"
                 android:inputType="textEmailAddress"
                 android:paddingTop="4dp"
@@ -182,9 +182,9 @@
                 android:paddingRight="10dp"
                 android:paddingLeft="10dp"
                 android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="@+id/ama_tvEmail"
-                app:layout_constraintStart_toStartOf="@+id/ama_tvEmail"
-                app:layout_constraintTop_toBottomOf="@+id/ama_tvEmail" />
+                app:layout_constraintEnd_toEndOf="@+id/ama_tvEmailTitle"
+                app:layout_constraintStart_toStartOf="@+id/ama_tvEmailTitle"
+                app:layout_constraintTop_toBottomOf="@+id/ama_tvEmailTitle" />
 
             <TextView
                 android:id="@+id/ama_tvAddress"
@@ -194,10 +194,10 @@
                 android:text="@string/addressLabel"
                 android:textColor="@color/medium_dark_grey"
                 android:textSize="15sp"
-                app:layout_constraintEnd_toEndOf="@+id/ama_etContactNo"
+                app:layout_constraintEnd_toEndOf="@+id/ama_tvContactNo"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/ama_etContactNo"
-                app:layout_constraintTop_toBottomOf="@+id/ama_etEmail" />
+                app:layout_constraintStart_toStartOf="@+id/ama_tvContactNo"
+                app:layout_constraintTop_toBottomOf="@+id/ama_tvEmail" />
 
             <EditText
                 android:id="@+id/ama_etAddress"
@@ -230,23 +230,31 @@
                 app:layout_constraintTop_toBottomOf="@+id/ama_etAddress" />
 
 
-            <EditText
-                android:id="@+id/ama_etGender"
+            <RadioGroup
+                android:id="@+id/ama_rgGender"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/text_box"
-                android:hint="@string/gender"
-                android:textAlignment="center"
-                android:textColor="@color/medium_dark_grey"
-                android:paddingTop="4dp"
-                android:paddingBottom="4dp"
-                android:paddingRight="10dp"
-                android:paddingLeft="10dp"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="@+id/ama_tvGender"
-                app:layout_constraintHorizontal_bias="0.0"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/ama_tvGender"
                 app:layout_constraintStart_toStartOf="@+id/ama_tvGender"
-                app:layout_constraintTop_toBottomOf="@+id/ama_tvGender" />
+                app:layout_constraintEnd_toEndOf="@+id/ama_tvGender"
+                >
+
+                <RadioButton
+                    android:id="@+id/ama_rbFemale"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:onClick="rgDonateHistory_clicked"
+                    android:text="@string/female" />
+
+                <RadioButton
+                    android:id="@+id/ama_rbMale"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:onClick="rgDonateHistory_clicked"
+                    android:text="@string/male"/>
+
+            </RadioGroup>
 
             <TextView
                 android:id="@+id/ama_tvCenterTitle"
@@ -256,9 +264,9 @@
                 android:textSize="15sp"
                 android:textColor="@color/medium_dark_grey"
                 android:layout_marginTop="16sp"
-                app:layout_constraintEnd_toEndOf="@+id/ama_etGender"
-                app:layout_constraintStart_toStartOf="@+id/ama_etGender"
-                app:layout_constraintTop_toBottomOf="@+id/ama_etGender" />
+                app:layout_constraintEnd_toEndOf="@+id/ama_rgGender"
+                app:layout_constraintStart_toStartOf="@+id/ama_rgGender"
+                app:layout_constraintTop_toBottomOf="@+id/ama_rgGender" />
 
             <TextView
                 android:id="@+id/ama_tvBloodDonationCenter"
@@ -294,7 +302,7 @@
                 style="?android:spinnerStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/text_box"
+                android:background="@drawable/edit_text_box"
                 android:drawableRight="@drawable/ic_baseline_calendar"
                 android:onClick="openDatePicker"
                 android:text="@string/dateFormat"
@@ -320,15 +328,24 @@
                 app:layout_constraintStart_toStartOf="@+id/ama_tvPickDate"
                 app:layout_constraintTop_toBottomOf="@+id/ama_tvPickDate" />
 
-            <Spinner
-                android:id="@+id/ama_spPickTime"
+            <RelativeLayout
+                android:id="@+id/ama_rlSpinner"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:entries="@array/timeAvailable"
-                android:textSize="14sp"
+                android:background="@drawable/edit_text_box"
                 app:layout_constraintEnd_toEndOf="@+id/ama_tvAppointmentTime"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/ama_tvAppointmentTime"
-                app:layout_constraintTop_toBottomOf="@+id/ama_tvAppointmentTime" />
+                app:layout_constraintTop_toBottomOf="@+id/ama_tvAppointmentTime">
+                <Spinner
+                    android:id="@+id/ama_spPickTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/timeAvailable"
+                    android:textAlignment="center"
+                    android:textSize="14sp"
+                    />
+            </RelativeLayout>
 
             <TextView
                 android:id="@+id/ama_tvBloodGroup"
@@ -338,9 +355,9 @@
                 android:text="@string/bloodGroupLabel"
                 android:textColor="@color/medium_dark_grey"
                 android:textSize="15sp"
-                app:layout_constraintEnd_toEndOf="@+id/ama_spPickTime"
-                app:layout_constraintStart_toStartOf="@+id/ama_spPickTime"
-                app:layout_constraintTop_toBottomOf="@+id/ama_spPickTime" />
+                app:layout_constraintEnd_toEndOf="@+id/ama_rlSpinner"
+                app:layout_constraintStart_toStartOf="@+id/ama_rlSpinner"
+                app:layout_constraintTop_toBottomOf="@+id/ama_rlSpinner" />
 
             <TextView
                 android:id="@+id/ama_tvPickBlood"

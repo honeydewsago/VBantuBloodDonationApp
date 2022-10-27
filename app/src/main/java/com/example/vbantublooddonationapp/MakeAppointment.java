@@ -45,6 +45,7 @@ public class MakeAppointment extends AppCompatActivity {
     private DatePickerDialog datePickerDialog;
     private ActivityMakeAppointmentBinding binding;
     private String donationBefore = "";
+    private String gender = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +83,7 @@ public class MakeAppointment extends AppCompatActivity {
         List<User> userList = mUserViewModel.getUserById(mUserID);
         mUser = userList.get(0);
 
-        binding.amaTvBloodDonationCenter.setText(mOrganiser.address);
+        binding.amaTvBloodDonationCenter.setText(mOrganiser.companyName);
         initUserInfo(mUser);
 
         //Date session
@@ -97,12 +98,40 @@ public class MakeAppointment extends AppCompatActivity {
     }
 
     private void initUserInfo(User user) {
-        binding.amaEtFullName.setText(user.getFullName());
-        binding.amaEtIcNo.setText(user.getIcNo());
-        binding.amaEtContactNo.setText(user.getContact());
-        binding.amaEtEmail.setText(user.getEmail());
+        binding.amaTvFullName.setText(user.getFullName());
+        binding.amaTvIcNo.setText(user.getIcNo());
+        binding.amaTvContactNo.setText(user.getContact());
+        binding.amaTvEmail.setText(user.getEmail());
         binding.amaTvPickBlood.setText(user.getBloodType());
-        binding.amaEtGender.setText(user.getGender());
+        gender = user.getGender();
+        if (gender.equals("female")){
+            binding.amaRbFemale.setChecked(true);
+            binding.amaRbFemale.setEnabled(false);
+            binding.amaRbMale.setEnabled(false);
+            binding.amaRgGender.setEnabled(false);
+        }
+
+        else if (gender.equals("male")){
+            binding.amaRbMale.setChecked(true);
+            binding.amaRbFemale.setEnabled(false);
+            binding.amaRbMale.setEnabled(false);
+            binding.amaRgGender.setEnabled(false);
+        }
+        //for fail to retrieve data from database
+        else{
+            binding.amaRbFemale.setEnabled(false);
+            binding.amaRbMale.setEnabled(false);
+            binding.amaRgGender.setEnabled(false);
+        }
+
+        binding.amaEtAddress.setText("");
+        binding.amaTvPickDate.setText(R.string.dateFormat);
+        binding.amaSpPickTime.setSelection(0);
+
+        binding.amaRbDonateHistoryYes.setChecked(false);
+        binding.amaRbDonateHistoryYes.setChecked(false);
+        donationBefore = "";
+
 
 
     }
@@ -113,77 +142,21 @@ public class MakeAppointment extends AppCompatActivity {
     }
 
     private void submitForm() {
-        String fullName = binding.amaEtFullName.getText().toString().trim();
-        String icNo = binding.amaEtIcNo.getText().toString().trim();
-        String contactNo = binding.amaEtContactNo.getText().toString().trim();
-        String email = binding.amaEtEmail.getText().toString().trim();
+        String fullName = binding.amaTvFullName.getText().toString().trim();
+        String icNo = binding.amaTvIcNo.getText().toString().trim();
+        String contactNo = binding.amaTvContactNo.getText().toString().trim();
+        String email = binding.amaTvEmail.getText().toString().trim();
         String address = binding.amaEtAddress.getText().toString().trim();
         String appointmentDate = binding.amaTvPickDate.getText().toString().trim();
         String appointmentTime = binding.amaSpPickTime.getSelectedItem().toString().trim();
         String pickBlood = binding.amaTvPickBlood.getText().toString().trim();
-        String gender = binding.amaEtGender.getText().toString().trim();
+
 
         //validation
-        //full name validation
-        if (fullName.isEmpty()){
-            binding.amaEtFullName.setError("Full Name is Required!");
-            binding.amaEtFullName.requestFocus();
-            return;
-        }
-
-        //ic no validation
-        if (icNo.isEmpty()){
-            binding.amaEtIcNo.setError("IC No is Required!");
-            binding.amaEtIcNo.requestFocus();
-            return;
-        }
-
-        //ic no length validation
-        if (icNo.length() != 12){
-            binding.amaEtIcNo.setError("IC No length should be 12!");
-            binding.amaEtIcNo.requestFocus();
-            return;
-        }
-
-        //contact no validation
-        if (contactNo.isEmpty()){
-            binding.amaEtContactNo.setError("Contact No is Required!");
-            binding.amaEtContactNo.requestFocus();
-            return;
-        }
-
-        //contact no length validation
-        if (contactNo.length()< 10){
-            binding.amaEtContactNo.setError("Contact No is Invalid!");
-            binding.amaEtContactNo.requestFocus();
-            return;
-        }
-
-        //email validation
-        if (email.isEmpty()){
-            binding.amaEtEmail.setError("Email Address is Required");
-            binding.amaEtEmail.requestFocus();
-            return;
-        }
-
-        //email format validation
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            binding.amaEtEmail.setError("Email address is Invalid!");
-            binding.amaEtEmail.requestFocus();
-            return;
-        }
-
-
         //address validation
         if (address.isEmpty()){
             binding.amaEtAddress.setError("Address is required!");
             binding.amaEtAddress.requestFocus();
-            return;
-        }
-
-        if (gender.isEmpty()){
-           binding.amaEtGender.setError("Please select your Gender");
-            binding.amaEtGender.requestFocus();
             return;
         }
 
@@ -194,6 +167,7 @@ public class MakeAppointment extends AppCompatActivity {
             return;
         }
 
+        //donationBefore validation
         if (donationBefore.isEmpty()){
             Toast.makeText(this, "Please select your donation history experience", Toast.LENGTH_SHORT).show();
             binding.amaRgDonateHistory.requestFocus();
@@ -207,6 +181,7 @@ public class MakeAppointment extends AppCompatActivity {
         Toast.makeText(this, "Submit completed", Toast.LENGTH_SHORT).show();
         Intent i = new Intent(MakeAppointment.this,AppointmentSuccess.class);
         startActivity(i);
+        finish();
 
     }
 
