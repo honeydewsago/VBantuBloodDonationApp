@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vbantublooddonationapp.Model.BloodRequest;
@@ -20,6 +21,7 @@ import com.example.vbantublooddonationapp.databinding.CardLocationBinding;
 import com.example.vbantublooddonationapp.databinding.CardUrgentRequestBinding;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class UrgentRequestAdapter extends RecyclerView.Adapter<UrgentRequestAdapter.UrgentRequestHolder> {
@@ -27,10 +29,13 @@ public class UrgentRequestAdapter extends RecyclerView.Adapter<UrgentRequestAdap
     private Activity mActivity;
     private List<BloodRequest> mRequestList;
     private OrganiserViewModel mOrganiserViewModel;
+    private List<String> mBloodTypeList;
+    private BloodTypeAdapter mBloodTypeAdapter;
 
     public UrgentRequestAdapter(Activity activity) {
         mActivity = activity;
         mOrganiserViewModel = new ViewModelProvider((FragmentActivity)mActivity).get(OrganiserViewModel.class);
+        mBloodTypeAdapter = new BloodTypeAdapter(mActivity);
     }
 
     public void setRequestList(List<BloodRequest> requestList) {
@@ -49,7 +54,24 @@ public class UrgentRequestAdapter extends RecyclerView.Adapter<UrgentRequestAdap
     public void onBindViewHolder(@NonNull UrgentRequestHolder holder, int position) {
         BloodRequest request = mRequestList.get(position);
         holder.mTvOrganiser.setText(getOrganiserName(request.getOrganiserID()));
-        holder.mTvRequestInfo.setText(request.getRequestInfo());
+        //holder.mTvRequestInfo.setText(request.getRequestInfo());
+
+        String requestInfo = request.getRequestInfo();
+        if (requestInfo.length() > 55) {
+            requestInfo = requestInfo.substring(0,52);
+            requestInfo = requestInfo + "...";
+        }
+        holder.mTvRequestInfo.setText(requestInfo);
+
+        String bloodShortage = request.getShortageType();
+        mBloodTypeList = Arrays.asList(bloodShortage.split(","));
+
+        mBloodTypeAdapter.setBloodTypeList(mBloodTypeList);
+        holder.mRvBloodType.setAdapter(mBloodTypeAdapter);
+
+        //set the layout manager
+        holder.mRvBloodType.setLayoutManager(new GridLayoutManager(mActivity.getApplicationContext(), 4));
+
     }
 
     @Override

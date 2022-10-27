@@ -23,7 +23,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Locati
 
     private Activity mActivity;
     private List<Organiser> mOrganiserList;
-    private ArrayList<String> mBloodTypeList;
+    private List<String> mBloodTypeList;
     private BloodTypeAdapter mBloodTypeAdapter;
 
     public LocationAdapter(Activity activity) {
@@ -90,20 +90,29 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Locati
             mRvBloodType = itemBinding.clRvBloodType;
             mBtnMoreInfo = itemBinding.clBtnOrganiserMoreInfo;
 
+            itemBinding.getRoot().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startSingleLocationActivity(getAdapterPosition());
+                }
+            });
             mBtnMoreInfo.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Organiser currentOrganiser = mOrganiserList.get(getAdapterPosition());
-
-                    Intent i = new Intent(mActivity, SingleBloodBankLocation.class);
-
-                    i.putExtra("currentOrganiserID", currentOrganiser.getOrganiserID());
-
-                    mActivity.startActivity(i);
+                    startSingleLocationActivity(getAdapterPosition());
                 }
             });
         }
+    }
 
+    public void startSingleLocationActivity(int position){
+        Organiser currentOrganiser = mOrganiserList.get(position);
+
+        Intent i = new Intent(mActivity, SingleBloodBankLocation.class);
+
+        i.putExtra("currentOrganiserID", currentOrganiser.getOrganiserID());
+
+        mActivity.startActivity(i);
     }
 }
 

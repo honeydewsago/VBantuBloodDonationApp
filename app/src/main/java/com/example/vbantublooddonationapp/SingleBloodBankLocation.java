@@ -28,7 +28,7 @@ public class SingleBloodBankLocation extends AppCompatActivity {
     private ActivitySingleBloodBankLocationBinding binding;
     private OrganiserViewModel mOrganiserViewModel;
     private Organiser mOrganiser;
-    private ArrayList<String> mBloodTypeList;
+    private List<String> mBloodTypeList;
     private BloodTypeAdapter mBloodTypeAdapter;
 
     @Override
