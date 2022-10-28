@@ -75,10 +75,9 @@ public class SingleBloodRequestActivity extends AppCompatActivity {
 
         //Date format in YYYYMMDD_HHMMSS
         String dateTime = mBloodRequest.getDateTime();
-        String time = dateTime.substring(9,15);
 
         binding.asbrTvDate.setText(getFullDate(dateTime));
-        binding.asbrTvTime.setText(convertTimeTo12HFormat(time));
+        binding.asbrTvTime.setText(convertTimeTo12HFormat(dateTime));
 
         List<Organiser> mOrganiserList = mOrganiserViewModel.getOrganiserById(mBloodRequest.getOrganiserID());
         mOrganiser = mOrganiserList.get(0);
@@ -152,7 +151,8 @@ public class SingleBloodRequestActivity extends AppCompatActivity {
         }
     }
 
-    public String convertTimeTo12HFormat(String time24H) {
+    public String convertTimeTo12HFormat(String dateTime) {
+        String time24H = dateTime.substring(9,15);
         int hour = Integer.parseInt(time24H.substring(0,2));
         String minute = time24H.substring(2,4);
         String period="";
