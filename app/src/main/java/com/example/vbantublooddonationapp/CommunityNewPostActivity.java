@@ -23,6 +23,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.vbantublooddonationapp.Model.CommunityPost;
 import com.example.vbantublooddonationapp.Model.Organiser;
 import com.example.vbantublooddonationapp.Model.User;
 import com.example.vbantublooddonationapp.ViewModel.OrganiserViewModel;
@@ -39,6 +40,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.FileNotFoundException;
@@ -49,6 +51,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.UUID;
 
 public class CommunityNewPostActivity extends AppCompatActivity {
 
@@ -68,13 +71,15 @@ public class CommunityNewPostActivity extends AppCompatActivity {
     private EditText et_communityNewPost;
 
     //Firebase
-    private FirebaseStorage storage;
+    private StorageTask uploadTask;
+    private FirebaseDatabase database;
     private StorageReference storageReference;
     private FirebaseAuth mAuth;
     private String userUUID;
 
-    private final int PICK_IMAGE_REQUEST = 71;
+    private int SELECT_PICTURE = 200;
     private Uri filepath;
+    String myUrl = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,15 +93,16 @@ public class CommunityNewPostActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 //        userUUID = mAuth.getCurrentUser().getUid();
 
-        storageReference = FirebaseStorage.getInstance().getReference("CommunityPost");
+        storageReference = FirebaseStorage.getInstance().getReference("CommunityPost").child(String.valueOf(mUserID));
 
         community_ImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setType("image/*");
-                intent.setAction(Intent.ACTION_PICK);
-                startActivityForResult(Intent.createChooser(intent, "Select Image"), PICK_IMAGE_REQUEST);
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent, "Select Image"),SELECT_PICTURE);
+
             }
         });
 
@@ -152,33 +158,69 @@ public class CommunityNewPostActivity extends AppCompatActivity {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault());
         String currentDateTime = sdf.format(new Date());
 
-        //get image
-        if(filepath != null){
-            final ProgressDialog progressDialog = new ProgressDialog(CommunityNewPostActivity.this);
-            progressDialog.setTitle("Uploading");
-            progressDialog.show();
+//        //get image
+//        if(filepath != null){
+//            final ProgressDialog progressDialog = new ProgressDialog(CommunityNewPostActivity.this);
+//            progressDialog.setTitle("Uploading");
+//            progressDialog.show();
+//
+//            StorageReference fileRef = storageReference.child(System.currentTimeMillis() + "");
+//
+//            uploadTask = fileRef.putFile(filepath);
+//            uploadTask.continueWithTask(task -> {
+//                if (!task.isComplete()) {
+//                    throw Objects.requireNonNull(task.getException());
+//                }
+//                return fileRef.getDownloadUrl();
+//            }).addOnCompleteListener(task -> {
+//                if (task.isSuccessful()) {
+//                    Uri downloadUri = (Uri) task.getResult();
+//                    myUrl = downloadUri.toString();
+//
+//                    DatabaseReference reference = database.getReference("CommunityPost");
+//                    String userID = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+//                    String postID = UUID.randomUUID().toString();
+//
+//                    CommunityPost post = new CommunityPost(postID, userID, cName, postCaption, myUrl, currentDateTime);
+//
+//                    reference.child(postID).setValue(post).addOnCompleteListener(task1 -> {
+//                        if (task1.isSuccessful()) {
+//                            Toast.makeText(CommunityNewPostActivity.this, "Post successfully created!", Toast.LENGTH_SHORT).show();
+//                            finish();
+//                        } else {
+//                            //redirect to login page
+//                            Toast.makeText(CommunityNewPostActivity.this, "Post creation failed! Please try again.", Toast.LENGTH_SHORT).show();
+//
+//                        }
+//                        progressDialog.dismiss();
+//                    });
+//
+//                }
+//            }).addOnFailureListener(e -> Toast.makeText(CommunityNewPostActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show());
 
-            StorageReference storageRef =  storageReference.child("CommunityPost");
-            storageRef.putFile(filepath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    progressDialog.dismiss();
-                    Toast.makeText(CommunityNewPostActivity.this, "Uploaded Successful", Toast.LENGTH_SHORT).show();;
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    progressDialog.dismiss();
-                    Toast.makeText(CommunityNewPostActivity.this, "Upload Fail", Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
+////            StorageReference storageRef =  storageReference.child("CommunityPost").child(String.valueOf(mUserID));
+//            storageRef.putFile(filepath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//                @Override
+//                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                    progressDialog.dismiss();
+//                    Toast.makeText(CommunityNewPostActivity.this, "Uploaded Successful", Toast.LENGTH_SHORT).show();;
+//                }
+//            }).addOnFailureListener(new OnFailureListener() {
+//                @Override
+//                public void onFailure(@NonNull Exception e) {
+//                    progressDialog.dismiss();
+//                    Toast.makeText(CommunityNewPostActivity.this, "Upload Fail", Toast.LENGTH_SHORT).show();
+//                }
+////            });
+//        } else {
+//            Toast.makeText(CommunityNewPostActivity.this, "No Image Selected!", Toast.LENGTH_SHORT).show();
+//        }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null){
+        if(requestCode == SELECT_PICTURE && resultCode == RESULT_OK && data != null && data.getData() != null){
             filepath = data.getData();
             try{
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filepath);
