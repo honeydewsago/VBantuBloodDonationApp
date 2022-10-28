@@ -84,17 +84,18 @@ public class CommunityNewPostActivity extends AppCompatActivity {
         View v = mCommunityNewPostBinding.getRoot();
         setContentView(v);
 
+        community_ImageView = (ImageView) findViewById(R.id.acnp_ivPostImage);
         mAuth = FirebaseAuth.getInstance();
-        userUUID = mAuth.getCurrentUser().getUid();
+//        userUUID = mAuth.getCurrentUser().getUid();
 
-        storageReference = FirebaseStorage.getInstance().getReference("CommunityPost").child(userUUID);
+        storageReference = FirebaseStorage.getInstance().getReference("CommunityPost");
 
         community_ImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
+                intent.setAction(Intent.ACTION_PICK);
                 startActivityForResult(Intent.createChooser(intent, "Select Image"), PICK_IMAGE_REQUEST);
             }
         });
@@ -138,7 +139,6 @@ public class CommunityNewPostActivity extends AppCompatActivity {
     }
 
     public void uploadPost(){
-
         //get post description
         String postDesc = mCommunityNewPostBinding.acnpEtCaption.getText().toString();
 
@@ -158,7 +158,7 @@ public class CommunityNewPostActivity extends AppCompatActivity {
             progressDialog.setTitle("Uploading");
             progressDialog.show();
 
-            StorageReference storageRef =  storageReference.child("CommunityPost").child(userUUID);
+            StorageReference storageRef =  storageReference.child("CommunityPost");
             storageRef.putFile(filepath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -176,7 +176,7 @@ public class CommunityNewPostActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null){
             filepath = data.getData();
