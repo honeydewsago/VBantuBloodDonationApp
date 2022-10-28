@@ -106,21 +106,21 @@ public class MakeAppointment extends AppCompatActivity {
         gender = user.getGender();
         if (gender.equals("female")){
             binding.amaRbFemale.setChecked(true);
-            binding.amaRbFemale.setEnabled(false);
-            binding.amaRbMale.setEnabled(false);
+            binding.amaRbFemale.setClickable(false);
+            binding.amaRbMale.setClickable(false);
             binding.amaRgGender.setEnabled(false);
         }
 
         else if (gender.equals("male")){
             binding.amaRbMale.setChecked(true);
-            binding.amaRbFemale.setEnabled(false);
-            binding.amaRbMale.setEnabled(false);
+            binding.amaRbFemale.setClickable(false);
+            binding.amaRbMale.setClickable(false);
             binding.amaRgGender.setEnabled(false);
         }
         //for fail to retrieve data from database
         else{
-            binding.amaRbFemale.setEnabled(false);
-            binding.amaRbMale.setEnabled(false);
+            binding.amaRbFemale.setClickable(false);
+            binding.amaRbMale.setClickable(false);
             binding.amaRgGender.setEnabled(false);
         }
 
@@ -167,6 +167,13 @@ public class MakeAppointment extends AppCompatActivity {
             return;
         }
 
+        //pickTime validation
+        if (appointmentTime.equals("Select time")){
+            Toast.makeText(this, "Please select your appointment time", Toast.LENGTH_SHORT).show();
+            binding.amaSpPickTime.requestFocus();
+            return;
+        }
+
         //donationBefore validation
         if (donationBefore.isEmpty()){
             Toast.makeText(this, "Please select your donation history experience", Toast.LENGTH_SHORT).show();
@@ -178,7 +185,7 @@ public class MakeAppointment extends AppCompatActivity {
         //assign value and insert to database
         Appointment appointment = new Appointment(mUserID, mOrganiserID, appointmentTime, appointmentDate, donationBefore, "0ml", 0);
         mAppointmentViewModel.insertAppointment(appointment);
-        Toast.makeText(this, "Submit completed", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Appointment submitted successfully", Toast.LENGTH_SHORT).show();
         Intent i = new Intent(MakeAppointment.this,AppointmentSuccess.class);
         startActivity(i);
         finish();
