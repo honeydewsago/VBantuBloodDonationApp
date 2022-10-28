@@ -7,6 +7,10 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,6 +27,11 @@ import java.util.List;
 import java.util.Objects;
 
 public class SingleBloodRequestActivity extends AppCompatActivity {
+
+    private final String USERID_KEY = "userid", USERTYPE_KEY = "usertype";
+    private SharedPreferences mPreferences;
+    private int mUserID = 1;
+    private String mUserType = "user";
 
     private ActivitySingleBloodRequestBinding binding;
     private BloodRequestViewModel mBloodRequestViewModel;
@@ -49,6 +58,13 @@ public class SingleBloodRequestActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbar.setNavigationIcon(ContextCompat.getDrawable(this, R.drawable.ic_arrow_back_ios));
 
+        mPreferences = getSharedPreferences("com.example.vbantublooddonationapp",MODE_PRIVATE);
+
+        if (mPreferences.contains(USERID_KEY) && mPreferences.contains(USERTYPE_KEY)) {
+            mUserID = mPreferences.getInt(USERID_KEY,1);
+            mUserType = mPreferences.getString(USERTYPE_KEY, "user");
+        }
+
         Intent i = getIntent();
         int requestID = i.getIntExtra("currentRequestID", 1);
 
@@ -59,13 +75,9 @@ public class SingleBloodRequestActivity extends AppCompatActivity {
 
         //Date format in YYYYMMDD_HHMMSS
         String dateTime = mBloodRequest.getDateTime();
-        String day = dateTime.substring(6,8);
-        String year = dateTime.substring(0,4);
-        int month = Integer.parseInt(dateTime.substring(4,6));
-        String time = dateTime.substring(9,15);
 
-        binding.asbrTvDate.setText(day + " "+ getMonthName(month) + " " + year);
-        binding.asbrTvTime.setText(convertTimeTo12HFormat(time));
+        binding.asbrTvDate.setText(getFullDate(dateTime));
+        binding.asbrTvTime.setText(convertTimeTo12HFormat(dateTime));
 
         List<Organiser> mOrganiserList = mOrganiserViewModel.getOrganiserById(mBloodRequest.getOrganiserID());
         mOrganiser = mOrganiserList.get(0);
@@ -81,6 +93,15 @@ public class SingleBloodRequestActivity extends AppCompatActivity {
         //set the layout manager
         binding.asbrRvBloodType.setLayoutManager(new GridLayoutManager(this, 4));
 
+        if (mUserType.equals("organiser")){
+            binding.asbrBtnMakeAppointment.setEnabled(false);
+            binding.asbrBtnMakeAppointment.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.medium_grey));
+            binding.asbrBtnMakeAppointment.setTextColor(getResources().getColor(R.color.white));
+        }
+        else {
+            binding.asbrBtnMakeAppointment.setEnabled(true);
+        }
+
         binding.asbrBtnMakeAppointment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -89,6 +110,14 @@ public class SingleBloodRequestActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    public String getFullDate(String dateTime) {
+        String year = dateTime.substring(0,4);
+        int month = Integer.parseInt(dateTime.substring(4,6));
+        String day = dateTime.substring(6,8);
+
+        return day + " "+ getMonthName(month) + " " + year;
     }
 
     public String getMonthName(int month_value){
@@ -122,7 +151,8 @@ public class SingleBloodRequestActivity extends AppCompatActivity {
         }
     }
 
-    public String convertTimeTo12HFormat(String time24H) {
+    public String convertTimeTo12HFormat(String dateTime) {
+        String time24H = dateTime.substring(9,15);
         int hour = Integer.parseInt(time24H.substring(0,2));
         String minute = time24H.substring(2,4);
         String period="";
