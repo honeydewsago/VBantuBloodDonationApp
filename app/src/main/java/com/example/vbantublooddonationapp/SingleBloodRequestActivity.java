@@ -7,6 +7,10 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,6 +27,11 @@ import java.util.List;
 import java.util.Objects;
 
 public class SingleBloodRequestActivity extends AppCompatActivity {
+
+    private final String USERID_KEY = "userid", USERTYPE_KEY = "usertype";
+    private SharedPreferences mPreferences;
+    private int mUserID = 1;
+    private String mUserType = "user";
 
     private ActivitySingleBloodRequestBinding binding;
     private BloodRequestViewModel mBloodRequestViewModel;
@@ -48,6 +57,13 @@ public class SingleBloodRequestActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbar.setNavigationIcon(ContextCompat.getDrawable(this, R.drawable.ic_arrow_back_ios));
+
+        mPreferences = getSharedPreferences("com.example.vbantublooddonationapp",MODE_PRIVATE);
+
+        if (mPreferences.contains(USERID_KEY) && mPreferences.contains(USERTYPE_KEY)) {
+            mUserID = mPreferences.getInt(USERID_KEY,1);
+            mUserType = mPreferences.getString(USERTYPE_KEY, "user");
+        }
 
         Intent i = getIntent();
         int requestID = i.getIntExtra("currentRequestID", 1);
@@ -80,6 +96,15 @@ public class SingleBloodRequestActivity extends AppCompatActivity {
 
         //set the layout manager
         binding.asbrRvBloodType.setLayoutManager(new GridLayoutManager(this, 4));
+
+        if (mUserType.equals("organiser")){
+            binding.asbrBtnMakeAppointment.setEnabled(false);
+            binding.asbrBtnMakeAppointment.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.medium_grey));
+            binding.asbrBtnMakeAppointment.setTextColor(getResources().getColor(R.color.white));
+        }
+        else {
+            binding.asbrBtnMakeAppointment.setEnabled(true);
+        }
 
         binding.asbrBtnMakeAppointment.setOnClickListener(new View.OnClickListener() {
             @Override
