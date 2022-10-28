@@ -25,6 +25,7 @@ public class AppointmentSuccess extends AppCompatActivity {
                 Intent i = new Intent(AppointmentSuccess.this, HomeActivity.class);
                 startActivity(i);
                 overridePendingTransition(R.anim.slide_in_down, R.anim.slide_out_down);
+                finish();
             }
         });
     }

@@ -44,6 +44,9 @@ public class CommunityNewPostActivity extends AppCompatActivity {
         View v = mCommunityNewPostBinding.getRoot();
         setContentView(v);
 
+        mOrganiserViewModel = new ViewModelProvider(this).get(OrganiserViewModel.class);
+        mUserViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+
         //set toolbar and display icon
         Toolbar toolbar = mCommunityNewPostBinding.acnpToolbar;
         setSupportActionBar(toolbar);

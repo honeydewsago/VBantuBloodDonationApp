@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SingleBloodRequestActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/asbr_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:actionBarSize"
+        android:background="@color/red"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/asbr_tvUrgentRequest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/urgentRequest"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <ImageView
+        android:id="@+id/asbr_ivOrganiser"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/placeholder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/asbr_toolbar" />
+
+    <TextView
+        android:id="@+id/asbr_tvOrganiser"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:padding="2dp"
+        android:text="@string/companyName"
+        android:textColor="@color/dark_grey"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/asbr_ivOrganiser" />
+
+    <TextView
+        android:id="@+id/asbr_tvRequestInfo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/requestInfo"
+        android:textColor="@color/red"
+        android:textSize="14sp"
+        android:justificationMode="inter_word"
+        app:layout_constraintEnd_toEndOf="@+id/asbr_tvOrganiser"
+        app:layout_constraintStart_toStartOf="@+id/asbr_tvOrganiser"
+        app:layout_constraintTop_toBottomOf="@+id/asbr_tvOrganiser" />
+
+    <TextView
+        android:id="@+id/asbr_tvDateTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/dateTitle"
+        android:textColor="@color/dark_grey"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/asbr_tvRequestInfo"
+        app:layout_constraintTop_toBottomOf="@+id/asbr_tvRequestInfo" />
+
+    <TextView
+        android:id="@+id/asbr_tvDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="@string/dateFormat"
+        android:textColor="@color/dark_grey"
+        android:textSize="14sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/asbr_tvDateTitle"
+        app:layout_constraintStart_toEndOf="@+id/asbr_tvDateTitle" />
+
+    <TextView
+        android:id="@+id/asbr_tvTimeTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/timeTitle"
+        android:textColor="@color/dark_grey"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/asbr_tvDateTitle"
+        app:layout_constraintTop_toBottomOf="@+id/asbr_tvDateTitle" />
+
+    <TextView
+        android:id="@+id/asbr_tvTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="@string/timeFormat"
+        android:textColor="@color/dark_grey"
+        android:textSize="14sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/asbr_tvTimeTitle"
+        app:layout_constraintStart_toEndOf="@+id/asbr_tvTimeTitle" />
+
+    <TextView
+        android:id="@+id/asbr_tvAddress"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:drawableLeft="@drawable/ic_location"
+        android:drawablePadding="4dp"
+        android:padding="2dp"
+        android:text="@string/organisationAddress"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/asbr_tvRequestInfo"
+        app:layout_constraintStart_toStartOf="@+id/asbr_tvTimeTitle"
+        app:layout_constraintTop_toBottomOf="@+id/asbr_tvTimeTitle" />
+
+    <TextView
+        android:id="@+id/asbr_tvContact"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:drawableLeft="@drawable/ic_local_phone"
+        android:drawablePadding="4dp"
+        android:padding="2dp"
+        android:text="@string/contactNo"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/asbr_tvAddress"
+        app:layout_constraintStart_toStartOf="@+id/asbr_tvAddress"
+        app:layout_constraintTop_toBottomOf="@+id/asbr_tvAddress" />
+
+    <TextView
+        android:id="@+id/asbr_tvBloodShortageType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:padding="2dp"
+        android:text="Blood Shortage Type: "
+        android:textColor="@color/red"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/asbr_tvContact"
+        app:layout_constraintTop_toBottomOf="@+id/asbr_tvContact" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/asbr_rvBloodType"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="@+id/asbr_tvContact"
+        app:layout_constraintStart_toEndOf="@+id/asbr_tvBloodShortageType"
+        app:layout_constraintTop_toTopOf="@+id/asbr_tvBloodShortageType" />
+
+    <Button
+        android:id="@+id/asbr_btnMakeAppointment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/mediumRed"
+        android:text="@string/makeYourAppointmentNow"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/asbr_rvBloodType"
+        app:layout_constraintStart_toStartOf="@+id/asbr_tvBloodShortageType"
+        app:layout_constraintTop_toBottomOf="@+id/asbr_rvBloodType" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
