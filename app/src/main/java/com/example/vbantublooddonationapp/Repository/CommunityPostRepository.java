@@ -29,10 +29,6 @@ public class CommunityPostRepository {
         new insertAsyncTask(mCommunityPostDao).execute(communityPost);
     }
 
-    public void deleteCommunityPost(CommunityPost communityPost){
-        new deleteAsyncTask(mCommunityPostDao).execute(communityPost);
-    }
-
     public void updateCommunityPost(CommunityPost communityPost){
         new updateAsyncTask(mCommunityPostDao).execute(communityPost);
     }
@@ -46,19 +42,6 @@ public class CommunityPostRepository {
         @Override
         protected Void doInBackground(final CommunityPost... params) {
             mAsyncTaskDao.insertCommunityPost(params[0]);
-            return null;
-        }
-    }
-
-    private static class deleteAsyncTask extends android.os.AsyncTask<CommunityPost, Void, Void> {
-        private CommunityPostDao mAsyncTaskDao;
-        deleteAsyncTask(CommunityPostDao dao) {
-            mAsyncTaskDao = dao;
-        }
-
-        @Override
-        protected Void doInBackground(final CommunityPost... params) {
-            mAsyncTaskDao.deleteCommunityPost(params[0]);
             return null;
         }
     }
