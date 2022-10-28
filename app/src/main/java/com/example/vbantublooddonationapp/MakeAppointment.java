@@ -128,8 +128,8 @@ public class MakeAppointment extends AppCompatActivity {
         binding.amaTvPickDate.setText(R.string.dateFormat);
         binding.amaSpPickTime.setSelection(0);
 
-        binding.amaRbDonateHistoryYes.setChecked(false);
-        binding.amaRbDonateHistoryYes.setChecked(false);
+
+        binding.amaRgDonateHistory.clearCheck();
         donationBefore = "";
 
 
