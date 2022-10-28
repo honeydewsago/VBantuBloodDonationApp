@@ -30,4 +30,44 @@ public class CommunityPost {
         this.postDesc = postDesc;
         this.postDateTime = postDateTime;
     }
+
+    public int getPostID() {
+        return postID;
+    }
+
+    public void setPostID(int postID) {
+        this.postID = postID;
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+
+    public int getOrganiserID() {
+        return organiserID;
+    }
+
+    public void setOrganiserID(int organiserID) {
+        this.organiserID = organiserID;
+    }
+
+    public String getPostDesc() {
+        return postDesc;
+    }
+
+    public void setPostDesc(String postDesc) {
+        this.postDesc = postDesc;
+    }
+
+    public String getPostDateTime() {
+        return postDateTime;
+    }
+
+    public void setPostDateTime(String postDateTime) {
+        this.postDateTime = postDateTime;
+    }
 }

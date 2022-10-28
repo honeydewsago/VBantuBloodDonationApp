@@ -40,10 +40,12 @@ public class CommunityNewPostActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //implementing binding
         mCommunityNewPostBinding = ActivityCommunityNewPostBinding.inflate(getLayoutInflater());
         View v = mCommunityNewPostBinding.getRoot();
         setContentView(v);
 
+        //initialise view model
         mOrganiserViewModel = new ViewModelProvider(this).get(OrganiserViewModel.class);
         mUserViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
@@ -84,5 +86,4 @@ public class CommunityNewPostActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 }

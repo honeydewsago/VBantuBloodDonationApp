@@ -25,6 +25,5 @@ public class CommunityPostViewModel extends AndroidViewModel {
     }
 
     public void insertCommunityPost(CommunityPost communityPost) { mCommunityPostRepository.insertCommunityPost(communityPost); }
-    public void deleteCommunityPost(CommunityPost communityPost) { mCommunityPostRepository.deleteCommunityPost(communityPost); }
     public void updateCommunityPost(CommunityPost communityPost) { mCommunityPostRepository.updateCommunityPost(communityPost); }
 }

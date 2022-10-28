@@ -83,7 +83,6 @@ public class HomeFragment extends Fragment {
             }
         });
 
-
         mUrgentRequestAdapter = new UrgentRequestAdapter(getActivity());
         homeBinding.fhRvUrgentRequest.setAdapter(mUrgentRequestAdapter);
 
