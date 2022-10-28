@@ -74,7 +74,7 @@
         android:layout_marginTop="8dp"
         android:text="@string/contactNoTitle"
         android:textColor="@color/red"
-        android:textSize="16sp"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@+id/ambr_tvDonationCenter"
         app:layout_constraintTop_toBottomOf="@+id/ambr_tvDonationCenter" />
 
@@ -83,13 +83,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="2dp"
         android:text="@string/contactNo"
-        android:textSize="14sp"
         android:textColor="@color/dark_grey"
+        android:textSize="14sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/ambr_tvContactNoTitle"
         app:layout_constraintEnd_toEndOf="@+id/ambr_tvDonationCenter"
-        app:layout_constraintStart_toEndOf="@+id/ambr_tvContactNoTitle"
-        app:layout_constraintTop_toTopOf="@+id/ambr_tvContactNoTitle" />
+        app:layout_constraintStart_toEndOf="@+id/ambr_tvContactNoTitle" />
 
     <TextView
         android:id="@+id/ambr_tvAddressTitle"
@@ -98,7 +97,7 @@
         android:layout_marginTop="8dp"
         android:text="@string/addressTitle"
         android:textColor="@color/red"
-        android:textSize="16sp"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@+id/ambr_tvContactNoTitle"
         app:layout_constraintTop_toBottomOf="@+id/ambr_tvContactNoTitle" />
 
@@ -106,14 +105,13 @@
         android:id="@+id/ambr_tvAddress"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="2dp"
+        android:layout_marginStart="4dp"
         android:text="@string/address"
-        android:textSize="12sp"
         android:textColor="@color/dark_grey"
+        android:textSize="14sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/ambr_tvAddressTitle"
         app:layout_constraintEnd_toEndOf="@+id/ambr_tvContactNo"
-        app:layout_constraintStart_toEndOf="@+id/ambr_tvAddressTitle"
-        app:layout_constraintTop_toTopOf="@+id/ambr_tvAddressTitle" />
+        app:layout_constraintStart_toEndOf="@+id/ambr_tvAddressTitle" />
 
     <ImageView
         android:id="@+id/ambr_ivLineBreak1"
@@ -226,7 +224,6 @@
         android:id="@+id/ambr_chbAB_neg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:text="@string/AB_neg"
         android:textColor="@color/red"
         android:textStyle="bold"
@@ -267,7 +264,7 @@
         android:id="@+id/ambr_btnSubmitRequest"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:text="@string/submitRequest"
         app:layout_constraintEnd_toEndOf="@+id/ambr_ivRequestBox"

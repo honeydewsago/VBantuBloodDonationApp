@@ -8,7 +8,10 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/outline_grey"
         app:cardCornerRadius="20dp"
         app:cardElevation="2dp">
@@ -22,7 +25,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:layout_marginEnd="4dp"
                 android:padding="2dp"
                 android:text="@string/companyName"
@@ -56,19 +59,18 @@
                 android:textColor="@color/red"
                 android:textSize="12sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/cur_tvRequestInfo"
                 app:layout_constraintTop_toBottomOf="@+id/cur_tvRequestInfo" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/cur_rvBloodType"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintBottom_toBottomOf="@+id/cur_tvBloodShortageType"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/cur_tvRequestInfo"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/cur_tvBloodShortageType"
                 app:layout_constraintTop_toTopOf="@+id/cur_tvBloodShortageType" />
 
