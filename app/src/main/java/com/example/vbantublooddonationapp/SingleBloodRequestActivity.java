@@ -75,12 +75,9 @@ public class SingleBloodRequestActivity extends AppCompatActivity {
 
         //Date format in YYYYMMDD_HHMMSS
         String dateTime = mBloodRequest.getDateTime();
-        String day = dateTime.substring(6,8);
-        String year = dateTime.substring(0,4);
-        int month = Integer.parseInt(dateTime.substring(4,6));
         String time = dateTime.substring(9,15);
 
-        binding.asbrTvDate.setText(day + " "+ getMonthName(month) + " " + year);
+        binding.asbrTvDate.setText(getFullDate(dateTime));
         binding.asbrTvTime.setText(convertTimeTo12HFormat(time));
 
         List<Organiser> mOrganiserList = mOrganiserViewModel.getOrganiserById(mBloodRequest.getOrganiserID());
@@ -114,6 +111,14 @@ public class SingleBloodRequestActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    public String getFullDate(String dateTime) {
+        String year = dateTime.substring(0,4);
+        int month = Integer.parseInt(dateTime.substring(4,6));
+        String day = dateTime.substring(6,8);
+
+        return day + " "+ getMonthName(month) + " " + year;
     }
 
     public String getMonthName(int month_value){
