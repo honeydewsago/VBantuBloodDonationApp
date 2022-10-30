@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.vbantublooddonationapp">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -17,16 +17,19 @@
         android:theme="@style/Theme.VBantuBloodDonationApp"
         tools:targetApi="31">
         <activity
+            android:name=".AppointmentDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".SingleBloodRequestActivity"
             android:exported="false" />
         <activity
             android:name=".RewardsActivity"
             android:exported="false" />
         <activity
-            android:name=".AppointmentHistory"
+            android:name=".AppointmentHistoryActivity"
             android:exported="false" />
         <activity
-            android:name=".ProfileQr"
+            android:name=".ProfileQrActivity"
             android:exported="false" />
         <activity
             android:name=".ProfileQR"

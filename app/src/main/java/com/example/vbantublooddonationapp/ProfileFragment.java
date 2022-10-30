@@ -70,14 +70,14 @@ public class ProfileFragment extends Fragment {
         profileBinding.fpIvQrCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), ProfileQr.class));
+                startActivity(new Intent(getActivity(), ProfileQrActivity.class));
             }
         });
 
         profileBinding.fpTvAppointmentHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), AppointmentHistory.class));
+                startActivity(new Intent(getActivity(), AppointmentHistoryActivity.class));
             }
         });
 
