@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.room.Database;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -72,7 +73,7 @@ public class CommunityNewPostActivity extends AppCompatActivity {
 
     //Firebase
     private StorageTask uploadTask;
-    private FirebaseDatabase database;
+    private DatabaseReference database;
     private StorageReference storageReference;
     private FirebaseAuth mAuth;
     private String userUUID;
@@ -159,44 +160,46 @@ public class CommunityNewPostActivity extends AppCompatActivity {
         String currentDateTime = sdf.format(new Date());
 
 //        //get image
-//        if(filepath != null){
-//            final ProgressDialog progressDialog = new ProgressDialog(CommunityNewPostActivity.this);
-//            progressDialog.setTitle("Uploading");
-//            progressDialog.show();
-//
-//            StorageReference fileRef = storageReference.child(System.currentTimeMillis() + "");
-//
-//            uploadTask = fileRef.putFile(filepath);
-//            uploadTask.continueWithTask(task -> {
-//                if (!task.isComplete()) {
-//                    throw Objects.requireNonNull(task.getException());
-//                }
-//                return fileRef.getDownloadUrl();
-//            }).addOnCompleteListener(task -> {
-//                if (task.isSuccessful()) {
-//                    Uri downloadUri = (Uri) task.getResult();
-//                    myUrl = downloadUri.toString();
-//
-//                    DatabaseReference reference = database.getReference("CommunityPost");
-//                    String userID = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-//                    String postID = UUID.randomUUID().toString();
-//
-//                    CommunityPost post = new CommunityPost(postID, userID, cName, postCaption, myUrl, currentDateTime);
-//
-//                    reference.child(postID).setValue(post).addOnCompleteListener(task1 -> {
-//                        if (task1.isSuccessful()) {
-//                            Toast.makeText(CommunityNewPostActivity.this, "Post successfully created!", Toast.LENGTH_SHORT).show();
-//                            finish();
-//                        } else {
-//                            //redirect to login page
-//                            Toast.makeText(CommunityNewPostActivity.this, "Post creation failed! Please try again.", Toast.LENGTH_SHORT).show();
-//
-//                        }
-//                        progressDialog.dismiss();
-//                    });
-//
-//                }
-//            }).addOnFailureListener(e -> Toast.makeText(CommunityNewPostActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+        if(filepath != null){
+            final ProgressDialog progressDialog = new ProgressDialog(CommunityNewPostActivity.this);
+            progressDialog.setTitle("Uploading");
+            progressDialog.show();
+
+            StorageReference fileRef = storageReference.child(System.currentTimeMillis() + "");
+
+            uploadTask = fileRef.putFile(filepath);
+            uploadTask.continueWithTask(task -> {
+                if (!task.isComplete()) {
+                    throw Objects.requireNonNull(task.getException());
+                }
+                return fileRef.getDownloadUrl();
+            }).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    Uri downloadUri = (Uri) task.getResult();
+                    myUrl = downloadUri.toString();
+
+                    database = FirebaseDatabase.getInstance().getReference("CommunityPost1");
+                    int postID = 1;
+                    int orID = 2;
+
+                    CommunityPost post = new CommunityPost(postID, mUserID, orID, postDesc, myUrl);
+
+                    database.child(String.valueOf(postID)).setValue(post).addOnCompleteListener(task1 -> {
+                        if (task1.isSuccessful()) {
+                            progressDialog.dismiss();
+                            Toast.makeText(CommunityNewPostActivity.this, "Post successfully created!", Toast.LENGTH_SHORT).show();
+                            finish();
+                        } else {
+                            //redirect to login page
+                            progressDialog.dismiss();
+                            Toast.makeText(CommunityNewPostActivity.this, "Post creation failed! Please try again.", Toast.LENGTH_SHORT).show();
+
+                        }
+                        progressDialog.dismiss();
+                    });
+
+                }
+            }).addOnFailureListener(e -> Toast.makeText(CommunityNewPostActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show());
 
 ////            StorageReference storageRef =  storageReference.child("CommunityPost").child(String.valueOf(mUserID));
 //            storageRef.putFile(filepath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -212,9 +215,9 @@ public class CommunityNewPostActivity extends AppCompatActivity {
 //                    Toast.makeText(CommunityNewPostActivity.this, "Upload Fail", Toast.LENGTH_SHORT).show();
 //                }
 ////            });
-//        } else {
-//            Toast.makeText(CommunityNewPostActivity.this, "No Image Selected!", Toast.LENGTH_SHORT).show();
-//        }
+        } else {
+            Toast.makeText(CommunityNewPostActivity.this, "No Image Selected!", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
