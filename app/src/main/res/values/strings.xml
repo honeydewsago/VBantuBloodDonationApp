@@ -144,6 +144,7 @@
     <string name="november">November</string>
     <string name="december">December</string>
     <string name="month">Month</string>
+    <string name="active">Active</string>
 
     <string-array name="bloodGroupValues">
         <item>A+</item>
@@ -157,6 +158,7 @@
     </string-array>
 
     <string-array name="timeAvailable">
+        <item>Select time</item>
         <item>9.00 am</item>
         <item>10.00 am</item>
         <item>11.00 am</item>

@@ -8,6 +8,8 @@ import androidx.lifecycle.ViewModelProvider;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
@@ -67,6 +69,19 @@ public class MakeBloodRequest extends AppCompatActivity {
         binding.ambrTvContactNo.setText(mOrganiser.getContact());
         binding.ambrTvAddress.setText(mOrganiser.getAddress());
 
+        binding.ambrEtRequestInfo.setFilters(new InputFilter[]{new InputFilter() {
+            @Override
+            public CharSequence filter(CharSequence charSequence, int i, int i1, Spanned spanned, int i2, int i3) {
+                if (charSequence != null) {
+                    String s = charSequence.toString();
+                    if (s.contains("\n")) {
+                        return s.replaceAll("\n", "");
+                    }
+                }
+                return null;
+            }
+        }});
+
         binding.ambrBtnSubmitRequest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,6 +106,10 @@ public class MakeBloodRequest extends AppCompatActivity {
             Toast.makeText(this, R.string.bloodTypeNeeded, Toast.LENGTH_SHORT).show();
             binding.ambrChbABPov.requestFocus();
             return;
+        }
+
+        if (requestInfo.contains("\n")) {
+            requestInfo.replaceAll("\n", "");
         }
 
         bloodTypeAB = checkBloodType(binding.ambrChbABPov, binding.ambrChbABNeg);

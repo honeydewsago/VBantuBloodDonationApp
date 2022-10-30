@@ -206,6 +206,7 @@
                 android:background="@drawable/edit_text_box"
                 android:hint="House Address"
                 android:inputType="textMultiLine"
+                android:gravity="clip_horizontal"
                 android:lines="3"
                 android:paddingLeft="10dp"
                 android:paddingTop="4dp"
@@ -244,14 +245,12 @@
                     android:id="@+id/ama_rbFemale"
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                    android:onClick="rgDonateHistory_clicked"
                     android:text="@string/female" />
 
                 <RadioButton
                     android:id="@+id/ama_rbMale"
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                    android:onClick="rgDonateHistory_clicked"
                     android:text="@string/male"/>
 
             </RadioGroup>
@@ -337,14 +336,14 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/ama_tvAppointmentTime"
                 app:layout_constraintTop_toBottomOf="@+id/ama_tvAppointmentTime">
+
                 <Spinner
                     android:id="@+id/ama_spPickTime"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:entries="@array/timeAvailable"
                     android:textAlignment="center"
-                    android:textSize="14sp"
-                    />
+                    android:textSize="14sp" />
             </RelativeLayout>
 
             <TextView
@@ -438,6 +437,7 @@
                 android:textColor="@color/dark_grey"
                 android:background="#99FFFFFF"
                 android:layout_marginTop="8dp"
+                android:drawablePadding="8dp"
                 app:layout_constraintStart_toStartOf="@+id/ama_tvReminder"
                 app:layout_constraintTop_toBottomOf="@+id/ama_tvReminder"
                 app:layout_constraintEnd_toEndOf="@id/ama_tvReminder"/>
@@ -451,6 +451,7 @@
                 android:text="@string/reminder2"
                 android:textSize="12sp"
                 android:padding="8dp"
+                android:drawablePadding="8dp"
                 android:textColor="@color/dark_grey"
                 android:background="#99FFFFFF"
                 app:layout_constraintTop_toBottomOf="@+id/ama_tvReminder1"
@@ -467,6 +468,7 @@
                 android:text="@string/reminder3"
                 android:textSize="12sp"
                 android:padding="8dp"
+                android:drawablePadding="8dp"
                 android:gravity="center_vertical"
                 android:textColor="@color/dark_grey"
                 android:background="#99FFFFFF"
@@ -480,9 +482,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/ic_done"
+                android:lines="2"
                 android:text="@string/reminder4"
                 android:textSize="12sp"
                 android:padding="8dp"
+                android:drawablePadding="8dp"
                 android:gravity="center_vertical"
                 android:textColor="@color/dark_grey"
                 android:background="#99FFFFFF"

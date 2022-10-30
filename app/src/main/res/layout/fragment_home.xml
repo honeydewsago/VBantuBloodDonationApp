@@ -46,9 +46,9 @@
             android:id="@+id/fh_svSearchBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/fh_toolbar" />
@@ -57,7 +57,7 @@
             android:id="@+id/fh_tvUrgentRequest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="18dp"
             android:layout_marginTop="10dp"
             android:text="@string/urgentRequest"
             android:textColor="@color/red"
@@ -67,20 +67,18 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/fh_rvUrgentRequest"
-            android:layout_width="match_parent"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="@+id/fh_svSearchBar"
+            app:layout_constraintStart_toStartOf="@+id/fh_svSearchBar"
             app:layout_constraintTop_toBottomOf="@+id/fh_tvUrgentRequest" />
 
         <TextView
             android:id="@+id/fh_tvLocation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="18dp"
             android:text="@string/location"
             android:textColor="@color/red"
             android:textSize="20sp"
@@ -89,14 +87,12 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/fh_rvLocation"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/fh_rvUrgentRequest"
+            app:layout_constraintStart_toStartOf="@+id/fh_rvUrgentRequest"
             app:layout_constraintTop_toBottomOf="@+id/fh_tvLocation" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
