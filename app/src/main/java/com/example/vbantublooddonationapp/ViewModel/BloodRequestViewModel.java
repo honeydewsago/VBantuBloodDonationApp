@@ -32,4 +32,12 @@ public class BloodRequestViewModel extends AndroidViewModel {
     public List<BloodRequest> getRequestById(int id){
         return mRepository.getRequestById(id);
     }
+
+    public List<BloodRequest> getRequestByOrganiserId(int id){
+        return mRepository.getRequestByOrganiserId(id);
+    }
+
+    public void updateBloodRequest(BloodRequest bloodRequest){
+        mRepository.update(bloodRequest);
+    }
 }
