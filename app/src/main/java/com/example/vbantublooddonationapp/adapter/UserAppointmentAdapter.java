@@ -19,22 +19,28 @@ import com.example.vbantublooddonationapp.Model.User;
 import com.example.vbantublooddonationapp.OrganiserSingleAppointmentDetails;
 import com.example.vbantublooddonationapp.R;
 import com.example.vbantublooddonationapp.SingleBloodBankLocation;
+import com.example.vbantublooddonationapp.ViewModel.AppointmentViewModel;
 import com.example.vbantublooddonationapp.ViewModel.BloodRequestViewModel;
 import com.example.vbantublooddonationapp.ViewModel.UserViewModel;
 import com.example.vbantublooddonationapp.databinding.CardBloodRequestHistoryBinding;
 import com.example.vbantublooddonationapp.databinding.CardUserAppointmentsBinding;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class UserAppointmentAdapter extends RecyclerView.Adapter<UserAppointmentAdapter.AppointmentHolder>{
 
     private Activity mActivity;
     private List<Appointment> mAppointmentList;
     private UserViewModel mUserViewModel;
+    private AppointmentViewModel mAppointmentViewModel;
 
     public UserAppointmentAdapter(Activity activity) {
         mActivity = activity;
         mUserViewModel = new ViewModelProvider((FragmentActivity)mActivity).get(UserViewModel.class);
+        mAppointmentViewModel = new ViewModelProvider((FragmentActivity)mActivity).get(AppointmentViewModel.class);
     }
 
     public void setAppointmentList(List<Appointment> appointmentList) {
@@ -51,9 +57,10 @@ public class UserAppointmentAdapter extends RecyclerView.Adapter<UserAppointment
     @Override
     public void onBindViewHolder(@NonNull AppointmentHolder holder, int position) {
         Appointment appointment = mAppointmentList.get(position);
-        String status = appointment.getStatus();
-        holder.mTvStatus.setText(status);
 
+        String status = updateAppointmentStatus(appointment);
+
+        holder.mTvStatus.setText(status);
         if (status.equals("Ongoing")) {
             holder.mTvStatus.setBackgroundResource(R.color.orange);
         }
@@ -162,5 +169,21 @@ public class UserAppointmentAdapter extends RecyclerView.Adapter<UserAppointment
             default:
                 return mActivity.getResources().getString(R.string.month);
         }
+    }
+
+    private String updateAppointmentStatus(Appointment appointment) {
+        String status = appointment.getStatus();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
+        int currentDate = Integer.parseInt(sdf.format(new Date()));
+        int date = Integer.parseInt(appointment.getAppointmentDate());
+
+        if (status.equals("Ongoing") && currentDate > date) {
+            appointment.setStatus("Expired");
+            mAppointmentViewModel.updateAppointment(appointment);
+            status = "Expired";
+        }
+
+        return status;
     }
 }

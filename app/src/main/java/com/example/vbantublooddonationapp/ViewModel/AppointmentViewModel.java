@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.example.vbantublooddonationapp.Model.Appointment;
+import com.example.vbantublooddonationapp.Model.BloodRequest;
 import com.example.vbantublooddonationapp.Model.Organiser;
 import com.example.vbantublooddonationapp.Repository.AppointmentRepository;
 
@@ -26,5 +27,9 @@ public class AppointmentViewModel extends AndroidViewModel {
 
     public LiveData<List<Appointment>> getAppointmentByOrganiserID(int id){
         return mRepository.getAppointmentByOrganiserID(id);
+    }
+
+    public void updateAppointment(Appointment appointment){
+        mRepository.update(appointment);
     }
 }
