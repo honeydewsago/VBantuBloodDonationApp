@@ -145,6 +145,7 @@
     <string name="december">December</string>
     <string name="month">Month</string>
     <string name="active">Active</string>
+    <string name="userAppointments">User Appointments</string>
 
     <string-array name="bloodGroupValues">
         <item>A+</item>
