@@ -1,7 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/outline_grey"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="2dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/cua_ivCalendar"
+                android:layout_width="70dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_calendar_24" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                app:cardCornerRadius="25dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/cua_tvStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/orange"
+                    android:paddingLeft="14dp"
+                    android:paddingTop="2dp"
+                    android:paddingRight="14dp"
+                    android:paddingBottom="2dp"
+                    android:text="@string/ongoing"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/cua_tvNameTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/nameTitle"
+                android:textColor="@color/dark_grey"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/cua_ivCalendar"
+                app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
+            <TextView
+                android:id="@+id/cua_tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="@string/username"
+                android:textColor="@color/dark_grey"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintBaseline_toBaselineOf="@+id/cua_tvNameTitle"
+                app:layout_constraintStart_toEndOf="@+id/cua_tvNameTitle" />
+
+            <TextView
+                android:id="@+id/cua_tvBloodGroupTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/bloodGroupLabel"
+                android:textColor="@color/dark_grey"
+                app:layout_constraintStart_toStartOf="@+id/cua_tvNameTitle"
+                app:layout_constraintTop_toBottomOf="@+id/cua_tvNameTitle" />
+
+            <TextView
+                android:id="@+id/cua_tvBloodGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="@string/A_pov"
+                android:textColor="@color/dark_grey"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintBaseline_toBaselineOf="@+id/cua_tvBloodGroupTitle"
+                app:layout_constraintStart_toEndOf="@+id/cua_tvBloodGroupTitle" />
+
+            <TextView
+                android:id="@+id/cua_tvAppointmentDateTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/dark_grey"
+                android:layout_marginTop="8dp"
+                android:text="@string/appointmentDateLabel"
+                app:layout_constraintStart_toStartOf="@+id/cua_tvBloodGroupTitle"
+                app:layout_constraintTop_toBottomOf="@+id/cua_tvBloodGroupTitle" />
+
+            <TextView
+                android:id="@+id/cua_tvAppointmentDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="@string/dateFormat"
+                android:textColor="@color/dark_grey"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintBaseline_toBaselineOf="@+id/cua_tvAppointmentDateTitle"
+                app:layout_constraintStart_toEndOf="@+id/cua_tvAppointmentDateTitle" />
+
+            <TextView
+                android:id="@+id/cua_tvAppointmentTimeTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/dark_grey"
+                android:text="@string/appointmentTimeLabel"
+                app:layout_constraintStart_toStartOf="@+id/cua_tvAppointmentDateTitle"
+                app:layout_constraintTop_toBottomOf="@+id/cua_tvAppointmentDateTitle" />
+
+            <TextView
+                android:id="@+id/cua_tvAppointmentTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="@string/timeFormat"
+                android:textColor="@color/dark_grey"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintBaseline_toBaselineOf="@+id/cua_tvAppointmentTimeTitle"
+                app:layout_constraintStart_toEndOf="@+id/cua_tvAppointmentTimeTitle" />
+
+            <TextView
+                android:id="@+id/cua_tvAppointmentDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                android:drawableEnd="@drawable/ic_arrow_forward_ios_grey"
+                android:gravity="center_vertical"
+                android:drawablePadding="4dp"
+                android:text="@string/appointmentDetails"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cua_tvAppointmentTimeTitle" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

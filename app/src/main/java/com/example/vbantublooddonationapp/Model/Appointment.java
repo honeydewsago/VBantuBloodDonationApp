@@ -18,6 +18,9 @@ public class Appointment {
     @ColumnInfo(name = "organiserID")
     public int organiserID;
 
+    @ColumnInfo(name = "address")
+    public String address;
+
     @ColumnInfo(name = "appointmentTime")
     public String appointmentTime;
 
@@ -31,11 +34,12 @@ public class Appointment {
     public String bloodAmt;
 
     @ColumnInfo(name = "status")
-    public int status;
+    public String status;
 
-    public Appointment(int userID, int organiserID, String appointmentTime, String appointmentDate, String donationBefore, String bloodAmt, int status) {
+    public Appointment(int userID, int organiserID, String address, String appointmentTime, String appointmentDate, String donationBefore, String bloodAmt, String status) {
         this.userID = userID;
         this.organiserID = organiserID;
+        this.address = address;
         this.appointmentTime = appointmentTime;
         this.appointmentDate = appointmentDate;
         this.donationBefore = donationBefore;

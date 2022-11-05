@@ -146,6 +146,9 @@
     <string name="month">Month</string>
     <string name="active">Active</string>
     <string name="userAppointments">User Appointments</string>
+    <string name="ongoing">Ongoing</string>
+    <string name="nameTitle">Name:</string>
+    <string name="appointmentDetails">Appointment Details</string>
 
     <string-array name="bloodGroupValues">
         <item>A+</item>

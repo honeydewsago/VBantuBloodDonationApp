@@ -183,7 +183,7 @@ public class MakeAppointment extends AppCompatActivity {
 
         //if all success
         //assign value and insert to database
-        Appointment appointment = new Appointment(mUserID, mOrganiserID, appointmentTime, appointmentDate, donationBefore, "0ml", 0);
+        Appointment appointment = new Appointment(mUserID, mOrganiserID, address, appointmentTime, appointmentDate, donationBefore, "0", "ongoing");
         mAppointmentViewModel.insertAppointment(appointment);
         Toast.makeText(this, "Appointment submitted successfully", Toast.LENGTH_SHORT).show();
         Intent i = new Intent(MakeAppointment.this,AppointmentSuccess.class);
