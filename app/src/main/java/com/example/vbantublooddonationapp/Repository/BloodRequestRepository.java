@@ -70,4 +70,49 @@ public class BloodRequestRepository {
             return requestList;
         }
     }
+
+    public List<BloodRequest> getRequestByOrganiserId(int id) {
+        List<BloodRequest> list = null;
+
+        try {
+            list = new BloodRequestRepository.getOrganiserRequestAsyncTask(mBloodRequestDao).execute(id).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    private static class getOrganiserRequestAsyncTask extends AsyncTask<Integer, Void, List<BloodRequest>> {
+        private BloodRequestDao mSyncTaskDao;
+
+        getOrganiserRequestAsyncTask(BloodRequestDao dao) {
+            mSyncTaskDao = dao;
+        }
+
+        @Override
+        protected List<BloodRequest> doInBackground(Integer...id) {
+            List<BloodRequest> requestList = mSyncTaskDao.getRequestByOrganiserId(id[0]);
+            return requestList;
+        }
+    }
+
+    public void update(BloodRequest bloodRequest) {
+        new BloodRequestRepository.updateAsyncTask(mBloodRequestDao).execute(bloodRequest);
+    }
+
+    private static class updateAsyncTask extends AsyncTask<BloodRequest, Void, Void> {
+        private BloodRequestDao mSyncTaskDao;
+
+        updateAsyncTask(BloodRequestDao dao) {
+            mSyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(BloodRequest...bloodRequests) {
+            mSyncTaskDao.update(bloodRequests[0]);
+            return null;
+        }
+    }
 }
