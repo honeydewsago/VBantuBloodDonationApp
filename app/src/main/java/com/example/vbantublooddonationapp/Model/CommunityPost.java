@@ -23,12 +23,15 @@ public class CommunityPost {
     @ColumnInfo(name = "postDateTime")
     public String postDateTime;
 
-    public CommunityPost(int postID, int userID, int organiserID, String postDesc, String postDateTime) {
-        this.postID = postID;
+    @ColumnInfo(name = "active")
+    public int active;
+
+    public CommunityPost(int userID, int organiserID, String postDesc, String postDateTime, int active) {
         this.userID = userID;
         this.organiserID = organiserID;
         this.postDesc = postDesc;
         this.postDateTime = postDateTime;
+        this.active = active;
     }
 
     public int getPostID() {

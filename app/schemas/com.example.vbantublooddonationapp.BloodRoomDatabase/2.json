@@ -1,8 +1,8 @@
 {
   "formatVersion": 1,
   "database": {
-    "version": 1,
-    "identityHash": "e4ab721f0daedc7d1f9912261bb381ec",
+    "version": 2,
+    "identityHash": "76a5ac984883b4cda28d003c1f7e8bc3",
     "entities": [
       {
         "tableName": "user_table",
@@ -260,7 +260,7 @@
       },
       {
         "tableName": "community_post_table",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`postID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `userID` INTEGER NOT NULL, `organiserID` INTEGER NOT NULL, `postDesc` TEXT, `postDateTime` TEXT, `active` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`postID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `userID` INTEGER NOT NULL, `organiserID` INTEGER NOT NULL, `postDesc` TEXT, `postDateTime` TEXT)",
         "fields": [
           {
             "fieldPath": "postID",
@@ -291,12 +291,6 @@
             "columnName": "postDateTime",
             "affinity": "TEXT",
             "notNull": false
-          },
-          {
-            "fieldPath": "active",
-            "columnName": "active",
-            "affinity": "INTEGER",
-            "notNull": true
           }
         ],
         "primaryKey": {
@@ -312,7 +306,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'e4ab721f0daedc7d1f9912261bb381ec')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '76a5ac984883b4cda28d003c1f7e8bc3')"
     ]
   }
 }
