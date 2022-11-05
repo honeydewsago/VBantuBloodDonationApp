@@ -163,12 +163,12 @@
 
     <string-array name="timeAvailable">
         <item>Select time</item>
-        <item>9.00 am</item>
-        <item>10.00 am</item>
-        <item>11.00 am</item>
-        <item>12.00 pm</item>
-        <item>1.00 pm</item>
-        <item>2.00 pm</item>
-        <item>3.00 pm</item>
+        <item>9:00 am</item>
+        <item>10:00 am</item>
+        <item>11:00 am</item>
+        <item>12:00 pm</item>
+        <item>1:00 pm</item>
+        <item>2:00 pm</item>
+        <item>3:00 pm</item>
     </string-array>
 </resources>
