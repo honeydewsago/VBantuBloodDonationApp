@@ -2,10 +2,12 @@ package com.example.vbantublooddonationapp;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -13,7 +15,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -23,7 +29,10 @@ import com.example.vbantublooddonationapp.ViewModel.OrganiserViewModel;
 import com.example.vbantublooddonationapp.ViewModel.UserViewModel;
 import com.example.vbantublooddonationapp.databinding.FragmentProfileBinding;
 
+
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 public class ProfileFragment extends Fragment {
     private final String USERID_KEY = "userid", USERTYPE_KEY = "usertype";
@@ -39,10 +48,13 @@ public class ProfileFragment extends Fragment {
     TextView mTvAppointmentHistory, mTvRewards;
     ImageView mIvQrCode;
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         profileBinding = FragmentProfileBinding.inflate(getLayoutInflater());
+
         return profileBinding.getRoot();
     }
 
@@ -50,6 +62,21 @@ public class ProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initUserViewModel();
+
+        toolbar = (Toolbar)getView().findViewById(R.id.fp_toolbar);
+        AppCompatActivity activity = (AppCompatActivity)getActivity();
+        activity.setSupportActionBar(toolbar);
+        activity.getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        profileBinding.fpBtnSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), SettingActivity.class));
+                getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            }
+        });
+
+
         mPreferences = getActivity().getSharedPreferences("com.example.vbantublooddonationapp",MODE_PRIVATE);
 
         if (mPreferences.contains(USERID_KEY) && mPreferences.contains(USERTYPE_KEY)) {
@@ -106,6 +133,8 @@ public class ProfileFragment extends Fragment {
         });
     }
 
+
+
     private void initUserViewModel(){
         mUserViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
@@ -117,4 +146,5 @@ public class ProfileFragment extends Fragment {
         };
         mUserViewModel.getAllUsers().observe(getViewLifecycleOwner(),userListObserver);
     }
+
 }
