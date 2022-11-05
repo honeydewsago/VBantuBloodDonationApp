@@ -24,6 +24,13 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".OrganiserSingleAppointmentDetails"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".UserAppointmentsActivity"
             android:exported="false" />
         <activity
@@ -38,9 +45,9 @@
         <activity
             android:name=".ProfileQr"
             android:exported="false" />
-        <!--<activity
+        <activity
             android:name=".ProfileQR"
-            android:exported="false" />-->
+            android:exported="false" />
         <activity
             android:name=".AppointmentSuccess"
             android:exported="false" />

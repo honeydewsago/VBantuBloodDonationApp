@@ -185,7 +185,7 @@ public class MakeAppointment extends AppCompatActivity {
 
         //if all success
         //assign value and insert to database
-        Appointment appointment = new Appointment(mUserID, mOrganiserID, appointmentTime, appointDate, donationBefore, "0", 0);
+        Appointment appointment = new Appointment(mUserID, mOrganiserID, address, appointmentTime, appointDate, donationBefore, "0", "ongoing");
         mAppointmentViewModel.insertAppointment(appointment);
         Toast.makeText(this, "Appointment submitted successfully", Toast.LENGTH_SHORT).show();
         Intent i = new Intent(MakeAppointment.this,AppointmentSuccess.class);
@@ -216,6 +216,7 @@ public class MakeAppointment extends AppCompatActivity {
                 dayFormat = Integer.toString(day);
             }
             appointDate = year + monthFormat + dayFormat;
+
             binding.amaTvPickDate.setText(date);
         };
 
