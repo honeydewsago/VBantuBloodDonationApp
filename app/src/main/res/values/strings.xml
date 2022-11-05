@@ -149,6 +149,13 @@
     <string name="ongoing">Ongoing</string>
     <string name="nameTitle">Name:</string>
     <string name="appointmentDetails">Appointment Details</string>
+    <string name="updateProfile">Update Profile</string>
+    <string name="changePassword">Change Password</string>
+    <string name="getHelp">Get Help</string>
+    <string name="customerSupport">Customer Support</string>
+    <string name="logout">Logout</string>
+    <string name="open">Open</string>
+
 
     <string-array name="bloodGroupValues">
         <item>A+</item>
