@@ -67,6 +67,16 @@ public class ProfileFragment extends Fragment {
         profileBinding.fpTvDOB.setText(user.dateOfBirth);
         profileBinding.fpTvBloodGroup.setText(user.bloodType);
 
+        if (mUserType.equals("organiser")) {
+            profileBinding.fpIvQrCode.setVisibility(View.GONE);
+            profileBinding.fpTvAppointmentHistory.setVisibility(View.GONE);
+            profileBinding.fpTvRewards.setVisibility(View.GONE);
+            profileBinding.fpTvUserAppointments.setVisibility(View.VISIBLE);
+        }
+        else {
+            profileBinding.fpTvUserAppointments.setVisibility(View.GONE);
+        }
+
         profileBinding.fpIvQrCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -85,6 +95,13 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), RewardsActivity.class));
+            }
+        });
+
+        profileBinding.fpTvUserAppointments.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), UserAppointmentsActivity.class));
             }
         });
     }
