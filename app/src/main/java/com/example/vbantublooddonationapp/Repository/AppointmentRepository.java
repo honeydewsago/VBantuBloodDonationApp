@@ -7,8 +7,10 @@ import androidx.lifecycle.LiveData;
 
 import com.example.vbantublooddonationapp.BloodRoomDatabase;
 import com.example.vbantublooddonationapp.DAO.AppointmentDao;
+import com.example.vbantublooddonationapp.DAO.BloodRequestDao;
 import com.example.vbantublooddonationapp.DAO.OrganiserDao;
 import com.example.vbantublooddonationapp.Model.Appointment;
+import com.example.vbantublooddonationapp.Model.BloodRequest;
 import com.example.vbantublooddonationapp.Model.Organiser;
 
 import java.util.List;
@@ -62,6 +64,24 @@ public class AppointmentRepository {
         protected LiveData<List<Appointment>> doInBackground(Integer...id) {
             LiveData<List<Appointment>> appointmentList = mSyncTaskDao.getAppointmentByOrganiserID(id[0]);
             return appointmentList;
+        }
+    }
+
+    public void update(Appointment appointment) {
+        new updateAsyncTask(mAppointmentDao).execute(appointment);
+    }
+
+    private static class updateAsyncTask extends AsyncTask<Appointment, Void, Void> {
+        private AppointmentDao mSyncTaskDao;
+
+        updateAsyncTask(AppointmentDao dao) {
+            mSyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(Appointment...appointments) {
+            mSyncTaskDao.update(appointments[0]);
+            return null;
         }
     }
 
