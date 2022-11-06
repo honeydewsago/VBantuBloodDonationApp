@@ -12,9 +12,11 @@ import android.view.MenuItem;
 
 import com.example.vbantublooddonationapp.Model.Appointment;
 import com.example.vbantublooddonationapp.Model.BloodRequest;
+import com.example.vbantublooddonationapp.Model.User;
 import com.example.vbantublooddonationapp.ViewModel.AppointmentViewModel;
 import com.example.vbantublooddonationapp.ViewModel.BloodRequestViewModel;
 import com.example.vbantublooddonationapp.ViewModel.OrganiserViewModel;
+import com.example.vbantublooddonationapp.ViewModel.UserViewModel;
 import com.example.vbantublooddonationapp.adapter.BloodTypeAdapter;
 import com.example.vbantublooddonationapp.databinding.ActivityOrganiserSingleAppointmentDetailsBinding;
 import com.example.vbantublooddonationapp.databinding.ActivitySingleBloodRequestBinding;
@@ -31,7 +33,9 @@ public class OrganiserSingleAppointmentDetails extends AppCompatActivity {
 
     private ActivityOrganiserSingleAppointmentDetailsBinding binding;
     private AppointmentViewModel mAppointmentViewModel;
+    private UserViewModel mUserViewModel;
     private Appointment mAppointment;
+    private User mUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +44,7 @@ public class OrganiserSingleAppointmentDetails extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         mAppointmentViewModel = new ViewModelProvider(this).get(AppointmentViewModel.class);
+        mUserViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
         Toolbar toolbar = binding.aosadToolbar;
 
@@ -61,8 +66,24 @@ public class OrganiserSingleAppointmentDetails extends AppCompatActivity {
         List<Appointment> appointmentList = mAppointmentViewModel.getAppointmentById(appointmentID);
         mAppointment = appointmentList.get(0);
 
+        List<User> userList = mUserViewModel.getUserById(mAppointment.getUserID());
+        mUser = userList.get(0);
+
+        binding.aosadTvFullName.setText(mUser.getFullName());
+        binding.aosadTvIcNo.setText(mUser.getIcNo());
+        binding.aosadTvContactNo.setText(mUser.getContact());
+        binding.aosadTvEmail.setText(mUser.getEmail());
+        binding.aosadTvAddress.setText(mAppointment.getAddress());
         binding.aosadTvDate.setText(getFullDate(mAppointment.getAppointmentDate()));
         binding.aosadTvTime.setText(mAppointment.getAppointmentTime());
+        binding.aosadTvBloodGroup.setText(mUser.getBloodType());
+
+        if (mUser.getGender().equals("female")) {
+            binding.aosadRbFemale.setChecked(true);
+        }
+        else {
+            binding.aosadRbMale.setChecked(true);
+        }
 
         if (mAppointment.getDonationBefore().equals("Yes")) {
             binding.aosadRbYes.setChecked(true);
