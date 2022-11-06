@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/appointmentbg"
+    tools:context=".ConfirmAppointmentActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/aca_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:actionBarSize"
+        android:background="@color/red"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/aca_tvConfirmAppointmentTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/confirmAppointment"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <ImageView
+        android:id="@+id/aca_ivAppointmentBox"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/aca_btnConfirmAppointment"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/aca_toolbar"
+        app:srcCompat="@drawable/white_transclucent_box" />
+
+    <TextView
+        android:id="@+id/aca_tvLocationTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/locationTitle"
+        android:textColor="@color/dark_grey"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/aca_ivAppointmentBox"
+        app:layout_constraintTop_toTopOf="@+id/aca_ivAppointmentBox" />
+
+    <TextView
+        android:id="@+id/aca_tvLocation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/location"
+        android:textColor="@color/dark_grey"
+        android:textSize="16sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/aca_tvLocationTitle"
+        app:layout_constraintEnd_toEndOf="@+id/aca_ivAppointmentBox"
+        app:layout_constraintStart_toEndOf="@+id/aca_tvLocationTitle" />
+
+    <TextView
+        android:id="@+id/aca_tvDonorNameTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/donorNameTitle"
+        android:textColor="@color/dark_grey"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/aca_tvLocationTitle"
+        app:layout_constraintTop_toBottomOf="@+id/aca_tvLocation" />
+
+    <TextView
+        android:id="@+id/aca_tvDonorName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/donor"
+        android:textColor="@color/dark_grey"
+        android:textSize="16sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/aca_tvDonorNameTitle"
+        app:layout_constraintEnd_toEndOf="@+id/aca_tvLocation"
+        app:layout_constraintStart_toEndOf="@+id/aca_tvDonorNameTitle" />
+
+    <TextView
+        android:id="@+id/aca_tvBloodAmtTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/bloodAmountTitle"
+        android:textColor="@color/dark_grey"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/aca_tvDonorNameTitle"
+        app:layout_constraintTop_toBottomOf="@+id/aca_tvDonorName" />
+
+    <TextView
+        android:id="@+id/aca_tvDateTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/dateTitle"
+        android:textColor="@color/dark_grey"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/aca_tvBloodAmtTitle"
+        app:layout_constraintTop_toBottomOf="@+id/aca_spinnerBloodAmt" />
+
+    <TextView
+        android:id="@+id/aca_tvDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/dateFormat"
+        android:textColor="@color/dark_grey"
+        android:textSize="16sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/aca_tvDateTitle"
+        app:layout_constraintEnd_toEndOf="@+id/aca_spinnerBloodAmt"
+        app:layout_constraintStart_toEndOf="@+id/aca_tvDateTitle" />
+
+    <TextView
+        android:id="@+id/aca_tvTimeTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/timeTitle"
+        android:textColor="@color/dark_grey"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/aca_tvDateTitle"
+        app:layout_constraintTop_toBottomOf="@+id/aca_tvDate" />
+
+    <TextView
+        android:id="@+id/aca_tvTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/timeFormat"
+        android:textColor="@color/dark_grey"
+        android:textSize="16sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/aca_tvTimeTitle"
+        app:layout_constraintStart_toEndOf="@+id/aca_tvTimeTitle" />
+
+    <Spinner
+        android:id="@+id/aca_spinnerBloodAmt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:entries="@array/donationBloodAmount"
+        app:layout_constraintBaseline_toBaselineOf="@+id/aca_tvBloodAmtTitle"
+        app:layout_constraintEnd_toEndOf="@+id/aca_tvDonorName"
+        app:layout_constraintStart_toEndOf="@+id/aca_tvBloodAmtTitle" />
+
+    <Button
+        android:id="@+id/aca_btnConfirmAppointment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="220dp"
+        android:text="@string/confirmAppointment"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
