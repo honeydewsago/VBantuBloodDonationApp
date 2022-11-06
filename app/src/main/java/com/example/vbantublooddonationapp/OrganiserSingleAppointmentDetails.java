@@ -86,7 +86,7 @@ public class OrganiserSingleAppointmentDetails extends AppCompatActivity {
             public void onClick(View view) {
                 Intent scanCode = new Intent(OrganiserSingleAppointmentDetails.this, ScanQRCode.class);
                 scanCode.putExtra("currentAppointmentID", mAppointment.getAppointmentID());
-                scanCode.putExtra("currentUserID", mUser.getUserID());
+                scanCode.putExtra("appointmentUserID", mUser.getUserID());
                 startActivity(scanCode);
             }
         });

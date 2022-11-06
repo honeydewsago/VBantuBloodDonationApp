@@ -182,6 +182,8 @@
     <string name="locationTitle">Location:</string>
     <string name="donorNameTitle">Donor Name:</string>
     <string name="bloodAmountTitle">Blood Amount:</string>
+    <string name="selectAmount">Select amount</string>
+    <string name="bloodAmountRequiredToast">Blood amount is required!</string>
 
     <string-array name="bloodGroupValues">
         <item>A+</item>

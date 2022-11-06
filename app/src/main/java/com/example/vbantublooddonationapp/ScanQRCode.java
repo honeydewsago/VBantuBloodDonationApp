@@ -30,7 +30,7 @@ public class ScanQRCode extends AppCompatActivity {
     private CodeScanner mCodeScanner;
 
     private ActivityScanQrcodeBinding binding;
-    private int appointmentID, userID;
+    private int appointmentID, appointmentUserID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +47,7 @@ public class ScanQRCode extends AppCompatActivity {
 
         Intent i = getIntent();
         appointmentID = i.getIntExtra("currentAppointmentID", 1);
-        userID = i.getIntExtra("currentUserID", 1);
+        appointmentUserID = i.getIntExtra("appointmentUserID", 1);
 
         setupCameraPermissions();
         scanCode();
@@ -69,13 +69,14 @@ public class ScanQRCode extends AppCompatActivity {
 
                         builder.setCancelable(false);
 
-                        if (Integer.parseInt(result.getText().trim()) == userID) {
+                        if (Integer.parseInt(result.getText().trim()) == appointmentUserID) {
                             builder.setTitle("User Identity Verified!")
                                     .setMessage("Press OK to continue")
                                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int id) {
                                             Intent i = new Intent(ScanQRCode.this, ConfirmAppointmentActivity.class);
                                             i.putExtra("currentAppointmentID", appointmentID);
+                                            i.putExtra("appointmentUserID", appointmentUserID);
                                             startActivity(i);
                                         }
                                     });
