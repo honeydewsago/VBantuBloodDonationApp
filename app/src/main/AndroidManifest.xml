@@ -18,6 +18,13 @@
         android:theme="@style/Theme.VBantuBloodDonationApp"
         tools:targetApi="31">
         <activity
+            android:name=".ConfirmAppointmentActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ScanQRCode"
             android:exported="false">
             <meta-data

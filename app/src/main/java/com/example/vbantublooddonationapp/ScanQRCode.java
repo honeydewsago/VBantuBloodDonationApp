@@ -1,11 +1,13 @@
 package com.example.vbantublooddonationapp;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -25,9 +27,10 @@ import java.util.Objects;
 public class ScanQRCode extends AppCompatActivity {
 
     private static final int CAMERA_REQUEST_CODE = 101;
-    private ActivityScanQrcodeBinding binding;
-
     private CodeScanner mCodeScanner;
+
+    private ActivityScanQrcodeBinding binding;
+    private int appointmentID, userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,10 @@ public class ScanQRCode extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbar.setNavigationIcon(ContextCompat.getDrawable(this, R.drawable.ic_arrow_back_ios));
+
+        Intent i = getIntent();
+        appointmentID = i.getIntExtra("currentAppointmentID", 1);
+        userID = i.getIntExtra("currentUserID", 1);
 
         setupCameraPermissions();
         scanCode();
@@ -57,6 +64,34 @@ public class ScanQRCode extends AppCompatActivity {
                     @Override
                     public void run() {
                         Toast.makeText(ScanQRCode.this, result.getText(), Toast.LENGTH_SHORT).show();
+
+                        AlertDialog.Builder builder = new AlertDialog.Builder(ScanQRCode.this);
+
+                        builder.setCancelable(false);
+
+                        if (Integer.parseInt(result.getText().trim()) == userID) {
+                            builder.setTitle("User Identity Verified!")
+                                    .setMessage("Press OK to continue")
+                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            Intent i = new Intent(ScanQRCode.this, ConfirmAppointmentActivity.class);
+                                            i.putExtra("currentAppointmentID", appointmentID);
+                                            startActivity(i);
+                                        }
+                                    });
+                        }
+                        else {
+                            builder.setTitle("Invalid user identity!")
+                                    .setMessage("Press try again")
+                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            dialog.cancel();
+                                        }
+                                    });
+                        }
+
+                        AlertDialog alert = builder.create();
+                        alert.show();
                     }
                 });
             }
