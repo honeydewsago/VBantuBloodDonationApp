@@ -23,4 +23,7 @@ public interface AppointmentDao {
 
     @Query("Select * from appointment_table where organiserID=(:id) ORDER By appointmentID DESC")
     LiveData<List<Appointment>> getAppointmentByOrganiserID(int id);
+
+    @Query("Select * from appointment_table where appointmentID=(:id)")
+    List<Appointment> getAppointmentById(int id);
 }

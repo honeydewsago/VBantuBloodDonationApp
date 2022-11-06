@@ -73,7 +73,7 @@ public class UserAppointmentAdapter extends RecyclerView.Adapter<UserAppointment
 
         holder.mTvName.setText(getUserFullname(appointment.getUserID()));
         holder.mTvDate.setText(getFullDate(appointment.getAppointmentDate()));
-        holder.mTvTime.setText(appointment.appointmentTime);
+        holder.mTvTime.setText(appointment.getAppointmentTime());
     }
 
     @Override
