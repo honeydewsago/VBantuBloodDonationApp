@@ -113,6 +113,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/_1st"
                 android:textColor="@color/black"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@id/fc_ivFirstPlaceNo"
                 app:layout_constraintEnd_toEndOf="@id/fc_ivFirstPlaceNo"
                 app:layout_constraintStart_toStartOf="@id/fc_ivFirstPlaceNo"
@@ -124,7 +125,7 @@
                 android:layout_height="30dp"
                 android:layout_marginStart="10dp"
                 android:contentDescription="@string/profilePicture"
-                android:src="@color/white"
+                android:src="@drawable/avatar"
                 app:layout_constraintBottom_toBottomOf="@id/fc_ivFirstPlaceBackground"
                 app:layout_constraintStart_toEndOf="@id/fc_ivFirstPlaceNoLine"
                 app:layout_constraintTop_toTopOf="@id/fc_ivFirstPlaceBackground" />
@@ -190,6 +191,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/_2nd"
                 android:textColor="@color/black"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@id/fc_ivSecondPlaceNo"
                 app:layout_constraintEnd_toEndOf="@id/fc_ivSecondPlaceNo"
                 app:layout_constraintStart_toStartOf="@id/fc_ivSecondPlaceNo"
@@ -201,7 +203,7 @@
                 android:layout_height="30dp"
                 android:layout_marginStart="10dp"
                 android:contentDescription="@string/profilePicture"
-                android:src="@color/white"
+                android:src="@drawable/avatar"
                 app:layout_constraintBottom_toBottomOf="@id/fc_ivSecondPlaceBackground"
                 app:layout_constraintStart_toEndOf="@id/fc_ivSecondPlaceNoLine"
                 app:layout_constraintTop_toTopOf="@id/fc_ivSecondPlaceBackground" />
@@ -267,6 +269,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/_3rd"
                 android:textColor="@color/black"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@id/fc_ivThirdPlaceNo"
                 app:layout_constraintEnd_toEndOf="@id/fc_ivThirdPlaceNo"
                 app:layout_constraintStart_toStartOf="@id/fc_ivThirdPlaceNo"
@@ -278,7 +281,7 @@
                 android:layout_height="30dp"
                 android:layout_marginStart="10dp"
                 android:contentDescription="@string/profilePicture"
-                android:src="@color/white"
+                android:src="@drawable/avatar"
                 app:layout_constraintBottom_toBottomOf="@id/fc_ivThirdPlaceBackground"
                 app:layout_constraintStart_toEndOf="@id/fc_ivThirdPlaceNoLine"
                 app:layout_constraintTop_toTopOf="@id/fc_ivThirdPlaceBackground" />
@@ -320,6 +323,7 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
             <ImageView
+                android:id="@+id/fc_ivViewFullRanking"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_arrow_forward_ios_black"
@@ -328,7 +332,6 @@
                 app:layout_constraintTop_toTopOf="@id/fc_tvViewFullRanking" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
     </androidx.cardview.widget.CardView>
 

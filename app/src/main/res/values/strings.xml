@@ -176,6 +176,8 @@
     <string name="thirdPlaceNo">Third Place No</string>
     <string name="thirdPlaceBackground">Third Place Background</string>
     <string name="viewFullRanking">View Full Ranking</string>
+    <string name="placeNo">Place No</string>
+    <string name="donorNo">1</string>
 
     <string-array name="bloodGroupValues">
         <item>A+</item>
