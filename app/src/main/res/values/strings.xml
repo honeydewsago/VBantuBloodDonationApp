@@ -188,6 +188,7 @@
     <string name="cameraPermissionRequiredToast">Camera permission is required to scan QR Code</string>
     <string name="userAppointmentConfirmedToast">User appointment confirmed!</string>
     <string name="bloodTypeRequiredToast">Blood type is required!</string>
+    <string name="bloodDonationAmount">Blood Donation Amount:</string>
 
     <string-array name="bloodGroupValues">
         <item>Select blood type</item>

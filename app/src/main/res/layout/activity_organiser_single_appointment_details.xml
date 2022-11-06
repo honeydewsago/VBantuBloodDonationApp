@@ -311,13 +311,36 @@
             tools:layout_editor_absoluteY="618dp" />
     </RadioGroup>
 
+    <TextView
+        android:id="@+id/aosad_tvDonationAmountTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/bloodDonationAmount"
+        android:textColor="@color/dark_grey"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/aosad_tvDonationBeforeTitle"
+        app:layout_constraintTop_toBottomOf="@+id/aosad_rgDonationBefore" />
+
+    <TextView
+        android:id="@+id/aosad_tvDonationAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/bloodAmount"
+        android:textColor="@color/dark_grey"
+        android:textSize="14sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/aosad_tvDonationAmountTitle"
+        app:layout_constraintStart_toEndOf="@+id/aosad_tvDonationAmountTitle" />
+
     <Button
         android:id="@+id/aosad_btnScanQR"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="80dp"
         android:text="@string/scanQRCode"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"

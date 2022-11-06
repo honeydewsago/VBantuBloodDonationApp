@@ -66,6 +66,7 @@ public class OrganiserSingleAppointmentDetails extends AppCompatActivity {
         binding.aosadTvDate.setText(getFullDate(mAppointment.getAppointmentDate()));
         binding.aosadTvTime.setText(mAppointment.getAppointmentTime());
         binding.aosadTvBloodGroup.setText(mUser.getBloodType());
+        binding.aosadTvDonationAmount.setText(mAppointment.getBloodAmt());
 
         if (mUser.getGender().equals("female")) {
             binding.aosadRbFemale.setChecked(true);
@@ -79,6 +80,10 @@ public class OrganiserSingleAppointmentDetails extends AppCompatActivity {
         }
         else {
             binding.aosadRbNo.setChecked(true);
+        }
+
+        if (mAppointment.getStatus().equals("Completed")) {
+            binding.aosadBtnScanQR.setEnabled(false);
         }
 
         binding.aosadBtnScanQR.setOnClickListener(new View.OnClickListener() {
