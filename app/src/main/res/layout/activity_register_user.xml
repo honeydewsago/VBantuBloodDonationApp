@@ -67,13 +67,15 @@
 
         <TextView
             android:id="@+id/aru_tvSelectDateOfBirth"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:layout_marginEnd="24dp"
             android:drawableEnd="@drawable/ic_arrow_down_24"
-            android:text="@string/clickToSelect"
             android:onClick="tvSelectDateOfBirth_clicked"
+            android:text="@string/clickToSelect"
             android:textColor="@color/dark_grey"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/aru_tvDateOfBirth"
             app:layout_constraintTop_toTopOf="@+id/aru_tvDateOfBirth" />
 
@@ -92,9 +94,10 @@
             android:id="@+id/aru_spinnerBloodType"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
             android:entries="@array/bloodGroupValues"
             app:layout_constraintEnd_toEndOf="@+id/aru_tvSelectDateOfBirth"
-            app:layout_constraintStart_toStartOf="@+id/aru_tvSelectDateOfBirth"
+            app:layout_constraintStart_toEndOf="@+id/aru_tvSelectBloodType"
             app:layout_constraintTop_toTopOf="@+id/aru_tvSelectBloodType" />
 
         <RadioGroup

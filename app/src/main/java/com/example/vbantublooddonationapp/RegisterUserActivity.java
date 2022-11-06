@@ -53,9 +53,16 @@ public class RegisterUserActivity extends AppCompatActivity {
         String confirmPassword = binding.aruEtConfirmPassword.getText().toString().trim();
 
         //validate to check if date of birth is empty
-        if (dateOfBirth.equals(R.string.clickToSelect)) {
+        if (dateOfBirth.equals("Click To Select")) {
             Toast.makeText(this, R.string.dateOfBirthRequiredToast, Toast.LENGTH_SHORT).show();
             binding.aruTvSelectDateOfBirth.requestFocus();
+            return;
+        }
+
+        //validate to check if blood type is empty
+        if (bloodType.equals("Select blood type")) {
+            Toast.makeText(this, R.string.bloodTypeRequiredToast, Toast.LENGTH_SHORT).show();
+            binding.aruSpinnerBloodType.requestFocus();
             return;
         }
 
