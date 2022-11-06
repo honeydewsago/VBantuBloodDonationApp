@@ -184,6 +184,9 @@
     <string name="bloodAmountTitle">Blood Amount:</string>
     <string name="selectAmount">Select amount</string>
     <string name="bloodAmountRequiredToast">Blood amount is required!</string>
+    <string name="cameraPermissionGrantedToast">Camera permission granted</string>
+    <string name="cameraPermissionRequiredToast">Camera permission is required to scan QR Code</string>
+    <string name="userAppointmentConfirmedToast">User appointment confirmed!</string>
 
     <string-array name="bloodGroupValues">
         <item>A+</item>

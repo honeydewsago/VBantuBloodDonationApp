@@ -99,7 +99,13 @@ public class ConfirmAppointmentActivity extends AppCompatActivity {
         }
 
         mAppointment.setBloodAmt(bloodAmt);
+        mAppointment.setStatus("Completed");
         mAppointmentViewModel.updateAppointment(mAppointment);
+
+        Toast.makeText(this, R.string.userAppointmentConfirmedToast, Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(ConfirmAppointmentActivity.this, HomeActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 
     public String getFullDate(String dateTime) {

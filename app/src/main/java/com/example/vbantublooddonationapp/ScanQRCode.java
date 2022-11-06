@@ -63,8 +63,6 @@ public class ScanQRCode extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(ScanQRCode.this, result.getText(), Toast.LENGTH_SHORT).show();
-
                         AlertDialog.Builder builder = new AlertDialog.Builder(ScanQRCode.this);
 
                         builder.setCancelable(false);
@@ -129,9 +127,9 @@ public class ScanQRCode extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == CAMERA_REQUEST_CODE) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "Camera permission granted", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, R.string.cameraPermissionGrantedToast, Toast.LENGTH_LONG).show();
             } else {
-                Toast.makeText(this, "Camera permission is required to scan QR Code", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, R.string.cameraPermissionRequiredToast, Toast.LENGTH_LONG).show();
             }
         }
     }
