@@ -176,6 +176,8 @@
     <string name="thirdPlaceNo">Third Place No</string>
     <string name="thirdPlaceBackground">Third Place Background</string>
     <string name="viewFullRanking">View Full Ranking</string>
+    <string name="scanUserQRCode">Scan the user\'s QR code</string>
+    <string name="placeQRinBox">Place QR code within the box above</string>
 
     <string-array name="bloodGroupValues">
         <item>A+</item>

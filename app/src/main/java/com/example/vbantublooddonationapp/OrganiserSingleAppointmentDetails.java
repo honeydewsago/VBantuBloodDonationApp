@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.vbantublooddonationapp.Model.Appointment;
 import com.example.vbantublooddonationapp.Model.BloodRequest;
@@ -91,6 +92,13 @@ public class OrganiserSingleAppointmentDetails extends AppCompatActivity {
         else {
             binding.aosadRbNo.setChecked(true);
         }
+
+        binding.aosadBtnScanQR.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(OrganiserSingleAppointmentDetails.this, ScanQRCode.class));
+            }
+        });
     }
 
     public String getFullDate(String dateTime) {
