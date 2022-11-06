@@ -28,8 +28,8 @@ public class AppointmentRepository {
         new AppointmentRepository.insertAsyncTask(mAppointmentDao).execute(appointment);
     }
 
-    public List<Appointment> getRequestByUserId(int id) {
-        List<Appointment> list =null;
+    public LiveData<List<Appointment>> getRequestByUserId(int id) {
+        LiveData<List<Appointment>> list =null;
 
         try{
             list = new AppointmentRepository.getAppointmentAsyncTask(mAppointmentDao).execute(id).get();

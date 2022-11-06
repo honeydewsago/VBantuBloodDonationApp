@@ -33,7 +33,7 @@ public class AppointmentViewModel extends AndroidViewModel {
         mRepository.update(appointment);
     }
 
-    public List<Appointment> getRequestByUserId(int id){
+    public LiveData<List<Appointment>> getRequestByUserId(int id){
         return mRepository.getRequestByUserId(id);
     }
 }

@@ -13,6 +13,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -31,8 +33,8 @@ public class AppointmentHistoryActivity extends AppCompatActivity {
     private int mUserID = 1;
     private String mUserType = "user";
     private ActivityAppointmentHistoryBinding binding;
-    private AppointmentHistoryAdapter mAppointmentHistoryAdapter;
-    private AppointmentViewModel mAppointmentHistoryViewModel;
+    private AppointmentHistoryAdapter mAppointmentAdapter;
+    private AppointmentViewModel mAppointmentViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +42,6 @@ public class AppointmentHistoryActivity extends AppCompatActivity {
         binding = ActivityAppointmentHistoryBinding.inflate(getLayoutInflater());
         View v = binding.getRoot();
         setContentView(v);
-
-        mAppointmentHistoryViewModel = new ViewModelProvider(this).get(AppointmentViewModel.class);
 
         toolbar = binding.ahToolbar;
         setSupportActionBar(toolbar);
@@ -56,13 +56,27 @@ public class AppointmentHistoryActivity extends AppCompatActivity {
             mUserType = mPreferences.getString(USERTYPE_KEY, "user");
         }
 
-        List<Appointment> mAppointmentHistoryList = mAppointmentHistoryViewModel.getRequestByUserId(mUserID);
-        mAppointmentHistoryAdapter =  new AppointmentHistoryAdapter(this);
-        mAppointmentHistoryAdapter.setAppointmentHistoryList(mAppointmentHistoryList);
-        binding.aahRvAppointmentHistory.setAdapter(mAppointmentHistoryAdapter);
+        mAppointmentAdapter =  new AppointmentHistoryAdapter(this);
+        binding.aahRvAppointmentHistory.setAdapter(mAppointmentAdapter);
 
         binding.aahRvAppointmentHistory.setLayoutManager(new LinearLayoutManager(this));
 
+        initAppointmentViewModel();
+    }
+
+    private void initAppointmentViewModel() {
+        //initialize the view model from the BloodRequestViewModel
+        mAppointmentViewModel = new ViewModelProvider(this).get(AppointmentViewModel.class);
+
+        //initialize the observer to observe the Live Data
+        final Observer<List<Appointment>> appointmentListObserver = new Observer<List<Appointment>>() {
+            @Override
+            public void onChanged(List<Appointment> appointments) {
+                mAppointmentAdapter.setAppointmentList(appointments);
+            }
+        };
+
+        mAppointmentViewModel.getRequestByUserId(mUserID).observe(this,appointmentListObserver);
     }
 
 

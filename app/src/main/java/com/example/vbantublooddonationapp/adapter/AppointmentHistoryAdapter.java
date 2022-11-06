@@ -34,7 +34,7 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
     }
 
 
-    public void setAppointmentHistoryList(List<Appointment> appointmentHistoryList){mAppointmentHistoryList = appointmentHistoryList;}
+    public void setAppointmentList(List<Appointment> appointmentHistoryList){mAppointmentHistoryList = appointmentHistoryList;}
 
     public void setOrganiserList(List<Organiser> organiserList){mOrganiserList = organiserList;}
 
@@ -48,7 +48,7 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
     @Override
     public void onBindViewHolder(@NonNull AppointmentHistoryHolder holder, int position) {
         Appointment appointment = mAppointmentHistoryList.get(position);
-        int appointmentStatus;
+        String appointmentStatus;
         String bloodAmount;
 
         holder.mTvBDC.setText(getOrganiserName(appointment.getOrganiserID()));
@@ -56,7 +56,7 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
         holder.mTvAppointmentTime.setText(appointment.getAppointmentTime());
 
         appointmentStatus = appointment.getStatus();
-        if(appointmentStatus==0){
+        if(appointmentStatus.equals("Ongoing")){
             holder.mTvBloodAmount.setVisibility(View.GONE);
             holder.mTvStatusOngoing.setVisibility(View.VISIBLE);
             holder.mTvStatusComplete.setVisibility(View.GONE);
