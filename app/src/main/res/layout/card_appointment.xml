@@ -1,154 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/appointment_box"
-        tools:layout_editor_absoluteX="3dp"
-        tools:layout_editor_absoluteY="0dp">
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="16dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="3dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/imageView6"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="36dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/appointment_calender" />
+            android:layout_height="match_parent"
+            android:background="@drawable/appointment_box"
+            tools:layout_editor_absoluteX="3dp"
+            tools:layout_editor_absoluteY="0dp">
 
-        <TextView
-            android:id="@+id/ca_status_complete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/status_complete"
-            android:paddingStart="5dp"
-            android:paddingTop="1dp"
-            android:paddingEnd="5dp"
-            android:paddingBottom="1dp"
-            android:text="Complete"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/ca_status_pending"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/status_pending"
-            android:paddingStart="10dp"
-            android:paddingTop="1dp"
-            android:paddingEnd="10dp"
-            android:paddingBottom="1dp"
-            android:text="Pending"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="70dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="36dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_calendar_24" />
 
-        <TextView
-            android:id="@+id/bdc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
-            android:text="Blood Donation Center: "
-            android:textColor="@color/black"
-            app:layout_constraintStart_toEndOf="@+id/imageView6"
-            app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/ca_tvStatus_Complete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/status_complete"
+                android:paddingStart="5dp"
+                android:paddingTop="1dp"
+                android:paddingEnd="5dp"
+                android:paddingBottom="1dp"
+                android:text="Complete"
+                android:textColor="@color/black"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/bdc"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/ca_bdc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:text="Penang Adventist Hospital"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/imageView6"
-            app:layout_constraintTop_toBottomOf="@+id/bdc" />
+            <TextView
+                android:id="@+id/ca_tvStatus_Ongoing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/status_pending"
+                android:paddingStart="10dp"
+                android:paddingTop="1dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="1dp"
+                android:text="Ongoing"
+                android:textColor="@color/black"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/bdc"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/appointment_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:text="Appointment Date: "
-            android:textColor="@color/black"
-            app:layout_constraintStart_toEndOf="@+id/imageView6"
-            app:layout_constraintTop_toBottomOf="@+id/ca_bdc" />
+            <TextView
+                android:id="@+id/bdc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:text="Blood Donation Center: "
+                android:textColor="@color/black"
+                app:layout_constraintStart_toEndOf="@+id/imageView6"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/appointment_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:text="Appointment Time: "
-            android:textColor="@color/black"
-            app:layout_constraintStart_toEndOf="@+id/imageView6"
-            app:layout_constraintTop_toBottomOf="@+id/appointment_date" />
+            <TextView
+                android:id="@+id/ca_tvBDC"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/imageView6"
+                app:layout_constraintTop_toBottomOf="@+id/bdc" />
 
-        <TextView
-            android:id="@+id/ca_appointment_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="TextView"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/appointment_date"
-            app:layout_constraintTop_toBottomOf="@+id/ca_bdc" />
+            <TextView
+                android:id="@+id/appointment_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:text="Appointment Date: "
+                android:textColor="@color/black"
+                app:layout_constraintStart_toEndOf="@+id/imageView6"
+                app:layout_constraintTop_toBottomOf="@+id/ca_tvBDC" />
 
-        <TextView
-            android:id="@+id/ca_appointment_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/appointment_time"
-            app:layout_constraintTop_toBottomOf="@+id/ca_appointment_date" />
+            <TextView
+                android:id="@+id/appointment_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:text="Appointment Time: "
+                android:textColor="@color/black"
+                app:layout_constraintStart_toEndOf="@+id/imageView6"
+                app:layout_constraintTop_toBottomOf="@+id/appointment_date" />
 
-        <TextView
-            android:id="@+id/ca_appointment_details"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="16dp"
-            android:drawableEnd="@drawable/ic_arrow_grey"
-            android:text="Appointment Details "
-            android:textColor="@color/medium_grey"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ca_appointment_time" />
+            <TextView
+                android:id="@+id/ca_tvAppointment_Date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/appointment_date"
+                app:layout_constraintTop_toBottomOf="@+id/ca_tvBDC" />
 
-        <TextView
-            android:id="@+id/ca_blood_amount"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginBottom="3dp"
-            android:background="@drawable/blood_amount"
-            android:gravity="center_horizontal"
-            android:paddingTop="1dp"
-            android:paddingBottom="1dp"
-            android:text="Blood amount: 300ml"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/ca_appointment_details"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appointment_time" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/ca_tvAppointment_Time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/appointment_time"
+                app:layout_constraintTop_toBottomOf="@+id/ca_tvAppointment_Date" />
 
-</androidx.cardview.widget.CardView>
+            <TextView
+                android:id="@+id/ca_tvAppointment_Details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="16dp"
+                android:drawableEnd="@drawable/ic_arrow_grey"
+                android:text="Appointment Details "
+                android:textColor="@color/medium_grey"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ca_tvAppointment_Time" />
+
+            <TextView
+                android:id="@+id/ca_tvBlood_Amount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="3dp"
+                android:background="@drawable/blood_amount"
+                android:gravity="center_horizontal"
+                android:paddingTop="1dp"
+                android:paddingBottom="1dp"
+                android:textColor="@color/white"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/ca_tvAppointment_Details"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/appointment_time" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

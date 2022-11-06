@@ -1,49 +1,48 @@
 package com.example.vbantublooddonationapp;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.graphics.PorterDuff;
-import android.os.Bundle;
-import android.util.AttributeSet;
-import android.view.MenuItem;
-import android.view.View;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
+
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.view.MenuItem;
 
 import com.example.vbantublooddonationapp.Model.Appointment;
+import com.example.vbantublooddonationapp.Model.BloodRequest;
 import com.example.vbantublooddonationapp.ViewModel.AppointmentViewModel;
-import com.example.vbantublooddonationapp.adapter.AppointmentHistoryAdapter;
-import com.example.vbantublooddonationapp.databinding.ActivityAppointmentHistoryBinding;
+import com.example.vbantublooddonationapp.ViewModel.BloodRequestViewModel;
+import com.example.vbantublooddonationapp.adapter.LocationAdapter;
+import com.example.vbantublooddonationapp.adapter.UrgentRequestAdapter;
+import com.example.vbantublooddonationapp.adapter.UserAppointmentAdapter;
+import com.example.vbantublooddonationapp.databinding.ActivityBloodRequestHistoryBinding;
+import com.example.vbantublooddonationapp.databinding.ActivityUserAppointmentsBinding;
 
 import java.util.List;
 import java.util.Objects;
 
-public class AppointmentHistoryActivity extends AppCompatActivity {
-    private Toolbar toolbar;
+public class UserAppointmentsActivity extends AppCompatActivity {
+
     private final String USERID_KEY = "userid", USERTYPE_KEY = "usertype";
     private SharedPreferences mPreferences;
     private int mUserID = 1;
     private String mUserType = "user";
-    private ActivityAppointmentHistoryBinding binding;
-    private AppointmentHistoryAdapter mAppointmentAdapter;
+
+    private ActivityUserAppointmentsBinding binding;
     private AppointmentViewModel mAppointmentViewModel;
+    private UserAppointmentAdapter mUserAppointmentAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityAppointmentHistoryBinding.inflate(getLayoutInflater());
-        View v = binding.getRoot();
-        setContentView(v);
+        binding = ActivityUserAppointmentsBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        toolbar = binding.ahToolbar;
+        Toolbar toolbar = binding.auaToolbar;
+
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -56,10 +55,11 @@ public class AppointmentHistoryActivity extends AppCompatActivity {
             mUserType = mPreferences.getString(USERTYPE_KEY, "user");
         }
 
-        mAppointmentAdapter =  new AppointmentHistoryAdapter(this);
-        binding.aahRvAppointmentHistory.setAdapter(mAppointmentAdapter);
+        mUserAppointmentAdapter = new UserAppointmentAdapter(this);
+        binding.auaRvAppointments.setAdapter(mUserAppointmentAdapter);
 
-        binding.aahRvAppointmentHistory.setLayoutManager(new LinearLayoutManager(this));
+        //set the layout manager
+        binding.auaRvAppointments.setLayoutManager(new GridLayoutManager(this,getResources().getInteger(R.integer.grid_column_count)));
 
         initAppointmentViewModel();
     }
@@ -72,18 +72,17 @@ public class AppointmentHistoryActivity extends AppCompatActivity {
         final Observer<List<Appointment>> appointmentListObserver = new Observer<List<Appointment>>() {
             @Override
             public void onChanged(List<Appointment> appointments) {
-                mAppointmentAdapter.setAppointmentList(appointments);
+                mUserAppointmentAdapter.setAppointmentList(appointments);
             }
         };
 
-        mAppointmentViewModel.getRequestByUserId(mUserID).observe(this,appointmentListObserver);
+        mAppointmentViewModel.getAppointmentByOrganiserID(mUserID).observe(this,appointmentListObserver);
     }
-
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
+            //close the current activity
             finish();
             return true;
         }

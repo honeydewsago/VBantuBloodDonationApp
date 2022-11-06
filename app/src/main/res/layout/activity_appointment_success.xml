@@ -29,6 +29,7 @@
 
     <Button
         android:id="@+id/aas_btnClose"
+        android:layout_margin="8dp"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_gravity="end"
@@ -42,7 +43,7 @@
         android:layout_height="220dp"
         app:lottie_autoPlay="true"
         app:lottie_loop="false"
-        app:lottie_rawRes="@raw/check_mark_success"
+        app:lottie_rawRes="@raw/success_icon_animated"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/aas_toolbar"
         app:layout_constraintStart_toStartOf="parent"
