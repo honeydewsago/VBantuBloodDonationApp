@@ -8,6 +8,8 @@ import androidx.lifecycle.AndroidViewModel;
 import com.example.vbantublooddonationapp.Model.Appointment;
 import com.example.vbantublooddonationapp.Repository.AppointmentRepository;
 
+import java.util.List;
+
 public class AppointmentViewModel extends AndroidViewModel {
 
     private AppointmentRepository mRepository;
@@ -18,5 +20,9 @@ public class AppointmentViewModel extends AndroidViewModel {
 
     public void insertAppointment(Appointment appointment){
         mRepository.insert(appointment);
+    }
+
+    public List<Appointment> getRequestByUserId(int id){
+        return mRepository.getRequestByUserId(id);
     }
 }
