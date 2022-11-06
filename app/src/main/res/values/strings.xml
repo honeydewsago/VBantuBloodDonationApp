@@ -155,6 +155,9 @@
     <string name="customerSupport">Customer Support</string>
     <string name="logout">Logout</string>
     <string name="open">Open</string>
+    <string name="icNoFormat">000000-00-0000</string>
+    <string name="haveADonationBefore">Have A Donation Before?</string>
+    <string name="scanQRCode">Scan QR Code</string>
     <string name="leaderboard">Leaderboard</string>
     <string name="yearlyTopDonor">Yearly Top Donor</string>
     <string name="topDonorUsername">Top Donor Username</string>
@@ -173,7 +176,6 @@
     <string name="thirdPlaceNo">Third Place No</string>
     <string name="thirdPlaceBackground">Third Place Background</string>
     <string name="viewFullRanking">View Full Ranking</string>
-
 
     <string-array name="bloodGroupValues">
         <item>A+</item>
