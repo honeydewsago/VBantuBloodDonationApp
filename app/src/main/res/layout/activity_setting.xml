@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SettingActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/as_clHeader"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/beige">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/beige"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/as_ivLogo"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginBottom="32dp"
+            android:src="@drawable/vbantulogo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:text="@string/app_name"
+            android:textColor="@color/dark_grey"
+            android:textSize="20sp"
+            android:layout_marginLeft="16dp"
+            android:gravity="center_vertical"
+            app:layout_constraintBottom_toBottomOf="@+id/as_ivLogo"
+            app:layout_constraintStart_toEndOf="@+id/as_ivLogo"
+            app:layout_constraintTop_toTopOf="@+id/as_ivLogo" />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        app:layout_constraintTop_toBottomOf="@+id/as_clHeader"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+    <TextView
+        android:id="@+id/as_tvUpdateProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:drawableLeft="@drawable/ic_baseline_edit_24"
+        android:drawablePadding="16dp"
+        android:paddingLeft="16dp"
+        android:text="@string/updateProfile"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/as_clHeader" />
+
+    <TextView
+        android:id="@+id/as_tvChangePassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_baseline_lock_24"
+        android:drawablePadding="16dp"
+        android:paddingLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/changePassword"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/as_tvUpdateProfile" />
+
+    <TextView
+        android:id="@+id/as_tvGetHelp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/getHelp"
+        android:textColor="@color/mediumRed"
+        android:textSize="15sp"
+        android:paddingLeft="16dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/as_tvChangePassword" />
+
+    <TextView
+        android:id="@+id/as_tvCustomerSupport"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/line_border_2dp"
+        android:drawablePadding="16dp"
+        android:drawableLeft="@drawable/customer_support"
+        android:layout_marginTop="8dp"
+        android:paddingLeft="16dp"
+        android:text="@string/customerSupport"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/as_tvGetHelp" />
+
+    <TextView
+        android:id="@+id/as_tvLogoutTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:text="@string/logout"
+        android:textColor="@color/mediumRed"
+        android:background="@drawable/line_border_2dp"
+        android:textSize="15sp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/as_tvCustomerSupport" />
+
+    <TextView
+        android:id="@+id/as_tvLogout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/line_border_2dp"
+        android:drawableLeft="@drawable/ic_baseline_logout_24"
+        android:drawablePadding="16dp"
+        android:layout_marginTop="8dp"
+        android:paddingLeft="16dp"
+        android:text="@string/logout"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/as_tvLogoutTitle" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
