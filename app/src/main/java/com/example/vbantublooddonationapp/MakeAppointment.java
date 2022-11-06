@@ -44,6 +44,7 @@ public class MakeAppointment extends AppCompatActivity {
 
     private DatePickerDialog datePickerDialog;
     private ActivityMakeAppointmentBinding binding;
+    private String appointDate = "";
     private String donationBefore = "";
     private String gender = "";
 
@@ -126,6 +127,7 @@ public class MakeAppointment extends AppCompatActivity {
 
         binding.amaEtAddress.setText("");
         binding.amaTvPickDate.setText(R.string.dateFormat);
+        appointDate = "";
         binding.amaSpPickTime.setSelection(0);
 
 
@@ -183,7 +185,7 @@ public class MakeAppointment extends AppCompatActivity {
 
         //if all success
         //assign value and insert to database
-        Appointment appointment = new Appointment(mUserID, mOrganiserID, address, appointmentTime, appointmentDate, donationBefore, "0", "ongoing");
+        Appointment appointment = new Appointment(mUserID, mOrganiserID, address, appointmentTime, appointDate, donationBefore, "0", "Ongoing");
         mAppointmentViewModel.insertAppointment(appointment);
         Toast.makeText(this, "Appointment submitted successfully", Toast.LENGTH_SHORT).show();
         Intent i = new Intent(MakeAppointment.this,AppointmentSuccess.class);
@@ -198,6 +200,23 @@ public class MakeAppointment extends AppCompatActivity {
         DatePickerDialog.OnDateSetListener dateSetListener = (datePicker, year, month, day) -> {
             month = month + 1;
             String date = makeDateString(day, month, year);
+            String monthFormat;
+            String dayFormat;
+            if (month < 10){
+                monthFormat = "0" + month;
+            }
+            else{
+                monthFormat = Integer.toString(month);
+            }
+
+            if (day < 10){
+                dayFormat = "0" +day;
+            }
+            else{
+                dayFormat = Integer.toString(day);
+            }
+            appointDate = year + monthFormat + dayFormat;
+
             binding.amaTvPickDate.setText(date);
         };
 

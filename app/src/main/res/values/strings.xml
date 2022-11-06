@@ -149,6 +149,13 @@
     <string name="ongoing">Ongoing</string>
     <string name="nameTitle">Name:</string>
     <string name="appointmentDetails">Appointment Details</string>
+    <string name="updateProfile">Update Profile</string>
+    <string name="changePassword">Change Password</string>
+    <string name="getHelp">Get Help</string>
+    <string name="customerSupport">Customer Support</string>
+    <string name="logout">Logout</string>
+    <string name="open">Open</string>
+
 
     <string-array name="bloodGroupValues">
         <item>A+</item>
@@ -163,12 +170,12 @@
 
     <string-array name="timeAvailable">
         <item>Select time</item>
-        <item>9.00 am</item>
-        <item>10.00 am</item>
-        <item>11.00 am</item>
-        <item>12.00 pm</item>
-        <item>1.00 pm</item>
-        <item>2.00 pm</item>
-        <item>3.00 pm</item>
+        <item>9:00 am</item>
+        <item>10:00 am</item>
+        <item>11:00 am</item>
+        <item>12:00 pm</item>
+        <item>1:00 pm</item>
+        <item>2:00 pm</item>
+        <item>3:00 pm</item>
     </string-array>
 </resources>
