@@ -158,7 +158,24 @@
     <string name="icNoFormat">000000-00-0000</string>
     <string name="haveADonationBefore">Have A Donation Before?</string>
     <string name="scanQRCode">Scan QR Code</string>
-
+    <string name="leaderboard">Leaderboard</string>
+    <string name="yearlyTopDonor">Yearly Top Donor</string>
+    <string name="topDonorUsername">Top Donor Username</string>
+    <string name="firstPlaceBackground">FirstPlaceBackground</string>
+    <string name="_1st">1st</string>
+    <string name="line">line</string>
+    <string name="firstPlaceNo">FirstPlaceNo</string>
+    <string name="profilePicture">profilePicture</string>
+    <string name="bloodAmount">ml</string>
+    <string name="secondPlaceBackground">Second Place Background</string>
+    <string name="secondPlaceNo">Second Place No</string>
+    <string name="_2nd">2nd</string>
+    <string name="secondDonorUsername">Second Donor Username</string>
+    <string name="thirdDonorUsername">Third Donor Username</string>
+    <string name="_3rd">3rd</string>
+    <string name="thirdPlaceNo">Third Place No</string>
+    <string name="thirdPlaceBackground">Third Place Background</string>
+    <string name="viewFullRanking">View Full Ranking</string>
 
     <string-array name="bloodGroupValues">
         <item>A+</item>
