@@ -6,8 +6,10 @@ import android.os.AsyncTask;
 import androidx.lifecycle.LiveData;
 
 import com.example.vbantublooddonationapp.BloodRoomDatabase;
+import com.example.vbantublooddonationapp.DAO.OrganiserDao;
 import com.example.vbantublooddonationapp.DAO.UserDao;
 import com.example.vbantublooddonationapp.Model.LoginParams;
+import com.example.vbantublooddonationapp.Model.Organiser;
 import com.example.vbantublooddonationapp.Model.User;
 
 import java.util.List;
@@ -123,6 +125,22 @@ public class UserRepository {
         protected List<User> doInBackground(Integer...id) {
             List<User> userList = mSyncTaskDao.getUserById(id[0]);
             return userList;
+        }
+    }
+
+    public void update(User user) {
+        new UserRepository.updateAsyncTask(mUserDao).execute(user);
+    }
+
+    private static class updateAsyncTask extends AsyncTask<User, Void, Void>{
+        private UserDao mSyncTaskDao;
+
+        updateAsyncTask(UserDao dao){mSyncTaskDao = dao;}
+
+        @Override
+        protected Void doInBackground(User... users) {
+            mSyncTaskDao.update(users[0]);
+            return null;
         }
     }
 
