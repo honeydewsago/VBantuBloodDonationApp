@@ -26,4 +26,7 @@ public interface AppointmentDao {
 
     @Query("Select * from appointment_table where appointmentID=(:id)")
     List<Appointment> getAppointmentById(int id);
+
+    @Query("SELECT * from appointment_table where status=('Completed')")
+    LiveData<List<Appointment>> getAllCompletedAppointment();
 }

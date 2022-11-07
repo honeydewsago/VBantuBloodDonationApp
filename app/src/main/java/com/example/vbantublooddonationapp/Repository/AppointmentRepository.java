@@ -113,4 +113,8 @@ public class AppointmentRepository {
         }
     }
 
+    public LiveData<List<Appointment>> getAllCompletedAppointment() {
+        return mAppointmentDao.getAllCompletedAppointment();
+    }
+
 }
