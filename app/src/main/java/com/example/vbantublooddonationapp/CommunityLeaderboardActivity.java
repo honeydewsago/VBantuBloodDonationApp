@@ -3,19 +3,29 @@ package com.example.vbantublooddonationapp;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.example.vbantublooddonationapp.Model.Appointment;
+import com.example.vbantublooddonationapp.Model.User;
+import com.example.vbantublooddonationapp.ViewModel.AppointmentViewModel;
+import com.example.vbantublooddonationapp.ViewModel.OrganiserViewModel;
+import com.example.vbantublooddonationapp.ViewModel.UserViewModel;
 import com.example.vbantublooddonationapp.databinding.ActivityCommunityLeaderboardBinding;
 import com.example.vbantublooddonationapp.databinding.ActivityCommunityNewPostBinding;
 
+import java.util.List;
 import java.util.Objects;
 
 public class CommunityLeaderboardActivity extends AppCompatActivity {
 
     private ActivityCommunityLeaderboardBinding mCommunityLeaderboardBinding;
+
+    private AppointmentViewModel mAppointmentViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +41,13 @@ public class CommunityLeaderboardActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbar.setNavigationIcon(ContextCompat.getDrawable(this, R.drawable.ic_arrow_back_ios));
+
+        //initialise view model
+        mAppointmentViewModel = new ViewModelProvider(this).get(AppointmentViewModel.class);
+
+        LiveData<List<Appointment>> mAppointmentList = mAppointmentViewModel.getAllCompletedAppointment();
+
+
     }
 
     //back button
