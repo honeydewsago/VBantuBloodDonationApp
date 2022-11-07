@@ -13,12 +13,14 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
     <style name="Circular">
         <item name="cornerSize">50%</item>
     </style>
 
     <style name="Theme.AppCompat.Translucent" parent="Theme.AppCompat.NoActionBar">
-        <item name="android:background">#33646464</item> <!-- Or any transparency or color you need -->
+        <item name="android:background">#33646464
+        </item> <!-- Or any transparency or color you need -->
         <item name="android:windowNoTitle">true</item>
 
         <item name="android:windowBackground">@android:color/transparent</item>
@@ -26,5 +28,14 @@
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowAnimationStyle">@android:style/Animation</item>
     </style>
+
+    <style name="Theme.VBantuBloodDonationApp.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.VBantuBloodDonationApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.VBantuBloodDonationApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>
