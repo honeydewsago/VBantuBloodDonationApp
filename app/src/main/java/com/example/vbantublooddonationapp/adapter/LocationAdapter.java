@@ -88,13 +88,12 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Locati
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(mActivity, "Failed to get image", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mActivity, "Failed to retrieve image", Toast.LENGTH_SHORT).show();
                     }
                 });
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
         }
 
         String address = organiser.getAddress();
