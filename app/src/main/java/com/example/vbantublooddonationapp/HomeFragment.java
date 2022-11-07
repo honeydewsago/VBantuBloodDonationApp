@@ -18,17 +18,27 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.vbantublooddonationapp.Model.BloodRequest;
+import com.example.vbantublooddonationapp.Model.CommunityPost;
 import com.example.vbantublooddonationapp.Model.Organiser;
+import com.example.vbantublooddonationapp.Model.OrganiserImage;
 import com.example.vbantublooddonationapp.ViewModel.BloodRequestViewModel;
 import com.example.vbantublooddonationapp.ViewModel.OrganiserViewModel;
 import com.example.vbantublooddonationapp.adapter.LocationAdapter;
 import com.example.vbantublooddonationapp.adapter.UrgentRequestAdapter;
 import com.example.vbantublooddonationapp.databinding.CardLocationBinding;
 import com.example.vbantublooddonationapp.databinding.FragmentHomeBinding;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 public class HomeFragment extends Fragment {
@@ -38,11 +48,14 @@ public class HomeFragment extends Fragment {
     private int mUserID = 1;
     private String mUserType = "user";
 
+    private List<OrganiserImage> mOrganiserImageList;
     private FragmentHomeBinding homeBinding;
     private UrgentRequestAdapter mUrgentRequestAdapter;
     private LocationAdapter mLocationAdapter;
     private BloodRequestViewModel mBloodRequestViewModel;
     private OrganiserViewModel mOrganiserViewModel;
+
+    private DatabaseReference mRef;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -86,8 +99,27 @@ public class HomeFragment extends Fragment {
         mUrgentRequestAdapter = new UrgentRequestAdapter(getActivity());
         homeBinding.fhRvUrgentRequest.setAdapter(mUrgentRequestAdapter);
 
-        mLocationAdapter = new LocationAdapter(getActivity());
+        mOrganiserImageList = new ArrayList<OrganiserImage>();
+        mLocationAdapter = new LocationAdapter(getActivity(), mOrganiserImageList);
         homeBinding.fhRvLocation.setAdapter(mLocationAdapter);
+
+        mRef = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("Organiser");
+
+        mRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot data : snapshot.getChildren()) {
+                    OrganiserImage organiserImage = data.getValue(OrganiserImage.class);
+                    mOrganiserImageList.add(organiserImage);
+                }
+                mLocationAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         //set the layout manager
         homeBinding.fhRvUrgentRequest.setLayoutManager(new GridLayoutManager(view.getContext(),getResources().getInteger(R.integer.grid_column_count)));
