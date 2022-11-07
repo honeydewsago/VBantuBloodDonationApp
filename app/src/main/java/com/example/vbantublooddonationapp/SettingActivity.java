@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.vbantublooddonationapp.Model.User;
 import com.example.vbantublooddonationapp.ViewModel.OrganiserViewModel;
@@ -42,8 +41,6 @@ public class SettingActivity extends AppCompatActivity {
             mUserID = mPreferences.getInt(USERID_KEY,1);
             mUserType = mPreferences.getString(USERTYPE_KEY, "user");
         }
-
-        Toast.makeText(this, "User type " + mUserType + "test", Toast.LENGTH_SHORT).show();
 
 
         binding.asTvUpdateProfile.setOnClickListener(new View.OnClickListener() {
@@ -79,11 +76,9 @@ public class SettingActivity extends AppCompatActivity {
     private void checkUsertype(String userType) {
         if (userType.equals("organiser")) {
             startActivity(new Intent(SettingActivity.this, UpdateOrganiserProfile.class));
-            Toast.makeText(SettingActivity.this, "Organiser here", Toast.LENGTH_SHORT).show();
         }
         if (userType.equals("user")){
             startActivity(new Intent(SettingActivity.this, UpdateUserProfile.class));
-            Toast.makeText(SettingActivity.this, "User here", Toast.LENGTH_SHORT).show();
         }
     }
 

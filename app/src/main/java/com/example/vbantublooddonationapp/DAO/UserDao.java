@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.vbantublooddonationapp.Model.User;
 
@@ -14,6 +15,9 @@ public interface UserDao {
 
     @Insert
     void insert(User...user);
+
+    @Update
+    void update(User...user);
 
     @Query("Select * from user_table where email=(:email) and password=(:password)")
     List<User> loginUser(String email, String password);
