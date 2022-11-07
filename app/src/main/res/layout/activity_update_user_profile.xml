@@ -155,6 +155,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/edit_text_box"
         android:hint="@string/contactNoExp"
+        android:inputType="number"
         android:paddingLeft="20dp"
         android:textColor="@color/dark_grey"
         android:textSize="20sp"

@@ -220,6 +220,11 @@
     <string name="hospital">Penang Adventist Hospital</string>
     <string name="view_appointment_history">View Appointment History</string>
     <string name="my_rewards">My Rewards</string>
+    <string name="oldPassword">Old Password:</string>
+    <string name="newPassword">New Password:</string>
+    <string name="confirmNewPassword">Confirm New Password:</string>
+    <string name="incorrectPassword">The password is incorrect!</string>
+    <string name="userOtherPassword">Please use other password.</string>
 
     <string-array name="bloodGroupValues">
         <item>Select blood type</item>
