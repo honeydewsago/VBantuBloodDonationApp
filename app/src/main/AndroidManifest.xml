@@ -39,6 +39,34 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".UpdateOrganiserProfile"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".UpdateUserProfile"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".CustomerSupport"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ChangePassword"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".SettingActivity"
             android:exported="false" >
             <meta-data
@@ -66,9 +94,6 @@
             android:exported="false" />
         <activity
             android:name=".ProfileQr"
-            android:exported="false" />
-        <activity
-            android:name=".ProfileQR"
             android:exported="false" />
         <activity
             android:name=".AppointmentSuccess"
