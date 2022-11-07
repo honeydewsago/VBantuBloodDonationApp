@@ -183,6 +183,7 @@ public class UpdateOrganiserProfile extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     HashMap<String, Object> data = new HashMap<>();
+                    data.put("organiserID", String.valueOf(mUserID));
                     data.put("url", receiverImage);
                     database.updateChildren(data);
                     progressDialog.dismiss();

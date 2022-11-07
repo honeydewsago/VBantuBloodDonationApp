@@ -84,16 +84,19 @@
             android:name=".UserAppointmentsActivity"
             android:exported="false" />
         <activity
+            android:name=".AppointmentDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".SingleBloodRequestActivity"
             android:exported="false" />
         <activity
             android:name=".RewardsActivity"
             android:exported="false" />
         <activity
-            android:name=".AppointmentHistory"
+            android:name=".AppointmentHistoryActivity"
             android:exported="false" />
         <activity
-            android:name=".ProfileQr"
+            android:name=".ProfileQrActivity"
             android:exported="false" />
         <activity
             android:name=".AppointmentSuccess"

@@ -2,37 +2,28 @@ package com.example.vbantublooddonationapp;
 
 import static android.content.Context.MODE_PRIVATE;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
-import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.vbantublooddonationapp.Model.Organiser;
 import com.example.vbantublooddonationapp.Model.User;
 import com.example.vbantublooddonationapp.ViewModel.OrganiserViewModel;
 import com.example.vbantublooddonationapp.ViewModel.UserViewModel;
 import com.example.vbantublooddonationapp.databinding.FragmentProfileBinding;
 
-
 import java.util.List;
-import java.util.Objects;
-import java.util.Set;
 
 public class ProfileFragment extends Fragment {
     private final String USERID_KEY = "userid", USERTYPE_KEY = "usertype";
@@ -40,13 +31,12 @@ public class ProfileFragment extends Fragment {
     private int mUserID = 1;
     private String mUserType = "user";
     private List<User> mUserList;
+    private List<Organiser> mOrganiserList;
 
     private UserViewModel mUserViewModel;
     private OrganiserViewModel mOrganiserViewModel;
     private FragmentProfileBinding profileBinding;
     Toolbar toolbar;
-    TextView mTvAppointmentHistory, mTvRewards;
-    ImageView mIvQrCode;
 
 
 
@@ -61,7 +51,7 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initUserViewModel();
+        initViewModel();
 
         toolbar = (Toolbar)getView().findViewById(R.id.fp_toolbar);
         AppCompatActivity activity = (AppCompatActivity)getActivity();
@@ -84,37 +74,56 @@ public class ProfileFragment extends Fragment {
             mUserType = mPreferences.getString(USERTYPE_KEY, "user");
         }
 
-        List<User> mUserList = mUserViewModel.getUserById(mUserID);
 
-        User user = mUserList.get(0);
 
-        profileBinding.fpTvUsername.setText(user.username);
-        profileBinding.fpTvEmail.setText(user.email);
-        profileBinding.fpTvIC.setText(user.icNo);
-        profileBinding.fpTvDOB.setText(user.dateOfBirth);
-        profileBinding.fpTvBloodGroup.setText(user.bloodType);
+
+
 
         if (mUserType.equals("organiser")) {
+            List<Organiser> mOrganiserList = mOrganiserViewModel.getOrganiserById(mUserID);
+            Organiser organiser = mOrganiserList.get(0);
+            profileBinding.fpTvUsername.setText(organiser.getPicName());
+            profileBinding.fpTvUserType.setText(R.string.user_type_o);
+            profileBinding.fpTvInfoType.setText(R.string.info_type_o);
+            profileBinding.fpTvCompany.setText(organiser.getCompanyName());
+            profileBinding.fpTvContactNo.setText(organiser.getContact());
+            profileBinding.fpTvAddress.setText(organiser.getAddress());
+
+            profileBinding.fpClPersonal.setVisibility(View.GONE);
+            profileBinding.fpClOrganiser.setVisibility(View.VISIBLE);
             profileBinding.fpIvQrCode.setVisibility(View.GONE);
             profileBinding.fpTvAppointmentHistory.setVisibility(View.GONE);
             profileBinding.fpTvRewards.setVisibility(View.GONE);
             profileBinding.fpTvUserAppointments.setVisibility(View.VISIBLE);
         }
         else {
+            List<User> mUserList = mUserViewModel.getUserById(mUserID);
+            User user = mUserList.get(0);
+
+            profileBinding.fpTvUserType.setText(R.string.user_type_bd);
             profileBinding.fpTvUserAppointments.setVisibility(View.GONE);
+            profileBinding.fpTvUsername.setText(user.username);
+            profileBinding.fpTvInfoType.setText(R.string.info_type_p);
+            profileBinding.fpTvEmail.setText(user.email);
+            profileBinding.fpTvIC.setText(user.icNo);
+            profileBinding.fpTvDOB.setText(user.dateOfBirth);
+            profileBinding.fpTvBloodGroup.setText(user.bloodType);
+
+            profileBinding.fpClPersonal.setVisibility(View.VISIBLE);
+            profileBinding.fpClOrganiser.setVisibility(View.GONE);
         }
 
         profileBinding.fpIvQrCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), ProfileQr.class));
+                startActivity(new Intent(getActivity(), ProfileQrActivity.class));
             }
         });
 
         profileBinding.fpTvAppointmentHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), AppointmentHistory.class));
+                startActivity(new Intent(getActivity(), AppointmentHistoryActivity.class));
             }
         });
 
@@ -135,7 +144,7 @@ public class ProfileFragment extends Fragment {
 
 
 
-    private void initUserViewModel(){
+    private void initViewModel(){
         mUserViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
         final Observer<List<User>> userListObserver = new Observer<List<User>>() {
@@ -145,6 +154,16 @@ public class ProfileFragment extends Fragment {
             }
         };
         mUserViewModel.getAllUsers().observe(getViewLifecycleOwner(),userListObserver);
+
+        mOrganiserViewModel = new ViewModelProvider(this).get(OrganiserViewModel.class);
+
+        final Observer<List<Organiser>> organiserListObserver = new Observer<List<Organiser>>() {
+            @Override
+            public void onChanged(List<Organiser> organisers) {
+                mOrganiserList = organisers;
+            }
+        };
+        mOrganiserViewModel.getAllOrganisers().observe(getViewLifecycleOwner(),organiserListObserver);
     }
 
 }
