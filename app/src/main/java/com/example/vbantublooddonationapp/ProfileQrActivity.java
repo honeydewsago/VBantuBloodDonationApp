@@ -43,7 +43,6 @@ public class ProfileQrActivity extends AppCompatActivity {
 
         if (mPreferences.contains(USERID_KEY) && mPreferences.contains(USERTYPE_KEY)){
             mUserID = mPreferences.getInt(USERID_KEY, 1);
-            mUserType = mPreferences.getString(USERTYPE_KEY, "user");
         }
         String data = String.valueOf(mUserID);
         QRGEncoder qrgEncoder = new QRGEncoder(data, null, QRGContents.Type.TEXT, 750);
