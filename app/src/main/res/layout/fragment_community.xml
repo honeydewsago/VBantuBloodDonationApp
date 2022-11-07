@@ -40,14 +40,306 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/fc_cvLeaderboard"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="210dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="15dp"
+        android:backgroundTint="@color/light_light_grey"
+        app:cardCornerRadius="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fc_toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/fc_toolbar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/fc_ivLeaderboardTitleBackground"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:contentDescription="@string/leaderboard"
+                android:src="@color/red"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/fc_tvLeaderboardTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="@string/yearlyTopDonor"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/fc_ivLeaderboardTitleBackground"
+                app:layout_constraintStart_toStartOf="@id/fc_ivLeaderboardTitleBackground"
+                app:layout_constraintTop_toTopOf="@id/fc_ivLeaderboardTitleBackground" />
+
+            <ImageView
+                android:id="@+id/fc_ivFirstPlaceBackground"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginTop="10dp"
+                android:contentDescription="@string/firstPlaceBackground"
+                android:src="@color/yellow"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fc_ivLeaderboardTitleBackground" />
+
+            <ImageView
+                android:id="@+id/fc_ivFirstPlaceNo"
+                android:layout_width="50dp"
+                android:layout_height="35dp"
+                android:contentDescription="@string/firstPlaceNo"
+                android:src="@color/yellow"
+                app:layout_constraintBottom_toBottomOf="@id/fc_ivFirstPlaceBackground"
+                app:layout_constraintStart_toStartOf="@id/fc_ivFirstPlaceBackground"
+                app:layout_constraintTop_toTopOf="@id/fc_ivFirstPlaceBackground" />
+
+            <ImageView
+                android:id="@+id/fc_ivFirstPlaceNoLine"
+                android:layout_width="0.5dp"
+                android:layout_height="30dp"
+                android:contentDescription="@string/line"
+                android:src="@color/medium_grey"
+                app:layout_constraintBottom_toBottomOf="@id/fc_ivFirstPlaceBackground"
+                app:layout_constraintStart_toEndOf="@id/fc_ivFirstPlaceNo"
+                app:layout_constraintTop_toTopOf="@id/fc_ivFirstPlaceBackground" />
+
+            <TextView
+                android:id="@+id/fc_tvFirstPlaceNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/_1st"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@id/fc_ivFirstPlaceNo"
+                app:layout_constraintEnd_toEndOf="@id/fc_ivFirstPlaceNo"
+                app:layout_constraintStart_toStartOf="@id/fc_ivFirstPlaceNo"
+                app:layout_constraintTop_toTopOf="@id/fc_ivFirstPlaceNo" />
+
+            <ImageView
+                android:id="@+id/fc_ivFirstPlaceProfilePicture"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="10dp"
+                android:contentDescription="@string/profilePicture"
+                android:src="@drawable/avatar"
+                app:layout_constraintBottom_toBottomOf="@id/fc_ivFirstPlaceBackground"
+                app:layout_constraintStart_toEndOf="@id/fc_ivFirstPlaceNoLine"
+                app:layout_constraintTop_toTopOf="@id/fc_ivFirstPlaceBackground" />
+
+            <TextView
+                android:id="@+id/fc_tvFirstPlaceUsername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="@string/topDonorUsername"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/fc_ivFirstPlaceBackground"
+                app:layout_constraintStart_toEndOf="@id/fc_ivFirstPlaceProfilePicture"
+                app:layout_constraintTop_toTopOf="@id/fc_ivFirstPlaceBackground" />
+
+            <TextView
+                android:id="@+id/fc_tvFirstPlaceBloodAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:text="@string/bloodAmount"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@id/fc_ivFirstPlaceBackground"
+                app:layout_constraintEnd_toEndOf="@id/fc_ivFirstPlaceBackground"
+                app:layout_constraintTop_toTopOf="@id/fc_ivFirstPlaceBackground" />
+
+            <ImageView
+                android:id="@+id/fc_ivSecondPlaceBackground"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginTop="10dp"
+                android:contentDescription="@string/secondPlaceBackground"
+                android:src="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fc_ivFirstPlaceBackground" />
+
+            <ImageView
+                android:id="@+id/fc_ivSecondPlaceNo"
+                android:layout_width="50dp"
+                android:layout_height="35dp"
+                android:contentDescription="@string/secondPlaceNo"
+                android:src="@color/pink"
+                app:layout_constraintBottom_toBottomOf="@id/fc_ivSecondPlaceBackground"
+                app:layout_constraintStart_toStartOf="@id/fc_ivSecondPlaceBackground"
+                app:layout_constraintTop_toTopOf="@id/fc_ivSecondPlaceBackground" />
+
+            <ImageView
+                android:id="@+id/fc_ivSecondPlaceNoLine"
+                android:layout_width="0.5dp"
+                android:layout_height="30dp"
+                android:contentDescription="@string/line"
+                android:src="@color/medium_grey"
+                app:layout_constraintBottom_toBottomOf="@id/fc_ivSecondPlaceBackground"
+                app:layout_constraintStart_toEndOf="@id/fc_ivSecondPlaceNo"
+                app:layout_constraintTop_toTopOf="@id/fc_ivSecondPlaceBackground" />
+
+            <TextView
+                android:id="@+id/fc_tvSecondPlaceNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/_2nd"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@id/fc_ivSecondPlaceNo"
+                app:layout_constraintEnd_toEndOf="@id/fc_ivSecondPlaceNo"
+                app:layout_constraintStart_toStartOf="@id/fc_ivSecondPlaceNo"
+                app:layout_constraintTop_toTopOf="@id/fc_ivSecondPlaceNo" />
+
+            <ImageView
+                android:id="@+id/fc_ivSecondPlaceProfilePicture"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="10dp"
+                android:contentDescription="@string/profilePicture"
+                android:src="@drawable/avatar"
+                app:layout_constraintBottom_toBottomOf="@id/fc_ivSecondPlaceBackground"
+                app:layout_constraintStart_toEndOf="@id/fc_ivSecondPlaceNoLine"
+                app:layout_constraintTop_toTopOf="@id/fc_ivSecondPlaceBackground" />
+
+            <TextView
+                android:id="@+id/fc_tvSecondPlaceUsername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="@string/secondDonorUsername"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/fc_ivSecondPlaceBackground"
+                app:layout_constraintStart_toEndOf="@id/fc_ivSecondPlaceProfilePicture"
+                app:layout_constraintTop_toTopOf="@id/fc_ivSecondPlaceBackground" />
+
+            <TextView
+                android:id="@+id/fc_tvSecondPlaceBloodAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:text="@string/bloodAmount"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@id/fc_ivSecondPlaceBackground"
+                app:layout_constraintEnd_toEndOf="@id/fc_ivSecondPlaceBackground"
+                app:layout_constraintTop_toTopOf="@id/fc_ivSecondPlaceBackground" />
+
+            <ImageView
+                android:id="@+id/fc_ivThirdPlaceBackground"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginTop="10dp"
+                android:contentDescription="@string/thirdPlaceBackground"
+                android:src="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fc_ivSecondPlaceBackground" />
+
+            <ImageView
+                android:id="@+id/fc_ivThirdPlaceNo"
+                android:layout_width="50dp"
+                android:layout_height="35dp"
+                android:contentDescription="@string/thirdPlaceNo"
+                android:src="@color/pink"
+                app:layout_constraintBottom_toBottomOf="@id/fc_ivThirdPlaceBackground"
+                app:layout_constraintStart_toStartOf="@id/fc_ivThirdPlaceBackground"
+                app:layout_constraintTop_toTopOf="@id/fc_ivThirdPlaceBackground" />
+
+            <ImageView
+                android:id="@+id/fc_ivThirdPlaceNoLine"
+                android:layout_width="0.5dp"
+                android:layout_height="30dp"
+                android:contentDescription="@string/line"
+                android:src="@color/medium_grey"
+                app:layout_constraintBottom_toBottomOf="@id/fc_ivThirdPlaceBackground"
+                app:layout_constraintStart_toEndOf="@id/fc_ivThirdPlaceNo"
+                app:layout_constraintTop_toTopOf="@id/fc_ivThirdPlaceBackground" />
+
+            <TextView
+                android:id="@+id/fc_tvThirdPlaceNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/_3rd"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@id/fc_ivThirdPlaceNo"
+                app:layout_constraintEnd_toEndOf="@id/fc_ivThirdPlaceNo"
+                app:layout_constraintStart_toStartOf="@id/fc_ivThirdPlaceNo"
+                app:layout_constraintTop_toTopOf="@id/fc_ivThirdPlaceNo" />
+
+            <ImageView
+                android:id="@+id/fc_ivThirdPlaceProfilePicture"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="10dp"
+                android:contentDescription="@string/profilePicture"
+                android:src="@drawable/avatar"
+                app:layout_constraintBottom_toBottomOf="@id/fc_ivThirdPlaceBackground"
+                app:layout_constraintStart_toEndOf="@id/fc_ivThirdPlaceNoLine"
+                app:layout_constraintTop_toTopOf="@id/fc_ivThirdPlaceBackground" />
+
+            <TextView
+                android:id="@+id/fc_tvThirdPlaceUsername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="@string/thirdDonorUsername"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/fc_ivThirdPlaceBackground"
+                app:layout_constraintStart_toEndOf="@id/fc_ivThirdPlaceProfilePicture"
+                app:layout_constraintTop_toTopOf="@id/fc_ivThirdPlaceBackground" />
+
+            <TextView
+                android:id="@+id/fc_tvThirdPlaceBloodAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:text="@string/bloodAmount"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@id/fc_ivThirdPlaceBackground"
+                app:layout_constraintEnd_toEndOf="@id/fc_ivThirdPlaceBackground"
+                app:layout_constraintTop_toTopOf="@id/fc_ivThirdPlaceBackground" />
+
+            <TextView
+                android:id="@+id/fc_tvViewFullRanking"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="@string/viewFullRanking"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <ImageView
+                android:id="@+id/fc_ivViewFullRanking"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_arrow_forward_ios_black"
+                app:layout_constraintBottom_toBottomOf="@id/fc_tvViewFullRanking"
+                app:layout_constraintStart_toEndOf="@+id/fc_tvViewFullRanking"
+                app:layout_constraintTop_toTopOf="@id/fc_tvViewFullRanking" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/fc_rvCommunityPosts"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"

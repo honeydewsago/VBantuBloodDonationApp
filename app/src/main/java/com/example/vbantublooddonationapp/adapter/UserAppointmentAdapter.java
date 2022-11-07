@@ -45,6 +45,7 @@ public class UserAppointmentAdapter extends RecyclerView.Adapter<UserAppointment
 
     public void setAppointmentList(List<Appointment> appointmentList) {
         mAppointmentList = appointmentList;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -72,8 +73,9 @@ public class UserAppointmentAdapter extends RecyclerView.Adapter<UserAppointment
         }
 
         holder.mTvName.setText(getUserFullname(appointment.getUserID()));
+        holder.mTvBloodType.setText(getUserBloodType(appointment.getUserID()));
         holder.mTvDate.setText(getFullDate(appointment.getAppointmentDate()));
-        holder.mTvTime.setText(appointment.appointmentTime);
+        holder.mTvTime.setText(appointment.getAppointmentTime());
     }
 
     @Override
@@ -124,6 +126,12 @@ public class UserAppointmentAdapter extends RecyclerView.Adapter<UserAppointment
         i.putExtra("currentAppointmentID", currentAppointment.getAppointmentID());
 
         mActivity.startActivity(i);
+    }
+
+    private String getUserBloodType(int id) {
+        List<User> userList = mUserViewModel.getUserById(id);
+        User user = userList.get(0);
+        return user.getBloodType();
     }
 
     private String getUserFullname(int id) {

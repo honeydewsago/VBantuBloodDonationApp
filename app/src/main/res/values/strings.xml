@@ -155,9 +155,45 @@
     <string name="customerSupport">Customer Support</string>
     <string name="logout">Logout</string>
     <string name="open">Open</string>
-
+    <string name="icNoFormat">000000-00-0000</string>
+    <string name="haveADonationBefore">Have A Donation Before?</string>
+    <string name="scanQRCode">Scan QR Code</string>
+    <string name="leaderboard">Leaderboard</string>
+    <string name="yearlyTopDonor">Yearly Top Donor</string>
+    <string name="topDonorUsername">Top Donor Username</string>
+    <string name="firstPlaceBackground">FirstPlaceBackground</string>
+    <string name="_1st">1st</string>
+    <string name="line">line</string>
+    <string name="firstPlaceNo">FirstPlaceNo</string>
+    <string name="profilePicture">profilePicture</string>
+    <string name="bloodAmount">ml</string>
+    <string name="secondPlaceBackground">Second Place Background</string>
+    <string name="secondPlaceNo">Second Place No</string>
+    <string name="_2nd">2nd</string>
+    <string name="secondDonorUsername">Second Donor Username</string>
+    <string name="thirdDonorUsername">Third Donor Username</string>
+    <string name="_3rd">3rd</string>
+    <string name="thirdPlaceNo">Third Place No</string>
+    <string name="thirdPlaceBackground">Third Place Background</string>
+    <string name="viewFullRanking">View Full Ranking</string>
+    <string name="scanUserQRCode">Scan the user\'s QR code</string>
+    <string name="placeQRinBox">Place QR code within the box above</string>
+    <string name="confirmAppointment">Confirm Appointment</string>
+    <string name="locationTitle">Location:</string>
+    <string name="donorNameTitle">Donor Name:</string>
+    <string name="bloodAmountTitle">Blood Amount:</string>
+    <string name="selectAmount">Select amount</string>
+    <string name="bloodAmountRequiredToast">Blood amount is required!</string>
+    <string name="cameraPermissionGrantedToast">Camera permission granted</string>
+    <string name="cameraPermissionRequiredToast">Camera permission is required to scan QR Code</string>
+    <string name="userAppointmentConfirmedToast">User appointment confirmed!</string>
+    <string name="bloodTypeRequiredToast">Blood type is required!</string>
+    <string name="bloodDonationAmount">Blood Donation Amount:</string>
+    <string name="placeNo">Place No</string>
+    <string name="donorNo">1</string>
 
     <string-array name="bloodGroupValues">
+        <item>Select blood type</item>
         <item>A+</item>
         <item>A-</item>
         <item>AB+</item>
@@ -177,5 +213,16 @@
         <item>1:00 pm</item>
         <item>2:00 pm</item>
         <item>3:00 pm</item>
+    </string-array>
+
+    <string-array name="donationBloodAmount">
+        <item>Select amount</item>
+        <item>200 ml</item>
+        <item>250 ml</item>
+        <item>300 ml</item>
+        <item>350 ml</item>
+        <item>400 ml</item>
+        <item>450 ml</item>
+        <item>500 ml</item>
     </string-array>
 </resources>

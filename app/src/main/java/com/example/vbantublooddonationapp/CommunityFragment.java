@@ -34,7 +34,21 @@ public class CommunityFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        binding.fcTvViewFullRanking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(),CommunityLeaderboardActivity.class);
+                startActivity(i);
+            }
+        });
 
+        binding.fcIvViewFullRanking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(),CommunityLeaderboardActivity.class);
+                startActivity(i);
+            }
+        });
 
         binding.fcBtnNewPost.setOnClickListener(new View.OnClickListener() {
             @Override

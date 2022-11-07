@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/cclrd_ivBackground"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:contentDescription="@string/background"
+        android:src="@color/white"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+        android:id="@+id/cclrd_ivPlaceNo"
+        android:layout_width="70dp"
+        android:layout_height="50dp"
+        android:contentDescription="@string/placeNo"
+        android:src="@color/pink"
+        app:layout_constraintBottom_toBottomOf="@id/cclrd_ivBackground"
+        app:layout_constraintStart_toStartOf="@id/cclrd_ivBackground"
+        app:layout_constraintTop_toTopOf="@id/cclrd_ivBackground" />
+
+    <ImageView
+        android:id="@+id/cclrd_ivPlaceNoLine"
+        android:layout_width="0.5dp"
+        android:layout_height="30dp"
+        android:contentDescription="@string/line"
+        android:src="@color/medium_grey"
+        app:layout_constraintBottom_toBottomOf="@id/cclrd_ivBackground"
+        app:layout_constraintStart_toEndOf="@id/cclrd_ivPlaceNo"
+        app:layout_constraintTop_toTopOf="@id/cclrd_ivBackground" />
+
+    <TextView
+        android:id="@+id/cclrd_tvPlaceNo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/donorNo"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@id/cclrd_ivPlaceNo"
+        app:layout_constraintEnd_toEndOf="@id/cclrd_ivPlaceNo"
+        app:layout_constraintStart_toStartOf="@id/cclrd_ivPlaceNo"
+        app:layout_constraintTop_toTopOf="@id/cclrd_ivPlaceNo" />
+
+    <ImageView
+        android:id="@+id/cclrd_ivProfilePicture"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="10dp"
+        android:contentDescription="@string/profilePicture"
+        android:src="@drawable/avatar"
+        app:layout_constraintBottom_toBottomOf="@id/cclrd_ivBackground"
+        app:layout_constraintStart_toEndOf="@id/cclrd_ivPlaceNoLine"
+        app:layout_constraintTop_toTopOf="@id/cclrd_ivBackground" />
+
+    <TextView
+        android:id="@+id/cclrd_tvUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="@string/username"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/cclrd_ivBackground"
+        app:layout_constraintStart_toEndOf="@id/cclrd_ivProfilePicture"
+        app:layout_constraintTop_toTopOf="@id/cclrd_ivBackground" />
+
+    <TextView
+        android:id="@+id/cclrd_tvBloodAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:text="@string/bloodAmount"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@id/cclrd_ivBackground"
+        app:layout_constraintEnd_toEndOf="@id/cclrd_ivBackground"
+        app:layout_constraintTop_toTopOf="@id/cclrd_ivBackground" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

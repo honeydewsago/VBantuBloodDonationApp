@@ -12,6 +12,7 @@ import com.example.vbantublooddonationapp.Model.Organiser;
 import com.example.vbantublooddonationapp.Repository.AppointmentRepository;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class AppointmentViewModel extends AndroidViewModel {
 
@@ -31,6 +32,10 @@ public class AppointmentViewModel extends AndroidViewModel {
 
     public void updateAppointment(Appointment appointment){
         mRepository.update(appointment);
+    }
+
+    public List<Appointment> getAppointmentById(int id){
+        return mRepository.getAppointmentById(id);
     }
 
     public LiveData<List<Appointment>> getRequestByUserId(int id){
