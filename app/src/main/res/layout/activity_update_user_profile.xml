@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UpdateUserProfile"
+    android:background="@drawable/formbg">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/auup_tbToolBar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:actionBarSize"
+        android:background="@color/red"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/auup_tvToolBarTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:text="@string/updateProfile"
+            android:textColor="@color/white"/>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <TextView
+        android:id="@+id/auup_tvAvatar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/avatarLabel"
+        android:textColor="@color/medium_dark_grey"
+        android:textSize="20sp"
+        android:layout_marginTop="32dp"
+        android:layout_marginLeft="32dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/auup_tbToolBar" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/auup_sivAvatar"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/portrait_placeholder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/auup_tvAvatar"
+        app:shapeAppearanceOverlay="@style/Circular" />
+
+
+    <ImageButton
+        android:id="@+id/auup_ibEditAvatar"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="92dp"
+        android:layout_marginEnd="152dp"
+        android:background="@drawable/edit_profile_icon"
+        android:src="@drawable/ic_baseline_edit_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/auup_tbToolBar" />
+
+    <TextView
+        android:id="@+id/auup_tvFullName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/fullNameLabel"
+        android:textColor="@color/medium_dark_grey"
+        android:textSize="20sp"
+        android:layout_marginTop="12dp"
+        android:layout_marginLeft="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/auup_sivAvatar" />
+
+    <TextView
+        android:id="@+id/auup_tvFullNameDisplay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/text_box"
+        android:paddingLeft="20dp"
+        android:text="@string/fullname"
+        android:textColor="@color/dark_grey"
+        android:textSize="20sp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/auup_tvFullName" />
+
+    <TextView
+        android:id="@+id/auup_tvBloodType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/bloodType"
+        android:textColor="@color/medium_dark_grey"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="@+id/auup_tvFullName"
+        app:layout_constraintTop_toBottomOf="@+id/auup_tvFullNameDisplay" />
+
+    <TextView
+        android:id="@+id/auup_tvBloodTypeDisplay"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/text_box"
+        android:paddingLeft="20dp"
+        android:text="@string/bloodA"
+        android:textColor="@color/dark_grey"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/auup_tvFullNameDisplay"
+        app:layout_constraintStart_toStartOf="@+id/auup_tvFullNameDisplay"
+        app:layout_constraintTop_toBottomOf="@+id/auup_tvBloodType" />
+
+    <TextView
+        android:id="@+id/auup_tvUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/usernameLabel"
+        android:textColor="@color/medium_dark_grey"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="@+id/auup_tvBloodType"
+        app:layout_constraintTop_toBottomOf="@+id/auup_tvBloodTypeDisplay" />
+
+    <EditText
+        android:id="@+id/auup_etUsername"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_text_box"
+        android:paddingLeft="20dp"
+        android:hint="@string/usernameRequired"
+        android:textColor="@color/dark_grey"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/auup_tvBloodTypeDisplay"
+        app:layout_constraintStart_toStartOf="@+id/auup_tvBloodTypeDisplay"
+        app:layout_constraintTop_toBottomOf="@+id/auup_tvUsername" />
+
+    <TextView
+        android:id="@+id/auup_tvContact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/contactNoLabel"
+        android:textColor="@color/medium_dark_grey"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="@+id/auup_tvUsername"
+        app:layout_constraintTop_toBottomOf="@+id/auup_etUsername" />
+
+    <EditText
+        android:id="@+id/auup_etContact"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_text_box"
+        android:hint="@string/contactNoExp"
+        android:paddingLeft="20dp"
+        android:textColor="@color/dark_grey"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/auup_etUsername"
+        app:layout_constraintStart_toStartOf="@+id/auup_etUsername"
+        app:layout_constraintTop_toBottomOf="@+id/auup_tvContact" />
+
+    <TextView
+        android:id="@+id/auup_tvEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/emailLabel"
+        android:textColor="@color/medium_dark_grey"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="@+id/auup_tvContact"
+        app:layout_constraintTop_toBottomOf="@+id/auup_etContact" />
+
+    <EditText
+        android:id="@+id/auup_etEmail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_text_box"
+        android:hint="@string/emailRequired"
+        android:paddingLeft="20dp"
+        android:textColor="@color/dark_grey"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/auup_etContact"
+        app:layout_constraintStart_toStartOf="@+id/auup_etContact"
+        app:layout_constraintTop_toBottomOf="@+id/auup_tvEmail" />
+
+    <Button
+        android:id="@+id/auup_btnSubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="32dp"
+        android:paddingTop="8dp"
+        android:paddingRight="32dp"
+        android:paddingBottom="8dp"
+        android:text="@string/submit"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/auup_etEmail" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

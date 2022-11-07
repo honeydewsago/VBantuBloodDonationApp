@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/formbg"
+    tools:context=".AppointmentDetailActivity">
+
+
+
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/aad_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                android:background="#C83E4D"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Appointment Details"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </androidx.appcompat.widget.Toolbar>
+
+            <TextView
+                android:id="@+id/aad_tvTitle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Appointment information cannot be changed."
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/aad_toolbar" />
+
+            <TextView
+                android:id="@+id/aad_tvFullNameTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
+                android:text="@string/fullNameLabel"
+                android:textColor="@color/medium_dark_grey"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/aad_tvTitle" />
+
+            <TextView
+                android:id="@+id/aad_tvFullName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/text_box"
+                android:hint="@string/fullNameInput"
+                android:paddingLeft="10dp"
+                android:paddingTop="4dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="4dp"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/aad_tvFullNameTitle" />
+
+            <TextView
+                android:id="@+id/aad_tvIcNoTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
+                android:text="@string/icLabel"
+                android:textColor="@color/medium_dark_grey"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/aad_tvFullName" />
+
+            <TextView
+                android:id="@+id/aad_tvIcNo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/text_box"
+                android:hint="@string/icNo"
+                android:paddingLeft="10dp"
+                android:paddingTop="4dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="4dp"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/aad_tvIcNoTitle" />
+
+
+            <TextView
+                android:id="@+id/aad_tvContactNoTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/contactNoLabel"
+                android:textColor="@color/medium_dark_grey"
+                android:layout_marginTop="16dp"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="@+id/aad_tvIcNo"
+                app:layout_constraintStart_toStartOf="@+id/aad_tvIcNo"
+                app:layout_constraintTop_toBottomOf="@+id/aad_tvIcNo" />
+
+            <TextView
+                android:id="@+id/aad_tvContactNo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/contactNoExp"
+                android:inputType="number"
+                android:background="@drawable/text_box"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/aad_tvContactNoTitle"
+                app:layout_constraintStart_toStartOf="@+id/aad_tvContactNoTitle"
+                app:layout_constraintTop_toBottomOf="@+id/aad_tvContactNoTitle" />
+
+            <TextView
+                android:id="@+id/aad_tvEmailTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/emailLabel"
+                android:textColor="@color/medium_dark_grey"
+                android:textSize="15sp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/aad_tvContactNo"
+                app:layout_constraintStart_toStartOf="@+id/aad_tvContactNo"
+                app:layout_constraintTop_toBottomOf="@+id/aad_tvContactNo" />
+
+            <TextView
+                android:id="@+id/aad_tvEmail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/text_box"
+                android:hint="@string/enterYourEmailHere"
+                android:inputType="textEmailAddress"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/aad_tvEmailTitle"
+                app:layout_constraintStart_toStartOf="@+id/aad_tvEmailTitle"
+                app:layout_constraintTop_toBottomOf="@+id/aad_tvEmailTitle" />
+
+            <TextView
+                android:id="@+id/aad_tvAddressTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/addressLabel"
+                android:textColor="@color/medium_dark_grey"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="@+id/aad_tvContactNo"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/aad_tvContactNo"
+                app:layout_constraintTop_toBottomOf="@+id/aad_tvEmail" />
+
+            <TextView
+                android:id="@+id/aad_tvAddress"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/text_box"
+                android:hint="House Address"
+                android:gravity="clip_horizontal"
+                android:lines="3"
+                android:paddingLeft="10dp"
+                android:paddingTop="4dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="4dp"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/aad_tvAddressTitle"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/aad_tvAddressTitle"
+                app:layout_constraintTop_toBottomOf="@+id/aad_tvAddressTitle" />
+
+            <TextView
+                android:id="@+id/aad_tvGender"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/gender"
+                android:textColor="@color/medium_dark_grey"
+                android:textSize="15sp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/aad_tvAddress"
+                app:layout_constraintStart_toStartOf="@+id/aad_tvAddress"
+                app:layout_constraintTop_toBottomOf="@+id/aad_tvAddress" />
+
+
+            <RadioGroup
+                android:id="@+id/aad_rgGender"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/aad_tvGender"
+                app:layout_constraintStart_toStartOf="@+id/aad_tvGender"
+                app:layout_constraintEnd_toEndOf="@+id/aad_tvGender"
+                >
+
+                <RadioButton
+                    android:id="@+id/aad_rbFemale"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:text="@string/female" />
+
+                <RadioButton
+                    android:id="@+id/aad_rbMale"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:text="@string/male"/>
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/aad_tvCenterTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/bloodDonationCenter"
+                android:textSize="15sp"
+                android:textColor="@color/medium_dark_grey"
+                android:layout_marginTop="16sp"
+                app:layout_constraintEnd_toEndOf="@+id/aad_rgGender"
+                app:layout_constraintStart_toStartOf="@+id/aad_rgGender"
+                app:layout_constraintTop_toBottomOf="@+id/aad_rgGender" />
+
+            <TextView
+                android:id="@+id/aad_tvBloodDonationCenter"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/text_box"
+                android:text="Penang Adventist Hospital"
+                android:textColor="@color/medium_dark_grey"
+                android:textAlignment="center"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/aad_tvCenterTitle"
+                app:layout_constraintStart_toStartOf="@+id/aad_tvCenterTitle"
+                app:layout_constraintTop_toBottomOf="@+id/aad_tvCenterTitle" />
+
+            <TextView
+                android:id="@+id/aad_tvAppointmentDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/appointmentDateLabel"
+                android:textColor="@color/medium_dark_grey"
+                android:textSize="15sp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/aad_tvBloodDonationCenter"
+                app:layout_constraintStart_toStartOf="@+id/aad_tvBloodDonationCenter"
+                app:layout_constraintTop_toBottomOf="@+id/aad_tvBloodDonationCenter" />
+
+            <TextView
+                android:id="@+id/aad_tvPickDate"
+                style="?android:spinnerStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/text_box"
+                android:drawableRight="@drawable/ic_baseline_calendar"
+                android:text="@string/dateFormat"
+                android:textColor="@color/medium_dark_grey"
+                android:textAlignment="center"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/aad_tvAppointmentDate"
+                app:layout_constraintStart_toStartOf="@+id/aad_tvAppointmentDate"
+                app:layout_constraintTop_toBottomOf="@+id/aad_tvAppointmentDate" />
+
+            <TextView
+                android:id="@+id/aad_tvAppointmentTimeTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/appointmentTimeLabel"
+                android:textColor="@color/medium_dark_grey"
+                android:textSize="15sp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/aad_tvPickDate"
+                app:layout_constraintStart_toStartOf="@+id/aad_tvPickDate"
+                app:layout_constraintTop_toBottomOf="@+id/aad_tvPickDate" />
+
+            <TextView
+                android:id="@+id/aad_tvAppointmentTime"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/text_box"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:paddingTop="4dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="4dp"
+                app:layout_constraintEnd_toEndOf="@+id/aad_tvAppointmentTimeTitle"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/aad_tvAppointmentTimeTitle"
+                app:layout_constraintTop_toBottomOf="@+id/aad_tvAppointmentTimeTitle"></TextView>
+
+            <TextView
+                android:id="@+id/aad_tvBloodGroup"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/bloodGroupLabel"
+                android:textColor="@color/medium_dark_grey"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="@+id/aad_tvAppointmentTime"
+                app:layout_constraintStart_toStartOf="@+id/aad_tvAppointmentTimeTitle"
+                app:layout_constraintTop_toBottomOf="@+id/aad_tvAppointmentTime" />
+
+            <TextView
+                android:id="@+id/aad_tvPickBlood"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/text_box"
+                android:textColor="@color/medium_dark_grey"
+                android:text="@string/bloodA"
+                android:textAlignment="center"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/aad_tvBloodGroup"
+                app:layout_constraintStart_toStartOf="@+id/aad_tvBloodGroup"
+                app:layout_constraintTop_toBottomOf="@+id/aad_tvBloodGroup" />
+
+            <TextView
+                android:id="@+id/aad_tvDonateHistory"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/bloodDonationHistoryQuestion"
+                android:textColor="@color/medium_dark_grey"
+                android:textSize="15sp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/aad_tvPickBlood"
+                app:layout_constraintStart_toStartOf="@+id/aad_tvPickBlood"
+                app:layout_constraintTop_toBottomOf="@+id/aad_tvPickBlood" />
+
+            <RadioGroup
+                android:id="@+id/aad_rgDonateHistory"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/aad_tvDonateHistory"
+                app:layout_constraintStart_toStartOf="@+id/aad_tvDonateHistory"
+                app:layout_constraintEnd_toEndOf="@+id/aad_tvDonateHistory"
+
+                >
+
+                <RadioButton
+                    android:id="@+id/aad_rbDonateHistoryYes"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:text="@string/yes" />
+
+                <RadioButton
+                    android:id="@+id/aad_rbDonateHistoryNo"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:text="@string/no"/>
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/aad_tvReminder"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/reminder"
+                android:textColor="@color/dark_grey"
+                android:textSize="15sp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/aad_rgDonateHistory"
+                app:layout_constraintStart_toStartOf="@+id/aad_rgDonateHistory"
+                app:layout_constraintTop_toBottomOf="@+id/aad_rgDonateHistory" />
+
+            <TextView
+                android:id="@+id/aad_tvReminder1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_done"
+                android:lines="2"
+                android:text="@string/reminder1"
+                android:textSize="12sp"
+                android:padding="8dp"
+                android:textColor="@color/dark_grey"
+                android:background="#99FFFFFF"
+                android:layout_marginTop="8dp"
+                android:drawablePadding="8dp"
+                app:layout_constraintStart_toStartOf="@+id/aad_tvReminder"
+                app:layout_constraintTop_toBottomOf="@+id/aad_tvReminder"
+                app:layout_constraintEnd_toEndOf="@id/aad_tvReminder"/>
+
+            <TextView
+                android:id="@+id/aad_tvReminder2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_done"
+                android:lines="2"
+                android:text="@string/reminder2"
+                android:textSize="12sp"
+                android:padding="8dp"
+                android:drawablePadding="8dp"
+                android:textColor="@color/dark_grey"
+                android:background="#99FFFFFF"
+                app:layout_constraintTop_toBottomOf="@+id/aad_tvReminder1"
+                app:layout_constraintStart_toStartOf="@+id/aad_tvReminder1"
+                app:layout_constraintEnd_toEndOf="@+id/aad_tvReminder1"
+                />
+
+            <TextView
+                android:id="@+id/aad_tvReminder3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_done"
+                android:lines="2"
+                android:text="@string/reminder3"
+                android:textSize="12sp"
+                android:padding="8dp"
+                android:drawablePadding="8dp"
+                android:gravity="center_vertical"
+                android:textColor="@color/dark_grey"
+                android:background="#99FFFFFF"
+                app:layout_constraintTop_toBottomOf="@+id/aad_tvReminder2"
+                app:layout_constraintStart_toStartOf="@+id/aad_tvReminder2"
+                app:layout_constraintEnd_toEndOf="@+id/aad_tvReminder2"
+                />
+
+            <TextView
+                android:id="@+id/aad_tvReminder4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_done"
+                android:lines="2"
+                android:text="@string/reminder4"
+                android:textSize="12sp"
+                android:padding="8dp"
+                android:drawablePadding="8dp"
+                android:gravity="center_vertical"
+                android:textColor="@color/dark_grey"
+                android:background="#99FFFFFF"
+                app:layout_constraintTop_toBottomOf="@+id/aad_tvReminder3"
+                app:layout_constraintStart_toStartOf="@+id/aad_tvReminder3"
+                app:layout_constraintEnd_toEndOf="@+id/aad_tvReminder3"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </TableLayout>
+
+
+
+
+
+</ScrollView>

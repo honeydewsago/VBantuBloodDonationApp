@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UpdateOrganiserProfile"
+    android:background="@drawable/formbg">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/auop_tbToolBar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:actionBarSize"
+        android:background="@color/red"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/auop_tvToolBarTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:text="@string/updateProfile"
+            android:textColor="@color/white"/>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <TextView
+        android:id="@+id/auop_tvOrganisationCoverPhoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/organisationCoverPhoto"
+        android:textColor="@color/medium_dark_grey"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="30dp"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/auop_tbToolBar" />
+
+    <ImageView
+        android:id="@+id/auop_ivOrganisationCoverPhoto"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/placeholder"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/auop_tvOrganisationCoverPhoto" />
+
+    <Button
+        android:id="@+id/auop_btnUploadImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/uploadImage"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/auop_ivOrganisationCoverPhoto" />
+
+    <TextView
+        android:id="@+id/auop_tvPersonInCharge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/personInCharge"
+        android:textColor="@color/medium_dark_grey"
+        android:textSize="16sp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/auop_btnUploadImage" />
+
+    <EditText
+        android:id="@+id/auop_etPersonInCharge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_text_box"
+        android:text=""
+        android:hint="@string/fullname"
+        android:textColor="@color/dark_grey"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:paddingLeft="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/auop_tvPersonInCharge" />
+
+    <TextView
+        android:id="@+id/auop_tvIcNo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/icLabel"
+        android:textColor="@color/medium_dark_grey"
+        android:textSize="16sp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="@+id/auop_tvPersonInCharge"
+        app:layout_constraintTop_toBottomOf="@+id/auop_etPersonInCharge" />
+
+    <EditText
+        android:id="@+id/auop_etIcNo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_text_box"
+        android:hint="@string/icNo"
+        android:paddingLeft="20dp"
+        android:text=""
+        android:textColor="@color/dark_grey"
+        app:layout_constraintEnd_toEndOf="@+id/auop_etPersonInCharge"
+        app:layout_constraintStart_toStartOf="@+id/auop_etPersonInCharge"
+        app:layout_constraintTop_toBottomOf="@+id/auop_tvIcNo" />
+
+    <TextView
+        android:id="@+id/auop_tvContactNo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/contactNoLabel"
+        android:textColor="@color/medium_dark_grey"
+        android:textSize="16sp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="@+id/auop_tvIcNo"
+        app:layout_constraintTop_toBottomOf="@+id/auop_etIcNo" />
+
+    <EditText
+        android:id="@+id/auop_etContactNo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_text_box"
+        android:hint="@string/contactNo"
+        android:paddingLeft="20dp"
+        android:text=""
+        android:textColor="@color/dark_grey"
+        app:layout_constraintEnd_toEndOf="@+id/auop_etIcNo"
+        app:layout_constraintStart_toStartOf="@+id/auop_etIcNo"
+        app:layout_constraintTop_toBottomOf="@+id/auop_tvContactNo" />
+
+    <TextView
+        android:id="@+id/auop_tvEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/emailLabel"
+        android:textColor="@color/medium_dark_grey"
+        android:textSize="16sp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="@+id/auop_tvContactNo"
+        app:layout_constraintTop_toBottomOf="@+id/auop_etContactNo" />
+
+    <EditText
+        android:id="@+id/auop_etEmail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_text_box"
+        android:hint="@string/email"
+        android:paddingLeft="20dp"
+        android:text=""
+        android:textColor="@color/dark_grey"
+        app:layout_constraintEnd_toEndOf="@+id/auop_etContactNo"
+        app:layout_constraintStart_toStartOf="@+id/auop_etContactNo"
+        app:layout_constraintTop_toBottomOf="@+id/auop_tvEmail" />
+
+    <TextView
+        android:id="@+id/auop_tvAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/addressLabel"
+        android:textColor="@color/medium_dark_grey"
+        android:textSize="16sp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="@+id/auop_tvEmail"
+        app:layout_constraintTop_toBottomOf="@+id/auop_etEmail" />
+
+    <EditText
+        android:id="@+id/auop_etAddress"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_text_box"
+        android:hint="@string/address"
+        android:paddingLeft="20dp"
+        android:lines="3"
+        android:gravity="start"
+        android:text=""
+        android:textColor="@color/dark_grey"
+        app:layout_constraintEnd_toEndOf="@+id/auop_etEmail"
+        app:layout_constraintStart_toStartOf="@+id/auop_etEmail"
+        app:layout_constraintTop_toBottomOf="@+id/auop_tvAddress" />
+
+
+    <Button
+        android:id="@+id/auop_btnSubmit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/submit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/auop_btnUploadImage"
+        app:layout_constraintStart_toStartOf="@+id/auop_btnUploadImage"
+        app:layout_constraintTop_toBottomOf="@+id/auop_etAddress" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

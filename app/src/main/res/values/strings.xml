@@ -191,6 +191,35 @@
     <string name="bloodDonationAmount">Blood Donation Amount:</string>
     <string name="placeNo">Place No</string>
     <string name="donorNo">1</string>
+    <string name="hereToHelp">We\'re here to help!</string>
+    <string name="findMoreHelp">Find more help</string>
+    <string name="contactUsThroughEmail">Contact us through email:</string>
+    <string name="vbantuEmail"><i>vbantumalaysia@gmail.com</i></string>
+    <string name="needMoreHelp">Need more help?</string>
+    <string name="fasterWaytoAddressIssue">Faster way to address your issue</string>
+    <string name="responseTime">Response time: 2-3 working days</string>
+    <string name="emailUs">Email Us</string>
+    <string name="organisationCoverPhoto">Organisation Cover Photo:</string>
+    <string name="uploadImage">Upload Image</string>
+    <string name="personInCharge">Person In Charge:</string>
+    <string name="avatarLabel">Avatar:</string>
+    <string name="usernameLabel">Username:</string>
+    <string name="user_type_bd">Blood Donor</string>
+    <string name="user_type_o">Organiser</string>
+    <string name="info_type_o">Organiser Information</string>
+    <string name="info_type_p">Personal Information</string>
+    <string name="my_profile_title">My Profile</string>
+    <string name="user_type">User Type</string>
+    <string name="personal_information">Personal Information</string>
+    <string name="ic_no">IC No.</string>
+    <string name="date_of_birth">Date of birth</string>
+    <string name="blood_group">Blood Group</string>
+    <string name="email_address">alicewong2304@gmail.com</string>
+    <string name="company">Company</string>
+    <string name="contact_no">Contact No.</string>
+    <string name="hospital">Penang Adventist Hospital</string>
+    <string name="view_appointment_history">View Appointment History</string>
+    <string name="my_rewards">My Rewards</string>
 
     <string-array name="bloodGroupValues">
         <item>Select blood type</item>
@@ -225,4 +254,5 @@
         <item>450 ml</item>
         <item>500 ml</item>
     </string-array>
+
 </resources>
