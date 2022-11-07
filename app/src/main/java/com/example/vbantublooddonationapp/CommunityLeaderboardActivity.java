@@ -45,9 +45,7 @@ public class CommunityLeaderboardActivity extends AppCompatActivity {
         //initialise view model
         mAppointmentViewModel = new ViewModelProvider(this).get(AppointmentViewModel.class);
 
-        LiveData<List<Appointment>> mAppointmentCompletedList = mAppointmentViewModel.getAllCompletedAppointment();
-        //mAppointmentCompleted = mAppointmentCompletedList.get(0);
-        //mCommunityLeaderboardBinding.  .setText(mAppointmentCompleted.());
+        LiveData<List<Appointment>> mAppointmentList = mAppointmentViewModel.getAllCompletedAppointment();
 
 
     }

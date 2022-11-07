@@ -100,7 +100,7 @@ public class UpdateOrganiserProfile extends AppCompatActivity {
         binding.auopBtnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                updateProfile();
+                updateProfile(mOrganiser);
             }
         });
 
@@ -115,7 +115,7 @@ public class UpdateOrganiserProfile extends AppCompatActivity {
         binding.auopEtAddress.setText(organiser.getAddress());
     }
 
-    private void updateProfile() {
+    private void updateProfile(Organiser organiser) {
         final ProgressDialog progressDialog = new ProgressDialog(UpdateOrganiserProfile.this);
         progressDialog.setTitle("Uploading......");
         progressDialog.setMessage("Please Wait");
@@ -128,7 +128,6 @@ public class UpdateOrganiserProfile extends AppCompatActivity {
         String picContact = binding.auopEtContactNo.getText().toString();
         String picEmail = binding.auopEtEmail.getText().toString();
         String organisationAddress = binding.auopEtAddress.getText().toString();
-
 
         if (picName.isEmpty()){
             binding.auopEtPersonInCharge.setError(getText(R.string.nameOfPicRequired));
@@ -154,12 +153,6 @@ public class UpdateOrganiserProfile extends AppCompatActivity {
             return;
         }
 
-        if (picContact.length()<10){
-            binding.auopEtContactNo.setError(getText(R.string.contactNumAtLeast10Char));
-            binding.auopEtContactNo.requestFocus();
-            return;
-        }
-
         if (picEmail.isEmpty()){
             binding.auopEtEmail.setError(getText(R.string.emailRequired));
             binding.auopEtEmail.requestFocus();
@@ -179,12 +172,7 @@ public class UpdateOrganiserProfile extends AppCompatActivity {
         }
 
         //update room database
-        mOrganiser.setPicName(picName);
-        mOrganiser.setPicIcNo(picIC);
-        mOrganiser.setContact(picContact);
-        mOrganiser.setEmail(picEmail);
-        mOrganiser.setAddress(organisationAddress);
-        mOrganiserViewModel.updateOrganiser(mOrganiser);
+
 
 
 
@@ -209,7 +197,7 @@ public class UpdateOrganiserProfile extends AppCompatActivity {
             });
         } else {
             progressDialog.dismiss();
-            Toast.makeText(this, "Profile updated successfully", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Profile updated", Toast.LENGTH_SHORT).show();
             finish();
         }
     }

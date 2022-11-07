@@ -130,20 +130,4 @@ public class OrganiserRepository {
         }
     }
 
-    public void update(Organiser organiser) {
-        new OrganiserRepository.updateAsyncTask(mOrganiserDao).execute(organiser);
-    }
-
-    private static class updateAsyncTask extends AsyncTask<Organiser, Void, Void>{
-        private OrganiserDao mSyncTaskDao;
-
-        updateAsyncTask(OrganiserDao dao){mSyncTaskDao = dao;}
-
-        @Override
-        protected Void doInBackground(Organiser... organisers) {
-            mSyncTaskDao.update(organisers[0]);
-            return null;
-        }
-    }
-
 }

@@ -37,5 +37,4 @@ public class UserViewModel extends AndroidViewModel {
         return mRepository.getUserById(id);
     }
 
-    public void updateUser(User user){mRepository.update(user);}
 }

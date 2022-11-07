@@ -44,5 +44,4 @@ public class OrganiserViewModel extends AndroidViewModel {
         return mRepository.getOrganiserById(id);
     }
 
-    public void updateOrganiser(Organiser organiser){mRepository.update(organiser);}
 }
