@@ -74,27 +74,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Locati
         holder.mTvOrganiser.setText(organiser.getCompanyName());
 
         String imageUrl = getImageLink(organiser.getOrganiserID());
-        if (imageUrl != null) {
-            mStorageReference = FirebaseStorage.getInstance("gs://vbantu-blood-donation-app.appspot.com/").getReference("Organiser/"+ organiser.getOrganiserID() +"/"+imageUrl);
-
-            try {
-                File localFile = File.createTempFile("tempfile", ".jpg");
-                mStorageReference.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                        Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                        holder.mIvOrganiserImage.setImageBitmap(bitmap);
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(mActivity, "Failed to retrieve image", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        setImage(imageUrl, holder.mIvOrganiserImage, organiser.getOrganiserID());
 
         String address = organiser.getAddress();
         if (address.length() > 50) {
@@ -158,7 +138,31 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Locati
         mActivity.startActivity(i);
     }
 
-    public String getImageLink(int id) {
+    private void setImage(String imageUrl, ImageView imageView, int organiserID) {
+        if (imageUrl != null) {
+            mStorageReference = FirebaseStorage.getInstance("gs://vbantu-blood-donation-app.appspot.com/").getReference("Organiser/"+ organiserID +"/"+imageUrl);
+
+            try {
+                File localFile = File.createTempFile("tempfile", ".jpg");
+                mStorageReference.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                        Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                        imageView.setImageBitmap(bitmap);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(mActivity, "Failed to retrieve image", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private String getImageLink(int id) {
         for (OrganiserImage organiserImage : mOrganiserImageList) {
             if (Integer.parseInt(organiserImage.getOrganiserID()) == id) {
                 return organiserImage.getUrl();
