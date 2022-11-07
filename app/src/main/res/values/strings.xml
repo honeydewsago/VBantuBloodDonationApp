@@ -191,6 +191,19 @@
     <string name="bloodDonationAmount">Blood Donation Amount:</string>
     <string name="placeNo">Place No</string>
     <string name="donorNo">1</string>
+    <string name="hereToHelp">We\'re here to help!</string>
+    <string name="findMoreHelp">Find more help</string>
+    <string name="contactUsThroughEmail">Contact us through email:</string>
+    <string name="vbantuEmail"><i>vbantumalaysia@gmail.com</i></string>
+    <string name="needMoreHelp">Need more help?</string>
+    <string name="fasterWaytoAddressIssue">Faster way to address your issue</string>
+    <string name="responseTime">Response time: 2-3 working days</string>
+    <string name="emailUs">Email Us</string>
+    <string name="organisationCoverPhoto">Organisation Cover Photo:</string>
+    <string name="uploadImage">Upload Image</string>
+    <string name="personInCharge">Person In Charge:</string>
+    <string name="avatarLabel">Avatar:</string>
+    <string name="usernameLabel">Username:</string>
 
     <string-array name="bloodGroupValues">
         <item>Select blood type</item>
@@ -225,4 +238,5 @@
         <item>450 ml</item>
         <item>500 ml</item>
     </string-array>
+
 </resources>
