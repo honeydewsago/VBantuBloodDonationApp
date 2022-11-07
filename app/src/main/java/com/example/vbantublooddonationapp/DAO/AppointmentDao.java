@@ -6,10 +6,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-
 import com.example.vbantublooddonationapp.Model.Appointment;
-import com.example.vbantublooddonationapp.Model.BloodRequest;
-import com.example.vbantublooddonationapp.Model.Organiser;
 
 import java.util.List;
 
@@ -33,4 +30,7 @@ public interface AppointmentDao {
 
     @Query("Select * from appointment_table where appointmentID=(:id)")
     List<Appointment> getAppointmentById(int id);
+
+    @Query("Select * from appointment_table where userID=(:id)")
+    LiveData<List<Appointment>> getAppointmentByUserID(int id);
 }

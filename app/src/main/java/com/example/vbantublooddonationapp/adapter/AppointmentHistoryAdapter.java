@@ -9,15 +9,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vbantublooddonationapp.AppointmentDetailActivity;
 import com.example.vbantublooddonationapp.Model.Appointment;
 import com.example.vbantublooddonationapp.Model.Organiser;
+import com.example.vbantublooddonationapp.R;
 import com.example.vbantublooddonationapp.ViewModel.OrganiserViewModel;
 import com.example.vbantublooddonationapp.databinding.CardAppointmentBinding;
-
 
 import java.util.List;
 
@@ -52,7 +51,7 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
         String bloodAmount;
 
         holder.mTvBDC.setText(getOrganiserName(appointment.getOrganiserID()));
-        holder.mTvAppointmentDate.setText(appointment.getAppointmentDate());
+        holder.mTvAppointmentDate.setText(getFullDate(appointment.getAppointmentDate()));
         holder.mTvAppointmentTime.setText(appointment.getAppointmentTime());
 
         appointmentStatus = appointment.getStatus();
@@ -61,7 +60,7 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
             holder.mTvStatusOngoing.setVisibility(View.VISIBLE);
             holder.mTvStatusComplete.setVisibility(View.GONE);
         }else{
-            bloodAmount = "Blood amount: " + appointment.getBloodAmt() + "ml";
+            bloodAmount = "Blood amount: " + appointment.getBloodAmt();
             holder.mTvBloodAmount.setVisibility(View.VISIBLE);
             holder.mTvBloodAmount.setText(bloodAmount);
             holder.mTvStatusOngoing.setVisibility(View.GONE);
@@ -120,5 +119,44 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
         List<Organiser> organiserList = mOrganiserViewModel.getOrganiserById(id);
         Organiser organiser = organiserList.get(0);
         return organiser.getCompanyName();
+    }
+
+    public String getFullDate(String dateTime) {
+        String year = dateTime.substring(0,4);
+        int month = Integer.parseInt(dateTime.substring(4,6));
+        String day = dateTime.substring(6,8);
+
+        return day + " "+ getMonthName(month) + " " + year;
+    }
+
+    public String getMonthName(int month_value){
+        switch (month_value) {
+            case 1:
+                return mActivity.getResources().getString(R.string.january);
+            case 2:
+                return mActivity.getResources().getString(R.string.february);
+            case 3:
+                return mActivity.getResources().getString(R.string.march);
+            case 4:
+                return mActivity.getResources().getString(R.string.april);
+            case 5:
+                return mActivity.getResources().getString(R.string.may);
+            case 6:
+                return mActivity.getResources().getString(R.string.june);
+            case 7:
+                return mActivity.getResources().getString(R.string.july);
+            case 8:
+                return mActivity.getResources().getString(R.string.august);
+            case 9:
+                return mActivity.getResources().getString(R.string.september);
+            case 10:
+                return mActivity.getResources().getString(R.string.october);
+            case 11:
+                return mActivity.getResources().getString(R.string.november);
+            case 12:
+                return mActivity.getResources().getString(R.string.december);
+            default:
+                return mActivity.getResources().getString(R.string.month);
+        }
     }
 }

@@ -2,17 +2,13 @@ package com.example.vbantublooddonationapp.ViewModel;
 
 import android.app.Application;
 
-import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.example.vbantublooddonationapp.Model.Appointment;
-import com.example.vbantublooddonationapp.Model.BloodRequest;
-import com.example.vbantublooddonationapp.Model.Organiser;
 import com.example.vbantublooddonationapp.Repository.AppointmentRepository;
 
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public class AppointmentViewModel extends AndroidViewModel {
 
@@ -34,11 +30,12 @@ public class AppointmentViewModel extends AndroidViewModel {
         mRepository.update(appointment);
     }
 
-    public List<Appointment> getAppointmentById(int id){
-        return mRepository.getAppointmentById(id);
-    }
 
     public LiveData<List<Appointment>> getRequestByUserId(int id){
         return mRepository.getRequestByUserId(id);
+    }
+
+    public List<Appointment> getAppointmentById(int id) {
+        return mRepository.getRequestById(id);
     }
 }

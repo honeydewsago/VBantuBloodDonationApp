@@ -2,24 +2,17 @@ package com.example.vbantublooddonationapp;
 
 import static android.content.Context.MODE_PRIVATE;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
-import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -29,10 +22,7 @@ import com.example.vbantublooddonationapp.ViewModel.OrganiserViewModel;
 import com.example.vbantublooddonationapp.ViewModel.UserViewModel;
 import com.example.vbantublooddonationapp.databinding.FragmentProfileBinding;
 
-
 import java.util.List;
-import java.util.Objects;
-import java.util.Set;
 
 public class ProfileFragment extends Fragment {
     private final String USERID_KEY = "userid", USERTYPE_KEY = "usertype";
@@ -45,8 +35,6 @@ public class ProfileFragment extends Fragment {
     private OrganiserViewModel mOrganiserViewModel;
     private FragmentProfileBinding profileBinding;
     Toolbar toolbar;
-    TextView mTvAppointmentHistory, mTvRewards;
-    ImageView mIvQrCode;
 
 
 
