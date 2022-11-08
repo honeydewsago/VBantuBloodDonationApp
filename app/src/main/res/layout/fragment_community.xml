@@ -94,7 +94,7 @@
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+                app:layout_constraintTop_toBottomOf="@+id/fc_rvLeaderboard" />
 
             <ImageView
                 android:id="@+id/fc_ivViewFullRanking"

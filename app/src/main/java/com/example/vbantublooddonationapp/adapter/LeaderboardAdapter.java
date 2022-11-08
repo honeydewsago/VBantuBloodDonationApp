@@ -44,6 +44,7 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
     public void onBindViewHolder(@NonNull LeaderboardHolder holder, int position) {
         LeaderboardUser leaderboardUser = mLeaderboardUserList.get(position);
         holder.mTvUsername.setText(leaderboardUser.getUsername());
+        holder.mTvBloodAmt.setText(leaderboardUser.getBloodAmt()+"ml");
     }
 
     @Override
@@ -56,10 +57,12 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
 
     public class LeaderboardHolder extends RecyclerView.ViewHolder{
         private TextView mTvUsername;
+        private TextView mTvBloodAmt;
 
         public LeaderboardHolder(CardLeaderboardRowBinding itemBinding) {
             super(itemBinding.getRoot());
             mTvUsername = itemBinding.clrTvPlaceUsername;
+            mTvBloodAmt = itemBinding.clrTvPlaceBloodAmount;
         }
     }
 }

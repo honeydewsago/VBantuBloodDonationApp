@@ -13,6 +13,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.room.Database;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +32,8 @@ import com.example.vbantublooddonationapp.adapter.UrgentRequestAdapter;
 import com.example.vbantublooddonationapp.databinding.FragmentCommunityBinding;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -45,7 +48,7 @@ public class CommunityFragment extends Fragment {
     private User mUser2;
     private User mUser3;
 
-    private List<LeaderboardUser> mLeaderboardUserList;
+    private List<LeaderboardUser> top3UserList;
     private LeaderboardAdapter mLeaderboardAdapter;
 
     @Override
@@ -70,14 +73,6 @@ public class CommunityFragment extends Fragment {
         //mUser = mAppointmentCompletedList.hasObservers();
         //mCommunityNewPostBinding.acnpTvUsername.setText(mUser.getUsername());
 
-        mAppointmentViewModel = new ViewModelProvider(this).get(AppointmentViewModel.class);
-        mUserViewModel = new ViewModelProvider(this).get(UserViewModel.class);
-
-        mLeaderboardUserList = new ArrayList<>();
-        List<Appointment> appointmentList = mAppointmentViewModel.getAllCompletedAppointment();
-
-        List<User> userList = mUserViewModel.getUserList();
-
         /*
         for (int i=0; i < userList.size(); i++) {
             LeaderboardUser leaderboardUser = new LeaderboardUser();
@@ -96,19 +91,50 @@ public class CommunityFragment extends Fragment {
 
          */
 
-        LeaderboardUser user1 = new LeaderboardUser();
-        user1.setUserID(1);
-        user1.setUsername(userList.get(0).getUsername());
-        user1.setBloodAmt(20);
-        mLeaderboardUserList.add(user1);
+        mAppointmentViewModel = new ViewModelProvider(this).get(AppointmentViewModel.class);
+        mUserViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+
+        top3UserList = new ArrayList<>();
+        List<LeaderboardUser> leaderboardUserList = new ArrayList<>();
+        List<Appointment> appointmentList = mAppointmentViewModel.getAllCompletedAppointment();
+
+        List<User> userList = mUserViewModel.getUserList();
+
+        for (int i=0; i < userList.size(); i++) {
+            LeaderboardUser leaderboardUser = new LeaderboardUser();
+            leaderboardUser.setUserID(i+1);
+            leaderboardUser.setUsername(userList.get(i).getUsername());
+
+            for (int j=0; j < appointmentList.size(); j++) {
+                Appointment appointment = appointmentList.get(j);
+                int amount=0;
+                if (appointment.getUserID() == (i+1)) {
+                    amount = amount + appointment.getBloodAmt();
+
+                }
+                leaderboardUser.setBloodAmt(amount);
+            }
+
+            leaderboardUserList.add(leaderboardUser);
+        }
+
+        top3UserList = leaderboardUserList;
+        /*
+        Collections.sort(leaderboardUserList, new BloodAmountComparator());
+
+        for (int i=0; i<3; i++) {
+            top3UserList.add(leaderboardUserList.get(i));
+        }
+
+         */
 
         mLeaderboardAdapter = new LeaderboardAdapter(getActivity());
-        mLeaderboardAdapter.setLeaderboardUserList(mLeaderboardUserList);
+        mLeaderboardAdapter.setLeaderboardUserList(top3UserList);
         mCommunityBinding.fcRvLeaderboard.setAdapter(mLeaderboardAdapter);
 
         mCommunityBinding.fcRvLeaderboard.setLayoutManager(new GridLayoutManager(view.getContext(),getResources().getInteger(R.integer.grid_column_count)));
 
-        /*
+
         mCommunityBinding.fcTvViewFullRanking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -132,8 +158,13 @@ public class CommunityFragment extends Fragment {
                 startActivity(i);
             }
         });
+    }
 
-         */
+    public class BloodAmountComparator implements Comparator<LeaderboardUser> {
+        @Override
+        public int compare(LeaderboardUser u1, LeaderboardUser u2) {
+            return u1.getBloodAmt() - u2.getBloodAmt();
+        }
     }
 }
 
