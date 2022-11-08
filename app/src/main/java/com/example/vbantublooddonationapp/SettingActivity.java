@@ -42,6 +42,12 @@ public class SettingActivity extends AppCompatActivity {
             mUserType = mPreferences.getString(USERTYPE_KEY, "user");
         }
 
+        binding.asBtnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         binding.asTvUpdateProfile.setOnClickListener(new View.OnClickListener() {
             @Override

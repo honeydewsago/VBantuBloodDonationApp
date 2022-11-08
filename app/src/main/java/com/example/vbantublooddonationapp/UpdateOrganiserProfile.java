@@ -11,28 +11,35 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Patterns;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.vbantublooddonationapp.Model.Organiser;
+import com.example.vbantublooddonationapp.Model.OrganiserImage;
 import com.example.vbantublooddonationapp.ViewModel.OrganiserViewModel;
 import com.example.vbantublooddonationapp.databinding.ActivityMakeAppointmentBinding;
 import com.example.vbantublooddonationapp.databinding.ActivityUpdateOrganiserProfileBinding;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -84,6 +91,7 @@ public class UpdateOrganiserProfile extends AppCompatActivity {
         List<Organiser> organiserList = mOrganiserViewModel.getOrganiserById(mUserID);
         mOrganiser = organiserList.get(0);
 
+
         //initialise organiser details
         initProfileDetails(mOrganiser);
 
@@ -108,6 +116,22 @@ public class UpdateOrganiserProfile extends AppCompatActivity {
     }
 
     private void initProfileDetails(Organiser organiser) {
+        DatabaseReference mRef = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("Organiser").child(String.valueOf(mOrganiser.getOrganiserID()));
+
+        mRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                OrganiserImage organiserImage = snapshot.getValue(OrganiserImage.class);
+                if (organiserImage != null) {
+                    setImage(organiserImage.getUrl(), mUserID);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         binding.auopEtPersonInCharge.setText(organiser.getPicName());
         binding.auopEtIcNo.setText(organiser.getPicIcNo());
         binding.auopEtContactNo.setText(organiser.getContact());
@@ -121,7 +145,6 @@ public class UpdateOrganiserProfile extends AppCompatActivity {
         progressDialog.setMessage("Please Wait");
         progressDialog.show();
 
-        String organiserCenter = mOrganiser.getCompanyName();
 
         String picName = binding.auopEtPersonInCharge.getText().toString();
         String picIC = binding.auopEtIcNo.getText().toString();
@@ -210,7 +233,7 @@ public class UpdateOrganiserProfile extends AppCompatActivity {
         } else {
             progressDialog.dismiss();
             Toast.makeText(this, "Profile updated successfully", Toast.LENGTH_SHORT).show();
-            finish();
+            startActivity(new Intent(this, HomeActivity.class));
         }
     }
 
@@ -223,6 +246,31 @@ public class UpdateOrganiserProfile extends AppCompatActivity {
 
         }
         return imageURL;
+    }
+
+
+    private void setImage(String imageUrl,  int organiserID) {
+        if (imageUrl != null) {
+            StorageReference mStorageReference = FirebaseStorage.getInstance("gs://vbantu-blood-donation-app.appspot.com/").getReference("Organiser/"+ organiserID +"/"+imageUrl);
+
+            try {
+                File localFile = File.createTempFile("tempfile", ".jpg");
+                mStorageReference.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                        Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                        binding.auopIvOrganisationCoverPhoto.setImageBitmap(bitmap);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(UpdateOrganiserProfile.this, "Failed to retrieve image", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private void selectImage() {
