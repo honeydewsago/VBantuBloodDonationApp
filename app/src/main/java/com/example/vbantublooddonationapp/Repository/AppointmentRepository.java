@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData;
 
 import com.example.vbantublooddonationapp.BloodRoomDatabase;
 import com.example.vbantublooddonationapp.DAO.AppointmentDao;
+import com.example.vbantublooddonationapp.DAO.UserDao;
 import com.example.vbantublooddonationapp.Model.Appointment;
 
 import java.util.List;
@@ -148,8 +149,29 @@ public class AppointmentRepository {
         }
     }
 
-    public LiveData<List<Appointment>> getAllCompletedAppointment() {
-        return mAppointmentDao.getAllCompletedAppointment();
+    public List<Appointment> getAllCompletedAppointment() {
+        List<Appointment> list = null;
+        try {
+            list = new getAllCompletedAppointmentAsyncTask(mAppointmentDao).execute().get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 
+    private static class getAllCompletedAppointmentAsyncTask extends AsyncTask<Void, Void, List<Appointment>> {
+        private AppointmentDao mSyncTaskDao;
+
+        getAllCompletedAppointmentAsyncTask(AppointmentDao dao) {
+            mSyncTaskDao = dao;
+        }
+
+        @Override
+        protected List<Appointment> doInBackground(Void...params) {
+            List<Appointment> userList = mSyncTaskDao.getAllCompletedAppointment();
+            return userList;
+        }
+    }
 }

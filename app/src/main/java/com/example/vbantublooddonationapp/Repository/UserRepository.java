@@ -145,5 +145,30 @@ public class UserRepository {
     }
 
 
+    public List<User> getUserList() {
+        List<User> list = null;
+        try {
+            list = new getUserListAsyncTask(mUserDao).execute().get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    private static class getUserListAsyncTask extends AsyncTask<Void, Void, List<User>> {
+        private UserDao mSyncTaskDao;
+
+        getUserListAsyncTask(UserDao dao) {
+            mSyncTaskDao = dao;
+        }
+
+        @Override
+        protected List<User> doInBackground(Void...params) {
+            List<User> userList = mSyncTaskDao.getUserList();
+            return userList;
+        }
+    }
 
 }

@@ -31,12 +31,12 @@ public class Appointment {
     public String donationBefore;
 
     @ColumnInfo(name = "bloodAmt")
-    public String bloodAmt;
+    public int bloodAmt;
 
     @ColumnInfo(name = "status")
     public String status;
 
-    public Appointment(int userID, int organiserID, String address, String appointmentTime, String appointmentDate, String donationBefore, String bloodAmt, String status) {
+    public Appointment(int userID, int organiserID, String address, String appointmentTime, String appointmentDate, String donationBefore, int bloodAmt, String status) {
         this.userID = userID;
         this.organiserID = organiserID;
         this.address = address;
@@ -103,11 +103,11 @@ public class Appointment {
         this.donationBefore = donationBefore;
     }
 
-    public String getBloodAmt() {
+    public int getBloodAmt() {
         return bloodAmt;
     }
 
-    public void setBloodAmt(String bloodAmt) {
+    public void setBloodAmt(int bloodAmt) {
         this.bloodAmt = bloodAmt;
     }
 

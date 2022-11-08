@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/outline_grey"
+        app:cardElevation="2dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/clr_ivPlaceBackground"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:contentDescription="@string/secondPlaceBackground"
+                android:src="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/clr_ivPlaceNo"
+                android:layout_width="50dp"
+                android:layout_height="35dp"
+                android:contentDescription="@string/placeNo"
+                android:src="@color/pink"
+                app:layout_constraintBottom_toBottomOf="@id/clr_ivPlaceBackground"
+                app:layout_constraintStart_toStartOf="@id/clr_ivPlaceBackground"
+                app:layout_constraintTop_toTopOf="@id/clr_ivPlaceBackground" />
+
+            <ImageView
+                android:id="@+id/clr_ivPlaceNoLine"
+                android:layout_width="0.5dp"
+                android:layout_height="30dp"
+                android:contentDescription="@string/line"
+                android:src="@color/medium_grey"
+                app:layout_constraintBottom_toBottomOf="@id/clr_ivPlaceBackground"
+                app:layout_constraintStart_toEndOf="@id/clr_ivPlaceNo"
+                app:layout_constraintTop_toTopOf="@id/clr_ivPlaceBackground" />
+
+            <TextView
+                android:id="@+id/clr_tvPlaceNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/_0nd"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@id/clr_ivPlaceNo"
+                app:layout_constraintEnd_toEndOf="@id/clr_ivPlaceNo"
+                app:layout_constraintStart_toStartOf="@id/clr_ivPlaceNo"
+                app:layout_constraintTop_toTopOf="@id/clr_ivPlaceNo" />
+
+            <ImageView
+                android:id="@+id/clr_ivPlaceProfilePicture"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="10dp"
+                android:contentDescription="@string/profilePicture"
+                android:src="@drawable/avatar"
+                app:layout_constraintBottom_toBottomOf="@id/clr_ivPlaceBackground"
+                app:layout_constraintStart_toEndOf="@id/clr_ivPlaceNoLine"
+                app:layout_constraintTop_toTopOf="@id/clr_ivPlaceBackground" />
+
+            <TextView
+                android:id="@+id/clr_tvPlaceUsername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="@string/username"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/clr_ivPlaceBackground"
+                app:layout_constraintStart_toEndOf="@id/clr_ivPlaceProfilePicture"
+                app:layout_constraintTop_toTopOf="@id/clr_ivPlaceBackground" />
+
+            <TextView
+                android:id="@+id/clr_tvPlaceBloodAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:text="@string/bloodAmount"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@id/clr_ivPlaceBackground"
+                app:layout_constraintEnd_toEndOf="@id/clr_ivPlaceBackground"
+                app:layout_constraintTop_toTopOf="@id/clr_ivPlaceBackground" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>
+
