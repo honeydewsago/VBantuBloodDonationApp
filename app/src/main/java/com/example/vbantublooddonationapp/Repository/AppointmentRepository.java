@@ -148,8 +148,30 @@ public class AppointmentRepository {
         }
     }
 
-    public LiveData<List<Appointment>> getAllCompletedAppointment() {
-        return mAppointmentDao.getAllCompletedAppointment();
+    public List<Appointment> getAllCompletedAppointment() {
+        List<Appointment> list = null;
+
+        try {
+            list = new getAllCompletedAppointmentAsyncTask(mAppointmentDao).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 
+    private static class getAllCompletedAppointmentAsyncTask extends AsyncTask<Void, Void, List<Appointment>> {
+        private AppointmentDao mSyncTaskDao;
+
+        getAllCompletedAppointmentAsyncTask(AppointmentDao dao) {
+            mSyncTaskDao = dao;
+        }
+
+        @Override
+        protected List<Appointment> doInBackground(Void...voids) {
+            List<Appointment> appointmentList = mSyncTaskDao.getAllCompletedAppointment();
+            return appointmentList;
+        }
+    }
 }

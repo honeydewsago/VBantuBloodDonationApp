@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,11 +20,17 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.vbantublooddonationapp.Model.Appointment;
+import com.example.vbantublooddonationapp.Model.LeaderboardUser;
+import com.example.vbantublooddonationapp.Model.OrganiserImage;
 import com.example.vbantublooddonationapp.Model.User;
 import com.example.vbantublooddonationapp.ViewModel.AppointmentViewModel;
 import com.example.vbantublooddonationapp.ViewModel.UserViewModel;
+import com.example.vbantublooddonationapp.adapter.LeaderboardAdapter;
+import com.example.vbantublooddonationapp.adapter.LocationAdapter;
+import com.example.vbantublooddonationapp.adapter.UrgentRequestAdapter;
 import com.example.vbantublooddonationapp.databinding.FragmentCommunityBinding;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -37,6 +44,9 @@ public class CommunityFragment extends Fragment {
     private User mUser1;
     private User mUser2;
     private User mUser3;
+
+    private List<LeaderboardUser> mLeaderboardUserList;
+    private LeaderboardAdapter mLeaderboardAdapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,12 +64,51 @@ public class CommunityFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        initAppointmentViewModel();
+        //initAppointmentViewModel();
 
         //LiveData<List<Appointment>> mAppointmentCompletedList = mAppointmentViewModel.getAllCompletedAppointment();
         //mUser = mAppointmentCompletedList.hasObservers();
         //mCommunityNewPostBinding.acnpTvUsername.setText(mUser.getUsername());
 
+        mAppointmentViewModel = new ViewModelProvider(this).get(AppointmentViewModel.class);
+        mUserViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+
+        mLeaderboardUserList = new ArrayList<>();
+        List<Appointment> appointmentList = mAppointmentViewModel.getAllCompletedAppointment();
+
+        List<User> userList = mUserViewModel.getUserList();
+
+        /*
+        for (int i=0; i < userList.size(); i++) {
+            LeaderboardUser leaderboardUser = new LeaderboardUser();
+            leaderboardUser.setUserID(i+1);
+            leaderboardUser.setUsername(userList.get(i).getUsername());
+
+            for (int j=0; j < appointmentList.size(); j++) {
+                Appointment appointment = appointmentList.get(j);
+                if (appointment.getUserID() == (i+1)) {
+                    leaderboardUser.setBloodAmt((leaderboardUser.getBloodAmt()+appointment.getBloodAmt()));
+                }
+            }
+
+            mLeaderboardUserList.add(leaderboardUser);
+        }
+
+         */
+
+        LeaderboardUser user1 = new LeaderboardUser();
+        user1.setUserID(1);
+        user1.setUsername(userList.get(0).getUsername());
+        user1.setBloodAmt(20);
+        mLeaderboardUserList.add(user1);
+
+        mLeaderboardAdapter = new LeaderboardAdapter(getActivity());
+        mLeaderboardAdapter.setLeaderboardUserList(mLeaderboardUserList);
+        mCommunityBinding.fcRvLeaderboard.setAdapter(mLeaderboardAdapter);
+
+        mCommunityBinding.fcRvLeaderboard.setLayoutManager(new GridLayoutManager(view.getContext(),getResources().getInteger(R.integer.grid_column_count)));
+
+        /*
         mCommunityBinding.fcTvViewFullRanking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,19 +132,13 @@ public class CommunityFragment extends Fragment {
                 startActivity(i);
             }
         });
+
+         */
     }
+}
 
-    private void initAppointmentViewModel() {
-        //initialise view model
-        mAppointmentViewModel = new ViewModelProvider(this).get(AppointmentViewModel.class);
-        mUserViewModel = new ViewModelProvider(this).get(UserViewModel.class);
-
-        //create observer object
-        final Observer<List<Appointment>> appointmentListObserver = new Observer<List<Appointment>>() {
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onChanged(List<Appointment> appointments) {
-                if (appointments.size() == 0) {
+/*
+if (appointments.size() == 0) {
                     mCommunityBinding.fcCvLeaderboard.setVisibility(View.GONE);
                 }
                 if (appointments.size() == 1) {
@@ -179,6 +222,18 @@ public class CommunityFragment extends Fragment {
                     mCommunityBinding.fcTvSecondPlaceUsername.setText(mUser3.getUsername());
                     mCommunityBinding.fcTvSecondPlaceBloodAmount.setText(thirdDonorAppointments.getBloodAmt()+"ml");
                 }
+
+private void initAppointmentViewModel() {
+        //initialise view model
+        mAppointmentViewModel = new ViewModelProvider(this).get(AppointmentViewModel.class);
+        mUserViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+
+        //create observer object
+        final Observer<List<Appointment>> appointmentListObserver = new Observer<List<Appointment>>() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onChanged(List<Appointment> appointments) {
+
             }
         };
 
@@ -186,4 +241,4 @@ public class CommunityFragment extends Fragment {
         mAppointmentViewModel.getAllCompletedAppointment().observe(getViewLifecycleOwner(), appointmentListObserver);
 
     }
-}
+ */

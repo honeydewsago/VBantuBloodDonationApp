@@ -225,6 +225,7 @@
     <string name="confirmNewPassword">Confirm New Password:</string>
     <string name="incorrectPassword">The password is incorrect!</string>
     <string name="userOtherPassword">Please use other password.</string>
+    <string name="_0nd">0nd</string>
 
     <string-array name="bloodGroupValues">
         <item>Select blood type</item>

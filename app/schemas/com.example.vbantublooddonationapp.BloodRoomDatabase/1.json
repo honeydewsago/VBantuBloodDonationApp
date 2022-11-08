@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "e4ab721f0daedc7d1f9912261bb381ec",
+    "identityHash": "f1201f1b7151202529c6b57aa15a4c92",
     "entities": [
       {
         "tableName": "user_table",
@@ -142,7 +142,7 @@
       },
       {
         "tableName": "appointment_table",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`appointmentID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `userID` INTEGER NOT NULL, `organiserID` INTEGER NOT NULL, `address` TEXT, `appointmentTime` TEXT, `appointmentDate` TEXT, `donationBefore` TEXT, `bloodAmt` TEXT, `status` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`appointmentID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `userID` INTEGER NOT NULL, `organiserID` INTEGER NOT NULL, `address` TEXT, `appointmentTime` TEXT, `appointmentDate` TEXT, `donationBefore` TEXT, `bloodAmt` INTEGER NOT NULL, `status` TEXT)",
         "fields": [
           {
             "fieldPath": "appointmentID",
@@ -189,8 +189,8 @@
           {
             "fieldPath": "bloodAmt",
             "columnName": "bloodAmt",
-            "affinity": "TEXT",
-            "notNull": false
+            "affinity": "INTEGER",
+            "notNull": true
           },
           {
             "fieldPath": "status",
@@ -312,7 +312,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'e4ab721f0daedc7d1f9912261bb381ec')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f1201f1b7151202529c6b57aa15a4c92')"
     ]
   }
 }

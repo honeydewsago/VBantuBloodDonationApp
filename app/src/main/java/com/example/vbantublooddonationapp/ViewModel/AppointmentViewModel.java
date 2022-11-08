@@ -39,7 +39,7 @@ public class AppointmentViewModel extends AndroidViewModel {
         return mRepository.getRequestById(id);
     }
 
-    public LiveData<List<Appointment>> getAllCompletedAppointment() {
+    public List<Appointment> getAllCompletedAppointment() {
         return mRepository.getAllCompletedAppointment();
     }
 }

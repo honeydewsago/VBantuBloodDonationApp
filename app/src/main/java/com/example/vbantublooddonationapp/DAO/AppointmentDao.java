@@ -32,7 +32,7 @@ public interface AppointmentDao {
     List<Appointment> getAppointmentById(int id);
 
     @Query("SELECT * from appointment_table where status=('Completed') ORDER By bloodAmt DESC")
-    LiveData<List<Appointment>> getAllCompletedAppointment();
+    List<Appointment> getAllCompletedAppointment();
 
     @Query("Select * from appointment_table where userID=(:id)")
     LiveData<List<Appointment>> getAppointmentByUserID(int id);
