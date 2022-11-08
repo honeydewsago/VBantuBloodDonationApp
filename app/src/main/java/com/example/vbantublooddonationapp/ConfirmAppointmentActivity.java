@@ -89,15 +89,16 @@ public class ConfirmAppointmentActivity extends AppCompatActivity {
     }
 
     private void confirmAppointment() {
-        String bloodAmt = binding.acaSpinnerBloodAmt.getSelectedItem().toString().trim();
+        String bloodAmtStr = binding.acaSpinnerBloodAmt.getSelectedItem().toString().trim();
 
         //validate to check if date of birth is empty
-        if (bloodAmt.equals("Select amount")) {
+        if (bloodAmtStr.equals("Select amount")) {
             Toast.makeText(this, R.string.bloodAmountRequiredToast, Toast.LENGTH_SHORT).show();
             binding.acaSpinnerBloodAmt.requestFocus();
             return;
         }
 
+        int bloodAmt = getBloodAmt(bloodAmtStr);
         mAppointment.setBloodAmt(bloodAmt);
         mAppointment.setStatus("Completed");
         mAppointmentViewModel.updateAppointment(mAppointment);
@@ -106,6 +107,26 @@ public class ConfirmAppointmentActivity extends AppCompatActivity {
         Intent intent = new Intent(ConfirmAppointmentActivity.this, HomeActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+    }
+
+    public int getBloodAmt(String bloodMl) {
+        switch (bloodMl) {
+            case "200 ml":
+                return 200;
+            case "250 ml":
+                return 250;
+            case "300 ml":
+                return 300;
+            case "350 ml":
+                return 350;
+            case "400 ml":
+                return 400;
+            case "450 ml":
+                return 450;
+            case "500 ml":
+                return 500;
+        }
+        return 0;
     }
 
     public String getFullDate(String dateTime) {
