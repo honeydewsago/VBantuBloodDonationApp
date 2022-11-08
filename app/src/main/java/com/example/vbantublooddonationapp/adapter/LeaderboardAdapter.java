@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.vbantublooddonationapp.Model.LeaderboardUser;
 import com.example.vbantublooddonationapp.Model.Organiser;
 import com.example.vbantublooddonationapp.Model.OrganiserImage;
+import com.example.vbantublooddonationapp.R;
 import com.example.vbantublooddonationapp.databinding.CardLeaderboardRowBinding;
 import com.example.vbantublooddonationapp.databinding.CardLocationBinding;
 
@@ -45,6 +46,21 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
         LeaderboardUser leaderboardUser = mLeaderboardUserList.get(position);
         holder.mTvUsername.setText(leaderboardUser.getUsername());
         holder.mTvBloodAmt.setText(leaderboardUser.getBloodAmt()+"ml");
+
+        if (position == 0) {
+            holder.mIvPlaceNoBg.setImageResource(R.color.yellow);
+            holder.mIvPlaceBg.setImageResource(R.color.yellow);
+            holder.mTvPlaceNo.setText("1st");
+        }
+        else if (position == 1) {
+            holder.mTvPlaceNo.setText("2nd");
+        }
+        else if (position == 2) {
+            holder.mTvPlaceNo.setText("3rd");
+        }
+        else {
+            holder.mTvPlaceNo.setText((position+1)+"th");
+        }
     }
 
     @Override
@@ -56,12 +72,16 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
     }
 
     public class LeaderboardHolder extends RecyclerView.ViewHolder{
+        private ImageView mIvPlaceBg;
+        private ImageView mIvPlaceNoBg;
         private TextView mTvPlaceNo;
         private TextView mTvUsername;
         private TextView mTvBloodAmt;
 
         public LeaderboardHolder(CardLeaderboardRowBinding itemBinding) {
             super(itemBinding.getRoot());
+            mIvPlaceBg = itemBinding.clrIvPlaceBackground;
+            mIvPlaceNoBg = itemBinding.clrIvPlaceNo;
             mTvPlaceNo = itemBinding.clrTvPlaceNo;
             mTvUsername = itemBinding.clrTvPlaceUsername;
             mTvBloodAmt = itemBinding.clrTvPlaceBloodAmount;
