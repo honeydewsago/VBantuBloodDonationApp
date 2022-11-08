@@ -56,11 +56,13 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
     }
 
     public class LeaderboardHolder extends RecyclerView.ViewHolder{
+        private TextView mTvPlaceNo;
         private TextView mTvUsername;
         private TextView mTvBloodAmt;
 
         public LeaderboardHolder(CardLeaderboardRowBinding itemBinding) {
             super(itemBinding.getRoot());
+            mTvPlaceNo = itemBinding.clrTvPlaceNo;
             mTvUsername = itemBinding.clrTvPlaceUsername;
             mTvBloodAmt = itemBinding.clrTvPlaceBloodAmount;
         }

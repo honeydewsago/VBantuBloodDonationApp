@@ -67,30 +67,6 @@ public class CommunityFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //initAppointmentViewModel();
-
-        //LiveData<List<Appointment>> mAppointmentCompletedList = mAppointmentViewModel.getAllCompletedAppointment();
-        //mUser = mAppointmentCompletedList.hasObservers();
-        //mCommunityNewPostBinding.acnpTvUsername.setText(mUser.getUsername());
-
-        /*
-        for (int i=0; i < userList.size(); i++) {
-            LeaderboardUser leaderboardUser = new LeaderboardUser();
-            leaderboardUser.setUserID(i+1);
-            leaderboardUser.setUsername(userList.get(i).getUsername());
-
-            for (int j=0; j < appointmentList.size(); j++) {
-                Appointment appointment = appointmentList.get(j);
-                if (appointment.getUserID() == (i+1)) {
-                    leaderboardUser.setBloodAmt((leaderboardUser.getBloodAmt()+appointment.getBloodAmt()));
-                }
-            }
-
-            mLeaderboardUserList.add(leaderboardUser);
-        }
-
-         */
-
         mAppointmentViewModel = new ViewModelProvider(this).get(AppointmentViewModel.class);
         mUserViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
@@ -105,28 +81,24 @@ public class CommunityFragment extends Fragment {
             leaderboardUser.setUserID(i+1);
             leaderboardUser.setUsername(userList.get(i).getUsername());
 
+            int amount=0;
+
             for (int j=0; j < appointmentList.size(); j++) {
                 Appointment appointment = appointmentList.get(j);
-                int amount=0;
                 if (appointment.getUserID() == (i+1)) {
                     amount = amount + appointment.getBloodAmt();
-
                 }
-                leaderboardUser.setBloodAmt(amount);
             }
 
+            leaderboardUser.setBloodAmt(amount);
             leaderboardUserList.add(leaderboardUser);
         }
 
-        top3UserList = leaderboardUserList;
-        /*
         Collections.sort(leaderboardUserList, new BloodAmountComparator());
 
         for (int i=0; i<3; i++) {
             top3UserList.add(leaderboardUserList.get(i));
         }
-
-         */
 
         mLeaderboardAdapter = new LeaderboardAdapter(getActivity());
         mLeaderboardAdapter.setLeaderboardUserList(top3UserList);
@@ -163,10 +135,34 @@ public class CommunityFragment extends Fragment {
     public class BloodAmountComparator implements Comparator<LeaderboardUser> {
         @Override
         public int compare(LeaderboardUser u1, LeaderboardUser u2) {
-            return u1.getBloodAmt() - u2.getBloodAmt();
+            return u2.getBloodAmt() - u1.getBloodAmt();
         }
     }
 }
+
+//initAppointmentViewModel();
+
+//LiveData<List<Appointment>> mAppointmentCompletedList = mAppointmentViewModel.getAllCompletedAppointment();
+//mUser = mAppointmentCompletedList.hasObservers();
+//mCommunityNewPostBinding.acnpTvUsername.setText(mUser.getUsername());
+
+        /*
+        for (int i=0; i < userList.size(); i++) {
+            LeaderboardUser leaderboardUser = new LeaderboardUser();
+            leaderboardUser.setUserID(i+1);
+            leaderboardUser.setUsername(userList.get(i).getUsername());
+
+            for (int j=0; j < appointmentList.size(); j++) {
+                Appointment appointment = appointmentList.get(j);
+                if (appointment.getUserID() == (i+1)) {
+                    leaderboardUser.setBloodAmt((leaderboardUser.getBloodAmt()+appointment.getBloodAmt()));
+                }
+            }
+
+            mLeaderboardUserList.add(leaderboardUser);
+        }
+
+         */
 
 /*
 if (appointments.size() == 0) {
