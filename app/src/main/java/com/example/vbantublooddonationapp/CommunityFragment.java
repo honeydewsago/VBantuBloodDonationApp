@@ -1,34 +1,24 @@
 package com.example.vbantublooddonationapp;
 
-import static android.view.View.VISIBLE;
-
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.room.Database;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.vbantublooddonationapp.Model.Appointment;
 import com.example.vbantublooddonationapp.Model.LeaderboardUser;
-import com.example.vbantublooddonationapp.Model.OrganiserImage;
 import com.example.vbantublooddonationapp.Model.User;
 import com.example.vbantublooddonationapp.ViewModel.AppointmentViewModel;
 import com.example.vbantublooddonationapp.ViewModel.UserViewModel;
 import com.example.vbantublooddonationapp.adapter.LeaderboardAdapter;
-import com.example.vbantublooddonationapp.adapter.LocationAdapter;
-import com.example.vbantublooddonationapp.adapter.UrgentRequestAdapter;
 import com.example.vbantublooddonationapp.databinding.FragmentCommunityBinding;
 
 import java.util.ArrayList;

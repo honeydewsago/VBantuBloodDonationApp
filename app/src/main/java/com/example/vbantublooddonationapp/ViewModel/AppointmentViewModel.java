@@ -13,25 +13,25 @@ import java.util.List;
 public class AppointmentViewModel extends AndroidViewModel {
 
     private AppointmentRepository mRepository;
+
     public AppointmentViewModel(Application application) {
         super(application);
         mRepository = new AppointmentRepository(application);
     }
 
-    public void insertAppointment(Appointment appointment){
+    public void insertAppointment(Appointment appointment) {
         mRepository.insert(appointment);
     }
 
-    public LiveData<List<Appointment>> getAppointmentByOrganiserID(int id){
+    public LiveData<List<Appointment>> getAppointmentByOrganiserID(int id) {
         return mRepository.getAppointmentByOrganiserID(id);
     }
 
-    public void updateAppointment(Appointment appointment){
+    public void updateAppointment(Appointment appointment) {
         mRepository.update(appointment);
     }
 
-
-    public LiveData<List<Appointment>> getRequestByUserId(int id){
+    public LiveData<List<Appointment>> getRequestByUserId(int id) {
         return mRepository.getRequestByUserId(id);
     }
 

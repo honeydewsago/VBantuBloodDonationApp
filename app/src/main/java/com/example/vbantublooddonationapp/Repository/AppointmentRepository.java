@@ -7,7 +7,6 @@ import androidx.lifecycle.LiveData;
 
 import com.example.vbantublooddonationapp.BloodRoomDatabase;
 import com.example.vbantublooddonationapp.DAO.AppointmentDao;
-import com.example.vbantublooddonationapp.DAO.UserDao;
 import com.example.vbantublooddonationapp.Model.Appointment;
 
 import java.util.List;
@@ -16,36 +15,36 @@ import java.util.concurrent.ExecutionException;
 public class AppointmentRepository {
     private AppointmentDao mAppointmentDao;
 
-    public AppointmentRepository(Application application){
+    public AppointmentRepository(Application application) {
         BloodRoomDatabase db = BloodRoomDatabase.getINSTANCE(application);
         mAppointmentDao = db.appointmentDao();
     }
 
-    public void insert(Appointment appointment){
+    public void insert(Appointment appointment) {
         new AppointmentRepository.insertAsyncTask(mAppointmentDao).execute(appointment);
     }
 
     public LiveData<List<Appointment>> getRequestByUserId(int id) {
-        LiveData<List<Appointment>> list =null;
+        LiveData<List<Appointment>> list = null;
 
-        try{
+        try {
             list = new AppointmentRepository.getAppointmentByUserAsyncTask(mAppointmentDao).execute(id).get();
-        }catch (ExecutionException e){
+        } catch (ExecutionException e) {
             e.printStackTrace();
-        }catch (InterruptedException e){
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
         return list;
     }
 
     public List<Appointment> getRequestById(int id) {
-        List<Appointment> list =null;
+        List<Appointment> list = null;
 
-        try{
+        try {
             list = new AppointmentRepository.getAppointmentByIdAsyncTask(mAppointmentDao).execute(id).get();
-        }catch (ExecutionException e){
+        } catch (ExecutionException e) {
             e.printStackTrace();
-        }catch (InterruptedException e){
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
         return list;
@@ -54,7 +53,9 @@ public class AppointmentRepository {
     public class insertAsyncTask extends AsyncTask<Appointment, Void, Void> {
         private AppointmentDao mSyncTaskDao;
 
-        insertAsyncTask(AppointmentDao dao){ mSyncTaskDao = dao;}
+        insertAsyncTask(AppointmentDao dao) {
+            mSyncTaskDao = dao;
+        }
 
         @Override
         protected Void doInBackground(Appointment... appointments) {
@@ -84,7 +85,7 @@ public class AppointmentRepository {
         }
 
         @Override
-        protected LiveData<List<Appointment>> doInBackground(Integer...id) {
+        protected LiveData<List<Appointment>> doInBackground(Integer... id) {
             LiveData<List<Appointment>> appointmentList = mSyncTaskDao.getAppointmentByOrganiserID(id[0]);
             return appointmentList;
         }
@@ -98,7 +99,7 @@ public class AppointmentRepository {
         }
 
         @Override
-        protected LiveData<List<Appointment>> doInBackground(Integer...id) {
+        protected LiveData<List<Appointment>> doInBackground(Integer... id) {
             LiveData<List<Appointment>> appointmentList = mSyncTaskDao.getAppointmentByUserID(id[0]);
             return appointmentList;
         }
@@ -116,7 +117,7 @@ public class AppointmentRepository {
         }
 
         @Override
-        protected Void doInBackground(Appointment...appointments) {
+        protected Void doInBackground(Appointment... appointments) {
             mSyncTaskDao.update(appointments[0]);
             return null;
         }
@@ -143,7 +144,7 @@ public class AppointmentRepository {
         }
 
         @Override
-        protected List<Appointment> doInBackground(Integer...id) {
+        protected List<Appointment> doInBackground(Integer... id) {
             List<Appointment> appointmentList = mSyncTaskDao.getAppointmentById(id[0]);
             return appointmentList;
         }
@@ -169,7 +170,7 @@ public class AppointmentRepository {
         }
 
         @Override
-        protected List<Appointment> doInBackground(Void...params) {
+        protected List<Appointment> doInBackground(Void... params) {
             List<Appointment> userList = mSyncTaskDao.getAllCompletedAppointment();
             return userList;
         }
