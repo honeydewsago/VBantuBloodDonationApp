@@ -11,7 +11,6 @@ import com.example.vbantublooddonationapp.Model.Appointment;
 import java.util.List;
 
 
-
 @Dao
 public interface AppointmentDao {
 
@@ -23,7 +22,7 @@ public interface AppointmentDao {
 
 
     @Update
-    void update(Appointment...appointments);
+    void update(Appointment... appointments);
 
     @Query("Select * from appointment_table where organiserID=(:id) ORDER By appointmentID DESC")
     LiveData<List<Appointment>> getAppointmentByOrganiserID(int id);
