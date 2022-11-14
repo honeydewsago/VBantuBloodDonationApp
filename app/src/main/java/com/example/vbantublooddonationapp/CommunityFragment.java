@@ -22,6 +22,7 @@ import com.example.vbantublooddonationapp.adapter.LeaderboardAdapter;
 import com.example.vbantublooddonationapp.databinding.FragmentCommunityBinding;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -61,6 +62,9 @@ public class CommunityFragment extends Fragment {
 
         List<User> userList = mUserViewModel.getUserList();
 
+        Calendar calendar = Calendar.getInstance();
+        int currentYear = calendar.get(Calendar.YEAR);
+
         for (int i = 0; i < userList.size(); i++) {
             LeaderboardUser leaderboardUser = new LeaderboardUser();
             leaderboardUser.setUserID(i + 1);
@@ -70,8 +74,12 @@ public class CommunityFragment extends Fragment {
 
             for (int j = 0; j < appointmentList.size(); j++) {
                 Appointment appointment = appointmentList.get(j);
-                if (appointment.getUserID() == (i + 1)) {
-                    amount = amount + appointment.getBloodAmt();
+
+                int year = Integer.parseInt(appointment.getAppointmentDate().substring(0,4));
+                if (year == currentYear) {
+                    if (appointment.getUserID() == (i + 1)) {
+                        amount = amount + appointment.getBloodAmt();
+                    }
                 }
             }
 
