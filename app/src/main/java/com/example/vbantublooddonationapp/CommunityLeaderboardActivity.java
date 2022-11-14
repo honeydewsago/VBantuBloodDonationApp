@@ -59,16 +59,16 @@ public class CommunityLeaderboardActivity extends AppCompatActivity {
 
         List<User> userList = mUserViewModel.getUserList();
 
-        for (int i=0; i < userList.size(); i++) {
+        for (int i = 0; i < userList.size(); i++) {
             LeaderboardUser leaderboardUser = new LeaderboardUser();
-            leaderboardUser.setUserID(i+1);
+            leaderboardUser.setUserID(i + 1);
             leaderboardUser.setUsername(userList.get(i).getUsername());
 
-            int amount=0;
+            int amount = 0;
 
-            for (int j=0; j < appointmentList.size(); j++) {
+            for (int j = 0; j < appointmentList.size(); j++) {
                 Appointment appointment = appointmentList.get(j);
-                if (appointment.getUserID() == (i+1)) {
+                if (appointment.getUserID() == (i + 1)) {
                     amount = amount + appointment.getBloodAmt();
                 }
             }
@@ -83,7 +83,7 @@ public class CommunityLeaderboardActivity extends AppCompatActivity {
         mLeaderboardAdapter.setLeaderboardUserList(mLeaderboardUserList);
         mCommunityLeaderboardBinding.aclRvYearlyTopDonorList.setAdapter(mLeaderboardAdapter);
 
-        mCommunityLeaderboardBinding.aclRvYearlyTopDonorList.setLayoutManager(new GridLayoutManager(this,getResources().getInteger(R.integer.grid_column_count)));
+        mCommunityLeaderboardBinding.aclRvYearlyTopDonorList.setLayoutManager(new GridLayoutManager(this, getResources().getInteger(R.integer.grid_column_count)));
 
 
     }

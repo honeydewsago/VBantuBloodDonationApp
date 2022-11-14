@@ -1,5 +1,6 @@
 package com.example.vbantublooddonationapp.adapter;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,7 @@ import com.example.vbantublooddonationapp.databinding.CardLocationBinding;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.LeaderboardHolder>{
+public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.LeaderboardHolder> {
 
     private Activity mActivity;
     private List<LeaderboardUser> mLeaderboardUserList;
@@ -29,6 +30,7 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
         mActivity = activity;
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public void setLeaderboardUserList(List<LeaderboardUser> leaderboardUserList) {
         mLeaderboardUserList = leaderboardUserList;
         notifyDataSetChanged();
@@ -41,25 +43,23 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
         return new LeaderboardHolder(itemBinding);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull LeaderboardHolder holder, int position) {
         LeaderboardUser leaderboardUser = mLeaderboardUserList.get(position);
         holder.mTvUsername.setText(leaderboardUser.getUsername());
-        holder.mTvBloodAmt.setText(leaderboardUser.getBloodAmt()+"ml");
+        holder.mTvBloodAmt.setText(leaderboardUser.getBloodAmt() + "ml");
 
         if (position == 0) {
             holder.mIvPlaceNoBg.setImageResource(R.color.yellow);
             holder.mIvPlaceBg.setImageResource(R.color.yellow);
             holder.mTvPlaceNo.setText("1st");
-        }
-        else if (position == 1) {
+        } else if (position == 1) {
             holder.mTvPlaceNo.setText("2nd");
-        }
-        else if (position == 2) {
+        } else if (position == 2) {
             holder.mTvPlaceNo.setText("3rd");
-        }
-        else {
-            holder.mTvPlaceNo.setText((position+1)+"th");
+        } else {
+            holder.mTvPlaceNo.setText((position + 1) + "th");
         }
     }
 
@@ -71,7 +71,7 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
         return mLeaderboardUserList.size();
     }
 
-    public class LeaderboardHolder extends RecyclerView.ViewHolder{
+    public class LeaderboardHolder extends RecyclerView.ViewHolder {
         private ImageView mIvPlaceBg;
         private ImageView mIvPlaceNoBg;
         private TextView mTvPlaceNo;

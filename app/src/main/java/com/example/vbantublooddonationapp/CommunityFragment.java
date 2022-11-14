@@ -1,34 +1,24 @@
 package com.example.vbantublooddonationapp;
 
-import static android.view.View.VISIBLE;
-
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.room.Database;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.vbantublooddonationapp.Model.Appointment;
 import com.example.vbantublooddonationapp.Model.LeaderboardUser;
-import com.example.vbantublooddonationapp.Model.OrganiserImage;
 import com.example.vbantublooddonationapp.Model.User;
 import com.example.vbantublooddonationapp.ViewModel.AppointmentViewModel;
 import com.example.vbantublooddonationapp.ViewModel.UserViewModel;
 import com.example.vbantublooddonationapp.adapter.LeaderboardAdapter;
-import com.example.vbantublooddonationapp.adapter.LocationAdapter;
-import com.example.vbantublooddonationapp.adapter.UrgentRequestAdapter;
 import com.example.vbantublooddonationapp.databinding.FragmentCommunityBinding;
 
 import java.util.ArrayList;
@@ -71,16 +61,16 @@ public class CommunityFragment extends Fragment {
 
         List<User> userList = mUserViewModel.getUserList();
 
-        for (int i=0; i < userList.size(); i++) {
+        for (int i = 0; i < userList.size(); i++) {
             LeaderboardUser leaderboardUser = new LeaderboardUser();
-            leaderboardUser.setUserID(i+1);
+            leaderboardUser.setUserID(i + 1);
             leaderboardUser.setUsername(userList.get(i).getUsername());
 
-            int amount=0;
+            int amount = 0;
 
-            for (int j=0; j < appointmentList.size(); j++) {
+            for (int j = 0; j < appointmentList.size(); j++) {
                 Appointment appointment = appointmentList.get(j);
-                if (appointment.getUserID() == (i+1)) {
+                if (appointment.getUserID() == (i + 1)) {
                     amount = amount + appointment.getBloodAmt();
                 }
             }
@@ -91,7 +81,7 @@ public class CommunityFragment extends Fragment {
 
         Collections.sort(leaderboardUserList, new BloodAmountComparator());
 
-        for (int i=0; i<3; i++) {
+        for (int i = 0; i < 3; i++) {
             top3UserList.add(leaderboardUserList.get(i));
         }
 
@@ -99,8 +89,7 @@ public class CommunityFragment extends Fragment {
         mLeaderboardAdapter.setLeaderboardUserList(top3UserList);
         mCommunityBinding.fcRvLeaderboard.setAdapter(mLeaderboardAdapter);
 
-        mCommunityBinding.fcRvLeaderboard.setLayoutManager(new GridLayoutManager(view.getContext(),getResources().getInteger(R.integer.grid_column_count)));
-
+        mCommunityBinding.fcRvLeaderboard.setLayoutManager(new GridLayoutManager(view.getContext(), getResources().getInteger(R.integer.grid_column_count)));
 
         mCommunityBinding.fcTvViewFullRanking.setOnClickListener(new View.OnClickListener() {
             @Override
