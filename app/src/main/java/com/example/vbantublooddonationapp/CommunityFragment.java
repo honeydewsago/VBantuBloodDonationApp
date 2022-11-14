@@ -14,10 +14,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.vbantublooddonationapp.Model.Appointment;
+import com.example.vbantublooddonationapp.Model.CommunityPost;
 import com.example.vbantublooddonationapp.Model.LeaderboardUser;
 import com.example.vbantublooddonationapp.Model.User;
 import com.example.vbantublooddonationapp.ViewModel.AppointmentViewModel;
+import com.example.vbantublooddonationapp.ViewModel.CommunityPostViewModel;
 import com.example.vbantublooddonationapp.ViewModel.UserViewModel;
+import com.example.vbantublooddonationapp.adapter.CommunityPostAdapter;
 import com.example.vbantublooddonationapp.adapter.LeaderboardAdapter;
 import com.example.vbantublooddonationapp.databinding.FragmentCommunityBinding;
 
@@ -36,6 +39,8 @@ public class CommunityFragment extends Fragment {
     private UserViewModel mUserViewModel;
     private List<LeaderboardUser> top3UserList;
     private LeaderboardAdapter mLeaderboardAdapter;
+    private CommunityPostAdapter mCommunityPostAdapter;
+    private CommunityPostViewModel mCommunityPostViewModel;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -122,6 +127,12 @@ public class CommunityFragment extends Fragment {
                 startActivity(i);
             }
         });
+
+        mCommunityPostViewModel = new ViewModelProvider(this).get(CommunityPostViewModel.class);
+        List<CommunityPost> communityPostList = mCommunityPostViewModel.getAllCommunityPost();
+        mCommunityPostAdapter = new CommunityPostAdapter(getActivity());
+        mCommunityPostAdapter.setCommunityPostList(communityPostList);
+        mCommunityBinding.fcRvCommunityPosts.setAdapter(mCommunityPostAdapter);
     }
 
     public class BloodAmountComparator implements Comparator<LeaderboardUser> {
