@@ -1,20 +1,32 @@
 package com.example.vbantublooddonationapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.example.vbantublooddonationapp.Model.Comments;
+import com.example.vbantublooddonationapp.adapter.CommunityCommentAdapter;
 import com.example.vbantublooddonationapp.databinding.ActivityCommunityCommentBinding;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class CommunityCommentActivity extends AppCompatActivity {
 
     private ActivityCommunityCommentBinding mActivityCommunityCommentBinding;
+    private CommunityCommentAdapter mCommunityCommentAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +42,36 @@ public class CommunityCommentActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbar.setNavigationIcon(ContextCompat.getDrawable(this, R.drawable.ic_arrow_back_ios));
+
+        //connect db
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+        //get intent and current post id
+        Intent i = getIntent();
+        String currentPostID = i.getStringExtra("currentPostID");
+        DatabaseReference mRef = database.getReference("Comment").child(currentPostID);
+        ArrayList<Comments> mCommentsList = new ArrayList<>();
+
+
+        mCommunityCommentAdapter = new CommunityCommentAdapter(this, mCommentsList);
+        mActivityCommunityCommentBinding.accRvComments.setAdapter(mCommunityCommentAdapter);
+
+        mRef.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Comments mComments = dataSnapshot.getValue(Comments.class);
+                    mCommentsList.add(mComments);
+                }
+                mCommunityCommentAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     //back button
