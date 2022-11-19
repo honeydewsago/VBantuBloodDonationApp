@@ -38,8 +38,8 @@ public class CommunityPost {
         return postID;
     }
 
-    public void setPostID(int postID) {
-        this.postID = postID;
+    public int setPostID(int postID) {
+        return postID;
     }
 
     public int getUserID() {
