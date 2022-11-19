@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.vbantublooddonationapp.Model.Comments;
 import com.example.vbantublooddonationapp.adapter.CommunityCommentAdapter;
@@ -27,6 +28,7 @@ public class CommunityCommentActivity extends AppCompatActivity {
 
     private ActivityCommunityCommentBinding mActivityCommunityCommentBinding;
     private CommunityCommentAdapter mCommunityCommentAdapter;
+    private TextView mcccTvComment, mcccTvUsername;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,22 +51,27 @@ public class CommunityCommentActivity extends AppCompatActivity {
         //get intent and current post id
         Intent i = getIntent();
         String currentPostID = i.getStringExtra("currentPostID");
-        DatabaseReference mRef = database.getReference("Comment").child(currentPostID);
+        DatabaseReference mRef = FirebaseDatabase.getInstance().getReference().child("Comment").child("ID");
         ArrayList<Comments> mCommentsList = new ArrayList<>();
 
 
         mCommunityCommentAdapter = new CommunityCommentAdapter(this, mCommentsList);
         mActivityCommunityCommentBinding.accRvComments.setAdapter(mCommunityCommentAdapter);
 
-        mRef.addValueEventListener(new ValueEventListener() {
+        mRef.child("ID").addValueEventListener(new ValueEventListener() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    Comments mComments = dataSnapshot.getValue(Comments.class);
-                    mCommentsList.add(mComments);
+//                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+//                    Comments mComments = dataSnapshot.getValue(Comments.class);
+//                    mCommentsList.add(mComments);
+//                }
+//                mCommunityCommentAdapter.notifyDataSetChanged();
+                if (snapshot.exists()){
+                    Comments comment = snapshot.getValue(Comments.class);
+                    mcccTvComment.setText(comment.getComment());
+                    mcccTvUsername.setText(comment.getUserID());
                 }
-                mCommunityCommentAdapter.notifyDataSetChanged();
             }
 
             @Override

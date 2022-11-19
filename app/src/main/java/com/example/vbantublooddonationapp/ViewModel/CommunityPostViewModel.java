@@ -33,4 +33,8 @@ public class CommunityPostViewModel extends AndroidViewModel {
     public void updateCommunityPost(CommunityPost communityPost) {
         mCommunityPostRepository.updateCommunityPost(communityPost);
     }
+
+    public List<CommunityPost> getCommunityPostByDateTimePostDesc(String postDateTime, String postDesc) {
+        return mCommunityPostRepository.getCommunityPostByDateTimePostDesc(postDateTime, postDesc);
+    }
 }

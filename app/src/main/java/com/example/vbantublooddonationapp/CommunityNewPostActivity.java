@@ -1,39 +1,30 @@
 package com.example.vbantublooddonationapp;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.room.Database;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.AttributeSet;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.vbantublooddonationapp.Model.CommunityPost;
 import com.example.vbantublooddonationapp.Model.Organiser;
 import com.example.vbantublooddonationapp.Model.User;
+import com.example.vbantublooddonationapp.ViewModel.CommunityPostViewModel;
 import com.example.vbantublooddonationapp.ViewModel.OrganiserViewModel;
 import com.example.vbantublooddonationapp.ViewModel.UserViewModel;
 import com.example.vbantublooddonationapp.databinding.ActivityCommunityNewPostBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -42,12 +33,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
-import com.google.firebase.storage.UploadTask;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -55,8 +43,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
-import java.util.Random;
-import java.util.UUID;
 
 public class CommunityNewPostActivity extends AppCompatActivity {
 
@@ -65,15 +51,15 @@ public class CommunityNewPostActivity extends AppCompatActivity {
     private final String USERID_KEY = "userid", USERTYPE_KEY = "usertype";
     private SharedPreferences mPreferences;
     private int mUserID = 1;
+    private int mOrganiserID = 0;
     private String mUserType = "user";
 
     private Organiser mOrganiser;
     private User mUser;
+    private CommunityPost mCommunityPost;
     private OrganiserViewModel mOrganiserViewModel;
     private UserViewModel mUserViewModel;
-
-    private ImageView btn_done, community_ImageView;
-    private EditText et_communityNewPost;
+    private CommunityPostViewModel mCommunityPostViewModel;
 
     //Firebase
     private StorageTask uploadTask;
@@ -81,7 +67,6 @@ public class CommunityNewPostActivity extends AppCompatActivity {
     private StorageReference storageReference;
     private FirebaseStorage mStorage;
     private FirebaseAuth mAuth;
-    private String userUUID;
 
     private int SELECT_PICTURE = 200;
     private Uri filepath;
@@ -98,20 +83,17 @@ public class CommunityNewPostActivity extends AppCompatActivity {
         setContentView(v);
 
         mStorage = FirebaseStorage.getInstance();
-        community_ImageView = (ImageView) findViewById(R.id.acnp_ivPostImage);
         mAuth = FirebaseAuth.getInstance();
-//        userUUID = mAuth.getCurrentUser().getUid();
 
         storageReference = FirebaseStorage.getInstance().getReference("CommunityPost").child(String.valueOf(mUserID));
 
-        community_ImageView.setOnClickListener(new View.OnClickListener() {
+        mCommunityNewPostBinding.acnpIvPostImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "Select Image"),SELECT_PICTURE);
-
+                startActivityForResult(Intent.createChooser(intent, "Select Image"), SELECT_PICTURE);
             }
         });
 
@@ -125,6 +107,7 @@ public class CommunityNewPostActivity extends AppCompatActivity {
         //initialise view model
         mOrganiserViewModel = new ViewModelProvider(this).get(OrganiserViewModel.class);
         mUserViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        mCommunityPostViewModel = new ViewModelProvider(this).get(CommunityPostViewModel.class);
 
         //set toolbar and display icon
         Toolbar toolbar = mCommunityNewPostBinding.acnpToolbar;
@@ -134,7 +117,7 @@ public class CommunityNewPostActivity extends AppCompatActivity {
         toolbar.setNavigationIcon(ContextCompat.getDrawable(this, R.drawable.ic_arrow_back_ios));
 
         //get data in sp file
-        mPreferences = getSharedPreferences("com.example.vbantublooddonationapp",MODE_PRIVATE);
+        mPreferences = getSharedPreferences("com.example.vbantublooddonationapp", MODE_PRIVATE);
 
         if (mPreferences.contains(USERID_KEY) && mPreferences.contains(USERTYPE_KEY)) {
             mUserID = mPreferences.getInt(USERID_KEY, 1);
@@ -154,32 +137,41 @@ public class CommunityNewPostActivity extends AppCompatActivity {
     }
 
     public void uploadPost() {
-        //get post description
+
         final ProgressDialog progressDialog = new ProgressDialog(CommunityNewPostActivity.this);
         progressDialog.setTitle("Uploading");
         progressDialog.setMessage("Please Wait");
         progressDialog.show();
 
+        //get post description
         String postDesc = mCommunityNewPostBinding.acnpEtCaption.getText().toString();
 
         if (postDesc.isEmpty()) {
             progressDialog.dismiss();
             mCommunityNewPostBinding.acnpEtCaption.setError("Write something here.");
             mCommunityNewPostBinding.acnpEtCaption.requestFocus();
-            return;
         }
 
         //get current date time
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault());
         String currentDateTime = sdf.format(new Date());
 
-        Random r = new Random();
-        int postID = r.nextInt();
-        String pstID = String.valueOf(postID);
+        if (mUserType.equals("organiser")){
+            mUserID = 0;
+            mOrganiserID = mUserID;
+        }
+
+        CommunityPost newPost = new CommunityPost(mUserID, mOrganiserID ,postDesc, currentDateTime, 1);
+        mCommunityPostViewModel.insertCommunityPost(newPost);
+
+        //get post id by date time and post description
+        List<CommunityPost> communityPostList = mCommunityPostViewModel.getCommunityPostByDateTimePostDesc(currentDateTime, postDesc);
+        mCommunityPost = communityPostList.get(0);
+        int currentPostID = mCommunityPost.getPostID();
 
         //get image
         if (filepath != null) {
-            StorageReference fileRef = FirebaseStorage.getInstance().getReference().child("CommunityPost/" + postID);
+            StorageReference fileRef = FirebaseStorage.getInstance().getReference().child("CommunityPost/" + currentPostID);
             uploadTask = fileRef.putFile(filepath);
             uploadTask.continueWithTask(task -> {
                 if (!task.isComplete()) {
@@ -196,29 +188,39 @@ public class CommunityNewPostActivity extends AppCompatActivity {
                     database.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            if (!(snapshot.child("CommunityPost1").child(String.valueOf(mUserID)).child(currentDateTime).exists())) {
+                            if (!(snapshot.child("CommunityPost").child(String.valueOf(mUserID)).child(currentDateTime).exists())) {
                                 HashMap<String, Object> data = new HashMap<>();
-                                data.put("userID", mUserID);
-                                data.put("postId", pstID);
-                                data.put("postDescription", postDesc);
+
+                                data.put("postId", currentPostID);
                                 data.put("url", myUrl);
+                                if (mUserType.equals("user")){
+                                    data.put("userID", mUserID);
+                                    data.put("organiserID", 0);
+                                }
+                                if (mUserType.equals("organiser")){
+                                    data.put("userID", 0);
+                                    data.put("organiserID", mUserID);
+                                }
                                 data.put("date", currentDateTime);
 
-                                database.child("CommunityPost1").child(String.valueOf(mUserID)).child(currentDateTime).updateChildren(data).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                database.child("CommunityPost").child(String.valueOf(mUserID)).child(currentDateTime).updateChildren(data).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (task.isSuccessful()) {
+                                            progressDialog.dismiss();
                                             Toast.makeText(getApplicationContext(), "Upload Successful", Toast.LENGTH_SHORT).show();
                                             Intent intent = new Intent(CommunityNewPostActivity.this, HomeActivity.class);
                                             startActivity(intent);
                                             finish();
 
                                         } else {
+                                            progressDialog.dismiss();
                                             Toast.makeText(getApplicationContext(), "Network Error. Please Try Again", Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 });
                             } else {
+                                progressDialog.dismiss();
                                 Toast.makeText(getApplicationContext(), "Network Error. Please try Again", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(CommunityNewPostActivity.this, HomeActivity.class);
                                 startActivity(intent);
@@ -235,6 +237,7 @@ public class CommunityNewPostActivity extends AppCompatActivity {
                 }
             }).addOnFailureListener(e -> Toast.makeText(CommunityNewPostActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show());
         } else {
+            progressDialog.dismiss();
             Toast.makeText(CommunityNewPostActivity.this, "No Image Selected!", Toast.LENGTH_SHORT).show();
         }
     }
@@ -243,11 +246,11 @@ public class CommunityNewPostActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == SELECT_PICTURE && resultCode == RESULT_OK && data != null && data.getData() != null){
+        if (requestCode == SELECT_PICTURE && resultCode == RESULT_OK && data != null && data.getData() != null) {
             filepath = data.getData();
-            try{
+            try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filepath);
-                community_ImageView.setImageBitmap(bitmap);
+                mCommunityNewPostBinding.acnpIvPostImage.setImageBitmap(bitmap);
                 validateImage = true;
             } catch (IOException e) {
                 e.printStackTrace();

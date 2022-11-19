@@ -21,6 +21,9 @@ public interface CommunityPostDao {
     @Query("Select * from community_post_table where postID=(:id)")
     List<CommunityPost> getCommunityPostByID(int id);
 
+    @Query("Select * from community_post_table where postDateTime=(:postDateTime) AND postDesc=(:postDesc)")
+    List<CommunityPost> getCommunityPostByDateTimePostDesc(String postDateTime, String postDesc);
+
     @Update
     void updateCommunityPost(CommunityPost communityPost);
 

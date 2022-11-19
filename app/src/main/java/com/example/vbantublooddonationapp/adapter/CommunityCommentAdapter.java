@@ -11,6 +11,8 @@ import com.example.vbantublooddonationapp.Model.Comments;
 import com.example.vbantublooddonationapp.databinding.CardCommunityCommentsBinding;
 import com.google.firebase.database.FirebaseDatabase;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,11 +55,12 @@ public class CommunityCommentAdapter extends RecyclerView.Adapter<CommunityComme
 
     public static class CommunityCommentHolder extends RecyclerView.ViewHolder {
 
-        private final TextView mcccTvComment;
+        private final TextView mcccTvComment, mcccTvUsername;
 
         public CommunityCommentHolder(@NonNull CardCommunityCommentsBinding mCardCommunityCommentsBinding) {
             super(mCardCommunityCommentsBinding.getRoot());
             mcccTvComment = mCardCommunityCommentsBinding.cccTvComment;
+            mcccTvUsername = mCardCommunityCommentsBinding.cccTvUsername;
         }
     }
 }
