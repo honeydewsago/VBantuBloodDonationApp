@@ -176,7 +176,7 @@ public class CommunityNewPostActivity extends AppCompatActivity {
         int postID = r.nextInt();
         String pstID = String.valueOf(postID);
 
-//        //get image
+        //get image
         if(filepath != null){
             String receiverImage = uploadImage();
 

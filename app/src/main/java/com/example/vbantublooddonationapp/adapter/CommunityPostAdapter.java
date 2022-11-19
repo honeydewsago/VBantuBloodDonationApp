@@ -1,5 +1,6 @@
 package com.example.vbantublooddonationapp.adapter;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
@@ -12,9 +13,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.vbantublooddonationapp.AppointmentDetailActivity;
 import com.example.vbantublooddonationapp.CommunityCommentActivity;
-import com.example.vbantublooddonationapp.Model.Appointment;
 import com.example.vbantublooddonationapp.Model.CommunityPost;
 import com.example.vbantublooddonationapp.Model.Organiser;
 import com.example.vbantublooddonationapp.Model.User;
@@ -23,17 +22,22 @@ import com.example.vbantublooddonationapp.ViewModel.OrganiserViewModel;
 import com.example.vbantublooddonationapp.ViewModel.UserViewModel;
 import com.example.vbantublooddonationapp.databinding.CardCommunityPostBinding;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
 
 public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdapter.CommunityPostHolder> {
 
     private final Activity mActivity;
     private List<CommunityPost> mCommunityPostList;
-    private CommunityPostViewModel mCommunityPostViewModel;
+    private final CommunityPostViewModel mCommunityPostViewModel;
     private List<Organiser> mOrganiserList;
-    private OrganiserViewModel mOrganiserViewModel;
+    private final OrganiserViewModel mOrganiserViewModel;
     private List<User> mUserList;
-    private UserViewModel mUserViewModel;
+    private final UserViewModel mUserViewModel;
 
     public CommunityPostAdapter(Activity activity) {
         mActivity = activity;
@@ -50,35 +54,41 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
     @Override
     public CommunityPostHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         CardCommunityPostBinding mCardCommunityPostBinding = CardCommunityPostBinding.inflate(mActivity.getLayoutInflater());
-        return new CommunityPostAdapter.CommunityPostHolder(mCardCommunityPostBinding);
+        return new CommunityPostHolder(mCardCommunityPostBinding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CommunityPostAdapter.CommunityPostHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CommunityPostAdapter.CommunityPostHolder holder, @SuppressLint("RecyclerView") int position) {
         CommunityPost communityPost = mCommunityPostList.get(position);
 
         //show post details
-
-        //user
         if (communityPost.organiserID == 0) {
             holder.mccpTvUsername.setText(getUserName(communityPost.getUserID()));
-            holder.mccpTvCaption.setText(getPostDesc(position));
-
-
-
-
         }
-
-        //organiser
         if (communityPost.userID == 0) {
             holder.mccpTvUsername.setText(getOrganiserName(communityPost.getOrganiserID()));
-            holder.mccpTvCaption.setText(getPostDesc(position));
-
-
         }
+        holder.mccpTvCaption.setText(communityPost.getPostDesc());
+        //holder.mccpIvPostImage
 
-        //post description
+        //holder.mccpIvAvatar
+        //holder.mccpTvLikes
 
+        getPostDuration(position, holder.mccpTvDuration);
+
+        holder.mccpIvComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                communityPostComments(position);
+            }
+        });
+
+        holder.mccpTvComments.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                communityPostComments(position);
+            }
+        });
     }
 
     @Override
@@ -89,14 +99,15 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
         return mCommunityPostList.size();
     }
 
-    public class CommunityPostHolder extends RecyclerView.ViewHolder {
-        private TextView mccpTvUsername;
-        private TextView mccpTvCaption;
-        private TextView mccpTvDuration;
+    public static class CommunityPostHolder extends RecyclerView.ViewHolder {
+        private final TextView mccpTvUsername;
+        private final TextView mccpTvCaption;
+        private final TextView mccpTvDuration;
         private TextView mccpTvLikes;
-        private TextView mccpTvComments;
+        private final TextView mccpTvComments;
         private ImageView mccpIvAvatar;
         private ImageView mccpIvPostImage;
+        private final ImageView mccpIvComment;
 
         public CommunityPostHolder(@NonNull CardCommunityPostBinding mCardCommunityPostBinding) {
             super(mCardCommunityPostBinding.getRoot());
@@ -107,13 +118,7 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
             mccpIvAvatar = mCardCommunityPostBinding.ccpIvAvatar;
             mccpIvPostImage = mCardCommunityPostBinding.ccpIvPostImage;
             mccpTvComments = mCardCommunityPostBinding.ccpTvComments;
-
-            mccpTvComments.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    communityPostComments(getAdapterPosition());
-                }
-            });
+            mccpIvComment = mCardCommunityPostBinding.ccpIvComment;
 
             //Likes
         }
@@ -138,10 +143,48 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
         return organiser.getCompanyName();
     }
 
-    public String getPostDesc(int position) {
+    @SuppressLint("SetTextI18n")
+    public void getPostDuration(int position, TextView mccpTvDuration) {
         CommunityPost currentPost = mCommunityPostList.get(position);
         List<CommunityPost> communityPostList = mCommunityPostViewModel.getCommunityPostByID(currentPost.getPostID());
         CommunityPost communityPost = communityPostList.get(0);
-        return communityPost.postDesc;
+
+        //get current date time
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault());
+        String currentTime = sdf.format(new Date());
+        try {
+            Date postTime = sdf.parse(communityPost.postDateTime);
+            Date end = sdf.parse(currentTime);
+            long diff = Objects.requireNonNull(end).getTime() - Objects.requireNonNull(postTime).getTime();
+            int days = (int) (diff / (1000 * 60 * 60 * 24));
+            int hours = (int) (diff / (1000 * 60 * 60));
+            int minutes = (int) (diff / (1000 * 60));
+            int months = days / 31;
+
+            if (months > 1) {
+                mccpTvDuration.setText(months + " months ago");
+            } else if (months == 1) {
+                mccpTvDuration.setText(months + " month ago");
+            } else if (days > 1) {
+                mccpTvDuration.setText(days + " days ago");
+            } else if (days == 1) {
+                mccpTvDuration.setText(days + " day ago");
+            } else if (hours > 1) {
+                mccpTvDuration.setText(hours + " hours ago");
+            } else if (hours == 1) {
+                mccpTvDuration.setText(hours + " hour ago");
+            } else if (minutes > 1) {
+                mccpTvDuration.setText(minutes + " minutes ago");
+            } else if (minutes == 1) {
+                mccpTvDuration.setText(minutes + " minute ago");
+            } else {
+                mccpTvDuration.setText("just now");
+            }
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
+
+
 }
