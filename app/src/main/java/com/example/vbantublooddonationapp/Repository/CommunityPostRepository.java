@@ -4,6 +4,7 @@ import android.app.Application;
 import android.os.AsyncTask;
 
 import com.example.vbantublooddonationapp.BloodRoomDatabase;
+import com.example.vbantublooddonationapp.DAO.AppointmentDao;
 import com.example.vbantublooddonationapp.DAO.CommunityPostDao;
 import com.example.vbantublooddonationapp.Model.CommunityPost;
 
@@ -75,8 +76,35 @@ public class CommunityPostRepository {
 
         @Override
         protected List<CommunityPost> doInBackground(Void... params) {
-            List<CommunityPost> CommunityPostList = mSyncTaskDao.getAllCommunityPost();
-            return CommunityPostList;
+            List<CommunityPost> communityPostList = mSyncTaskDao.getAllCommunityPost();
+            return communityPostList;
+        }
+    }
+
+    public List<CommunityPost> getCommunityPostByID(int id) {
+        List<CommunityPost> list = null;
+
+        try {
+            list = new CommunityPostRepository.getCommunityPostByIDAsyncTask(mCommunityPostDao).execute(id).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    private static class getCommunityPostByIDAsyncTask extends AsyncTask<Integer, Void, List<CommunityPost>> {
+        private CommunityPostDao mSyncTaskDao;
+
+        getCommunityPostByIDAsyncTask(CommunityPostDao dao) {
+            mSyncTaskDao = dao;
+        }
+
+        @Override
+        protected List<CommunityPost> doInBackground(Integer... id) {
+            List<CommunityPost> communityPostList = mSyncTaskDao.getCommunityPostByID(id[0]);
+            return communityPostList;
         }
     }
 }
