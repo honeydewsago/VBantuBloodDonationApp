@@ -133,6 +133,7 @@ public class CommunityFragment extends Fragment {
         mCommunityPostAdapter = new CommunityPostAdapter(getActivity());
         mCommunityPostAdapter.setCommunityPostList(communityPostList);
         mCommunityBinding.fcRvCommunityPosts.setAdapter(mCommunityPostAdapter);
+        mCommunityBinding.fcRvCommunityPosts.setLayoutManager(new GridLayoutManager(view.getContext(), getResources().getInteger(R.integer.grid_column_count)));
     }
 
     public class BloodAmountComparator implements Comparator<LeaderboardUser> {

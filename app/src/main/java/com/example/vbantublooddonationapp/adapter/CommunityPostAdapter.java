@@ -57,6 +57,7 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
     public void onBindViewHolder(@NonNull CommunityPostAdapter.CommunityPostHolder holder, int position) {
         CommunityPost communityPost = mCommunityPostList.get(position);
 
+        //show username
         if (communityPost.organiserID == 0){
             holder.mccpTvUsername.setText(getUserName(communityPost.getUserID()));
         }
@@ -64,6 +65,8 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
         if (communityPost.userID == 0){
             holder.mccpTvUsername.setText(getOrganiserName(communityPost.getOrganiserID()));
         }
+
+        //
     }
 
     @Override
@@ -98,6 +101,8 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
                     communityPostComments(getAdapterPosition());
                 }
             });
+
+            //Likes
         }
     }
 
