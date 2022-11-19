@@ -34,9 +34,7 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
     private final Activity mActivity;
     private List<CommunityPost> mCommunityPostList;
     private final CommunityPostViewModel mCommunityPostViewModel;
-    private List<Organiser> mOrganiserList;
     private final OrganiserViewModel mOrganiserViewModel;
-    private List<User> mUserList;
     private final UserViewModel mUserViewModel;
 
     public CommunityPostAdapter(Activity activity) {

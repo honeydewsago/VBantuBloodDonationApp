@@ -31,6 +31,7 @@ import com.example.vbantublooddonationapp.Model.User;
 import com.example.vbantublooddonationapp.ViewModel.OrganiserViewModel;
 import com.example.vbantublooddonationapp.ViewModel.UserViewModel;
 import com.example.vbantublooddonationapp.databinding.ActivityCommunityNewPostBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -152,7 +153,7 @@ public class CommunityNewPostActivity extends AppCompatActivity {
         }
     }
 
-    public void uploadPost(){
+    public void uploadPost() {
         //get post description
         final ProgressDialog progressDialog = new ProgressDialog(CommunityNewPostActivity.this);
         progressDialog.setTitle("Uploading");
@@ -177,48 +178,67 @@ public class CommunityNewPostActivity extends AppCompatActivity {
         String pstID = String.valueOf(postID);
 
         //get image
-        if(filepath != null){
-            String receiverImage = uploadImage();
-
-            database = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("CommunityPost1").child(String.valueOf(mUserID)).child(currentDateTime);
-            database.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    HashMap<String, Object> data = new HashMap<>();
-                    data.put("userID", String.valueOf(mUserID));
-                    data.put("PostID", pstID);
-                    data.put("url", receiverImage);
-                    data.put("data", currentDateTime);
-                    database.updateChildren(data);
-                    progressDialog.dismiss();
-                    Intent intent = new Intent(CommunityNewPostActivity.this, HomeActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(intent);
+        if (filepath != null) {
+            StorageReference fileRef = FirebaseStorage.getInstance().getReference().child("CommunityPost/" + postID);
+            uploadTask = fileRef.putFile(filepath);
+            uploadTask.continueWithTask(task -> {
+                if (!task.isComplete()) {
+                    throw Objects.requireNonNull(task.getException());
                 }
+                return fileRef.getDownloadUrl();
+            }).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    //get the download Uri of the image
+                    Uri downloadUri = (Uri) task.getResult();
+                    myUrl = downloadUri.toString();
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
+                    database = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference();
+                    database.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (!(snapshot.child("CommunityPost1").child(String.valueOf(mUserID)).child(currentDateTime).exists())) {
+                                HashMap<String, Object> data = new HashMap<>();
+                                data.put("userID", mUserID);
+                                data.put("postId", pstID);
+                                data.put("postDescription", postDesc);
+                                data.put("url", myUrl);
+                                data.put("date", currentDateTime);
 
+                                database.child("CommunityPost1").child(String.valueOf(mUserID)).child(currentDateTime).updateChildren(data).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            Toast.makeText(getApplicationContext(), "Upload Successful", Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(CommunityNewPostActivity.this, HomeActivity.class);
+                                            startActivity(intent);
+                                            finish();
+
+                                        } else {
+                                            Toast.makeText(getApplicationContext(), "Network Error. Please Try Again", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Network Error. Please try Again", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(CommunityNewPostActivity.this, HomeActivity.class);
+                                startActivity(intent);
+                                finish();
+
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
                 }
-            });
-
+            }).addOnFailureListener(e -> Toast.makeText(CommunityNewPostActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show());
         } else {
-            progressDialog.dismiss();
             Toast.makeText(CommunityNewPostActivity.this, "No Image Selected!", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private String uploadImage(){
-        String imageURL = UUID.randomUUID().toString();
-        if (community_ImageView != null) {
-            storageReference = mStorage.getReference().child("Community/" + mUserID + "/" + imageURL);
-
-            uploadTask = storageReference.putFile(filepath);
-            Task<Uri> imageLink = storageReference.getDownloadUrl();
-        }
-
-        return imageURL;
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
