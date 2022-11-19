@@ -171,8 +171,8 @@ public class AppointmentRepository {
 
         @Override
         protected List<Appointment> doInBackground(Void... params) {
-            List<Appointment> userList = mSyncTaskDao.getAllCompletedAppointment();
-            return userList;
+            List<Appointment> appointmentList = mSyncTaskDao.getAllCompletedAppointment();
+            return appointmentList;
         }
     }
 }
