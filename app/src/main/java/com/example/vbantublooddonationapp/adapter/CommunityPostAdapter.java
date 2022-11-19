@@ -35,14 +35,14 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
     private List<User> mUserList;
     private UserViewModel mUserViewModel;
 
-    public CommunityPostAdapter(Activity activity){
+    public CommunityPostAdapter(Activity activity) {
         mActivity = activity;
         mCommunityPostViewModel = new ViewModelProvider((FragmentActivity) mActivity).get(CommunityPostViewModel.class);
         mOrganiserViewModel = new ViewModelProvider((FragmentActivity) mActivity).get(OrganiserViewModel.class);
         mUserViewModel = new ViewModelProvider((FragmentActivity) mActivity).get(UserViewModel.class);
     }
 
-    public void setCommunityPostList(List<CommunityPost> communityPostList){
+    public void setCommunityPostList(List<CommunityPost> communityPostList) {
         mCommunityPostList = communityPostList;
     }
 
@@ -57,27 +57,39 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
     public void onBindViewHolder(@NonNull CommunityPostAdapter.CommunityPostHolder holder, int position) {
         CommunityPost communityPost = mCommunityPostList.get(position);
 
-        //show username
-        if (communityPost.organiserID == 0){
+        //show post details
+
+        //user
+        if (communityPost.organiserID == 0) {
             holder.mccpTvUsername.setText(getUserName(communityPost.getUserID()));
+            holder.mccpTvCaption.setText(getPostDesc(position));
+
+
+
+
         }
 
-        if (communityPost.userID == 0){
+        //organiser
+        if (communityPost.userID == 0) {
             holder.mccpTvUsername.setText(getOrganiserName(communityPost.getOrganiserID()));
+            holder.mccpTvCaption.setText(getPostDesc(position));
+
+
         }
 
-        //
+        //post description
+
     }
 
     @Override
     public int getItemCount() {
-        if(mCommunityPostList==null){
+        if (mCommunityPostList == null) {
             return 0;
         }
         return mCommunityPostList.size();
     }
 
-    public class CommunityPostHolder extends RecyclerView.ViewHolder{
+    public class CommunityPostHolder extends RecyclerView.ViewHolder {
         private TextView mccpTvUsername;
         private TextView mccpTvCaption;
         private TextView mccpTvDuration;
@@ -85,6 +97,7 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
         private TextView mccpTvComments;
         private ImageView mccpIvAvatar;
         private ImageView mccpIvPostImage;
+
         public CommunityPostHolder(@NonNull CardCommunityPostBinding mCardCommunityPostBinding) {
             super(mCardCommunityPostBinding.getRoot());
             mccpTvUsername = mCardCommunityPostBinding.ccpTvUsername;
@@ -106,28 +119,29 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
         }
     }
 
-    public void communityPostComments(int position){
+    public void communityPostComments(int position) {
         CommunityPost currentPost = mCommunityPostList.get(position);
         Intent i = new Intent(mActivity, CommunityCommentActivity.class);
         i.putExtra("currentPostID", currentPost.getPostID());
         mActivity.startActivity(i);
     }
 
-    public String getUserName(int id){
+    public String getUserName(int id) {
         List<User> userList = mUserViewModel.getUserById(id);
         User user = userList.get(0);
         return user.getUsername();
     }
 
-    public String getOrganiserName(int id){
+    public String getOrganiserName(int id) {
         List<Organiser> organiserList = mOrganiserViewModel.getOrganiserById(id);
         Organiser organiser = organiserList.get(0);
         return organiser.getCompanyName();
     }
 
-    public String getCaption(int id){
-        List<Organiser> organiserList = mOrganiserViewModel.getOrganiserById(id);
-        Organiser organiser = organiserList.get(0);
-        return organiser.getCompanyName();
+    public String getPostDesc(int position) {
+        CommunityPost currentPost = mCommunityPostList.get(position);
+        List<CommunityPost> communityPostList = mCommunityPostViewModel.getCommunityPostByID(currentPost.getPostID());
+        CommunityPost communityPost = communityPostList.get(0);
+        return communityPost.postDesc;
     }
 }

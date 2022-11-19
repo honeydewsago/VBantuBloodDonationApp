@@ -18,6 +18,9 @@ public interface CommunityPostDao {
     @Query("SELECT * from community_post_table where active=(1) ORDER BY postID DESC ")
     List<CommunityPost> getAllCommunityPost();
 
+    @Query("Select * from community_post_table where postID=(:id)")
+    List<CommunityPost> getCommunityPostByID(int id);
+
     @Update
     void updateCommunityPost(CommunityPost communityPost);
 

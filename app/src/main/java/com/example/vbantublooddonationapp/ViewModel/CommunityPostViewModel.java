@@ -4,7 +4,6 @@ import android.app.Application;
 
 import androidx.lifecycle.AndroidViewModel;
 
-import com.example.vbantublooddonationapp.Model.Appointment;
 import com.example.vbantublooddonationapp.Model.CommunityPost;
 import com.example.vbantublooddonationapp.Repository.CommunityPostRepository;
 
@@ -21,6 +20,10 @@ public class CommunityPostViewModel extends AndroidViewModel {
 
     public List<CommunityPost> getAllCommunityPost() {
         return mCommunityPostRepository.getAllCommunityPost();
+    }
+
+    public List<CommunityPost> getCommunityPostByID(int id) {
+        return mCommunityPostRepository.getCommunityPostByID(id);
     }
 
     public void insertCommunityPost(CommunityPost communityPost) {
