@@ -26,7 +26,11 @@ import com.example.vbantublooddonationapp.ViewModel.CommunityPostViewModel;
 import com.example.vbantublooddonationapp.ViewModel.OrganiserViewModel;
 import com.example.vbantublooddonationapp.ViewModel.UserViewModel;
 import com.example.vbantublooddonationapp.databinding.CardCommunityPostBinding;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -44,6 +48,7 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
     private final UserViewModel mUserViewModel;
     CommunityLikesAdapter mCommunityLikesAdapter;
     FirebaseDatabase database;
+    DatabaseReference comments;
 
     private final String USERID_KEY = "userid", USERTYPE_KEY = "usertype";
     private SharedPreferences mPreferences;
@@ -103,6 +108,8 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
                 communityPostComments(communityPost);
             }
         });
+
+        setTotalComments(communityPost.getPostID(), holder.mccpTvComments);
     }
 
     @Override
@@ -139,7 +146,6 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
     }
 
     public void communityPostComments(CommunityPost mCommunityPost) {
-        //CommunityPost currentPost = mCommunityPostList.get(position);
         Intent i = new Intent(mActivity, CommunityCommentActivity.class);
         i.putExtra("currentPostID", mCommunityPost.getPostID());
         System.out.println(mCommunityPost.getPostID());
@@ -223,10 +229,10 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
 
             if (mccpIvLike.isPressed()) {
                 if (mUserType.equals("organiser")) {
-                    int organserID = mUserID;
+                    int organiserID = mUserID;
                     String postID = String.valueOf(post.getPostID());
                     database.getReference("Likes").child(postID)
-                            .child(String.valueOf(organserID)).removeValue();
+                            .child(String.valueOf(organiserID)).removeValue();
                     mccpIvLike.setImageResource(R.drawable.ic_thumb_up_red);
                 } else {
                     int userID = mUserID;
@@ -237,10 +243,10 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
                 }
             } else {
                 if (mUserType.equals("organiser")) {
-                    int organserID = mUserID;
+                    int organiserID = mUserID;
                     String postID = String.valueOf(post.getPostID());
                     database.getReference("Likes").child(postID)
-                            .child(String.valueOf(organserID)).setValue(true);
+                            .child(String.valueOf(organiserID)).setValue(true);
                     mccpIvLike.setImageResource(R.drawable.ic_thumb_up_grey);
                 } else {
                     int userID = mUserID;
@@ -253,4 +259,26 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
             return true;
         });
     };
+
+    private void setTotalComments(int postID, final TextView mccpTvComments) {
+
+        comments = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference().child("Comment").child(String.valueOf(postID));
+
+        comments.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                long totalComments = snapshot.getChildrenCount();
+                if (totalComments == 0) {
+                    mccpTvComments.setText(totalComments + " Comment");
+                } else {
+                    mccpTvComments.setText(totalComments + " Comments");
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
 }

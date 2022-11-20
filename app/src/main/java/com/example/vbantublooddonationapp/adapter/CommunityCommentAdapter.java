@@ -11,12 +11,9 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vbantublooddonationapp.Model.Comments;
-import com.example.vbantublooddonationapp.Model.Organiser;
-import com.example.vbantublooddonationapp.Model.User;
 import com.example.vbantublooddonationapp.ViewModel.OrganiserViewModel;
 import com.example.vbantublooddonationapp.ViewModel.UserViewModel;
 import com.example.vbantublooddonationapp.databinding.CardCommunityCommentsBinding;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
@@ -27,18 +24,10 @@ public class CommunityCommentAdapter extends RecyclerView.Adapter<CommunityComme
 
     private final Activity mActivity;
     public final List<Comments> mCommentsList;
-    final FirebaseDatabase database;
-    private final OrganiserViewModel mOrganiserViewModel;
-    private final UserViewModel mUserViewModel;
-
-    private DatabaseReference mRef;
 
     public CommunityCommentAdapter(Activity activity, ArrayList<Comments> mCommentsList) {
         mActivity = activity;
         this.mCommentsList = mCommentsList;
-        mOrganiserViewModel = new ViewModelProvider((FragmentActivity) mActivity).get(OrganiserViewModel.class);
-        mUserViewModel = new ViewModelProvider((FragmentActivity) mActivity).get(UserViewModel.class);
-        database = FirebaseDatabase.getInstance();
     }
 
     @NonNull
@@ -77,17 +66,5 @@ public class CommunityCommentAdapter extends RecyclerView.Adapter<CommunityComme
             mcccTvUsername = mCardCommunityCommentsBinding.cccTvUsername;
             //mcccIvAvatar = mCardCommunityCommentsBinding.cccIvAvatar;
         }
-    }
-
-    public String getUserName(int id) {
-        List<User> userList = mUserViewModel.getUserById(id);
-        User user = userList.get(0);
-        return user.getUsername();
-    }
-
-    public String getOrganiserName(int id) {
-        List<Organiser> organiserList = mOrganiserViewModel.getOrganiserById(id);
-        Organiser organiser = organiserList.get(0);
-        return organiser.getCompanyName();
     }
 }
