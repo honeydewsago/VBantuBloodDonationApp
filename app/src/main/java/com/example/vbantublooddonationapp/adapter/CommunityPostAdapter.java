@@ -223,10 +223,10 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
 
             if (mccpIvLike.isPressed()) {
                 if (mUserType.equals("organiser")) {
-                    int organserID = mUserID;
+                    int organiserID = mUserID;
                     String postID = String.valueOf(post.getPostID());
                     database.getReference("Likes").child(postID)
-                            .child(String.valueOf(organserID)).removeValue();
+                            .child(String.valueOf(organiserID)).removeValue();
                     mccpIvLike.setImageResource(R.drawable.ic_thumb_up_red);
                 } else {
                     int userID = mUserID;
@@ -237,10 +237,10 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
                 }
             } else {
                 if (mUserType.equals("organiser")) {
-                    int organserID = mUserID;
+                    int organiserID = mUserID;
                     String postID = String.valueOf(post.getPostID());
                     database.getReference("Likes").child(postID)
-                            .child(String.valueOf(organserID)).setValue(true);
+                            .child(String.valueOf(organiserID)).setValue(true);
                     mccpIvLike.setImageResource(R.drawable.ic_thumb_up_grey);
                 } else {
                     int userID = mUserID;

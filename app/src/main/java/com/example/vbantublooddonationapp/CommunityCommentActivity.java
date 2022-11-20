@@ -12,11 +12,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.vbantublooddonationapp.Model.Comments;
@@ -28,8 +25,6 @@ import com.example.vbantublooddonationapp.ViewModel.OrganiserViewModel;
 import com.example.vbantublooddonationapp.ViewModel.UserViewModel;
 import com.example.vbantublooddonationapp.adapter.CommunityCommentAdapter;
 import com.example.vbantublooddonationapp.databinding.ActivityCommunityCommentBinding;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
@@ -162,19 +157,18 @@ public class CommunityCommentActivity extends AppCompatActivity {
                                         if (task.isSuccessful()) {
                                             System.out.println(currentPostID);
                                             Toast.makeText(getApplicationContext(), "Upload Successful", Toast.LENGTH_SHORT).show();
-                                            Intent intent = new Intent(CommunityCommentActivity.this, HomeActivity.class);
-                                            startActivity(intent);
                                             finish();
 
                                         } else {
                                             System.out.println(currentPostID);
                                             Toast.makeText(getApplicationContext(), "Network Error. Please Try Again", Toast.LENGTH_SHORT).show();
+                                            finish();
                                         }
                                     }
                                 });
                             } else {
-                                System.out.println(currentPostID);
                                 Toast.makeText(CommunityCommentActivity.this, "Network Error. Please Try Again", Toast.LENGTH_SHORT).show();
+                                finish();
                             }
                         }
 

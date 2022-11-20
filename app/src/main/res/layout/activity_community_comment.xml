@@ -41,7 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginBottom="2dp"
-        android:background="@drawable/outline_grey"
+        android:background="@drawable/et_custom"
         android:contentDescription="@string/background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
