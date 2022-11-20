@@ -1,8 +1,12 @@
 package com.example.vbantublooddonationapp.adapter;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -17,10 +21,12 @@ import com.example.vbantublooddonationapp.CommunityCommentActivity;
 import com.example.vbantublooddonationapp.Model.CommunityPost;
 import com.example.vbantublooddonationapp.Model.Organiser;
 import com.example.vbantublooddonationapp.Model.User;
+import com.example.vbantublooddonationapp.R;
 import com.example.vbantublooddonationapp.ViewModel.CommunityPostViewModel;
 import com.example.vbantublooddonationapp.ViewModel.OrganiserViewModel;
 import com.example.vbantublooddonationapp.ViewModel.UserViewModel;
 import com.example.vbantublooddonationapp.databinding.CardCommunityPostBinding;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -36,6 +42,16 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
     private final CommunityPostViewModel mCommunityPostViewModel;
     private final OrganiserViewModel mOrganiserViewModel;
     private final UserViewModel mUserViewModel;
+    CommunityLikesAdapter mCommunityLikesAdapter;
+    FirebaseDatabase database;
+
+    private final String USERID_KEY = "userid", USERTYPE_KEY = "usertype";
+    private SharedPreferences mPreferences;
+    private int mUserID = 1;
+    private int mOrganiserID = 0;
+    private String mUserType = "user";
+    private Organiser mOrganiser;
+    private User mUser;
 
     public CommunityPostAdapter(Activity activity) {
         mActivity = activity;
@@ -68,10 +84,8 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
         }
         holder.mccpTvCaption.setText(communityPost.getPostDesc());
         //holder.mccpIvPostImage
-
         //holder.mccpIvAvatar
-        //holder.mccpTvLikes
-
+        likeCommunityPost(communityPost, holder.mccpIvLike);
         getPostDuration(position, holder.mccpTvDuration);
 
         holder.mccpIvComment.setOnClickListener(new View.OnClickListener() {
@@ -108,6 +122,7 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
         private ImageView mccpIvAvatar;
         private ImageView mccpIvPostImage;
         private final ImageView mccpIvComment;
+        private final ImageView mccpIvLike;
 
         public CommunityPostHolder(@NonNull CardCommunityPostBinding mCardCommunityPostBinding) {
             super(mCardCommunityPostBinding.getRoot());
@@ -119,8 +134,7 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
             mccpIvPostImage = mCardCommunityPostBinding.ccpIvPostImage;
             mccpTvComments = mCardCommunityPostBinding.ccpTvComments;
             mccpIvComment = mCardCommunityPostBinding.ccpIvComment;
-
-            //Likes
+            mccpIvLike = mCardCommunityPostBinding.ccpIvLike;
         }
     }
 
@@ -187,5 +201,56 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
+    private void likeCommunityPost(CommunityPost post, ImageView mccpIvLike) {
 
+        mccpIvLike.setOnTouchListener((v, event) -> {
+
+            // show interest in events resulting from ACTION_DOWN
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                return true;
+            }
+
+            // don't handle event unless its ACTION_UP so "doSomething()" only runs once.
+            if (event.getAction() != MotionEvent.ACTION_UP) return false;
+
+            mPreferences = mActivity.getSharedPreferences("com.example.vbantublooddonationapp", MODE_PRIVATE);
+
+            if (mPreferences.contains(USERID_KEY) && mPreferences.contains(USERTYPE_KEY)) {
+                mUserID = mPreferences.getInt(USERID_KEY, 1);
+                mUserType = mPreferences.getString(USERTYPE_KEY, "user");
+            }
+
+            if (mccpIvLike.isPressed()) {
+                if (mUserType.equals("organiser")) {
+                    int organserID = mUserID;
+                    String postID = String.valueOf(post.getPostID());
+                    database.getReference("Likes").child(postID)
+                            .child(String.valueOf(organserID)).removeValue();
+                    mccpIvLike.setImageResource(R.drawable.ic_thumb_up_red);
+                } else {
+                    int userID = mUserID;
+                    String postID = String.valueOf(post.getPostID());
+                    database.getReference("Likes").child(postID)
+                            .child(String.valueOf(userID)).removeValue();
+                    mccpIvLike.setImageResource(R.drawable.ic_thumb_up_red);
+                }
+            } else {
+                if (mUserType.equals("organiser")) {
+                    int organserID = mUserID;
+                    String postID = String.valueOf(post.getPostID());
+                    database.getReference("Likes").child(postID)
+                            .child(String.valueOf(organserID)).setValue(true);
+                    mccpIvLike.setImageResource(R.drawable.ic_thumb_up_grey);
+                } else {
+                    int userID = mUserID;
+                    String postID = String.valueOf(post.getPostID());
+                    database.getReference("Likes").child(postID)
+                            .child(String.valueOf(userID)).setValue(true);
+                    mccpIvLike.setImageResource(R.drawable.ic_thumb_up_grey);
+                }
+            }
+            return true;
+        });
+    };
 }

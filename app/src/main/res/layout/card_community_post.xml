@@ -173,7 +173,7 @@
                     android:layout_weight="5"
                     android:contentDescription="@string/like"
                     android:padding="10dp"
-                    android:src="@drawable/ic_thumb_up"
+                    android:src="@drawable/ic_thumb_up_grey"
                     tools:ignore="NestedWeights" />
 
                 <ImageView
