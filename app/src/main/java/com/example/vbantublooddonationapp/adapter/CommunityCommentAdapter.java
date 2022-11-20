@@ -1,17 +1,23 @@
 package com.example.vbantublooddonationapp.adapter;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vbantublooddonationapp.Model.Comments;
+import com.example.vbantublooddonationapp.Model.Organiser;
+import com.example.vbantublooddonationapp.Model.User;
+import com.example.vbantublooddonationapp.ViewModel.OrganiserViewModel;
+import com.example.vbantublooddonationapp.ViewModel.UserViewModel;
 import com.example.vbantublooddonationapp.databinding.CardCommunityCommentsBinding;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,15 +25,19 @@ import java.util.List;
 
 public class CommunityCommentAdapter extends RecyclerView.Adapter<CommunityCommentAdapter.CommunityCommentHolder>{
 
-    private Activity mActivity;
-    private List<Comments> mCommentsList;
+    private final Activity mActivity;
+    public final List<Comments> mCommentsList;
     final FirebaseDatabase database;
+    private final OrganiserViewModel mOrganiserViewModel;
+    private final UserViewModel mUserViewModel;
 
+    private DatabaseReference mRef;
 
     public CommunityCommentAdapter(Activity activity, ArrayList<Comments> mCommentsList) {
         mActivity = activity;
         this.mCommentsList = mCommentsList;
-
+        mOrganiserViewModel = new ViewModelProvider((FragmentActivity) mActivity).get(OrganiserViewModel.class);
+        mUserViewModel = new ViewModelProvider((FragmentActivity) mActivity).get(UserViewModel.class);
         database = FirebaseDatabase.getInstance();
     }
 
@@ -39,10 +49,13 @@ public class CommunityCommentAdapter extends RecyclerView.Adapter<CommunityComme
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CommunityCommentAdapter.CommunityCommentHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CommunityCommentAdapter.CommunityCommentHolder holder, @SuppressLint("RecyclerView") int position) {
         Comments mComments = mCommentsList.get(position);
-        holder.mcccTvComment.setText(mComments.getComment());
 
+        String comment = mComments.getComment().toString();
+        String name = mComments.getUserName().toString();
+        holder.mcccTvUsername.setText(name);
+        holder.mcccTvComment.setText(comment);
     }
 
     @Override
@@ -55,12 +68,26 @@ public class CommunityCommentAdapter extends RecyclerView.Adapter<CommunityComme
 
     public static class CommunityCommentHolder extends RecyclerView.ViewHolder {
 
-        private final TextView mcccTvComment, mcccTvUsername;
+        public final TextView mcccTvComment, mcccTvUsername;
+        //private final ImageView mcccIvAvatar;
 
         public CommunityCommentHolder(@NonNull CardCommunityCommentsBinding mCardCommunityCommentsBinding) {
             super(mCardCommunityCommentsBinding.getRoot());
             mcccTvComment = mCardCommunityCommentsBinding.cccTvComment;
             mcccTvUsername = mCardCommunityCommentsBinding.cccTvUsername;
+            //mcccIvAvatar = mCardCommunityCommentsBinding.cccIvAvatar;
         }
+    }
+
+    public String getUserName(int id) {
+        List<User> userList = mUserViewModel.getUserById(id);
+        User user = userList.get(0);
+        return user.getUsername();
+    }
+
+    public String getOrganiserName(int id) {
+        List<Organiser> organiserList = mOrganiserViewModel.getOrganiserById(id);
+        Organiser organiser = organiserList.get(0);
+        return organiser.getCompanyName();
     }
 }
