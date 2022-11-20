@@ -77,14 +77,16 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
         holder.mccpIvComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                communityPostComments(position);
+                CommunityPost communityPost = mCommunityPostList.get(position);
+                communityPostComments(communityPost);
             }
         });
 
         holder.mccpTvComments.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                communityPostComments(position);
+                CommunityPost communityPost = mCommunityPostList.get(position);
+                communityPostComments(communityPost);
             }
         });
     }
@@ -122,10 +124,11 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
         }
     }
 
-    public void communityPostComments(int position) {
-        CommunityPost currentPost = mCommunityPostList.get(position);
+    public void communityPostComments(CommunityPost mCommunityPost) {
+        //CommunityPost currentPost = mCommunityPostList.get(position);
         Intent i = new Intent(mActivity, CommunityCommentActivity.class);
-        i.putExtra("currentPostID", currentPost.getPostID());
+        i.putExtra("currentPostID", mCommunityPost.getPostID());
+        System.out.println(mCommunityPost.getPostID());
         mActivity.startActivity(i);
     }
 

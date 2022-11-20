@@ -4,17 +4,28 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.vbantublooddonationapp.Model.Comments;
+import com.example.vbantublooddonationapp.Model.CommunityPost;
+import com.example.vbantublooddonationapp.Model.Organiser;
+import com.example.vbantublooddonationapp.Model.User;
+import com.example.vbantublooddonationapp.ViewModel.CommunityPostViewModel;
+import com.example.vbantublooddonationapp.ViewModel.OrganiserViewModel;
+import com.example.vbantublooddonationapp.ViewModel.UserViewModel;
 import com.example.vbantublooddonationapp.adapter.CommunityCommentAdapter;
 import com.example.vbantublooddonationapp.databinding.ActivityCommunityCommentBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,6 +33,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Objects;
 
 public class CommunityCommentActivity extends AppCompatActivity {
@@ -30,6 +43,19 @@ public class CommunityCommentActivity extends AppCompatActivity {
     private CommunityCommentAdapter mCommunityCommentAdapter;
     private TextView mcccTvComment, mcccTvUsername;
 
+    private final String USERID_KEY = "userid", USERTYPE_KEY = "usertype";
+    private SharedPreferences mPreferences;
+    private int mUserID = 1;
+    private int mOrganiserID = 0;
+    private String mUserType = "user";
+
+    private Organiser mOrganiser;
+    private User mUser;
+    private CommunityPost mCommunityPost;
+    private OrganiserViewModel mOrganiserViewModel;
+    private UserViewModel mUserViewModel;
+    private CommunityPostViewModel mCommunityPostViewModel;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,30 +74,128 @@ public class CommunityCommentActivity extends AppCompatActivity {
         //connect db
         FirebaseDatabase database = FirebaseDatabase.getInstance();
 
+        //initialise view model
+        mOrganiserViewModel = new ViewModelProvider(this).get(OrganiserViewModel.class);
+        mUserViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        mCommunityPostViewModel = new ViewModelProvider(this).get(CommunityPostViewModel.class);
+
+        mPreferences = getSharedPreferences("com.example.vbantublooddonationapp", MODE_PRIVATE);
+
+        if (mPreferences.contains(USERID_KEY) && mPreferences.contains(USERTYPE_KEY)) {
+            mUserID = mPreferences.getInt(USERID_KEY, 1);
+            mUserType = mPreferences.getString(USERTYPE_KEY, "user");
+        }
+
+        if (mUserType.equals("organiser")) {
+            List<Organiser> mOrganiserList = mOrganiserViewModel.getOrganiserById(mUserID);
+            mOrganiser = mOrganiserList.get(0);
+//            mActivityCommunityCommentBinding.acnpTvUsername.setText(mOrganiser.getCompanyName());
+
+        } else {
+            List<User> mUserList = mUserViewModel.getUserById(mUserID);
+            mUser = mUserList.get(0);
+//            mCommunityNewPostBinding.acnpTvUsername.setText(mUser.getUsername());
+        }
+
         //get intent and current post id
-        Intent i = getIntent();
-        String currentPostID = i.getStringExtra("currentPostID");
+        Intent mIntent = getIntent();
+        int currentPostID = mIntent.getIntExtra("currentPostID", 0);
         DatabaseReference mRef = FirebaseDatabase.getInstance().getReference().child("Comment").child("ID");
+
         ArrayList<Comments> mCommentsList = new ArrayList<>();
-
-
         mCommunityCommentAdapter = new CommunityCommentAdapter(this, mCommentsList);
         mActivityCommunityCommentBinding.accRvComments.setAdapter(mCommunityCommentAdapter);
+
+        //read data from database
+        mRef.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Comments cmt = dataSnapshot.getValue(Comments.class);
+                    //add the data to the array list
+                    mCommentsList.add(cmt);
+                }
+                //update the adapter
+                mCommunityCommentAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        mActivityCommunityCommentBinding.accIvCommentsSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String communityComment = mActivityCommunityCommentBinding.accEtComment.getText().toString();
+
+                if (communityComment.isEmpty()){
+                    mActivityCommunityCommentBinding.accEtComment.setError("Please don't leave blank.");
+                    mActivityCommunityCommentBinding.accEtComment.requestFocus();
+                } else {
+                    DatabaseReference rootRef = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference();
+                    rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (!(snapshot.child("Comment").child(String.valueOf(currentPostID)).exists())) {
+                                HashMap<String, Object> comment = new HashMap<>();
+                                comment.put("comment", communityComment);
+                                if (mUserType.equals("user")){
+                                    comment.put("userID", mUserID);
+                                    comment.put("organiserID", 0);
+                                }
+                                if (mUserType.equals("organiser")){
+                                    comment.put("userID", 0);
+                                    comment.put("organiserID", mUserID);
+                                }
+                                comment.put("postID", currentPostID);
+                                rootRef.child("Comment").child(String.valueOf(currentPostID)).updateChildren(comment).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            System.out.println(currentPostID);
+                                            Toast.makeText(getApplicationContext(), "Upload Successful", Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(CommunityCommentActivity.this, HomeActivity.class);
+                                            startActivity(intent);
+                                            finish();
+
+                                        } else {
+                                            System.out.println(currentPostID);
+                                            Toast.makeText(getApplicationContext(), "Network Error. Please Try Again", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
+                            } else {
+                                System.out.println(currentPostID);
+                                Toast.makeText(CommunityCommentActivity.this,  "Network Error. Please Try Again", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                }
+            }
+        });
 
         mRef.child("ID").addValueEventListener(new ValueEventListener() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-//                    Comments mComments = dataSnapshot.getValue(Comments.class);
-//                    mCommentsList.add(mComments);
-//                }
-//                mCommunityCommentAdapter.notifyDataSetChanged();
-                if (snapshot.exists()){
-                    Comments comment = snapshot.getValue(Comments.class);
-                    mcccTvComment.setText(comment.getComment());
-                    mcccTvUsername.setText(comment.getUserID());
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Comments mComments = dataSnapshot.getValue(Comments.class);
+                    mCommentsList.add(mComments);
                 }
+                mCommunityCommentAdapter.notifyDataSetChanged();
+//                if (snapshot.exists()){
+//                    Comments comment = snapshot.getValue(Comments.class);
+//                    mcccTvComment.setText(comment.getComment());
+//                    mcccTvUsername.setText(comment.getUserID());
+//                }
             }
 
             @Override
