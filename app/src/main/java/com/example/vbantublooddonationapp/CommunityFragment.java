@@ -14,8 +14,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.vbantublooddonationapp.Model.Appointment;
+import com.example.vbantublooddonationapp.Model.CommunityImage;
 import com.example.vbantublooddonationapp.Model.CommunityPost;
 import com.example.vbantublooddonationapp.Model.LeaderboardUser;
+import com.example.vbantublooddonationapp.Model.OrganiserImage;
 import com.example.vbantublooddonationapp.Model.User;
 import com.example.vbantublooddonationapp.ViewModel.AppointmentViewModel;
 import com.example.vbantublooddonationapp.ViewModel.CommunityPostViewModel;
@@ -41,6 +43,7 @@ public class CommunityFragment extends Fragment {
     private LeaderboardAdapter mLeaderboardAdapter;
     private CommunityPostAdapter mCommunityPostAdapter;
     private CommunityPostViewModel mCommunityPostViewModel;
+    private List<CommunityImage> mCommunityImageList;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -130,10 +133,14 @@ public class CommunityFragment extends Fragment {
 
         mCommunityPostViewModel = new ViewModelProvider(this).get(CommunityPostViewModel.class);
         List<CommunityPost> communityPostList = mCommunityPostViewModel.getAllCommunityPost();
-        mCommunityPostAdapter = new CommunityPostAdapter(getActivity());
+
+        mCommunityImageList = new ArrayList<CommunityImage>();
+        mCommunityPostAdapter = new CommunityPostAdapter(getActivity(), mCommunityImageList);
         mCommunityPostAdapter.setCommunityPostList(communityPostList);
+
         mCommunityBinding.fcRvCommunityPosts.setAdapter(mCommunityPostAdapter);
         mCommunityBinding.fcRvCommunityPosts.setLayoutManager(new GridLayoutManager(view.getContext(), getResources().getInteger(R.integer.grid_column_count)));
+
     }
 
     public class BloodAmountComparator implements Comparator<LeaderboardUser> {
