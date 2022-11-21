@@ -8,24 +8,25 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vbantublooddonationapp.CommunityCommentActivity;
+import com.example.vbantublooddonationapp.Model.CommunityImage;
 import com.example.vbantublooddonationapp.Model.CommunityPost;
 import com.example.vbantublooddonationapp.Model.Organiser;
+import com.example.vbantublooddonationapp.Model.OrganiserImage;
 import com.example.vbantublooddonationapp.Model.User;
 import com.example.vbantublooddonationapp.R;
 import com.example.vbantublooddonationapp.ViewModel.CommunityPostViewModel;
@@ -33,13 +34,20 @@ import com.example.vbantublooddonationapp.ViewModel.OrganiserViewModel;
 import com.example.vbantublooddonationapp.ViewModel.UserViewModel;
 import com.example.vbantublooddonationapp.databinding.CardCommunityPostBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -52,12 +60,14 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
 
     private final Activity mActivity;
     private List<CommunityPost> mCommunityPostList;
+    private List<CommunityImage> mCommunityImageList;
     private final CommunityPostViewModel mCommunityPostViewModel;
     private final OrganiserViewModel mOrganiserViewModel;
     private final UserViewModel mUserViewModel;
     CommunityLikesAdapter mCommunityLikesAdapter;
     FirebaseDatabase database;
-    DatabaseReference comments, likes, saveLikes;
+    DatabaseReference totalComments, likes, saveLikes;
+    StorageReference mStorageReference;
 
     private final String USERID_KEY = "userid", USERTYPE_KEY = "usertype";
     private SharedPreferences mPreferences;
@@ -67,12 +77,15 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
     private Organiser mOrganiser;
     private User mUser;
     private String postID = "";
+    private String dateTime = "";
+    private DatabaseReference mRef;
 
-    public CommunityPostAdapter(Activity activity) {
+    public CommunityPostAdapter(Activity activity, List<CommunityImage> communityImageList) {
         mActivity = activity;
         mCommunityPostViewModel = new ViewModelProvider((FragmentActivity) mActivity).get(CommunityPostViewModel.class);
         mOrganiserViewModel = new ViewModelProvider((FragmentActivity) mActivity).get(OrganiserViewModel.class);
         mUserViewModel = new ViewModelProvider((FragmentActivity) mActivity).get(UserViewModel.class);
+        mCommunityImageList = communityImageList;
     }
 
     public void setCommunityPostList(List<CommunityPost> communityPostList) {
@@ -105,12 +118,15 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
             holder.mccpTvUsername.setText(getOrganiserName(communityPost.getOrganiserID()));
         }
         holder.mccpTvCaption.setText(communityPost.getPostDesc());
-        //holder.mccpIvPostImage
-        //holder.mccpIvAvatar
+
+        //like post
         isLike(communityPost, holder.mccpIvLike);
         likeCommunityPost(communityPost, holder.mccpIvLike);
+
+        //show posted time
         getPostDuration(position, holder.mccpTvDuration);
 
+        //redirect to comments list
         holder.mccpIvComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -127,7 +143,68 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
             }
         });
 
+        //total number of likes and comments
         setTotalComments(communityPost.getPostID(), holder.mccpTvComments);
+        setTotalLikes(communityPost.getPostID(), holder.mccpTvLikes);
+
+        dateTime = communityPost.getPostDateTime();
+
+        mRef = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference().child("CommunityPost").child(postID).child(dateTime);
+
+        mRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot data : snapshot.getChildren()) {
+                    CommunityImage communityImage = data.getValue(CommunityImage.class);
+                    mCommunityImageList.add(communityImage);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+        //show post image
+        String imageUrl = getImageLink(Integer.parseInt(postID));
+        setImage(imageUrl, holder.mccpIvPostImage, postID);
+
+        //holder.mccpIvAvatar
+    }
+
+    private void setImage(String imageUrl, ImageView mccpIvPostImage, String postID) {
+        if (imageUrl != null) {
+            mStorageReference = FirebaseStorage.getInstance("gs://vbantu-blood-donation-app.appspot.com/").getReference("CommunityPost/" + postID);
+
+            try {
+                File localFile = File.createTempFile("tempfile", ".jpg");
+                mStorageReference.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                        Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                        mccpIvPostImage.setImageBitmap(bitmap);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @SuppressLint("RestrictedApi")
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(mActivity, "Failed to retrieve image", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private String getImageLink(int postID) {
+        for (CommunityImage communityImage : mCommunityImageList) {
+            if (communityImage.getPostID() == postID) {
+                return communityImage.getUrl();
+            }
+        }
+        return null;
     }
 
     @Override
@@ -229,12 +306,12 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
 
         postID = String.valueOf(post.getPostID());
         likes = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app")
-                .getReference();
+                .getReference().child("Likes").child(postID).child(String.valueOf(mUserID));
 
         likes.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.child("Likes").child(postID).child(String.valueOf(mUserID)).exists()) {
+                if (snapshot.exists()) {
                     mccpIvLike.setImageResource(R.drawable.ic_thumb_up_red);
                 } else {
                     mccpIvLike.setImageResource(R.drawable.ic_thumb_up_grey);
@@ -284,6 +361,10 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
                                 }
                             }
                         });
+                    } else {
+                        saveLikes.child("Likes").child(postID).child(String.valueOf(mUserID)).removeValue();
+                        mccpIvLike.setImageResource(R.drawable.ic_thumb_up_grey);
+
                     }
                 }
 
@@ -346,9 +427,9 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
 
     private void setTotalComments(int postID, final TextView mccpTvComments) {
 
-        comments = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference().child("Comment").child(String.valueOf(postID));
+        totalComments = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference().child("Comment").child(String.valueOf(postID));
 
-        comments.addValueEventListener(new ValueEventListener() {
+        totalComments.addValueEventListener(new ValueEventListener() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -358,6 +439,23 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
                 } else {
                     mccpTvComments.setText(totalComments + " Comments");
                 }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void setTotalLikes(int postID, final TextView mccpTvLikes) {
+        DatabaseReference totalLikes = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference().child("Likes").child(String.valueOf(postID));
+
+        totalLikes.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                mccpTvLikes.setText(snapshot.getChildrenCount() + " Likes");
             }
 
             @Override
