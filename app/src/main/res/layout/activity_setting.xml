@@ -21,7 +21,7 @@
             android:layout_height="36dp"
             android:background="@drawable/ic_arrow_back_ios"
             android:layout_marginTop="8dp"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="12dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -78,6 +78,7 @@
         android:paddingLeft="16dp"
         android:text="@string/updateProfile"
         android:textSize="20sp"
+        android:focusable="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/as_clHeader" />
 
