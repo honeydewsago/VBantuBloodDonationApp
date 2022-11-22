@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioButton;
@@ -18,6 +19,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.vbantublooddonationapp.Model.Appointment;
 import com.example.vbantublooddonationapp.Model.Organiser;
 import com.example.vbantublooddonationapp.Model.User;
+import com.example.vbantublooddonationapp.Repository.JavaMailAPI;
 import com.example.vbantublooddonationapp.ViewModel.AppointmentViewModel;
 import com.example.vbantublooddonationapp.ViewModel.OrganiserViewModel;
 import com.example.vbantublooddonationapp.ViewModel.UserViewModel;
@@ -187,15 +189,80 @@ public class MakeAppointment extends AppCompatActivity {
         Appointment appointment = new Appointment(mUserID, mOrganiserID, address, appointmentTime, appointDate, donationBefore, 0, "Ongoing");
         mAppointmentViewModel.insertAppointment(appointment);
         Toast.makeText(this, "Appointment submitted successfully", Toast.LENGTH_SHORT).show();
-        sendEmail();
+        sendEmail(appointment);
         Intent i = new Intent(MakeAppointment.this,AppointmentSuccess.class);
         startActivity(i);
         finish();
 
     }
 
-    private void sendEmail() {
+    private void sendEmail(Appointment appointment) {
         //send email to user
+        Log.d("TestingEMAIL", "Send to " + mUser.getEmail());
+        String genderEmail = gender.substring(0,1).toUpperCase() + gender.substring(1);
+        String fullDate = getFullDate(appointment.getAppointmentDate());
+        String email = mUser.getEmail();
+        String subject = "Appointment Details";
+        String message = getText(R.string.greet) + " " + mUser.getFullName() + ",\n" +
+                getText(R.string.appointmentEmailOpening) + "\n\n" +
+                getText(R.string.fullNameLabel) + " " + mUser.getFullName() + "\n"+
+                getText(R.string.icLabel) + " " + mUser.getIcNo() + "\n" +
+                getText(R.string.contactNoLabel) + " " + mUser.getContact() + "\n" +
+                getText(R.string.addressLabel) + " " + appointment.getAddress() + "\n" +
+                "Gender: " + genderEmail + "\n" +
+                getText(R.string.bloodDonationCenter) + ": "+ mOrganiser.getCompanyName() + "\n" +
+                getText(R.string.appointmentDateLabel) + " " + fullDate + "\n" +
+                getText(R.string.appointmentTimeLabel) + " " + appointment.getAppointmentTime() + "\n" +
+                getText(R.string.bloodGroupLabel) + " " + mUser.getBloodType() + "\n\n" +
+                getText(R.string.appointmentEmailInfo1) + "\n" +
+                getText(R.string.appointmentEmailReminder) + "\n" +
+                "1. " + getText(R.string.reminder1) +
+                "\n2. " + getText(R.string.reminder2) +
+                "\n3. " + getText(R.string.reminder3) +
+                "\n4. " + getText(R.string.reminder4) + "\n\n\n" +
+                getText(R.string.appointmentEmailEnding);
+
+        JavaMailAPI javaMailAPI = new JavaMailAPI(this, email, subject, message);
+        javaMailAPI.execute();
+    }
+
+    private String getFullDate(String dateTime) {
+        String year = dateTime.substring(0,4);
+        int month = Integer.parseInt(dateTime.substring(4,6));
+        String day = dateTime.substring(6,8);
+
+        return day + " "+ getMonthName(month) + " " + year;
+    }
+
+    public String getMonthName(int month_value){
+        switch (month_value) {
+            case 1:
+                return getString(R.string.january);
+            case 2:
+                return getString(R.string.february);
+            case 3:
+                return getString(R.string.march);
+            case 4:
+                return getString(R.string.april);
+            case 5:
+                return getString(R.string.may);
+            case 6:
+                return getString(R.string.june);
+            case 7:
+                return getString(R.string.july);
+            case 8:
+                return getString(R.string.august);
+            case 9:
+                return getString(R.string.september);
+            case 10:
+                return getString(R.string.october);
+            case 11:
+                return getString(R.string.november);
+            case 12:
+                return getString(R.string.december);
+            default:
+                return getString(R.string.month);
+        }
     }
 
 
