@@ -1,22 +1,29 @@
 package com.example.vbantublooddonationapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.example.vbantublooddonationapp.Model.Organiser;
 import com.example.vbantublooddonationapp.ViewModel.OrganiserViewModel;
 import com.example.vbantublooddonationapp.databinding.ActivityRegisterOrganiserBinding;
-import com.example.vbantublooddonationapp.databinding.ActivityRegisterUserBinding;
+
+import java.util.List;
 
 public class RegisterOrganiserActivity extends AppCompatActivity {
-
+    private final String USERID_KEY = "userid", USERTYPE_KEY = "usertype";
+    private int mUserID = 1;
+    private String mUserType = "";
+    private SharedPreferences mPreferences;
     private ActivityRegisterOrganiserBinding binding;
     private OrganiserViewModel mOrganiserViewModel;
+
+    private boolean status = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +34,8 @@ public class RegisterOrganiserActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         mOrganiserViewModel = new ViewModelProvider(this).get(OrganiserViewModel.class);
+
+        mPreferences = getSharedPreferences("com.example.vbantublooddonationapp",MODE_PRIVATE);
 
         Intent i = getIntent();
         String email = i.getStringExtra("organiser_email");
@@ -113,6 +122,19 @@ public class RegisterOrganiserActivity extends AppCompatActivity {
 
         //insert the organiser object
         mOrganiserViewModel.insertOrganiser(organiser);
+
+        List<Organiser> mOrganiserList = mOrganiserViewModel.loginOrganiser(email,password);
+        Organiser organiserReg = mOrganiserList.get(0);
+        mUserID = organiserReg.organiserID;
+        mUserType = "organiser";
+        status = true;
+
+        if (status) {
+            SharedPreferences.Editor spEditor = mPreferences.edit();
+            spEditor.putInt(USERID_KEY, mUserID);
+            spEditor.putString(USERTYPE_KEY, mUserType);
+            spEditor.apply();
+        }
 
         //toast message to inform organisers the registration is successful
         Toast.makeText(RegisterOrganiserActivity.this, R.string.userRegisterSuccessfully, Toast.LENGTH_SHORT).show();
