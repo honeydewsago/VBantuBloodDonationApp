@@ -226,6 +226,11 @@
     <string name="incorrectPassword">The password is incorrect!</string>
     <string name="userOtherPassword">Please use other password.</string>
     <string name="_0nd">0nd</string>
+    <string name="greet">Dear </string>
+    <string name="appointmentEmailOpening">Thank you for making an appointment with us. Please find your appointment details below.</string>
+    <string name="appointmentEmailEnding">Thank you. \n\nYour Sincerely,\nVbantu Team</string>
+    <string name="appointmentEmailInfo1">Please show this email or alternatively, your appointment details through VBantu App at the blood donation center upon arrival.</string>
+    <string name="appointmentEmailReminder">"Kind Reminder: "</string>
 
     <string-array name="bloodGroupValues">
         <item>Select blood type</item>
