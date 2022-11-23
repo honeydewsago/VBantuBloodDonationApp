@@ -54,8 +54,8 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/acs_cvCustomerSupportDetail"
         android:layout_width="match_parent"
-        android:layout_height="480dp"
-        android:layout_marginTop="56dp"
+        android:layout_height="440dp"
+        android:layout_marginTop="80dp"
         app:cardCornerRadius="20dp"
         app:cardBackgroundColor="@color/pink"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -71,11 +71,12 @@
                 android:id="@+id/acs_tvFindMoreHelp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/findMoreHelp"
-                android:textColor="@color/black"
-                android:textSize="20sp"
+                android:layout_marginStart="24dp"
                 android:layout_marginTop="32dp"
-                android:layout_marginLeft="16dp"
+                android:text="@string/findMoreHelp"
+                android:textColor="@color/mediumRed"
+                android:textSize="18sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -83,11 +84,11 @@
                 android:id="@+id/acs_tvContactUs"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="20dp"
                 android:text="@string/contactUsThroughEmail"
                 android:textColor="@color/black"
-                android:textSize="20sp"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="16dp"
+                android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/acs_tvFindMoreHelp" />
 
@@ -109,7 +110,7 @@
                 android:layout_width="360dp"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="20dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="32dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/acs_tvVbantuEmail">
@@ -134,9 +135,10 @@
                         android:id="@+id/acs_tvFasterWayToAddressIssue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
                         android:text="@string/fasterWaytoAddressIssue"
-                        android:textColor="@color/light_grey"
-                        android:textSize="16sp"
+                        android:textColor="@color/mediumRed"
+                        android:textSize="14sp"
                         app:layout_constraintStart_toStartOf="@+id/acs_tvNeedMoreHelp"
                         app:layout_constraintTop_toBottomOf="@+id/acs_tvNeedMoreHelp" />
 
@@ -145,7 +147,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/responseTime"
-                        android:textColor="@color/medium_grey"
+                        android:textColor="@color/medium_dark_grey"
                         android:textSize="16sp"
                         android:layout_marginTop="8dp"
                         app:layout_constraintStart_toStartOf="@+id/acs_tvFasterWayToAddressIssue"
