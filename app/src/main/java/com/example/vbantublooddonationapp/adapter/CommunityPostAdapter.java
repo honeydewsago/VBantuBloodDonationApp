@@ -126,7 +126,7 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
             holder.mccpTvUsername.setText(communityPosts.getUserName());
         }
 
-        String userID = communityPosts.userID;
+        String userID = String.valueOf(mUserID);
         int mUserID = Integer.parseInt(userID);
         if (mUserID == 0) {
             holder.mccpTvUsername.setText(communityPosts.getUserName());
@@ -180,7 +180,7 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
 
         //user avatar
         if (Objects.equals(communityPosts.organiserID, "0")) {
-            String userid = String.valueOf(communityPosts.getUserID());
+            String userid = String.valueOf(mUserID);
             DatabaseReference mRef = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("User").child(userid);
 
             mRef.addValueEventListener(new ValueEventListener() {
@@ -338,7 +338,7 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
 
     public void communityLikesPosts(CommunityPosts communityPosts) {
         String pstID = communityPosts.getPostID();
-        String userID = communityPosts.getUserID();
+        String userID = String.valueOf(mUserID);
         Intent likeIntent = new Intent(context, CommunityLikesActivity.class);
         likeIntent.putExtra("likePostID", pstID);
         likeIntent.putExtra("userPostID", userID);
@@ -396,7 +396,7 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
     private void isLike(CommunityPosts post, ImageView mccpIvLike) {
 
         String postID = post.getPostID();
-        String userID = post.getUserID();
+        String userID = String.valueOf(mUserID);
         likes = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app")
                 .getReference().child("Likes").child(postID).child(userID);
 
@@ -430,7 +430,7 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
             // don't handle event unless its ACTION_UP so "doSomething()" only runs once.
             if (event.getAction() != MotionEvent.ACTION_UP) return false;
 
-            String userID = post.getUserID();
+            String userID = String.valueOf(mUserID);
             String postID = post.getPostID();
 
             saveLikes = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference();
