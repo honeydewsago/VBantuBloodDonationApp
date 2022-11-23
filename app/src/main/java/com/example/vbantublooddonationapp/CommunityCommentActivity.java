@@ -1,5 +1,6 @@
 package com.example.vbantublooddonationapp;
 
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -17,10 +18,9 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.vbantublooddonationapp.Model.Comments;
-import com.example.vbantublooddonationapp.Model.CommunityPost;
+import com.example.vbantublooddonationapp.Model.CommunityPosts;
 import com.example.vbantublooddonationapp.Model.Organiser;
 import com.example.vbantublooddonationapp.Model.User;
-import com.example.vbantublooddonationapp.ViewModel.CommunityPostViewModel;
 import com.example.vbantublooddonationapp.ViewModel.OrganiserViewModel;
 import com.example.vbantublooddonationapp.ViewModel.UserViewModel;
 import com.example.vbantublooddonationapp.adapter.CommunityCommentAdapter;
@@ -52,14 +52,14 @@ public class CommunityCommentActivity extends AppCompatActivity {
     private int mOrganiserID = 0;
     private String mUserType = "user";
     private String username = "";
-    private int currentPostID = 0;
+    private String organiserUsername = "";
+    private String currentPostID;
     String currentDateTime = "";
 
     private Organiser mOrganiser;
     private User mUser;
     private OrganiserViewModel mOrganiserViewModel;
     private UserViewModel mUserViewModel;
-    private CommunityPostViewModel mCommunityPostViewModel;
 
     RecyclerView.LayoutManager mLayoutManager;
     private DatabaseReference mRef;
@@ -90,7 +90,6 @@ public class CommunityCommentActivity extends AppCompatActivity {
         //initialise view model
         mOrganiserViewModel = new ViewModelProvider(this).get(OrganiserViewModel.class);
         mUserViewModel = new ViewModelProvider(this).get(UserViewModel.class);
-        mCommunityPostViewModel = new ViewModelProvider(this).get(CommunityPostViewModel.class);
 
         mPreferences = getSharedPreferences("com.example.vbantublooddonationapp", MODE_PRIVATE);
 
@@ -102,7 +101,7 @@ public class CommunityCommentActivity extends AppCompatActivity {
         if (mUserType.equals("organiser")) {
             List<Organiser> mOrganiserList = mOrganiserViewModel.getOrganiserById(mUserID);
             mOrganiser = mOrganiserList.get(0);
-            String organiserUsername = mOrganiser.getCompanyName();
+            organiserUsername = mOrganiser.getCompanyName();
 
         } else {
             List<User> mUserList = mUserViewModel.getUserById(mUserID);
@@ -112,8 +111,8 @@ public class CommunityCommentActivity extends AppCompatActivity {
 
         //get intent and current post id
         Intent mIntent = getIntent();
-        currentPostID = mIntent.getIntExtra("currentPostID", 0);
-        mRef = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference().child("Comment").child(String.valueOf(currentPostID));
+        currentPostID = mIntent.getStringExtra("currentPostID");
+        mRef = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference().child("Comment").child(currentPostID);
         mCommentsList = new ArrayList<>();
         mCommunityCommentAdapter = new CommunityCommentAdapter(CommunityCommentActivity.this, mCommentsList);
         mActivityCommunityCommentBinding.accRvComments.setAdapter(mCommunityCommentAdapter);
@@ -127,7 +126,6 @@ public class CommunityCommentActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String communityComment = mActivityCommunityCommentBinding.accEtComment.getText().toString();
 
-
                 if (communityComment.isEmpty()) {
                     mActivityCommunityCommentBinding.accEtComment.setError("Please don't leave blank.");
                     mActivityCommunityCommentBinding.accEtComment.requestFocus();
@@ -138,20 +136,22 @@ public class CommunityCommentActivity extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             if (!(snapshot.child("Comment").child(String.valueOf(currentPostID)).child(currentDateTime).exists())) {
                                 HashMap<String, Object> comment = new HashMap<>();
-                                comment.put("comment", communityComment);
+
+                                comment.put("postID", currentPostID);
                                 if (mUserType.equals("user")) {
-                                    comment.put("userID", mUserID);
-                                    comment.put("organiserID", 0);
+                                    comment.put("userID", String.valueOf(mUserID));
+                                    comment.put("organiserID", "0");
                                     comment.put("userName", username);
                                 }
                                 if (mUserType.equals("organiser")) {
-                                    comment.put("userID", 0);
-                                    comment.put("organiserID", mUserID);
+                                    comment.put("userID", "0");
+                                    comment.put("organiserID", String.valueOf(mUserID));
                                     comment.put("userName", username);
                                 }
-                                comment.put("postID", currentPostID);
+                                comment.put("comment", communityComment);
                                 comment.put("date", currentDateTime);
-                                rootRef.child("Comment").child(String.valueOf(currentPostID)).child(currentDateTime).updateChildren(comment).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+                                rootRef.child("Comment").child(currentPostID).child(currentDateTime).updateChildren(comment).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (task.isSuccessful()) {
@@ -199,10 +199,7 @@ public class CommunityCommentActivity extends AppCompatActivity {
                 }
                 //update the adapter
                 mCommunityCommentAdapter.notifyDataSetChanged();
-
-
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 

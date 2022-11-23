@@ -60,7 +60,7 @@
                 app:layout_constraintTop_toTopOf="@id/clr_ivPlaceNo" />
 
             <ImageView
-                android:id="@+id/clr_ivPlaceProfilePicture"
+                android:id="@+id/clr_ivAvatar"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginStart="10dp"
@@ -79,7 +79,7 @@
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@+id/clr_ivPlaceBackground"
-                app:layout_constraintStart_toEndOf="@id/clr_ivPlaceProfilePicture"
+                app:layout_constraintStart_toEndOf="@id/clr_ivAvatar"
                 app:layout_constraintTop_toTopOf="@id/clr_ivPlaceBackground" />
 
             <TextView

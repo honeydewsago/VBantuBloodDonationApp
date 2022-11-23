@@ -123,6 +123,11 @@ public class SettingActivity extends AppCompatActivity {
 
     @Override
     public void finish() {
+        //clear the data in the shared preferences file
+        SharedPreferences.Editor spEditor = mPreferences.edit();
+        spEditor.clear();
+        spEditor.apply();
+
         super.finish();
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }

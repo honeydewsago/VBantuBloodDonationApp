@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "f1201f1b7151202529c6b57aa15a4c92",
+    "identityHash": "89151d0cd1e5852db42c67aeba46b688",
     "entities": [
       {
         "tableName": "user_table",
@@ -257,62 +257,12 @@
         },
         "indices": [],
         "foreignKeys": []
-      },
-      {
-        "tableName": "community_post_table",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`postID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `userID` INTEGER NOT NULL, `organiserID` INTEGER NOT NULL, `postDesc` TEXT, `postDateTime` TEXT, `active` INTEGER NOT NULL)",
-        "fields": [
-          {
-            "fieldPath": "postID",
-            "columnName": "postID",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "userID",
-            "columnName": "userID",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "organiserID",
-            "columnName": "organiserID",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "postDesc",
-            "columnName": "postDesc",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "postDateTime",
-            "columnName": "postDateTime",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "active",
-            "columnName": "active",
-            "affinity": "INTEGER",
-            "notNull": true
-          }
-        ],
-        "primaryKey": {
-          "columnNames": [
-            "postID"
-          ],
-          "autoGenerate": true
-        },
-        "indices": [],
-        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f1201f1b7151202529c6b57aa15a4c92')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '89151d0cd1e5852db42c67aeba46b688')"
     ]
   }
 }

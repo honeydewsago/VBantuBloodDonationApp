@@ -1,5 +1,6 @@
 package com.example.vbantublooddonationapp.Repository;
 
+/*
 import android.app.Application;
 import android.os.AsyncTask;
 
@@ -140,4 +141,6 @@ public class CommunityPostRepository {
         }
     }
 }
+
+ */
 
