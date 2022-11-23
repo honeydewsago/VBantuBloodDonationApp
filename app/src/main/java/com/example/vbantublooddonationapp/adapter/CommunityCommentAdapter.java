@@ -2,15 +2,32 @@ package com.example.vbantublooddonationapp.adapter;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vbantublooddonationapp.Model.Comments;
+import com.example.vbantublooddonationapp.Model.UserImage;
 import com.example.vbantublooddonationapp.databinding.CardCommunityCommentsBinding;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +57,24 @@ public class CommunityCommentAdapter extends RecyclerView.Adapter<CommunityComme
         String name = mComments.getUserName().toString();
         holder.mcccTvUsername.setText(name);
         holder.mcccTvComment.setText(comment);
+
+        String userid = mComments.getUserID();
+        DatabaseReference mRef = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference().child("User").child(userid);
+
+        mRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                UserImage userImage = snapshot.getValue(UserImage.class);
+                if (userImage != null) {
+                    setAvatar(userImage.getUrl(), holder.mcccIvAvatar, userid);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     @Override
@@ -53,13 +88,37 @@ public class CommunityCommentAdapter extends RecyclerView.Adapter<CommunityComme
     public static class CommunityCommentHolder extends RecyclerView.ViewHolder {
 
         public final TextView mcccTvComment, mcccTvUsername;
-        //private final ImageView mcccIvAvatar;
+        private final ImageView mcccIvAvatar;
 
         public CommunityCommentHolder(@NonNull CardCommunityCommentsBinding mCardCommunityCommentsBinding) {
             super(mCardCommunityCommentsBinding.getRoot());
             mcccTvComment = mCardCommunityCommentsBinding.cccTvComment;
             mcccTvUsername = mCardCommunityCommentsBinding.cccTvUsername;
-            //mcccIvAvatar = mCardCommunityCommentsBinding.cccIvAvatar;
+            mcccIvAvatar = mCardCommunityCommentsBinding.cccIvAvatar;
+        }
+    }
+
+    private void setAvatar(String avatarUrl, ImageView mcccIvAvatar, String userID) {
+        if (avatarUrl != null) {
+            StorageReference mStorageReference = FirebaseStorage.getInstance("gs://vbantu-blood-donation-app.appspot.com/").getReference("User/" + userID + "/"+ avatarUrl);
+
+            try {
+                File localFile = File.createTempFile("tempfile", ".jpg");
+                mStorageReference.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                        Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                        mcccIvAvatar.setImageBitmap(bitmap);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(mActivity.getApplicationContext(), "Failed to retrieve image", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
