@@ -69,6 +69,8 @@
                 app:layout_constraintBottom_toBottomOf="@id/clr_ivPlaceBackground"
                 app:layout_constraintStart_toEndOf="@id/clr_ivPlaceNoLine"
                 app:layout_constraintTop_toTopOf="@id/clr_ivPlaceBackground"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
                 app:shapeAppearanceOverlay="@style/Circular" />
 
             <TextView
