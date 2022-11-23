@@ -62,6 +62,7 @@
     <string name="bloodA">A+</string>
     <string name="nameOfPicRequired">Name of person in charge is required!</string>
     <string name="contactNumberRequired">Contact number is required!</string>
+    <string name="contactNumAtLeast9Char">Contact number must be at least 9 characters!</string>
     <string name="contactNumAtLeast10Char">Contact number must be at least 10 characters!</string>
     <string name="icNumberRequired">IC number is required!</string>
     <string name="icNumAtLeast12Char">IC number must be 12 characters!</string>
@@ -239,6 +240,8 @@
     <string name="enterYourOTPHere">Enter your OTP here</string>
     <string name="otp">OTP</string>
     <string name="resetYourPasswordNow">Reset Your Password Now</string>
+    <string name="newPasswordHint">New Password</string>
+    <string name="confirmNewPasswordHint">Confirm New Password</string>
 
     <string-array name="bloodGroupValues">
         <item>Select blood type</item>
