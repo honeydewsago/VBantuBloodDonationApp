@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.Toast;
 
 //import com.example.vbantublooddonationapp.Model.CommunityPost;
+import com.example.vbantublooddonationapp.Model.CommunityPosts;
 import com.example.vbantublooddonationapp.Model.Organiser;
 import com.example.vbantublooddonationapp.Model.User;
 //import com.example.vbantublooddonationapp.ViewModel.CommunityPostViewModel;
@@ -43,6 +44,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.UUID;
 
 public class CommunityNewPostActivity extends AppCompatActivity {
 
@@ -56,10 +58,9 @@ public class CommunityNewPostActivity extends AppCompatActivity {
 
     private Organiser mOrganiser;
     private User mUser;
-    //private CommunityPost mCommunityPost;
+    private CommunityPosts mCommunityPosts;
     private OrganiserViewModel mOrganiserViewModel;
     private UserViewModel mUserViewModel;
-    //private CommunityPostViewModel mCommunityPostViewModel;
 
     //Firebase
     private StorageTask uploadTask;
@@ -107,7 +108,6 @@ public class CommunityNewPostActivity extends AppCompatActivity {
         //initialise view model
         mOrganiserViewModel = new ViewModelProvider(this).get(OrganiserViewModel.class);
         mUserViewModel = new ViewModelProvider(this).get(UserViewModel.class);
-        //mCommunityPostViewModel = new ViewModelProvider(this).get(CommunityPostViewModel.class);
 
         //set toolbar and display icon
         Toolbar toolbar = mCommunityNewPostBinding.acnpToolbar;
@@ -156,23 +156,11 @@ public class CommunityNewPostActivity extends AppCompatActivity {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault());
         String currentDateTime = sdf.format(new Date());
 
-        if (mUserType.equals("organiser")){
-            mUserID = 0;
-            mOrganiserID = mUserID;
-        }
-
-        /*
-        CommunityPost newPost = new CommunityPost(mUserID, mOrganiserID ,postDesc, currentDateTime, 1);
-        mCommunityPostViewModel.insertCommunityPost(newPost);
-
-        //get post id by date time and post description
-        List<CommunityPost> communityPostList = mCommunityPostViewModel.getCommunityPostByDateTimePostDesc(currentDateTime, postDesc);
-        mCommunityPost = communityPostList.get(0);
-        int currentPostID = mCommunityPost.getPostID();
-
         //get image
         if (filepath != null) {
-            StorageReference fileRef = FirebaseStorage.getInstance().getReference().child("CommunityPost/" + currentPostID);
+            String postID = UUID.randomUUID().toString();
+
+            StorageReference fileRef = FirebaseStorage.getInstance().getReference().child("CommunityPost/" + postID);
             uploadTask = fileRef.putFile(filepath);
             uploadTask.continueWithTask(task -> {
                 if (!task.isComplete()) {
@@ -189,22 +177,23 @@ public class CommunityNewPostActivity extends AppCompatActivity {
                     database.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            if (!(snapshot.child("CommunityPost").child(String.valueOf(mUserID)).child(currentDateTime).exists())) {
+
+                            if (!(snapshot.child("CommunityPost").child(postID).exists())) {
                                 HashMap<String, Object> data = new HashMap<>();
 
-                                data.put("postId", currentPostID);
-                                data.put("url", myUrl);
-                                if (mUserType.equals("user")){
-                                    data.put("userID", mUserID);
-                                    data.put("organiserID", 0);
-                                }
-                                if (mUserType.equals("organiser")){
-                                    data.put("userID", 0);
-                                    data.put("organiserID", mUserID);
-                                }
+                                data.put("postDesc", postDesc);
                                 data.put("date", currentDateTime);
+                                data.put("url", myUrl);
+                                if (mUserType.equals("user")) {
+                                    data.put("userID", String.valueOf(mUserID));
+                                    data.put("organiserID", "0");
+                                }
+                                if (mUserType.equals("organiser")) {
+                                    data.put("userID", "0");
+                                    data.put("organiserID", String.valueOf(mUserID));
+                                }
 
-                                database.child("CommunityPost").child(String.valueOf(mUserID)).child(currentDateTime).updateChildren(data).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                database.child("CommunityPost").child(postID).updateChildren(data).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (task.isSuccessful()) {
@@ -241,8 +230,6 @@ public class CommunityNewPostActivity extends AppCompatActivity {
             progressDialog.dismiss();
             Toast.makeText(CommunityNewPostActivity.this, "No Image Selected!", Toast.LENGTH_SHORT).show();
         }
-
-         */
     }
 
 

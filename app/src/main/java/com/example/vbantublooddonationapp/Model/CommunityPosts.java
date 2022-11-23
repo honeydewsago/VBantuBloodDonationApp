@@ -1,15 +1,15 @@
 package com.example.vbantublooddonationapp.Model;
 
-public class CommunityImage {
+public class CommunityPosts {
     private int postID;
     String url = "";
 
-    public CommunityImage(int postID, String url) {
+    public CommunityPosts(int postID, String url) {
         this.url = url;
         this.postID = postID;
     }
 
-    public CommunityImage(){
+    public CommunityPosts(){
 
     }
 
