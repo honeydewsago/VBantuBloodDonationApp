@@ -14,14 +14,20 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.vbantublooddonationapp.Model.Appointment;
+import com.example.vbantublooddonationapp.Model.CommunityImage;
+import com.example.vbantublooddonationapp.Model.CommunityPost;
 import com.example.vbantublooddonationapp.Model.LeaderboardUser;
+import com.example.vbantublooddonationapp.Model.OrganiserImage;
 import com.example.vbantublooddonationapp.Model.User;
 import com.example.vbantublooddonationapp.ViewModel.AppointmentViewModel;
+import com.example.vbantublooddonationapp.ViewModel.CommunityPostViewModel;
 import com.example.vbantublooddonationapp.ViewModel.UserViewModel;
+import com.example.vbantublooddonationapp.adapter.CommunityPostAdapter;
 import com.example.vbantublooddonationapp.adapter.LeaderboardAdapter;
 import com.example.vbantublooddonationapp.databinding.FragmentCommunityBinding;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -35,6 +41,9 @@ public class CommunityFragment extends Fragment {
     private UserViewModel mUserViewModel;
     private List<LeaderboardUser> top3UserList;
     private LeaderboardAdapter mLeaderboardAdapter;
+    private CommunityPostAdapter mCommunityPostAdapter;
+    private CommunityPostViewModel mCommunityPostViewModel;
+    private List<CommunityImage> mCommunityImageList;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,6 +70,9 @@ public class CommunityFragment extends Fragment {
 
         List<User> userList = mUserViewModel.getUserList();
 
+        Calendar calendar = Calendar.getInstance();
+        int currentYear = calendar.get(Calendar.YEAR);
+
         for (int i = 0; i < userList.size(); i++) {
             LeaderboardUser leaderboardUser = new LeaderboardUser();
             leaderboardUser.setUserID(i + 1);
@@ -70,8 +82,12 @@ public class CommunityFragment extends Fragment {
 
             for (int j = 0; j < appointmentList.size(); j++) {
                 Appointment appointment = appointmentList.get(j);
-                if (appointment.getUserID() == (i + 1)) {
-                    amount = amount + appointment.getBloodAmt();
+
+                int year = Integer.parseInt(appointment.getAppointmentDate().substring(0,4));
+                if (year == currentYear) {
+                    if (appointment.getUserID() == (i + 1)) {
+                        amount = amount + appointment.getBloodAmt();
+                    }
                 }
             }
 
@@ -114,6 +130,17 @@ public class CommunityFragment extends Fragment {
                 startActivity(i);
             }
         });
+
+        mCommunityPostViewModel = new ViewModelProvider(this).get(CommunityPostViewModel.class);
+        List<CommunityPost> communityPostList = mCommunityPostViewModel.getAllCommunityPost();
+
+        mCommunityImageList = new ArrayList<CommunityImage>();
+        mCommunityPostAdapter = new CommunityPostAdapter(getActivity(), mCommunityImageList);
+        mCommunityPostAdapter.setCommunityPostList(communityPostList);
+
+        mCommunityBinding.fcRvCommunityPosts.setAdapter(mCommunityPostAdapter);
+        mCommunityBinding.fcRvCommunityPosts.setLayoutManager(new GridLayoutManager(view.getContext(), getResources().getInteger(R.integer.grid_column_count)));
+
     }
 
     public class BloodAmountComparator implements Comparator<LeaderboardUser> {

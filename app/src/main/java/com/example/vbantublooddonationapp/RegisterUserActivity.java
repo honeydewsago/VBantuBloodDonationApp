@@ -1,26 +1,34 @@
 package com.example.vbantublooddonationapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.vbantublooddonationapp.Model.User;
 import com.example.vbantublooddonationapp.ViewModel.UserViewModel;
 import com.example.vbantublooddonationapp.databinding.ActivityRegisterUserBinding;
 
 import java.util.Calendar;
+import java.util.List;
 
 public class RegisterUserActivity extends AppCompatActivity {
 
+    private final String USERID_KEY = "userid", USERTYPE_KEY = "usertype";
+    private SharedPreferences mPreferences;
+    private int mUserID = 1;
+    private String mUserType = "";
     private ActivityRegisterUserBinding binding;
     private UserViewModel mUserViewModel;
     private String gender="";
+
+    private boolean status = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +38,8 @@ public class RegisterUserActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         mUserViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+
+        mPreferences = getSharedPreferences("com.example.vbantublooddonationapp",MODE_PRIVATE);
 
         Intent i = getIntent();
         String email = i.getStringExtra("user_email");
@@ -131,6 +141,19 @@ public class RegisterUserActivity extends AppCompatActivity {
 
         //insert the user object
         mUserViewModel.insertUser(user);
+
+        List<User> mUserList = mUserViewModel.loginUser(email,password);
+        User userReg = mUserList.get(0);
+        mUserID = userReg.userID;
+        mUserType = "user";
+        status = true;
+
+        if (status) {
+            SharedPreferences.Editor spEditor = mPreferences.edit();
+            spEditor.putInt(USERID_KEY, mUserID);
+            spEditor.putString(USERTYPE_KEY, mUserType);
+            spEditor.apply();
+        }
 
         //toast message to inform users the registration is successful
         Toast.makeText(RegisterUserActivity.this, R.string.userRegisterSuccessfully, Toast.LENGTH_SHORT).show();

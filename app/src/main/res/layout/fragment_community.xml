@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -37,92 +38,109 @@
             android:src="@drawable/ic_edit" />
     </androidx.appcompat.widget.Toolbar>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/fc_cvLeaderboard"
+    <ScrollView
+        android:id="@+id/fc_svfragmentCommunity"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="15dp"
-        android:backgroundTint="@color/light_light_grey"
-        app:cardCornerRadius="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fc_toolbar">
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fc_toolbar">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/fc_ivLeaderboardTitleBackground"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/fc_cvLeaderboard"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:contentDescription="@string/leaderboard"
-                android:src="@color/red"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="15dp"
+                android:backgroundTint="@color/light_light_grey"
+                app:cardCornerRadius="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/fc_tvLeaderboardTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:text="@string/yearlyTopDonor"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/fc_ivLeaderboardTitleBackground"
-                app:layout_constraintStart_toStartOf="@id/fc_ivLeaderboardTitleBackground"
-                app:layout_constraintTop_toTopOf="@id/fc_ivLeaderboardTitleBackground" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
+                    <ImageView
+                        android:id="@+id/fc_ivLeaderboardTitleBackground"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:contentDescription="@string/leaderboard"
+                        android:src="@color/red"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/fc_tvLeaderboardTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="@string/yearlyTopDonor"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/fc_ivLeaderboardTitleBackground"
+                        app:layout_constraintStart_toStartOf="@id/fc_ivLeaderboardTitleBackground"
+                        app:layout_constraintTop_toTopOf="@id/fc_ivLeaderboardTitleBackground" />
+
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/fc_rvLeaderboard"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/fc_ivLeaderboardTitleBackground" />
+
+                    <TextView
+                        android:id="@+id/fc_tvViewFullRanking"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="4dp"
+                        android:text="@string/viewFullRanking"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/fc_rvLeaderboard" />
+
+                    <ImageView
+                        android:id="@+id/fc_ivViewFullRanking"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_arrow_forward_ios_black"
+                        app:layout_constraintBottom_toBottomOf="@id/fc_tvViewFullRanking"
+                        app:layout_constraintStart_toEndOf="@+id/fc_tvViewFullRanking"
+                        app:layout_constraintTop_toTopOf="@id/fc_tvViewFullRanking"
+                        android:contentDescription="@string/viewFullRanking" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/fc_rvLeaderboard"
-                android:layout_width="0dp"
+                android:id="@+id/fc_rvCommunityPosts"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fc_ivLeaderboardTitleBackground" />
-
-            <TextView
-                android:id="@+id/fc_tvViewFullRanking"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="4dp"
-                android:text="@string/viewFullRanking"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fc_rvLeaderboard" />
-
-            <ImageView
-                android:id="@+id/fc_ivViewFullRanking"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_arrow_forward_ios_black"
-                app:layout_constraintBottom_toBottomOf="@id/fc_tvViewFullRanking"
-                app:layout_constraintStart_toEndOf="@+id/fc_tvViewFullRanking"
-                app:layout_constraintTop_toTopOf="@id/fc_tvViewFullRanking" />
+                app:layout_constraintTop_toBottomOf="@id/fc_cvLeaderboard"
+                app:layout_constraintVertical_bias="0" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/fc_rvCommunityPosts"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fc_cvLeaderboard"
-        app:layout_constraintVertical_bias="0" />
-
-
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
