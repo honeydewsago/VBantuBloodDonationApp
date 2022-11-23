@@ -11,6 +11,7 @@
     <color name="mediumRed">#FFCE525F</color>
     <color name="red">#FFC83E4D</color>
     <color name="orange">#FFFD9E2F</color>
+    <color name="medium_pink">#F4B6B6</color>
     <color name="pink">#FFF2D5D8</color>
     <color name="light_grey">#FFE5E5E5</color>
     <color name="medium_grey">#FF999999</color>
@@ -18,6 +19,8 @@
     <color name="dark_grey">#FF434343</color>
     <color name="green">#FF87DB45</color>
     <color name="yellow">#FFD913</color>
+    <color name="light_blue">#89b3e0</color>
     <color name="light_light_grey">#F1F1F1</color>
+    <color name="grey">#21676262</color>
 
 </resources>

@@ -1,0 +1,1361 @@
+Index: app/src/main/res/layout/activity_rewards.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".RewardsActivity\">\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_rewards.xml b/app/src/main/res/layout/activity_rewards.xml
+--- a/app/src/main/res/layout/activity_rewards.xml	(revision 9cbaf3235784cae4e70767b9bd4d8e445cf8bf49)
++++ b/app/src/main/res/layout/activity_rewards.xml	(date 1669186414118)
+@@ -6,4 +6,137 @@
+     android:layout_height="match_parent"
+     tools:context=".RewardsActivity">
+ 
++    <androidx.appcompat.widget.Toolbar
++        android:id="@+id/ar_toolbar"
++        android:layout_width="match_parent"
++        android:layout_height="?actionBarSize"
++        android:background="#C83E4D"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintHorizontal_bias="0.0"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toTopOf="parent">
++
++        <TextView
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_gravity="center"
++            android:text="@string/my_rewards"
++            android:textColor="@color/white"
++            android:textSize="20sp"
++            android:textStyle="bold"
++            tools:layout_editor_absoluteX="159dp"
++            tools:layout_editor_absoluteY="14dp" />
++    </androidx.appcompat.widget.Toolbar>
++
++    <ImageView
++        android:id="@+id/ar_ivBg"
++        android:layout_width="0dp"
++        android:layout_height="wrap_content"
++        android:layout_marginTop="16dp"
++        android:adjustViewBounds="true"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toBottomOf="@+id/ar_toolbar"
++        app:srcCompat="@drawable/rewards_bg" />
++
++    <ImageView
++        android:id="@+id/ar_inPoints"
++        android:layout_width="175dp"
++        android:layout_height="178dp"
++        android:adjustViewBounds="true"
++        app:layout_constraintBottom_toBottomOf="@+id/ar_ivBg"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toBottomOf="@+id/ar_toolbar"
++        app:srcCompat="@drawable/points_bg" />
++
++    <TextView
++        android:id="@+id/ar_tvPoints"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_marginBottom="32dp"
++        android:includeFontPadding="false"
++        android:textColor="@color/light_blue"
++        android:textSize="38sp"
++        app:layout_constraintBottom_toBottomOf="@+id/ar_ivBg"
++        app:layout_constraintEnd_toEndOf="@+id/ar_ivBg"
++        app:layout_constraintStart_toStartOf="@+id/ar_ivBg"
++        app:layout_constraintTop_toBottomOf="@+id/ar_toolbar" />
++
++    <TextView
++        android:id="@+id/ar_tvpoint"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_marginTop="-8dp"
++        android:includeFontPadding="false"
++        android:text="@string/points"
++        android:textColor="@color/red"
++        android:textSize="20sp"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toBottomOf="@+id/ar_tvPoints" />
++
++    <TextView
++        android:id="@+id/ar_tvTitle"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_marginTop="8dp"
++        android:text="Points Redemption"
++        android:textColor="@color/red"
++        android:textStyle="bold"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toBottomOf="@+id/ar_ivBg" />
++
++    <View
++        android:id="@+id/horizontal_rule"
++        android:layout_width="match_parent"
++        android:layout_height="2dp"
++        android:layout_marginStart="16dp"
++        android:layout_marginTop="8dp"
++        android:layout_marginEnd="16dp"
++        android:background="@color/grey"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toBottomOf="@+id/ar_tvTitle" />
++
++    <androidx.constraintlayout.widget.ConstraintLayout
++        android:layout_width="0dp"
++        android:layout_height="0dp"
++        android:layout_marginStart="16dp"
++        android:layout_marginEnd="16dp"
++        app:layout_constraintBottom_toBottomOf="parent"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toBottomOf="@+id/horizontal_rule">
++
++        <com.google.android.material.tabs.TabLayout
++            android:id="@+id/ar_tabLayout"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            app:layout_constraintEnd_toEndOf="parent"
++            app:layout_constraintStart_toStartOf="parent"
++            app:layout_constraintTop_toTopOf="parent">
++
++            <com.google.android.material.tabs.TabItem
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:text="@string/store" />
++
++            <com.google.android.material.tabs.TabItem
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:text="@string/my_rewards" />
++        </com.google.android.material.tabs.TabLayout>
++
++        <androidx.viewpager2.widget.ViewPager2
++            android:id="@+id/ar_view_pager"
++            android:layout_width="0dp"
++            android:layout_height="0dp"
++            app:layout_constraintBottom_toBottomOf="parent"
++            app:layout_constraintEnd_toEndOf="parent"
++            app:layout_constraintStart_toStartOf="parent"
++            app:layout_constraintTop_toBottomOf="@+id/ar_tabLayout" />
++    </androidx.constraintlayout.widget.ConstraintLayout>
++
+ </androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
+Index: app/src/main/java/com/example/vbantublooddonationapp/RewardsActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.vbantublooddonationapp;\r\n\r\nimport android.os.Bundle;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\npublic class RewardsActivity extends AppCompatActivity {\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_rewards);\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/vbantublooddonationapp/RewardsActivity.java b/app/src/main/java/com/example/vbantublooddonationapp/RewardsActivity.java
+--- a/app/src/main/java/com/example/vbantublooddonationapp/RewardsActivity.java	(revision 9cbaf3235784cae4e70767b9bd4d8e445cf8bf49)
++++ b/app/src/main/java/com/example/vbantublooddonationapp/RewardsActivity.java	(date 1669208158293)
+@@ -3,12 +3,53 @@
+ import android.os.Bundle;
+ 
+ import androidx.appcompat.app.AppCompatActivity;
++import androidx.viewpager2.widget.ViewPager2;
++
++import com.example.vbantublooddonationapp.databinding.ActivityRewardsBinding;
++import com.google.android.material.tabs.TabLayout;
+ 
+ public class RewardsActivity extends AppCompatActivity {
++    private ActivityRewardsBinding binding;
++    RewardViewPagerAdapter mViewPagerAdapter;
++
+ 
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+-        setContentView(R.layout.activity_rewards);
++        binding = ActivityRewardsBinding.inflate(getLayoutInflater());
++        setContentView(binding.getRoot());
++
++        mViewPagerAdapter = new RewardViewPagerAdapter(this);
++        binding.arViewPager.setAdapter(mViewPagerAdapter);
++
++        binding.arTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
++            @Override
++            public void onTabSelected(TabLayout.Tab tab) {
++                binding.arViewPager.setCurrentItem(tab.getPosition());
++            }
++
++            @Override
++            public void onTabUnselected(TabLayout.Tab tab) {
++
++            }
++
++            @Override
++            public void onTabReselected(TabLayout.Tab tab) {
++
++            }
++        });
++
++        binding.arViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
++            @Override
++            public void onPageSelected(int position) {
++                super.onPageSelected(position);
++                binding.arTabLayout.getTabAt(position).select();
++            }
++        });
++
++
++
++
++
+     }
+ }
+\ No newline at end of file
+Index: app/src/main/java/com/example/vbantublooddonationapp/BloodRoomDatabase.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.vbantublooddonationapp;\r\n\r\nimport android.content.Context;\r\n\r\nimport androidx.room.AutoMigration;\r\nimport androidx.room.Database;\r\nimport androidx.room.Room;\r\nimport androidx.room.RoomDatabase;\r\n\r\nimport com.example.vbantublooddonationapp.DAO.AppointmentDao;\r\nimport com.example.vbantublooddonationapp.DAO.BloodRequestDao;\r\nimport com.example.vbantublooddonationapp.DAO.CommunityPostDao;\r\nimport com.example.vbantublooddonationapp.DAO.OrganiserDao;\r\nimport com.example.vbantublooddonationapp.DAO.UserDao;\r\nimport com.example.vbantublooddonationapp.Model.Appointment;\r\nimport com.example.vbantublooddonationapp.Model.BloodRequest;\r\nimport com.example.vbantublooddonationapp.Model.CommunityPost;\r\nimport com.example.vbantublooddonationapp.Model.Organiser;\r\nimport com.example.vbantublooddonationapp.Model.User;\r\n\r\n@Database(entities = {User.class, Organiser.class, Appointment.class, BloodRequest.class, CommunityPost.class}, version = 1, exportSchema = true)\r\npublic abstract class BloodRoomDatabase extends RoomDatabase {\r\n\r\n    public abstract UserDao userDao();\r\n    public abstract OrganiserDao organiserDao();\r\n    public abstract AppointmentDao appointmentDao();\r\n    public abstract BloodRequestDao bloodRequestDao();\r\n    public abstract CommunityPostDao communityPostDao();\r\n\r\n    public static BloodRoomDatabase INSTANCE;\r\n\r\n    public static BloodRoomDatabase getINSTANCE(Context context){\r\n\r\n        if(INSTANCE == null){\r\n            synchronized (BloodRoomDatabase.class) {\r\n                INSTANCE = Room.databaseBuilder(\r\n                        context.getApplicationContext(),\r\n                        BloodRoomDatabase.class, \"blood_database\")\r\n                        .createFromAsset(\"database/vbantu_database.db\")\r\n                        .build();\r\n            }\r\n        }\r\n        return INSTANCE;\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/vbantublooddonationapp/BloodRoomDatabase.java b/app/src/main/java/com/example/vbantublooddonationapp/BloodRoomDatabase.java
+--- a/app/src/main/java/com/example/vbantublooddonationapp/BloodRoomDatabase.java	(revision 9cbaf3235784cae4e70767b9bd4d8e445cf8bf49)
++++ b/app/src/main/java/com/example/vbantublooddonationapp/BloodRoomDatabase.java	(date 1669203773601)
+@@ -2,7 +2,6 @@
+ 
+ import android.content.Context;
+ 
+-import androidx.room.AutoMigration;
+ import androidx.room.Database;
+ import androidx.room.Room;
+ import androidx.room.RoomDatabase;
+@@ -11,6 +10,8 @@
+ import com.example.vbantublooddonationapp.DAO.BloodRequestDao;
+ import com.example.vbantublooddonationapp.DAO.CommunityPostDao;
+ import com.example.vbantublooddonationapp.DAO.OrganiserDao;
++import com.example.vbantublooddonationapp.DAO.RewardDao;
++import com.example.vbantublooddonationapp.DAO.RewardTransactionDao;
+ import com.example.vbantublooddonationapp.DAO.UserDao;
+ import com.example.vbantublooddonationapp.Model.Appointment;
+ import com.example.vbantublooddonationapp.Model.BloodRequest;
+@@ -26,6 +27,8 @@
+     public abstract AppointmentDao appointmentDao();
+     public abstract BloodRequestDao bloodRequestDao();
+     public abstract CommunityPostDao communityPostDao();
++    public abstract RewardDao rewardDao();
++    public abstract RewardTransactionDao rewardTransactionDao();
+ 
+     public static BloodRoomDatabase INSTANCE;
+ 
+@@ -42,4 +45,7 @@
+         }
+         return INSTANCE;
+     }
++
++
++
+ }
+\ No newline at end of file
+Index: app/src/main/res/layout/card_reward.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/card_reward.xml b/app/src/main/res/layout/card_reward.xml
+new file mode 100644
+--- /dev/null	(date 1669188648517)
++++ b/app/src/main/res/layout/card_reward.xml	(date 1669188648517)
+@@ -0,0 +1,126 @@
++<?xml version="1.0" encoding="utf-8"?>
++<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:layout_width="match_parent"
++    android:layout_height="wrap_content">
++
++
++    <androidx.cardview.widget.CardView
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:layout_marginBottom="8dp"
++        app:cardCornerRadius="10dp"
++        app:cardElevation="3dp">
++
++        <androidx.constraintlayout.widget.ConstraintLayout
++            android:layout_width="match_parent"
++            android:layout_height="match_parent">
++
++            <TextView
++                android:id="@+id/cr_tvDiscount"
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:layout_marginStart="16dp"
++                android:layout_marginTop="16dp"
++                android:text="TextView"
++                android:textColor="@color/red"
++                android:textSize="18sp"
++                android:textStyle="bold"
++                app:layout_constraintStart_toStartOf="parent"
++                app:layout_constraintTop_toTopOf="parent" />
++
++            <TextView
++                android:id="@+id/cr_tvMinSpend"
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:text="TextView"
++                android:textColor="@color/red"
++                app:layout_constraintEnd_toEndOf="@+id/cr_tvDiscount"
++                app:layout_constraintStart_toStartOf="@+id/cr_tvDiscount"
++                app:layout_constraintTop_toBottomOf="@+id/cr_tvDiscount" />
++
++            <View
++                android:id="@+id/view"
++                android:layout_width="1dp"
++                android:layout_height="0dp"
++                android:layout_marginStart="16dp"
++                android:layout_marginTop="8dp"
++                android:layout_marginBottom="8dp"
++                android:background="@color/grey"
++                app:layout_constraintBottom_toBottomOf="parent"
++                app:layout_constraintStart_toEndOf="@+id/cr_tvDiscount"
++                app:layout_constraintTop_toTopOf="parent" />
++
++            <TextView
++                android:id="@+id/cr_tvStoreName"
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:layout_marginStart="16dp"
++                android:layout_marginTop="16dp"
++                android:text="TextView"
++                android:textColor="@color/black"
++                app:layout_constraintStart_toEndOf="@+id/view"
++                app:layout_constraintTop_toTopOf="parent" />
++
++            <TextView
++                android:id="@+id/cr_tvExpiryDate"
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:layout_marginStart="8dp"
++                android:text="TextView"
++                app:layout_constraintBottom_toBottomOf="@+id/imageView"
++                app:layout_constraintStart_toEndOf="@+id/imageView"
++                app:layout_constraintTop_toTopOf="@+id/imageView" />
++
++            <ImageView
++                android:id="@+id/imageView"
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:layout_marginStart="16dp"
++                android:layout_marginTop="8dp"
++                app:layout_constraintStart_toEndOf="@+id/view"
++                app:layout_constraintTop_toBottomOf="@+id/cr_tvStoreName"
++                app:srcCompat="@drawable/ic_date" />
++
++            <TextView
++                android:id="@+id/cr_tvPoints"
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:layout_marginTop="16dp"
++                android:text="TextView"
++                android:textColor="@color/red"
++                app:layout_constraintBottom_toTopOf="@+id/cardView"
++                app:layout_constraintEnd_toEndOf="@+id/cardView"
++                app:layout_constraintStart_toStartOf="@+id/cardView"
++                app:layout_constraintTop_toTopOf="parent" />
++
++            <androidx.cardview.widget.CardView
++                android:id="@+id/cardView"
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:layout_marginTop="8dp"
++                android:layout_marginEnd="16dp"
++                android:layout_marginBottom="8dp"
++                app:cardCornerRadius="25dp"
++                app:layout_constraintBottom_toBottomOf="parent"
++                app:layout_constraintEnd_toEndOf="parent"
++                app:layout_constraintTop_toBottomOf="@+id/cr_tvPoints">
++
++                <TextView
++                    android:id="@+id/cr_tvBtnStatus"
++                    android:layout_width="wrap_content"
++                    android:layout_height="match_parent"
++                    android:background="@color/medium_pink"
++                    android:paddingLeft="14dp"
++                    android:paddingTop="2dp"
++                    android:paddingRight="14dp"
++                    android:paddingBottom="2dp"
++                    android:text="Redeem Now"
++                    android:textColor="@color/black" />
++            </androidx.cardview.widget.CardView>
++
++        </androidx.constraintlayout.widget.ConstraintLayout>
++    </androidx.cardview.widget.CardView>
++
++</RelativeLayout>
+\ No newline at end of file
+Index: app/src/main/res/layout/fragment_store.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/fragment_store.xml b/app/src/main/res/layout/fragment_store.xml
+new file mode 100644
+--- /dev/null	(date 1669184950474)
++++ b/app/src/main/res/layout/fragment_store.xml	(date 1669184950474)
+@@ -0,0 +1,19 @@
++<?xml version="1.0" encoding="utf-8"?>
++<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent">
++
++    <androidx.recyclerview.widget.RecyclerView
++        android:layout_width="409dp"
++        android:layout_height="729dp"
++        android:layout_marginStart="1dp"
++        android:layout_marginTop="1dp"
++        android:layout_marginEnd="1dp"
++        android:layout_marginBottom="1dp"
++        app:layout_constraintBottom_toBottomOf="parent"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toTopOf="parent" />
++</androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
+Index: app/src/main/res/layout/fragment_my_rewards.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/fragment_my_rewards.xml b/app/src/main/res/layout/fragment_my_rewards.xml
+new file mode 100644
+--- /dev/null	(date 1669185008369)
++++ b/app/src/main/res/layout/fragment_my_rewards.xml	(date 1669185008369)
+@@ -0,0 +1,19 @@
++<?xml version="1.0" encoding="utf-8"?>
++<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent">
++
++    <androidx.recyclerview.widget.RecyclerView
++        android:layout_width="409dp"
++        android:layout_height="729dp"
++        android:layout_marginStart="1dp"
++        android:layout_marginTop="1dp"
++        android:layout_marginEnd="1dp"
++        android:layout_marginBottom="1dp"
++        app:layout_constraintBottom_toBottomOf="parent"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toTopOf="parent" />
++</androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
+Index: app/src/main/java/com/example/vbantublooddonationapp/RewardViewPagerAdapter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/vbantublooddonationapp/RewardViewPagerAdapter.java b/app/src/main/java/com/example/vbantublooddonationapp/RewardViewPagerAdapter.java
+new file mode 100644
+--- /dev/null	(date 1669207717108)
++++ b/app/src/main/java/com/example/vbantublooddonationapp/RewardViewPagerAdapter.java	(date 1669207717108)
+@@ -0,0 +1,28 @@
++package com.example.vbantublooddonationapp;
++
++import androidx.annotation.NonNull;
++import androidx.fragment.app.Fragment;
++import androidx.fragment.app.FragmentActivity;
++import androidx.viewpager2.adapter.FragmentStateAdapter;
++
++public class RewardViewPagerAdapter extends FragmentStateAdapter {
++    public RewardViewPagerAdapter(@NonNull FragmentActivity fragmentActivity){super(fragmentActivity);}
++
++    @NonNull
++    @Override
++    public Fragment createFragment(int position) {
++        switch (position){
++            case 0:
++                return new StoreFragment();
++            case 1:
++                return new MyRewardFragment();
++            default:
++                return new StoreFragment();
++        }
++    }
++
++    @Override
++    public int getItemCount() {
++        return 2;
++    }
++}
+Index: app/src/main/java/com/example/vbantublooddonationapp/StoreFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/vbantublooddonationapp/StoreFragment.java b/app/src/main/java/com/example/vbantublooddonationapp/StoreFragment.java
+new file mode 100644
+--- /dev/null	(date 1669207717104)
++++ b/app/src/main/java/com/example/vbantublooddonationapp/StoreFragment.java	(date 1669207717104)
+@@ -0,0 +1,6 @@
++package com.example.vbantublooddonationapp;
++
++import androidx.fragment.app.Fragment;
++
++public class StoreFragment extends Fragment {
++}
+Index: app/src/main/java/com/example/vbantublooddonationapp/DAO/RewardDao.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/vbantublooddonationapp/DAO/RewardDao.java b/app/src/main/java/com/example/vbantublooddonationapp/DAO/RewardDao.java
+new file mode 100644
+--- /dev/null	(date 1669210278665)
++++ b/app/src/main/java/com/example/vbantublooddonationapp/DAO/RewardDao.java	(date 1669210278665)
+@@ -0,0 +1,27 @@
++package com.example.vbantublooddonationapp.DAO;
++
++import androidx.lifecycle.LiveData;
++import androidx.room.Dao;
++import androidx.room.Insert;
++import androidx.room.Query;
++import androidx.room.Update;
++
++import com.example.vbantublooddonationapp.Model.Reward;
++
++import java.util.List;
++
++@Dao
++public interface RewardDao {
++    @Insert
++    void insert(Reward... rewards);
++
++    @Update
++    void update(Reward... rewards);
++
++    @Query("Select * from reward_table where rewardID=(:id)")
++    List<Reward> getRequestById(int id);
++
++    @Query("Select * from reward_table where userID=(:id) ORDER By rewardID DESC")
++    LiveData<List<Reward>> getRewardByUserId(int id);
++
++}
+Index: app/src/main/java/com/example/vbantublooddonationapp/MyRewardFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/vbantublooddonationapp/MyRewardFragment.java b/app/src/main/java/com/example/vbantublooddonationapp/MyRewardFragment.java
+new file mode 100644
+--- /dev/null	(date 1669207717100)
++++ b/app/src/main/java/com/example/vbantublooddonationapp/MyRewardFragment.java	(date 1669207717100)
+@@ -0,0 +1,6 @@
++package com.example.vbantublooddonationapp;
++
++import androidx.fragment.app.Fragment;
++
++public class MyRewardFragment extends Fragment {
++}
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"DesignSurface\">\r\n    <option name=\"filePathToZoomLevelMap\">\r\n      <map>\r\n        <entry key=\"..\\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable-v24/profile_info_foreground.xml\" value=\"0.129\" />\r\n        <entry key=\"..\\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/ic_arrow_back_ios.xml\" value=\"0.209\" />\r\n        <entry key=\"..\\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/ic_arrow_down_24.xml\" value=\"0.209\" />\r\n        <entry key=\"..\\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/ic_arrow_forward_ios.xml\" value=\"0.209\" />\r\n        <entry key=\"..\\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/ic_group_72.xml\" value=\"0.129\" />\r\n        <entry key=\"..\\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/ic_loginbg.xml\" value=\"0.1\" />\r\n        <entry key=\"..\\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/ic_qr_code.xml\" value=\"0.258\" />\r\n        <entry key=\"..\\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/ic_settings.xml\" value=\"0.1\" />\r\n        <entry key=\"..\\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/personal_info.xml\" value=\"0.1\" />\r\n        <entry key=\"..\\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/profile_box.xml\" value=\"0.1\" />\r\n        <entry key=\"..\\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/profile_info.xml\" value=\"0.5\" />\r\n        <entry key=\"..\\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/red_box.xml\" value=\"0.152\" />\r\n        <entry key=\"..\\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/red_round_box.xml\" value=\"0.152\" />\r\n        <entry key=\"..\\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/activity_login.xml\" value=\"0.33\" />\r\n        <entry key=\"..\\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/activity_main.xml\" value=\"0.2015625\" />\r\n        <entry key=\"..\\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/fragment_community.xml\" value=\"0.2015625\" />\r\n        <entry key=\"..\\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/fragment_home.xml\" value=\"0.2015625\" />\r\n        <entry key=\"..\\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/fragment_login.xml\" value=\"0.33\" />\r\n        <entry key=\"..\\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/fragment_profile.xml\" value=\"0.33\" />\r\n        <entry key=\"..\\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/fragment_register.xml\" value=\"0.2015625\" />\r\n        <entry key=\"..\\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/mipmap-anydpi-v26/profile_info.xml\" value=\"0.1105\" />\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_11\" default=\"true\" project-jdk-name=\"11\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/build/classes\" />\r\n  </component>\r\n  <component name=\"ProjectType\">\r\n    <option name=\"id\" value=\"Android\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 9cbaf3235784cae4e70767b9bd4d8e445cf8bf49)
++++ b/.idea/misc.xml	(date 1667093267205)
+@@ -3,25 +3,45 @@
+   <component name="DesignSurface">
+     <option name="filePathToZoomLevelMap">
+       <map>
++        <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2395" />
+         <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable-v24/profile_info_foreground.xml" value="0.129" />
++        <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/appointment_box.xml" value="0.2395" />
++        <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/blood_amount.xml" value="0.2395" />
++        <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/card_appointment_box.xml" value="0.1" />
++        <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/ic_appointment.xml" value="0.1" />
+         <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/ic_arrow_back_ios.xml" value="0.209" />
+         <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/ic_arrow_down_24.xml" value="0.209" />
+         <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/ic_arrow_forward_ios.xml" value="0.209" />
++        <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/ic_arrow_grey.xml" value="0.286" />
+         <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/ic_group_72.xml" value="0.129" />
++        <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/ic_history_24.xml" value="0.2395" />
++        <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2395" />
++        <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/ic_location.xml" value="0.2395" />
++        <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/ic_login_box.xml" value="0.2395" />
+         <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/ic_loginbg.xml" value="0.1" />
+         <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/ic_qr_code.xml" value="0.258" />
++        <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/ic_send.xml" value="0.2395" />
+         <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/ic_settings.xml" value="0.1" />
++        <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/ic_splashscreen.xml" value="0.2395" />
++        <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/input_box.xml" value="0.1" />
+         <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/personal_info.xml" value="0.1" />
+         <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/profile_box.xml" value="0.1" />
+         <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/profile_info.xml" value="0.5" />
+         <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/red_box.xml" value="0.152" />
+         <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/red_round_box.xml" value="0.152" />
++        <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/status_complete.xml" value="0.2395" />
++        <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/drawable/status_pending.xml" value="0.1" />
++        <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/activity_appointment_detail.xml" value="0.38697916666666665" />
++        <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/activity_appointment_history.xml" value="0.5607547169811321" />
+         <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/activity_login.xml" value="0.33" />
+         <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/activity_main.xml" value="0.2015625" />
++        <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/activity_make_appointment.xml" value="0.28677685950413223" />
++        <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/activity_profile_qr.xml" value="0.33" />
++        <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/card_appointment.xml" value="0.5777604976671851" />
+         <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/fragment_community.xml" value="0.2015625" />
+         <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/fragment_home.xml" value="0.2015625" />
+         <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/fragment_login.xml" value="0.33" />
+-        <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/fragment_profile.xml" value="0.33" />
++        <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/fragment_profile.xml" value="0.6024716786817713" />
+         <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/fragment_register.xml" value="0.2015625" />
+         <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/mipmap-anydpi-v26/profile_info.xml" value="0.1105" />
+       </map>
+Index: app/schemas/com.example.vbantublooddonationapp.BloodRoomDatabase/1.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>{\r\n  \"formatVersion\": 1,\r\n  \"database\": {\r\n    \"version\": 1,\r\n    \"identityHash\": \"f1201f1b7151202529c6b57aa15a4c92\",\r\n    \"entities\": [\r\n      {\r\n        \"tableName\": \"user_table\",\r\n        \"createSql\": \"CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`userID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `username` TEXT, `password` TEXT, `fullName` TEXT, `email` TEXT, `icNo` TEXT, `dateOfBirth` TEXT, `gender` TEXT, `contact` TEXT, `bloodType` TEXT)\",\r\n        \"fields\": [\r\n          {\r\n            \"fieldPath\": \"userID\",\r\n            \"columnName\": \"userID\",\r\n            \"affinity\": \"INTEGER\",\r\n            \"notNull\": true\r\n          },\r\n          {\r\n            \"fieldPath\": \"username\",\r\n            \"columnName\": \"username\",\r\n            \"affinity\": \"TEXT\",\r\n            \"notNull\": false\r\n          },\r\n          {\r\n            \"fieldPath\": \"password\",\r\n            \"columnName\": \"password\",\r\n            \"affinity\": \"TEXT\",\r\n            \"notNull\": false\r\n          },\r\n          {\r\n            \"fieldPath\": \"fullName\",\r\n            \"columnName\": \"fullName\",\r\n            \"affinity\": \"TEXT\",\r\n            \"notNull\": false\r\n          },\r\n          {\r\n            \"fieldPath\": \"email\",\r\n            \"columnName\": \"email\",\r\n            \"affinity\": \"TEXT\",\r\n            \"notNull\": false\r\n          },\r\n          {\r\n            \"fieldPath\": \"icNo\",\r\n            \"columnName\": \"icNo\",\r\n            \"affinity\": \"TEXT\",\r\n            \"notNull\": false\r\n          },\r\n          {\r\n            \"fieldPath\": \"dateOfBirth\",\r\n            \"columnName\": \"dateOfBirth\",\r\n            \"affinity\": \"TEXT\",\r\n            \"notNull\": false\r\n          },\r\n          {\r\n            \"fieldPath\": \"gender\",\r\n            \"columnName\": \"gender\",\r\n            \"affinity\": \"TEXT\",\r\n            \"notNull\": false\r\n          },\r\n          {\r\n            \"fieldPath\": \"contact\",\r\n            \"columnName\": \"contact\",\r\n            \"affinity\": \"TEXT\",\r\n            \"notNull\": false\r\n          },\r\n          {\r\n            \"fieldPath\": \"bloodType\",\r\n            \"columnName\": \"bloodType\",\r\n            \"affinity\": \"TEXT\",\r\n            \"notNull\": false\r\n          }\r\n        ],\r\n        \"primaryKey\": {\r\n          \"columnNames\": [\r\n            \"userID\"\r\n          ],\r\n          \"autoGenerate\": true\r\n        },\r\n        \"indices\": [],\r\n        \"foreignKeys\": []\r\n      },\r\n      {\r\n        \"tableName\": \"organiser_table\",\r\n        \"createSql\": \"CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`organiserID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `email` TEXT, `companyName` TEXT, `password` TEXT, `picName` TEXT, `contact` TEXT, `picIcNo` TEXT, `address` TEXT)\",\r\n        \"fields\": [\r\n          {\r\n            \"fieldPath\": \"organiserID\",\r\n            \"columnName\": \"organiserID\",\r\n            \"affinity\": \"INTEGER\",\r\n            \"notNull\": true\r\n          },\r\n          {\r\n            \"fieldPath\": \"email\",\r\n            \"columnName\": \"email\",\r\n            \"affinity\": \"TEXT\",\r\n            \"notNull\": false\r\n          },\r\n          {\r\n            \"fieldPath\": \"companyName\",\r\n            \"columnName\": \"companyName\",\r\n            \"affinity\": \"TEXT\",\r\n            \"notNull\": false\r\n          },\r\n          {\r\n            \"fieldPath\": \"password\",\r\n            \"columnName\": \"password\",\r\n            \"affinity\": \"TEXT\",\r\n            \"notNull\": false\r\n          },\r\n          {\r\n            \"fieldPath\": \"picName\",\r\n            \"columnName\": \"picName\",\r\n            \"affinity\": \"TEXT\",\r\n            \"notNull\": false\r\n          },\r\n          {\r\n            \"fieldPath\": \"contact\",\r\n            \"columnName\": \"contact\",\r\n            \"affinity\": \"TEXT\",\r\n            \"notNull\": false\r\n          },\r\n          {\r\n            \"fieldPath\": \"picIcNo\",\r\n            \"columnName\": \"picIcNo\",\r\n            \"affinity\": \"TEXT\",\r\n            \"notNull\": false\r\n          },\r\n          {\r\n            \"fieldPath\": \"address\",\r\n            \"columnName\": \"address\",\r\n            \"affinity\": \"TEXT\",\r\n            \"notNull\": false\r\n          }\r\n        ],\r\n        \"primaryKey\": {\r\n          \"columnNames\": [\r\n            \"organiserID\"\r\n          ],\r\n          \"autoGenerate\": true\r\n        },\r\n        \"indices\": [],\r\n        \"foreignKeys\": []\r\n      },\r\n      {\r\n        \"tableName\": \"appointment_table\",\r\n        \"createSql\": \"CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`appointmentID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `userID` INTEGER NOT NULL, `organiserID` INTEGER NOT NULL, `address` TEXT, `appointmentTime` TEXT, `appointmentDate` TEXT, `donationBefore` TEXT, `bloodAmt` INTEGER NOT NULL, `status` TEXT)\",\r\n        \"fields\": [\r\n          {\r\n            \"fieldPath\": \"appointmentID\",\r\n            \"columnName\": \"appointmentID\",\r\n            \"affinity\": \"INTEGER\",\r\n            \"notNull\": true\r\n          },\r\n          {\r\n            \"fieldPath\": \"userID\",\r\n            \"columnName\": \"userID\",\r\n            \"affinity\": \"INTEGER\",\r\n            \"notNull\": true\r\n          },\r\n          {\r\n            \"fieldPath\": \"organiserID\",\r\n            \"columnName\": \"organiserID\",\r\n            \"affinity\": \"INTEGER\",\r\n            \"notNull\": true\r\n          },\r\n          {\r\n            \"fieldPath\": \"address\",\r\n            \"columnName\": \"address\",\r\n            \"affinity\": \"TEXT\",\r\n            \"notNull\": false\r\n          },\r\n          {\r\n            \"fieldPath\": \"appointmentTime\",\r\n            \"columnName\": \"appointmentTime\",\r\n            \"affinity\": \"TEXT\",\r\n            \"notNull\": false\r\n          },\r\n          {\r\n            \"fieldPath\": \"appointmentDate\",\r\n            \"columnName\": \"appointmentDate\",\r\n            \"affinity\": \"TEXT\",\r\n            \"notNull\": false\r\n          },\r\n          {\r\n            \"fieldPath\": \"donationBefore\",\r\n            \"columnName\": \"donationBefore\",\r\n            \"affinity\": \"TEXT\",\r\n            \"notNull\": false\r\n          },\r\n          {\r\n            \"fieldPath\": \"bloodAmt\",\r\n            \"columnName\": \"bloodAmt\",\r\n            \"affinity\": \"INTEGER\",\r\n            \"notNull\": true\r\n          },\r\n          {\r\n            \"fieldPath\": \"status\",\r\n            \"columnName\": \"status\",\r\n            \"affinity\": \"TEXT\",\r\n            \"notNull\": false\r\n          }\r\n        ],\r\n        \"primaryKey\": {\r\n          \"columnNames\": [\r\n            \"appointmentID\"\r\n          ],\r\n          \"autoGenerate\": true\r\n        },\r\n        \"indices\": [],\r\n        \"foreignKeys\": []\r\n      },\r\n      {\r\n        \"tableName\": \"blood_request_table\",\r\n        \"createSql\": \"CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`requestID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `organiserID` INTEGER NOT NULL, `requestInfo` TEXT, `shortageType` TEXT, `dateTime` TEXT, `active` INTEGER NOT NULL)\",\r\n        \"fields\": [\r\n          {\r\n            \"fieldPath\": \"requestID\",\r\n            \"columnName\": \"requestID\",\r\n            \"affinity\": \"INTEGER\",\r\n            \"notNull\": true\r\n          },\r\n          {\r\n            \"fieldPath\": \"organiserID\",\r\n            \"columnName\": \"organiserID\",\r\n            \"affinity\": \"INTEGER\",\r\n            \"notNull\": true\r\n          },\r\n          {\r\n            \"fieldPath\": \"requestInfo\",\r\n            \"columnName\": \"requestInfo\",\r\n            \"affinity\": \"TEXT\",\r\n            \"notNull\": false\r\n          },\r\n          {\r\n            \"fieldPath\": \"shortageType\",\r\n            \"columnName\": \"shortageType\",\r\n            \"affinity\": \"TEXT\",\r\n            \"notNull\": false\r\n          },\r\n          {\r\n            \"fieldPath\": \"dateTime\",\r\n            \"columnName\": \"dateTime\",\r\n            \"affinity\": \"TEXT\",\r\n            \"notNull\": false\r\n          },\r\n          {\r\n            \"fieldPath\": \"active\",\r\n            \"columnName\": \"active\",\r\n            \"affinity\": \"INTEGER\",\r\n            \"notNull\": true\r\n          }\r\n        ],\r\n        \"primaryKey\": {\r\n          \"columnNames\": [\r\n            \"requestID\"\r\n          ],\r\n          \"autoGenerate\": true\r\n        },\r\n        \"indices\": [],\r\n        \"foreignKeys\": []\r\n      },\r\n      {\r\n        \"tableName\": \"community_post_table\",\r\n        \"createSql\": \"CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`postID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `userID` INTEGER NOT NULL, `organiserID` INTEGER NOT NULL, `postDesc` TEXT, `postDateTime` TEXT, `active` INTEGER NOT NULL)\",\r\n        \"fields\": [\r\n          {\r\n            \"fieldPath\": \"postID\",\r\n            \"columnName\": \"postID\",\r\n            \"affinity\": \"INTEGER\",\r\n            \"notNull\": true\r\n          },\r\n          {\r\n            \"fieldPath\": \"userID\",\r\n            \"columnName\": \"userID\",\r\n            \"affinity\": \"INTEGER\",\r\n            \"notNull\": true\r\n          },\r\n          {\r\n            \"fieldPath\": \"organiserID\",\r\n            \"columnName\": \"organiserID\",\r\n            \"affinity\": \"INTEGER\",\r\n            \"notNull\": true\r\n          },\r\n          {\r\n            \"fieldPath\": \"postDesc\",\r\n            \"columnName\": \"postDesc\",\r\n            \"affinity\": \"TEXT\",\r\n            \"notNull\": false\r\n          },\r\n          {\r\n            \"fieldPath\": \"postDateTime\",\r\n            \"columnName\": \"postDateTime\",\r\n            \"affinity\": \"TEXT\",\r\n            \"notNull\": false\r\n          },\r\n          {\r\n            \"fieldPath\": \"active\",\r\n            \"columnName\": \"active\",\r\n            \"affinity\": \"INTEGER\",\r\n            \"notNull\": true\r\n          }\r\n        ],\r\n        \"primaryKey\": {\r\n          \"columnNames\": [\r\n            \"postID\"\r\n          ],\r\n          \"autoGenerate\": true\r\n        },\r\n        \"indices\": [],\r\n        \"foreignKeys\": []\r\n      }\r\n    ],\r\n    \"views\": [],\r\n    \"setupQueries\": [\r\n      \"CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)\",\r\n      \"INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f1201f1b7151202529c6b57aa15a4c92')\"\r\n    ]\r\n  }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/schemas/com.example.vbantublooddonationapp.BloodRoomDatabase/1.json b/app/schemas/com.example.vbantublooddonationapp.BloodRoomDatabase/1.json
+--- a/app/schemas/com.example.vbantublooddonationapp.BloodRoomDatabase/1.json	(revision 9cbaf3235784cae4e70767b9bd4d8e445cf8bf49)
++++ b/app/schemas/com.example.vbantublooddonationapp.BloodRoomDatabase/1.json	(date 1669209636899)
+@@ -2,11 +2,11 @@
+   "formatVersion": 1,
+   "database": {
+     "version": 1,
+-    "identityHash": "f1201f1b7151202529c6b57aa15a4c92",
++    "identityHash": "96cf4056b43afb7ead82f01eccfbf346",
+     "entities": [
+       {
+         "tableName": "user_table",
+-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`userID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `username` TEXT, `password` TEXT, `fullName` TEXT, `email` TEXT, `icNo` TEXT, `dateOfBirth` TEXT, `gender` TEXT, `contact` TEXT, `bloodType` TEXT)",
++        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`userID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `username` TEXT, `password` TEXT, `fullName` TEXT, `email` TEXT, `icNo` TEXT, `dateOfBirth` TEXT, `gender` TEXT, `contact` TEXT, `bloodType` TEXT, `points` INTEGER NOT NULL)",
+         "fields": [
+           {
+             "fieldPath": "userID",
+@@ -67,6 +67,12 @@
+             "columnName": "bloodType",
+             "affinity": "TEXT",
+             "notNull": false
++          },
++          {
++            "fieldPath": "points",
++            "columnName": "points",
++            "affinity": "INTEGER",
++            "notNull": true
+           }
+         ],
+         "primaryKey": {
+@@ -312,7 +318,7 @@
+     "views": [],
+     "setupQueries": [
+       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f1201f1b7151202529c6b57aa15a4c92')"
++      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '96cf4056b43afb7ead82f01eccfbf346')"
+     ]
+   }
+ }
+\ No newline at end of file
+Index: app/src/main/java/com/example/vbantublooddonationapp/Model/Reward.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/vbantublooddonationapp/Model/Reward.java b/app/src/main/java/com/example/vbantublooddonationapp/Model/Reward.java
+new file mode 100644
+--- /dev/null	(date 1669207413332)
++++ b/app/src/main/java/com/example/vbantublooddonationapp/Model/Reward.java	(date 1669207413332)
+@@ -0,0 +1,92 @@
++package com.example.vbantublooddonationapp.Model;
++
++import androidx.room.ColumnInfo;
++import androidx.room.Entity;
++import androidx.room.PrimaryKey;
++
++
++@Entity(tableName = "reward_table")
++public class Reward {
++    @PrimaryKey(autoGenerate = true)
++    @ColumnInfo(name = "rewardID")
++    public int rewardID;
++
++    @ColumnInfo(name = "discount")
++    public String discount;
++
++    @ColumnInfo(name = "minSpend")
++    public int minSpend;
++
++    @ColumnInfo(name = "storeName")
++    public String storeName;
++
++    @ColumnInfo(name = "quantity")
++    public int quantity;
++
++    @ColumnInfo(name = "points")
++    public int points;
++
++    @ColumnInfo(name = "status")
++    public String status;
++
++    public Reward(String discount, int minSpend, String storeName, int quantity, int points, String status) {
++        this.discount = discount;
++        this.minSpend = minSpend;
++        this.storeName = storeName;
++        this.quantity = quantity;
++        this.points = points;
++        this.status = status;
++    }
++
++    public int getRewardID() {
++        return rewardID;
++    }
++
++    public String getDiscount() {
++        return discount;
++    }
++
++    public void setDiscount(String discount) {
++        this.discount = discount;
++    }
++
++    public int getMinSpend() {
++        return minSpend;
++    }
++
++    public void setMinSpend(int minSpend) {
++        this.minSpend = minSpend;
++    }
++
++    public String getStoreName() {
++        return storeName;
++    }
++
++    public void setStoreName(String storeName) {
++        this.storeName = storeName;
++    }
++
++    public int getQuantity() {
++        return quantity;
++    }
++
++    public void setQuantity(int quantity) {
++        this.quantity = quantity;
++    }
++
++    public int getPoints() {
++        return points;
++    }
++
++    public void setPoints(int points) {
++        this.points = points;
++    }
++
++    public String getStatus() {
++        return status;
++    }
++
++    public void setStatus(String status) {
++        this.status = status;
++    }
++}
+Index: app/src/main/res/drawable/pink_btn.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/drawable/pink_btn.xml b/app/src/main/res/drawable/pink_btn.xml
+new file mode 100644
+--- /dev/null	(date 1669187452723)
++++ b/app/src/main/res/drawable/pink_btn.xml	(date 1669187452723)
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<shape xmlns:android="http://schemas.android.com/apk/res/android">
++    <solid android:color="@color/medium_pink"/>
++    <corners android:radius="25dp"/>
++</shape>
+\ No newline at end of file
+Index: app/src/main/res/drawable/ic_date.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/drawable/ic_date.xml b/app/src/main/res/drawable/ic_date.xml
+new file mode 100644
+--- /dev/null	(date 1669186746657)
++++ b/app/src/main/res/drawable/ic_date.xml	(date 1669186746657)
+@@ -0,0 +1,5 @@
++<vector android:height="24dp" android:tint="#D0D0D0"
++    android:viewportHeight="24" android:viewportWidth="24"
++    android:width="24dp" xmlns:android="http://schemas.android.com/apk/res/android">
++    <path android:fillColor="@android:color/white" android:pathData="M9,11L7,11v2h2v-2zM13,11h-2v2h2v-2zM17,11h-2v2h2v-2zM19,4h-1L18,2h-2v2L8,4L8,2L6,2v2L5,4c-1.11,0 -1.99,0.9 -1.99,2L3,20c0,1.1 0.89,2 2,2h14c1.1,0 2,-0.9 2,-2L21,6c0,-1.1 -0.9,-2 -2,-2zM19,20L5,20L5,9h14v11z"/>
++</vector>
+Index: app/src/main/java/com/example/vbantublooddonationapp/Repository/RewardRepository.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/vbantublooddonationapp/Repository/RewardRepository.java b/app/src/main/java/com/example/vbantublooddonationapp/Repository/RewardRepository.java
+new file mode 100644
+--- /dev/null	(date 1669195665178)
++++ b/app/src/main/java/com/example/vbantublooddonationapp/Repository/RewardRepository.java	(date 1669195665178)
+@@ -0,0 +1,110 @@
++package com.example.vbantublooddonationapp.Repository;
++
++import android.app.Application;
++import android.os.AsyncTask;
++
++import androidx.lifecycle.LiveData;
++
++import com.example.vbantublooddonationapp.BloodRoomDatabase;
++import com.example.vbantublooddonationapp.DAO.RewardDao;
++import com.example.vbantublooddonationapp.Model.Reward;
++
++import java.util.List;
++import java.util.concurrent.ExecutionException;
++
++public class RewardRepository {
++    private RewardDao mRewardDao;
++
++    public RewardRepository(Application application){
++        BloodRoomDatabase db = BloodRoomDatabase.getINSTANCE(application);
++        mRewardDao = db.rewardDao();
++    }
++
++    public void insert(Reward reward){
++        new RewardRepository.insertAsyncTask(mRewardDao).execute(reward);
++    }
++
++    public class insertAsyncTask extends AsyncTask<Reward, Void, Void> {
++        private RewardDao mSyncTaskDao;
++        public insertAsyncTask(RewardDao dao) {
++            mSyncTaskDao = dao;
++        }
++
++        @Override
++        protected Void doInBackground(Reward... rewards) {
++            mSyncTaskDao.insert(rewards[0]);
++            return null;
++        }
++    }
++
++    public List<Reward> getRequestById(int id){
++        List<Reward> list = null;
++
++        try {
++            list = new RewardRepository.getRequestByIdAsyncTask(mRewardDao).execute(id).get();
++        } catch (ExecutionException e) {
++            e.printStackTrace();
++        } catch (InterruptedException e) {
++            e.printStackTrace();
++        }
++        return list;
++    }
++
++    public class getRequestByIdAsyncTask extends AsyncTask<Integer,Void,List<Reward>> {
++        private RewardDao mSyncTaskDao;
++
++        public getRequestByIdAsyncTask(RewardDao dao) {
++            mSyncTaskDao = dao;
++        }
++
++        @Override
++        protected List<Reward> doInBackground(Integer... id) {
++            List<Reward> rewardList = mRewardDao.getRequestById(id[0]);
++            return rewardList;
++        }
++    }
++
++    public LiveData<List<Reward>> getRewardByUserId(int id){
++        LiveData<List<Reward>> list = null;
++        try {
++            list = new RewardRepository.getRewardByIdAsyncTask(mRewardDao).execute(id).get();
++        } catch (ExecutionException e) {
++            e.printStackTrace();
++        } catch (InterruptedException e) {
++            e.printStackTrace();
++        }
++        return list;
++    }
++
++
++    private static class getRewardByIdAsyncTask extends AsyncTask<Integer, Void, LiveData<List<Reward>>> {
++        private RewardDao mSyncTaskDao;
++
++        public getRewardByIdAsyncTask(RewardDao dao) {
++            mSyncTaskDao = dao;
++        }
++
++        @Override
++        protected LiveData<List<Reward>> doInBackground(Integer... id) {
++            LiveData<List<Reward>> rewardList = mSyncTaskDao.getRewardByUserId(id[0]);
++            return rewardList;
++        }
++    }
++    public void update(Reward reward) {
++        new RewardRepository.updateAsyncTask(mRewardDao).execute(reward);
++    }
++
++    private static class updateAsyncTask extends AsyncTask<Reward, Void, Void> {
++        private RewardDao mSyncTaskDao;
++
++        updateAsyncTask(RewardDao dao) {
++            mSyncTaskDao = dao;
++        }
++
++        @Override
++        protected Void doInBackground(Reward... reward) {
++            mSyncTaskDao.update(reward[0]);
++            return null;
++        }
++    }
++}
+Index: app/src/main/java/com/example/vbantublooddonationapp/LoginActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.vbantublooddonationapp;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.viewpager2.widget.ViewPager2;\r\n\r\nimport android.os.Bundle;\r\nimport android.view.View;\r\n\r\nimport com.example.vbantublooddonationapp.databinding.ActivityLoginBinding;\r\nimport com.example.vbantublooddonationapp.databinding.ActivityMainBinding;\r\nimport com.google.android.material.tabs.TabLayout;\r\n\r\npublic class LoginActivity extends AppCompatActivity {\r\n\r\n    private ActivityLoginBinding binding;\r\n    LoginViewPagerAdapter mViewPagerAdapter;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n\r\n        binding = ActivityLoginBinding.inflate(getLayoutInflater());\r\n        setContentView(binding.getRoot());\r\n\r\n        mViewPagerAdapter = new LoginViewPagerAdapter(this);\r\n        binding.alViewPager.setAdapter(mViewPagerAdapter);\r\n\r\n        binding.alTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {\r\n            @Override\r\n            public void onTabSelected(TabLayout.Tab tab) {\r\n                binding.alViewPager.setCurrentItem(tab.getPosition());\r\n            }\r\n\r\n            @Override\r\n            public void onTabUnselected(TabLayout.Tab tab) {\r\n\r\n            }\r\n\r\n            @Override\r\n            public void onTabReselected(TabLayout.Tab tab) {\r\n\r\n            }\r\n        });\r\n\r\n        binding.alViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {\r\n            @Override\r\n            public void onPageSelected(int position) {\r\n                super.onPageSelected(position);\r\n                binding.alTabLayout.getTabAt(position).select();\r\n            }\r\n        });\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/vbantublooddonationapp/LoginActivity.java b/app/src/main/java/com/example/vbantublooddonationapp/LoginActivity.java
+--- a/app/src/main/java/com/example/vbantublooddonationapp/LoginActivity.java	(revision 9cbaf3235784cae4e70767b9bd4d8e445cf8bf49)
++++ b/app/src/main/java/com/example/vbantublooddonationapp/LoginActivity.java	(date 1669207012080)
+@@ -1,13 +1,11 @@
+ package com.example.vbantublooddonationapp;
+ 
++import android.os.Bundle;
++
+ import androidx.appcompat.app.AppCompatActivity;
+ import androidx.viewpager2.widget.ViewPager2;
+ 
+-import android.os.Bundle;
+-import android.view.View;
+-
+ import com.example.vbantublooddonationapp.databinding.ActivityLoginBinding;
+-import com.example.vbantublooddonationapp.databinding.ActivityMainBinding;
+ import com.google.android.material.tabs.TabLayout;
+ 
+ public class LoginActivity extends AppCompatActivity {
+Index: app/src/main/java/com/example/vbantublooddonationapp/Model/RewardTransaction.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/vbantublooddonationapp/Model/RewardTransaction.java b/app/src/main/java/com/example/vbantublooddonationapp/Model/RewardTransaction.java
+new file mode 100644
+--- /dev/null	(date 1669206453124)
++++ b/app/src/main/java/com/example/vbantublooddonationapp/Model/RewardTransaction.java	(date 1669206453124)
+@@ -0,0 +1,91 @@
++package com.example.vbantublooddonationapp.Model;
++
++import androidx.room.ColumnInfo;
++import androidx.room.Entity;
++import androidx.room.PrimaryKey;
++
++@Entity(tableName = "reward_transaction_table")
++public class RewardTransaction {
++    @PrimaryKey(autoGenerate = true)
++    @ColumnInfo(name = "reward_transID")
++    public int reward_transID;
++
++    @ColumnInfo(name = "rewardID")
++    public int rewardID;
++
++    @ColumnInfo(name = "userID")
++    public int userID;
++
++    @ColumnInfo(name = "claimDate")
++    public String claimDate;
++
++    @ColumnInfo(name = "expiryDate")
++    public String expiryDate;
++
++    @ColumnInfo(name = "redeemDate")
++    public String redeemDate;
++
++    @ColumnInfo(name = "status")
++    public String status;
++
++    public RewardTransaction(int rewardID, int userID, String claimDate, String expiryDate, String redeemDate, String status) {
++        this.rewardID = rewardID;
++        this.userID = userID;
++        this.claimDate = claimDate;
++        this.expiryDate = expiryDate;
++        this.redeemDate = redeemDate;
++        this.status = status;
++    }
++
++    public int getReward_transID() {
++        return reward_transID;
++    }
++
++    public String getClaimDate() {
++        return claimDate;
++    }
++
++    public void setClaimDate(String claimDate) {
++        this.claimDate = claimDate;
++    }
++
++    public String getRedeemDate() {
++        return redeemDate;
++    }
++
++    public void setRedeemDate(String redeemDate) {
++        this.redeemDate = redeemDate;
++    }
++
++    public int getRewardID() {
++        return rewardID;
++    }
++
++    public void setRewardID(int rewardID) {
++        this.rewardID = rewardID;
++    }
++
++    public int getUserID() {
++        return userID;
++    }
++
++    public void setUserID(int userID) {
++        this.userID = userID;
++    }
++
++    public String getExpiryDate() {
++        return expiryDate;
++    }
++
++    public void setExpiryDate(String expiryDate) {
++        this.expiryDate = expiryDate;
++    }
++
++    public String getStatus() {
++        return status;
++    }
++
++    public void setStatus(String status) {
++        this.status = status;
++    }
++}
+Index: app/src/main/java/com/example/vbantublooddonationapp/DAO/RewardTransactionDao.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/vbantublooddonationapp/DAO/RewardTransactionDao.java b/app/src/main/java/com/example/vbantublooddonationapp/DAO/RewardTransactionDao.java
+new file mode 100644
+--- /dev/null	(date 1669210242205)
++++ b/app/src/main/java/com/example/vbantublooddonationapp/DAO/RewardTransactionDao.java	(date 1669210242205)
+@@ -0,0 +1,29 @@
++package com.example.vbantublooddonationapp.DAO;
++
++import androidx.lifecycle.LiveData;
++import androidx.room.Dao;
++import androidx.room.Insert;
++import androidx.room.Query;
++import androidx.room.Update;
++
++import com.example.vbantublooddonationapp.Model.RewardTransaction;
++
++import java.util.List;
++
++@Dao
++public interface RewardTransactionDao {
++
++    @Insert
++    void insert(RewardTransaction... rewardTransaction);
++
++    @Update
++    void update(RewardTransaction... rewardTransaction);
++
++    @Query("Select * from reward_transaction_table where reward_transID=(:id)")
++    List<RewardTransaction> getRequestById(int id);
++
++    @Query("Select * from reward_transaction_table where rewardID=(:id) ORDER By rewardID")
++    LiveData<List<RewardTransaction>> getRewardsTransactionByRewardId(int id);
++
++
++}
+Index: app/src/main/java/com/example/vbantublooddonationapp/ViewModel/RewardViewModel.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/vbantublooddonationapp/ViewModel/RewardViewModel.java b/app/src/main/java/com/example/vbantublooddonationapp/ViewModel/RewardViewModel.java
+new file mode 100644
+--- /dev/null	(date 1669195686769)
++++ b/app/src/main/java/com/example/vbantublooddonationapp/ViewModel/RewardViewModel.java	(date 1669195686769)
+@@ -0,0 +1,24 @@
++package com.example.vbantublooddonationapp.ViewModel;
++
++import android.app.Application;
++
++import androidx.lifecycle.AndroidViewModel;
++import androidx.lifecycle.LiveData;
++
++import com.example.vbantublooddonationapp.Model.Reward;
++import com.example.vbantublooddonationapp.Repository.RewardRepository;
++
++import java.util.List;
++
++public class RewardViewModel extends AndroidViewModel {
++    private RewardRepository mRepository;
++    private LiveData<List<Reward>> mAllRewards;
++
++    public RewardViewModel(Application application){
++        super(application);
++        mRepository = new RewardRepository(application);
++    }
++
++    public List<Reward> getRequestById(int id){return mRepository.getRequestById(id);}
++    public LiveData<List<Reward>> getRewardByUserId(int id){return mRepository.getRewardByUserId(id);}
++}
+Index: app/src/main/res/values/strings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><resources>\r\n    <string name=\"app_name\">VBantu</string>\r\n    <string name=\"homeTitle\">Blood Donation</string>\r\n    <string name=\"communityTitle\">Community</string>\r\n    <string name=\"profileTitle\">Profile</string>\r\n    <string name=\"welcome\">Welcome To VBantu</string>\r\n    <string name=\"welcomeBack\">Welcome Back To VBantu</string>\r\n    <string name=\"loginToContinue\">Login/Sign Up to Continue</string>\r\n    <string name=\"login\">Login</string>\r\n    <string name=\"signup\">Sign Up</string>\r\n    <string name=\"rememberMe\">Remember Me</string>\r\n    <string name=\"forgotPassword\">Forgot Password?</string>\r\n    <string name=\"username\">Username</string>\r\n    <string name=\"password\">Password</string>\r\n    <string name=\"donor\">Donor</string>\r\n    <string name=\"organiser\">Organiser</string>\r\n    <string name=\"email\">Email</string>\r\n    <string name=\"confirmPassword\">Confirm Password</string>\r\n    <string name=\"companyName\">Company Name</string>\r\n    <string name=\"fullname\">Full Name</string>\r\n    <string name=\"fillInPersonalInfo\">Please fill in your personal information</string>\r\n    <string name=\"clickToSelect\">Click To Select</string>\r\n    <string name=\"dateOfBirth\">Date of Birth:</string>\r\n    <string name=\"icNo\">IC No (Eg:xxxxxxxxxxxx)</string>\r\n    <string name=\"contactNo\">Contact No</string>\r\n    <string name=\"newPost\">New post</string>\r\n    <string name=\"like\">Like</string>\r\n    <string name=\"caption\">Caption</string>\r\n    <string name=\"likeAmount\">00 Likes</string>\r\n    <string name=\"commentAmount\">00 Comments</string>\r\n    <string name=\"minutes\">00 minutes ago</string>\r\n    <string name=\"comment\">Comment</string>\r\n    <string name=\"AddANewPost\">Add A New Post</string>\r\n    <string name=\"avatar\">Avatar</string>\r\n    <string name=\"done\">Done</string>\r\n    <string name=\"image\">Image</string>\r\n    <string name=\"likes\">Likes</string>\r\n    <string name=\"close\">Close</string>\r\n    <string name=\"Comments\">Comments</string>\r\n    <string name=\"background\">Background</string>\r\n    <string name=\"send\">Send</string>\r\n    <string name=\"commentsHint\">Write your comment here…</string>\r\n    <string name=\"bloodType\">Blood Type:</string>\r\n    <string name=\"female\">Female</string>\r\n    <string name=\"male\">Male</string>\r\n    <string name=\"gender\">Gender:</string>\r\n    <string name=\"youCameToTheRightPlace\">You Came To The Right Place</string>\r\n    <string name=\"enterYourEmailHere\">Enter Your Email Here</string>\r\n    <string name=\"toGetAPasswordReset\">To get a password reset</string>\r\n    <string name=\"urgentRequest\">Urgent Request</string>\r\n    <string name=\"location\">Location</string>\r\n    <string name=\"organisationInformation\">Organisation Information</string>\r\n    <string name=\"nameOfPic\">Name of Person In Charge</string>\r\n    <string name=\"organisationAddress\">Organisation Address</string>\r\n    <string name=\"agreeToTnC\"><![CDATA[I agree to the terms and conditions & privacy policy stated.]]></string>\r\n    <string name=\"subscribeToNewsFeed\">Subscribe to our latest newsfeed for upcoming updates.</string>\r\n    <string name=\"genderRequiredToast\">Gender is required!</string>\r\n    <string name=\"dateOfBirthRequiredToast\">Date of birth is required!</string>\r\n    <string name=\"userRegisterSuccessfully\">User Registered Successfully!</string>\r\n    <string name=\"userLoginSuccessfully\">User Login Successfully!</string>\r\n    <string name=\"requestInfo\">Request Info</string>\r\n    <string name=\"bloodA\">A+</string>\r\n    <string name=\"nameOfPicRequired\">Name of person in charge is required!</string>\r\n    <string name=\"contactNumberRequired\">Contact number is required!</string>\r\n    <string name=\"contactNumAtLeast10Char\">Contact number must be at least 10 characters!</string>\r\n    <string name=\"icNumberRequired\">IC number is required!</string>\r\n    <string name=\"icNumAtLeast12Char\">IC number must be 12 characters!</string>\r\n    <string name=\"passwordRequired\">Password is required!</string>\r\n    <string name=\"passwordAtLeast8Char\">Password should contain at least 8 characters!</string>\r\n    <string name=\"confirmPasswordRequired\">Confirm password is required!</string>\r\n    <string name=\"bothPasswordDoNotMatch\">Both passwords does not match!</string>\r\n    <string name=\"usernameRequired\">Username is required!</string>\r\n    <string name=\"orgnAddressRequired\">Organisation address is required!</string>\r\n    <string name=\"bloodDonation\">Blood Donation</string>\r\n    <string name=\"makeYourAppointmentNow\">Make Your Appointment Now</string>\r\n    <string name=\"emailAddressAlreadyExist\">An account with this email address already exists, please choose another email</string>\r\n    <string name=\"bloodRequestHistory\">Blood Request History</string>\r\n    <string name=\"makeABloodRequest\">Make A Blood Request</string>\r\n    <string name=\"bloodRequest\">Blood Request</string>\r\n    <string name=\"bloodDonationCenterTitle\">Blood Donation Center:</string>\r\n    <string name=\"addressTitle\">Address:</string>\r\n    <string name=\"bloodTypeNeededTitle\">Blood Type Needed:</string>\r\n    <string name=\"contactNoTitle\">Contact No:</string>\r\n    <string name=\"requestInformationTitle\">Request Information:</string>\r\n    <string name=\"address\">Address</string>\r\n    <string name=\"bloodDonationCenter\">Blood Donation Center</string>\r\n    <string name=\"AB_pov\">AB+</string>\r\n    <string name=\"A_pov\">A+</string>\r\n    <string name=\"B_pov\">B+</string>\r\n    <string name=\"O_pov\">O+</string>\r\n    <string name=\"AB_neg\">AB-</string>\r\n    <string name=\"A_neg\">A-</string>\r\n    <string name=\"B_neg\">B-</string>\r\n    <string name=\"O_neg\">O-</string>\r\n    <string name=\"writeYourRequestHere\">Write your request here.... (max 500 characters)</string>\r\n    <string name=\"submitRequest\">Submit Request</string>\r\n    <string name=\"emailRequired\">Email is required!</string>\r\n    <string name=\"emailInvalid\">Email address is invalid!</string>\r\n    <string name=\"nameRequired\">Name is required!</string>\r\n    <string name=\"bloodTypeNeeded\">Please select blood type needed</string>\r\n    <string name=\"requestInfoRequired\">Request information is required!</string>\r\n    <string name=\"requestSubmittedSuccessfully\">Request submitted successfully!</string>\r\n    <string name=\"fullNameLabel\">Full Name:</string>\r\n    <string name=\"fullNameInput\">Enter your full name</string>\r\n    <string name=\"icLabel\">IC No:</string>\r\n    <string name=\"contactNoLabel\">Contact No:</string>\r\n    <string name=\"contactNoExp\">Contact No (Eg:012-3456789)</string>\r\n    <string name=\"emailLabel\">Email:</string>\r\n    <string name=\"addressLabel\">Address:</string>\r\n    <string name=\"appointmentDateLabel\">Appointment Date:</string>\r\n    <string name=\"dateFormat\">DD/MM/YYYY</string>\r\n    <string name=\"appointmentTimeLabel\">Appointment Time:</string>\r\n    <string name=\"SelectTime\">Select time slot available</string>\r\n    <string name=\"bloodGroupLabel\">Blood Group:</string>\r\n    <string name=\"selectBloodType\">Select blood type</string>\r\n    <string name=\"bloodDonationHistoryQuestion\">Have you had a donation before?</string>\r\n    <string name=\"yes\">Yes</string>\r\n    <string name=\"no\">No</string>\r\n    <string name=\"reminder\">Reminder:</string>\r\n    <string name=\"reminder1\">Please make sure you are not on long term medications and has not been intoxicated by alcohol within 24 hours prior to donation.</string>\r\n    <string name=\"reminder2\">You should not be fasting and have had enough sleep(more than 5 hours) the night before donating.</string>\r\n    <string name=\"reminder3\">Minimum interval of 3 months since last donation.</string>\r\n    <string name=\"reminder4\"><![CDATA[Body weight at least 45kg & no chronic medical illness]]></string>\r\n    <string name=\"reset\">reset</string>\r\n    <string name=\"submit\">submit</string>\r\n    <string name=\"bloodDonationAppointment\">Blood Donation Appointment</string>\r\n    <string name=\"thankYou\">Thank You!</string>\r\n    <string name=\"submissionReceived\">Your submission has been received.</string>\r\n    <string name=\"confirmationDetail\">Full confirmation details of the appointment will be sent to your email.</string>\r\n    <string name=\"dateTitle\">Date:</string>\r\n    <string name=\"timeTitle\">Time:</string>\r\n    <string name=\"timeFormat\">0000am</string>\r\n    <string name=\"fullRequestInformation\">Request: %1$s</string>\r\n    <string name=\"january\">January</string>\r\n    <string name=\"february\">February</string>\r\n    <string name=\"march\">March</string>\r\n    <string name=\"april\">April</string>\r\n    <string name=\"may\">May</string>\r\n    <string name=\"june\">June</string>\r\n    <string name=\"july\">July</string>\r\n    <string name=\"august\">August</string>\r\n    <string name=\"september\">September</string>\r\n    <string name=\"october\">October</string>\r\n    <string name=\"november\">November</string>\r\n    <string name=\"december\">December</string>\r\n    <string name=\"month\">Month</string>\r\n    <string name=\"active\">Active</string>\r\n    <string name=\"userAppointments\">User Appointments</string>\r\n    <string name=\"ongoing\">Ongoing</string>\r\n    <string name=\"nameTitle\">Name:</string>\r\n    <string name=\"appointmentDetails\">Appointment Details</string>\r\n    <string name=\"updateProfile\">Update Profile</string>\r\n    <string name=\"changePassword\">Change Password</string>\r\n    <string name=\"getHelp\">Get Help</string>\r\n    <string name=\"customerSupport\">Customer Support</string>\r\n    <string name=\"logout\">Logout</string>\r\n    <string name=\"open\">Open</string>\r\n    <string name=\"icNoFormat\">000000-00-0000</string>\r\n    <string name=\"haveADonationBefore\">Have A Donation Before?</string>\r\n    <string name=\"scanQRCode\">Scan QR Code</string>\r\n    <string name=\"leaderboard\">Leaderboard</string>\r\n    <string name=\"yearlyTopDonor\">Yearly Top Donor</string>\r\n    <string name=\"topDonorUsername\">Top Donor Username</string>\r\n    <string name=\"firstPlaceBackground\">FirstPlaceBackground</string>\r\n    <string name=\"_1st\">1st</string>\r\n    <string name=\"line\">line</string>\r\n    <string name=\"firstPlaceNo\">FirstPlaceNo</string>\r\n    <string name=\"profilePicture\">profilePicture</string>\r\n    <string name=\"bloodAmount\">ml</string>\r\n    <string name=\"secondPlaceBackground\">Second Place Background</string>\r\n    <string name=\"secondPlaceNo\">Second Place No</string>\r\n    <string name=\"_2nd\">2nd</string>\r\n    <string name=\"secondDonorUsername\">Second Donor Username</string>\r\n    <string name=\"thirdDonorUsername\">Third Donor Username</string>\r\n    <string name=\"_3rd\">3rd</string>\r\n    <string name=\"thirdPlaceNo\">Third Place No</string>\r\n    <string name=\"thirdPlaceBackground\">Third Place Background</string>\r\n    <string name=\"viewFullRanking\">View Full Ranking</string>\r\n    <string name=\"scanUserQRCode\">Scan the user\\'s QR code</string>\r\n    <string name=\"placeQRinBox\">Place QR code within the box above</string>\r\n    <string name=\"confirmAppointment\">Confirm Appointment</string>\r\n    <string name=\"locationTitle\">Location:</string>\r\n    <string name=\"donorNameTitle\">Donor Name:</string>\r\n    <string name=\"bloodAmountTitle\">Blood Amount:</string>\r\n    <string name=\"selectAmount\">Select amount</string>\r\n    <string name=\"bloodAmountRequiredToast\">Blood amount is required!</string>\r\n    <string name=\"cameraPermissionGrantedToast\">Camera permission granted</string>\r\n    <string name=\"cameraPermissionRequiredToast\">Camera permission is required to scan QR Code</string>\r\n    <string name=\"userAppointmentConfirmedToast\">User appointment confirmed!</string>\r\n    <string name=\"bloodTypeRequiredToast\">Blood type is required!</string>\r\n    <string name=\"bloodDonationAmount\">Blood Donation Amount:</string>\r\n    <string name=\"placeNo\">Place No</string>\r\n    <string name=\"donorNo\">1</string>\r\n    <string name=\"hereToHelp\">We\\'re here to help!</string>\r\n    <string name=\"findMoreHelp\">Find more help</string>\r\n    <string name=\"contactUsThroughEmail\">Contact us through email:</string>\r\n    <string name=\"vbantuEmail\"><i>vbantumalaysia@gmail.com</i></string>\r\n    <string name=\"needMoreHelp\">Need more help?</string>\r\n    <string name=\"fasterWaytoAddressIssue\">Faster way to address your issue</string>\r\n    <string name=\"responseTime\">Response time: 2-3 working days</string>\r\n    <string name=\"emailUs\">Email Us</string>\r\n    <string name=\"organisationCoverPhoto\">Organisation Cover Photo:</string>\r\n    <string name=\"uploadImage\">Upload Image</string>\r\n    <string name=\"personInCharge\">Person In Charge:</string>\r\n    <string name=\"avatarLabel\">Avatar:</string>\r\n    <string name=\"usernameLabel\">Username:</string>\r\n    <string name=\"user_type_bd\">Blood Donor</string>\r\n    <string name=\"user_type_o\">Organiser</string>\r\n    <string name=\"info_type_o\">Organiser Information</string>\r\n    <string name=\"info_type_p\">Personal Information</string>\r\n    <string name=\"my_profile_title\">My Profile</string>\r\n    <string name=\"user_type\">User Type</string>\r\n    <string name=\"personal_information\">Personal Information</string>\r\n    <string name=\"ic_no\">IC No.</string>\r\n    <string name=\"date_of_birth\">Date of birth</string>\r\n    <string name=\"blood_group\">Blood Group</string>\r\n    <string name=\"email_address\">alicewong2304@gmail.com</string>\r\n    <string name=\"company\">Company</string>\r\n    <string name=\"contact_no\">Contact No.</string>\r\n    <string name=\"hospital\">Penang Adventist Hospital</string>\r\n    <string name=\"view_appointment_history\">View Appointment History</string>\r\n    <string name=\"my_rewards\">My Rewards</string>\r\n    <string name=\"oldPassword\">Old Password:</string>\r\n    <string name=\"newPassword\">New Password:</string>\r\n    <string name=\"confirmNewPassword\">Confirm New Password:</string>\r\n    <string name=\"incorrectPassword\">The password is incorrect!</string>\r\n    <string name=\"userOtherPassword\">Please use other password.</string>\r\n    <string name=\"_0nd\">0nd</string>\r\n    <string name=\"greet\">Dear </string>\r\n    <string name=\"appointmentEmailOpening\">Thank you for making an appointment with us. Please find your appointment details below.</string>\r\n    <string name=\"appointmentEmailEnding\">Thank you. \\n\\nYour Sincerely,\\nVbantu Team</string>\r\n    <string name=\"appointmentEmailInfo1\">Please show this email or alternatively, your appointment details through VBantu App at the blood donation center upon arrival.</string>\r\n    <string name=\"appointmentEmailReminder\">\"Kind Reminder: \"</string>\r\n\r\n    <string-array name=\"bloodGroupValues\">\r\n        <item>Select blood type</item>\r\n        <item>A+</item>\r\n        <item>A-</item>\r\n        <item>AB+</item>\r\n        <item>AB-</item>\r\n        <item>B+</item>\r\n        <item>B-</item>\r\n        <item>O+</item>\r\n        <item>O-</item>\r\n    </string-array>\r\n\r\n    <string-array name=\"timeAvailable\">\r\n        <item>Select time</item>\r\n        <item>9:00 am</item>\r\n        <item>10:00 am</item>\r\n        <item>11:00 am</item>\r\n        <item>12:00 pm</item>\r\n        <item>1:00 pm</item>\r\n        <item>2:00 pm</item>\r\n        <item>3:00 pm</item>\r\n    </string-array>\r\n\r\n    <string-array name=\"donationBloodAmount\">\r\n        <item>Select amount</item>\r\n        <item>200 ml</item>\r\n        <item>250 ml</item>\r\n        <item>300 ml</item>\r\n        <item>350 ml</item>\r\n        <item>400 ml</item>\r\n        <item>450 ml</item>\r\n        <item>500 ml</item>\r\n    </string-array>\r\n\r\n</resources>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/values/strings.xml b/app/src/main/res/values/strings.xml
+--- a/app/src/main/res/values/strings.xml	(revision 9cbaf3235784cae4e70767b9bd4d8e445cf8bf49)
++++ b/app/src/main/res/values/strings.xml	(date 1669184607657)
+@@ -219,6 +219,7 @@
+     <string name="contact_no">Contact No.</string>
+     <string name="hospital">Penang Adventist Hospital</string>
+     <string name="view_appointment_history">View Appointment History</string>
++    <string name="rewards">Rewards</string>
+     <string name="my_rewards">My Rewards</string>
+     <string name="oldPassword">Old Password:</string>
+     <string name="newPassword">New Password:</string>
+@@ -231,6 +232,8 @@
+     <string name="appointmentEmailEnding">Thank you. \n\nYour Sincerely,\nVbantu Team</string>
+     <string name="appointmentEmailInfo1">Please show this email or alternatively, your appointment details through VBantu App at the blood donation center upon arrival.</string>
+     <string name="appointmentEmailReminder">"Kind Reminder: "</string>
++    <string name="points">points</string>
++    <string name="store">Store</string>
+ 
+     <string-array name="bloodGroupValues">
+         <item>Select blood type</item>
+@@ -265,5 +268,7 @@
+         <item>450 ml</item>
+         <item>500 ml</item>
+     </string-array>
++    <!-- TODO: Remove or change this placeholder text -->
++    <string name="hello_blank_fragment">Hello blank fragment</string>
+ 
+ </resources>
+\ No newline at end of file
+Index: app/src/main/res/values/colors.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<resources>\r\n    <color name=\"purple_200\">#FFBB86FC</color>\r\n    <color name=\"purple_500\">#FF6200EE</color>\r\n    <color name=\"purple_700\">#FF3700B3</color>\r\n    <color name=\"teal_200\">#FF03DAC5</color>\r\n    <color name=\"teal_700\">#FF018786</color>\r\n    <color name=\"black\">#FF000000</color>\r\n    <color name=\"white\">#FFFFFFFF</color>\r\n    <color name=\"beige\">#FFEBD4CB</color>\r\n    <color name=\"mediumRed\">#FFCE525F</color>\r\n    <color name=\"red\">#FFC83E4D</color>\r\n    <color name=\"orange\">#FFFD9E2F</color>\r\n    <color name=\"pink\">#FFF2D5D8</color>\r\n    <color name=\"light_grey\">#FFE5E5E5</color>\r\n    <color name=\"medium_grey\">#FF999999</color>\r\n    <color name=\"medium_dark_grey\">#FF666666</color>\r\n    <color name=\"dark_grey\">#FF434343</color>\r\n    <color name=\"green\">#FF87DB45</color>\r\n    <color name=\"yellow\">#FFD913</color>\r\n    <color name=\"light_light_grey\">#F1F1F1</color>\r\n\r\n</resources>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/values/colors.xml b/app/src/main/res/values/colors.xml
+--- a/app/src/main/res/values/colors.xml	(revision 9cbaf3235784cae4e70767b9bd4d8e445cf8bf49)
++++ b/app/src/main/res/values/colors.xml	(date 1669187128248)
+@@ -11,6 +11,7 @@
+     <color name="mediumRed">#FFCE525F</color>
+     <color name="red">#FFC83E4D</color>
+     <color name="orange">#FFFD9E2F</color>
++    <color name="medium_pink">#F4B6B6</color>
+     <color name="pink">#FFF2D5D8</color>
+     <color name="light_grey">#FFE5E5E5</color>
+     <color name="medium_grey">#FF999999</color>
+@@ -18,6 +19,8 @@
+     <color name="dark_grey">#FF434343</color>
+     <color name="green">#FF87DB45</color>
+     <color name="yellow">#FFD913</color>
++    <color name="light_blue">#89b3e0</color>
+     <color name="light_light_grey">#F1F1F1</color>
++    <color name="grey">#21676262</color>
+ 
+ </resources>
+\ No newline at end of file
+Index: app/src/main/java/com/example/vbantublooddonationapp/ViewModel/RewardTransactionViewModel.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/vbantublooddonationapp/ViewModel/RewardTransactionViewModel.java b/app/src/main/java/com/example/vbantublooddonationapp/ViewModel/RewardTransactionViewModel.java
+new file mode 100644
+--- /dev/null	(date 1669203773615)
++++ b/app/src/main/java/com/example/vbantublooddonationapp/ViewModel/RewardTransactionViewModel.java	(date 1669203773615)
+@@ -0,0 +1,23 @@
++package com.example.vbantublooddonationapp.ViewModel;
++
++import android.app.Application;
++
++import androidx.lifecycle.AndroidViewModel;
++import androidx.lifecycle.LiveData;
++
++import com.example.vbantublooddonationapp.Model.RewardTransaction;
++import com.example.vbantublooddonationapp.Repository.RewardTransactionRepository;
++
++import java.util.List;
++
++public class RewardTransactionViewModel extends AndroidViewModel {
++    private RewardTransactionRepository mRepository;
++
++    public RewardTransactionViewModel(Application application) {
++        super(application);
++        mRepository = new RewardTransactionRepository(application);
++    }
++
++    public List<RewardTransaction> getRequestById(int id){return mRepository.getRequestById(id);}
++    public LiveData<List<RewardTransaction>> getRewardTransactionByRewardId(int id){return mRepository.getRewardTransactionByRewardId(id);}
++}
+Index: app/src/main/java/com/example/vbantublooddonationapp/Repository/RewardTransactionRepository.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/vbantublooddonationapp/Repository/RewardTransactionRepository.java b/app/src/main/java/com/example/vbantublooddonationapp/Repository/RewardTransactionRepository.java
+new file mode 100644
+--- /dev/null	(date 1669204730235)
++++ b/app/src/main/java/com/example/vbantublooddonationapp/Repository/RewardTransactionRepository.java	(date 1669204730235)
+@@ -0,0 +1,103 @@
++package com.example.vbantublooddonationapp.Repository;
++
++import android.app.Application;
++import android.os.AsyncTask;
++
++import androidx.lifecycle.LiveData;
++
++import com.example.vbantublooddonationapp.BloodRoomDatabase;
++import com.example.vbantublooddonationapp.DAO.RewardTransactionDao;
++import com.example.vbantublooddonationapp.Model.RewardTransaction;
++
++import java.util.List;
++import java.util.concurrent.ExecutionException;
++
++public class RewardTransactionRepository {
++    private RewardTransactionDao mRewardsTransactionDao;
++    public RewardTransactionRepository(Application application) {
++        BloodRoomDatabase db = BloodRoomDatabase.getINSTANCE(application);
++        mRewardsTransactionDao = db.rewardTransactionDao();
++    }
++
++    public void insert(RewardTransaction rewardTransaction){
++        new RewardTransactionRepository.insertAsyncTask(mRewardsTransactionDao).execute(rewardTransaction);
++    }
++
++    public class insertAsyncTask extends AsyncTask<RewardTransaction, Void, Void> {
++        private RewardTransactionDao mSyncTaskDao;
++        public insertAsyncTask(RewardTransactionDao dao) {
++            mSyncTaskDao = dao;
++        }
++
++        @Override
++        protected Void doInBackground(RewardTransaction... rewardTransactions) {
++            mSyncTaskDao.insert(rewardTransactions[0]);
++            return null;
++        }
++    }
++
++    public List<RewardTransaction> getRequestById(int id) {
++        List<RewardTransaction> list = null;
++
++        try {
++            list = new RewardTransactionRepository.getRequestByIdAsyncTask(mRewardsTransactionDao).execute(id).get();
++        } catch (ExecutionException e) {
++            e.printStackTrace();
++        } catch (InterruptedException e) {
++            e.printStackTrace();
++        }
++        return list;
++    }
++
++    public LiveData<List<RewardTransaction>> getRewardTransactionByRewardId(int id) {
++        LiveData<List<RewardTransaction>> list = null;
++        try {
++            list = new RewardTransactionRepository.getRewardTransactionByIdAsyncTask(mRewardsTransactionDao).execute(id).get();
++        } catch (ExecutionException e) {
++            e.printStackTrace();
++        } catch (InterruptedException e) {
++            e.printStackTrace();
++        }
++        return list;
++    }
++
++    public class getRequestByIdAsyncTask extends AsyncTask<Integer, Void, List<RewardTransaction>> {
++        private RewardTransactionDao mSyncTaskDao;
++        public getRequestByIdAsyncTask(RewardTransactionDao dao) {mSyncTaskDao = dao;}
++
++        @Override
++        protected List<RewardTransaction> doInBackground(Integer... id) {
++            List<RewardTransaction> rewardTransactionList = mRewardsTransactionDao.getRequestById(id[0]);
++            return rewardTransactionList;
++        }
++    }
++
++    public class getRewardTransactionByIdAsyncTask extends AsyncTask<Integer,Void,LiveData<List<RewardTransaction>>>{
++        private RewardTransactionDao mSyncTaskDao;
++        public getRewardTransactionByIdAsyncTask(RewardTransactionDao dao) {mSyncTaskDao=dao;}
++
++        @Override
++        protected LiveData<List<RewardTransaction>> doInBackground(Integer... id) {
++            LiveData<List<RewardTransaction>> rewardTransactionList = mSyncTaskDao.getRewardsTransactionByRewardId(id[0]);
++            return rewardTransactionList;
++        }
++    }
++
++    public void update(RewardTransaction rewardTransaction) {
++        new RewardTransactionRepository.updateAsyncTask(mRewardsTransactionDao).execute(rewardTransaction);
++    }
++
++    private static class updateAsyncTask extends AsyncTask<RewardTransaction, Void, Void> {
++        private RewardTransactionDao mSyncTaskDao;
++
++        updateAsyncTask(RewardTransactionDao dao) {
++            mSyncTaskDao = dao;
++        }
++
++        @Override
++        protected Void doInBackground(RewardTransaction... rewardTransactions) {
++            mSyncTaskDao.update(rewardTransactions[0]);
++            return null;
++        }
++    }
++}
+Index: app/src/main/res/layout/card_appointment.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n\r\n\r\n<RelativeLayout\r\n    xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"wrap_content\">\r\n\r\n    <androidx.cardview.widget.CardView\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginBottom=\"16dp\"\r\n        app:cardCornerRadius=\"10dp\"\r\n        app:cardElevation=\"3dp\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\">\r\n\r\n        <androidx.constraintlayout.widget.ConstraintLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"match_parent\"\r\n            android:background=\"@drawable/appointment_box\"\r\n            tools:layout_editor_absoluteX=\"3dp\"\r\n            tools:layout_editor_absoluteY=\"0dp\">\r\n\r\n\r\n            <ImageView\r\n                android:id=\"@+id/imageView6\"\r\n                android:layout_width=\"70dp\"\r\n                android:layout_height=\"60dp\"\r\n                android:layout_marginStart=\"16dp\"\r\n                android:layout_marginTop=\"36dp\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintTop_toTopOf=\"parent\"\r\n                app:srcCompat=\"@drawable/ic_calendar_24\" />\r\n\r\n            <androidx.cardview.widget.CardView\r\n                android:id=\"@+id/cardView\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginTop=\"8dp\"\r\n                android:layout_marginEnd=\"16dp\"\r\n                app:cardCornerRadius=\"25dp\"\r\n                app:layout_constraintEnd_toEndOf=\"parent\"\r\n                app:layout_constraintTop_toTopOf=\"parent\">\r\n\r\n                <TextView\r\n                    android:id=\"@+id/ca_tvStatus\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:background=\"@color/orange\"\r\n                    android:paddingLeft=\"14dp\"\r\n                    android:paddingTop=\"2dp\"\r\n                    android:paddingRight=\"14dp\"\r\n                    android:paddingBottom=\"2dp\"\r\n                    android:text=\"@string/ongoing\"\r\n                    android:textColor=\"@color/black\"\r\n                    android:textSize=\"14sp\" />\r\n            </androidx.cardview.widget.CardView>\r\n\r\n            <TextView\r\n                android:id=\"@+id/bdc\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginStart=\"8dp\"\r\n                android:layout_marginTop=\"24dp\"\r\n                android:text=\"Blood Donation Center: \"\r\n                android:textColor=\"@color/black\"\r\n                app:layout_constraintStart_toEndOf=\"@+id/imageView6\"\r\n                app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/ca_tvBDC\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginStart=\"8dp\"\r\n                android:textColor=\"@color/black\"\r\n                android:textStyle=\"bold\"\r\n                app:layout_constraintStart_toEndOf=\"@+id/imageView6\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/bdc\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/appointment_date\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginStart=\"8dp\"\r\n                android:layout_marginTop=\"16dp\"\r\n                android:text=\"Appointment Date: \"\r\n                android:textColor=\"@color/black\"\r\n                app:layout_constraintStart_toEndOf=\"@+id/imageView6\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/ca_tvBDC\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/appointment_time\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginStart=\"8dp\"\r\n                android:text=\"Appointment Time: \"\r\n                android:textColor=\"@color/black\"\r\n                app:layout_constraintStart_toEndOf=\"@+id/imageView6\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/appointment_date\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/ca_tvAppointment_Date\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginTop=\"16dp\"\r\n                android:textColor=\"@color/black\"\r\n                android:textStyle=\"bold\"\r\n                app:layout_constraintStart_toEndOf=\"@+id/appointment_date\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/ca_tvBDC\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/ca_tvAppointment_Time\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:textColor=\"@color/black\"\r\n                android:textStyle=\"bold\"\r\n                app:layout_constraintStart_toEndOf=\"@+id/appointment_time\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/ca_tvAppointment_Date\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/ca_tvAppointment_Details\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginTop=\"16dp\"\r\n                android:layout_marginEnd=\"8dp\"\r\n                android:layout_marginBottom=\"16dp\"\r\n                android:drawableEnd=\"@drawable/ic_arrow_grey\"\r\n                android:text=\"Appointment Details \"\r\n                android:textColor=\"@color/medium_grey\"\r\n                app:layout_constraintBottom_toBottomOf=\"parent\"\r\n                app:layout_constraintEnd_toEndOf=\"parent\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/ca_tvAppointment_Time\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/ca_tvBlood_Amount\"\r\n                android:layout_width=\"0dp\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginStart=\"24dp\"\r\n                android:layout_marginEnd=\"24dp\"\r\n                android:layout_marginBottom=\"3dp\"\r\n                android:background=\"@drawable/blood_amount\"\r\n                android:gravity=\"center_horizontal\"\r\n                android:paddingTop=\"1dp\"\r\n                android:paddingBottom=\"1dp\"\r\n                android:textColor=\"@color/white\"\r\n                android:visibility=\"visible\"\r\n                app:layout_constraintBottom_toBottomOf=\"parent\"\r\n                app:layout_constraintEnd_toStartOf=\"@+id/ca_tvAppointment_Details\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/appointment_time\" />\r\n\r\n        </androidx.constraintlayout.widget.ConstraintLayout>\r\n    </androidx.cardview.widget.CardView>\r\n\r\n</RelativeLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/card_appointment.xml b/app/src/main/res/layout/card_appointment.xml
+--- a/app/src/main/res/layout/card_appointment.xml	(revision 9cbaf3235784cae4e70767b9bd4d8e445cf8bf49)
++++ b/app/src/main/res/layout/card_appointment.xml	(date 1669188629642)
+@@ -1,6 +1,4 @@
+ <?xml version="1.0" encoding="utf-8"?>
+-
+-
+ <RelativeLayout
+     xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:app="http://schemas.android.com/apk/res-auto"
+@@ -13,11 +11,7 @@
+         android:layout_height="wrap_content"
+         android:layout_marginBottom="16dp"
+         app:cardCornerRadius="10dp"
+-        app:cardElevation="3dp"
+-        app:layout_constraintBottom_toBottomOf="parent"
+-        app:layout_constraintEnd_toEndOf="parent"
+-        app:layout_constraintStart_toStartOf="parent"
+-        app:layout_constraintTop_toTopOf="parent">
++        app:cardElevation="3dp">
+ 
+         <androidx.constraintlayout.widget.ConstraintLayout
+             android:layout_width="match_parent"

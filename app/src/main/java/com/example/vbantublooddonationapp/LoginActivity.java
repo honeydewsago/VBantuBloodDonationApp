@@ -1,13 +1,11 @@
 package com.example.vbantublooddonationapp;
 
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.os.Bundle;
-import android.view.View;
-
 import com.example.vbantublooddonationapp.databinding.ActivityLoginBinding;
-import com.example.vbantublooddonationapp.databinding.ActivityMainBinding;
 import com.google.android.material.tabs.TabLayout;
 
 public class LoginActivity extends AppCompatActivity {

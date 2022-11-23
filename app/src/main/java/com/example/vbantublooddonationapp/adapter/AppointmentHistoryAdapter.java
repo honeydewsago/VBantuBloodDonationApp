@@ -15,17 +15,22 @@ import com.example.vbantublooddonationapp.AppointmentDetailActivity;
 import com.example.vbantublooddonationapp.Model.Appointment;
 import com.example.vbantublooddonationapp.Model.Organiser;
 import com.example.vbantublooddonationapp.R;
+import com.example.vbantublooddonationapp.ViewModel.AppointmentViewModel;
 import com.example.vbantublooddonationapp.ViewModel.OrganiserViewModel;
 import com.example.vbantublooddonationapp.databinding.CardAppointmentBinding;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentHistoryAdapter.AppointmentHistoryHolder> {
 
     private Activity mActivity;
-    private List<Appointment> mAppointmentHistoryList;
+    private List<Appointment> mAppointmentList;
     private List<Organiser> mOrganiserList;
     private OrganiserViewModel mOrganiserViewModel;
+    private AppointmentViewModel mAppointmentViewModel;
 
     public AppointmentHistoryAdapter(Activity activity){
         mActivity = activity;
@@ -33,7 +38,10 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
     }
 
 
-    public void setAppointmentList(List<Appointment> appointmentHistoryList){mAppointmentHistoryList = appointmentHistoryList;}
+    public void setAppointmentList(List<Appointment> appointmentList){
+        mAppointmentList = appointmentList;
+        notifyDataSetChanged();
+    }
 
     public void setOrganiserList(List<Organiser> organiserList){mOrganiserList = organiserList;}
 
@@ -46,46 +54,50 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
 
     @Override
     public void onBindViewHolder(@NonNull AppointmentHistoryHolder holder, int position) {
-        Appointment appointment = mAppointmentHistoryList.get(position);
-        String appointmentStatus;
+        Appointment appointment = mAppointmentList.get(position);
         String bloodAmount;
+
+        bloodAmount = "Blood Amount: " + String.valueOf(appointment.getBloodAmt()) + " ml";
 
         holder.mTvBDC.setText(getOrganiserName(appointment.getOrganiserID()));
         holder.mTvAppointmentDate.setText(getFullDate(appointment.getAppointmentDate()));
         holder.mTvAppointmentTime.setText(appointment.getAppointmentTime());
 
-        appointmentStatus = appointment.getStatus();
-        if(appointmentStatus.equals("Ongoing")){
+        String status = updateAppointmentStatus(appointment);
+
+        holder.mTvStatus.setText(status);
+        if (status.equals("Ongoing")) {
+            holder.mTvStatus.setBackgroundResource(R.color.orange);
             holder.mTvBloodAmount.setVisibility(View.GONE);
-            holder.mTvStatusOngoing.setVisibility(View.VISIBLE);
-            holder.mTvStatusComplete.setVisibility(View.GONE);
-        }else{
-            bloodAmount = "Blood amount: " + appointment.getBloodAmt();
+        }
+        else if (status.equals("Completed")) {
+            holder.mTvStatus.setBackgroundResource(R.color.green);
             holder.mTvBloodAmount.setVisibility(View.VISIBLE);
             holder.mTvBloodAmount.setText(bloodAmount);
-            holder.mTvStatusOngoing.setVisibility(View.GONE);
-            holder.mTvStatusComplete.setVisibility(View.VISIBLE);
+        }
+        else{
+            holder.mTvStatus.setBackgroundResource(R.color.light_grey);
+            holder.mTvBloodAmount.setVisibility(View.GONE);
         }
     }
 
     @Override
     public int getItemCount() {
-        if(mAppointmentHistoryList==null){
+        if(mAppointmentList==null){
             return 0;
         }
-        return mAppointmentHistoryList.size();
+        return mAppointmentList.size();
     }
 
     public class AppointmentHistoryHolder extends RecyclerView.ViewHolder{
-        private TextView mTvBDC, mTvAppointmentDate, mTvAppointmentTime, mTvBloodAmount,mTvStatusOngoing,mTvStatusComplete, mTvAppointmentDetails;
+        private TextView mTvBDC, mTvAppointmentDate, mTvAppointmentTime, mTvBloodAmount,mTvStatus, mTvAppointmentDetails;
         public AppointmentHistoryHolder(CardAppointmentBinding itemBinding) {
             super(itemBinding.getRoot());
             mTvBDC = itemBinding.caTvBDC;
             mTvAppointmentDate = itemBinding.caTvAppointmentDate;
             mTvAppointmentTime = itemBinding.caTvAppointmentTime;
             mTvBloodAmount = itemBinding.caTvBloodAmount;
-            mTvStatusOngoing = itemBinding.caTvStatusOngoing;
-            mTvStatusComplete = itemBinding.caTvStatusComplete;
+            mTvStatus = itemBinding.caTvStatus;
             mTvAppointmentDetails = itemBinding.caTvAppointmentDetails;
 
             itemBinding.getRoot().setOnClickListener(new View.OnClickListener() {
@@ -107,7 +119,7 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
     }
 
     public void startAppointmentDetails(int position){
-        Appointment currentAppointment = mAppointmentHistoryList.get(position);
+        Appointment currentAppointment = mAppointmentList.get(position);
         Intent i = new Intent(mActivity, AppointmentDetailActivity.class);
 
         i.putExtra("currentAppointmentID", currentAppointment.getAppointmentID());
@@ -158,5 +170,21 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
             default:
                 return mActivity.getResources().getString(R.string.month);
         }
+    }
+
+    private String updateAppointmentStatus(Appointment appointment) {
+        String status = appointment.getStatus();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
+        int currentDate = Integer.parseInt(sdf.format(new Date()));
+        int date = Integer.parseInt(appointment.getAppointmentDate());
+
+        if (status.equals("Ongoing") && currentDate > date) {
+            appointment.setStatus("Expired");
+            mAppointmentViewModel.updateAppointment(appointment);
+            status = "Expired";
+        }
+
+        return status;
     }
 }

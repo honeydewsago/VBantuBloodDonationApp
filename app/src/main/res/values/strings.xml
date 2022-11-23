@@ -219,6 +219,7 @@
     <string name="contact_no">Contact No.</string>
     <string name="hospital">Penang Adventist Hospital</string>
     <string name="view_appointment_history">View Appointment History</string>
+    <string name="rewards">Rewards</string>
     <string name="my_rewards">My Rewards</string>
     <string name="oldPassword">Old Password:</string>
     <string name="newPassword">New Password:</string>
@@ -231,6 +232,8 @@
     <string name="emailEnding">Thank you. \n\nYour Sincerely,\nVbantu Team</string>
     <string name="appointmentEmailInfo1">Please show this email or alternatively, your appointment details through VBantu App at the blood donation center upon arrival.</string>
     <string name="appointmentEmailReminder">"Kind Reminder: "</string>
+    <string name="points">points</string>
+    <string name="store">Store</string>
     <string name="forgotPasswordEmailStarting">This is your OTP to reset your password.</string>
     <string name="forgotPasswordInfo">To ensure account safety, do remember to use strong passwords that include symbols and a combination of lower and upper-case letters. Keep your new password somewhere secure in case you forget it.  \nDo remember that all passwords are case-sensitive, and must be entered exactly as stated above.</string>
     <string name="enterYourOTPHere">Enter your OTP here</string>
