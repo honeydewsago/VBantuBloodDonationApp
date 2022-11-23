@@ -5,6 +5,7 @@ import static android.content.Context.MODE_PRIVATE;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,13 +30,14 @@ import java.util.List;
 import java.util.Locale;
 
 public class RewardAdapter extends RecyclerView.Adapter<RewardAdapter.RewardHolder> {
-    private Activity mActivity;
-    private List<Reward> mRewardList;
-    private RewardViewModel mRewardViewModel;
     private final String USERID_KEY = "userid", USERTYPE_KEY = "usertype";
     private SharedPreferences mPreferences;
     private int mUserID = 1;
     private String mUserType = "user";
+
+    private Activity mActivity;
+    private List<Reward> mRewardList;
+    private RewardViewModel mRewardViewModel;
     private int rewardId;
     private RewardTransactionViewModel mRewardTransactionViewModel;
 
@@ -75,12 +77,17 @@ public class RewardAdapter extends RecyclerView.Adapter<RewardAdapter.RewardHold
         holder.mTvMinSpend.setText(minSpend);
         holder.mTvStoreName.setText(reward.getStoreName());
         holder.mTvPoints.setText(points);
-        holder.mTvBtnStatus.setClickable(true);
 
         if (status.equals("Fully Redeemed")) {
             holder.mTvBtnStatus.setText(reward.getStatus());
             holder.mTvBtnStatus.setBackgroundResource(R.color.white_grey);
-            holder.mTvBtnStatus.setClickable(false);
+        }else{
+            holder.mTvBtnStatus.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(mActivity, "click", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 
@@ -102,6 +109,19 @@ public class RewardAdapter extends RecyclerView.Adapter<RewardAdapter.RewardHold
             mTvStoreName = binding.crTvStoreName;
             mTvPoints = binding.crTvPoints;
             mTvBtnStatus = binding.crTvBtnStatus;
+
+            mTvBtnStatus.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(mActivity, "click", Toast.LENGTH_SHORT).show();
+                }
+            });
+            binding.getRoot().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(mActivity, "c", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 //a

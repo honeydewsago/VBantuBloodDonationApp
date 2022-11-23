@@ -24,6 +24,6 @@ public interface RewardDao {
     @Query("Select * from reward_table where rewardID=(:id) ORDER By rewardID DESC")
     LiveData<List<Reward>> getRewardByUserId(int id);
 
-    @Query("Select * from reward_table")
+    @Query("Select * from reward_table ORDER BY rewardID")
     LiveData<List<Reward>> getAllRewards();
 }
