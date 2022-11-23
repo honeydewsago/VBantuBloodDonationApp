@@ -180,7 +180,7 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
 
         //user avatar
         if (Objects.equals(communityPosts.organiserID, "0")) {
-            String userid = String.valueOf(mUserID);
+            String userid = communityPosts.getUserID();
             DatabaseReference mRef = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("User").child(userid);
 
             mRef.addValueEventListener(new ValueEventListener() {
