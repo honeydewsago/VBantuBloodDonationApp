@@ -22,6 +22,7 @@ import com.example.vbantublooddonationapp.Model.User;
 import com.example.vbantublooddonationapp.ViewModel.AppointmentViewModel;
 import com.example.vbantublooddonationapp.ViewModel.CommunityPostViewModel;
 import com.example.vbantublooddonationapp.ViewModel.UserViewModel;
+import com.example.vbantublooddonationapp.adapter.CommunityLikesAdapter;
 import com.example.vbantublooddonationapp.adapter.CommunityPostAdapter;
 import com.example.vbantublooddonationapp.adapter.LeaderboardAdapter;
 import com.example.vbantublooddonationapp.databinding.FragmentCommunityBinding;
@@ -44,6 +45,7 @@ public class CommunityFragment extends Fragment {
     private CommunityPostAdapter mCommunityPostAdapter;
     private CommunityPostViewModel mCommunityPostViewModel;
     private List<CommunityImage> mCommunityImageList;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
