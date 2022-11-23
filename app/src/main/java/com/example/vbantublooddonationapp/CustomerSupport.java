@@ -4,7 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -35,8 +39,23 @@ public class CustomerSupport extends AppCompatActivity {
         binding.acsBtnEmailUs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //send email to vbantumalaysia@gmail.com
-                Toast.makeText(CustomerSupport.this, "Email to vbantu", Toast.LENGTH_SHORT).show();
+                //initialize support email
+                String[] email = {"vbantumalaysia@gmail.com"};
+
+                //create intent to send email
+                Intent intent = new Intent(Intent.ACTION_SENDTO);
+                intent.setData(Uri.parse("mailto:"));
+
+                //pass in the support email
+                intent.putExtra(Intent.EXTRA_EMAIL, email);
+
+                try {
+                    //launch the intent
+                    startActivity(intent);
+                } catch (ActivityNotFoundException e) {
+                    //error message if process failed
+                    Log.d("ImplicitIntent", "Can't handle this action");
+                }
             }
         });
 

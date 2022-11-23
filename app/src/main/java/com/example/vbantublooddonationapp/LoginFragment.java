@@ -48,13 +48,10 @@ public class LoginFragment extends Fragment {
         //get the shared preferences file
         mPreferences = getActivity().getSharedPreferences("com.example.vbantublooddonationapp",MODE_PRIVATE);
 
-        //enable auto-login
-        /*
         if (mPreferences.contains(USERID_KEY) && mPreferences.contains(USERTYPE_KEY)) {
-            Intent i = new Intent(getActivity(),HomeActivity.class);
+            Intent i = new Intent(getActivity(), HomeActivity.class);
             startActivity(i);
         }
-         */
 
         super.onCreate(savedInstanceState);
     }

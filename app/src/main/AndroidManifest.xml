@@ -17,8 +17,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.VBantuBloodDonationApp"
         tools:targetApi="31">
+
         <activity
-            android:name=".CommunityLikesActivity"
+            android:name=".CommunityLikesActivity"/>
+
+        <activity android:name=".ResetPassword"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".OTPActivity"
+
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
