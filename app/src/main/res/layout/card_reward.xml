@@ -9,6 +9,8 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         app:cardCornerRadius="10dp"
         app:cardElevation="3dp">
@@ -19,80 +21,72 @@
 
             <TextView
                 android:id="@+id/cr_tvDiscount"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
-                android:text="TextView"
+                android:layout_marginEnd="8dp"
+                android:text="50% OFF"
+                android:textAlignment="center"
                 android:textColor="@color/red"
-                android:textSize="18sp"
+                android:textSize="18dp"
                 android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/view"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/cr_tvMinSpend"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="TextView"
+                android:layout_marginStart="18dp"
+                android:layout_marginEnd="18dp"
+                android:text="Min Spend. RM 75"
+                android:textAlignment="center"
                 android:textColor="@color/red"
-                app:layout_constraintEnd_toEndOf="@+id/cr_tvDiscount"
-                app:layout_constraintStart_toStartOf="@+id/cr_tvDiscount"
+                android:textSize="10sp"
+                app:layout_constraintEnd_toStartOf="@+id/view"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cr_tvDiscount" />
 
             <View
                 android:id="@+id/view"
                 android:layout_width="1dp"
                 android:layout_height="0dp"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="100dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:background="@color/grey"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/cr_tvDiscount"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/cr_tvStoreName"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="24dp"
                 android:text="TextView"
-                android:textColor="@color/black"
+                android:textColor="@color/dark_grey"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/cardView"
                 app:layout_constraintStart_toEndOf="@+id/view"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/cr_tvExpiryDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="TextView"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView"
-                app:layout_constraintStart_toEndOf="@+id/imageView"
-                app:layout_constraintTop_toTopOf="@+id/imageView" />
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintStart_toEndOf="@+id/view"
-                app:layout_constraintTop_toBottomOf="@+id/cr_tvStoreName"
-                app:srcCompat="@drawable/ic_date" />
 
             <TextView
                 android:id="@+id/cr_tvPoints"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
                 android:text="TextView"
                 android:textColor="@color/red"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/cardView"
-                app:layout_constraintEnd_toEndOf="@+id/cardView"
-                app:layout_constraintStart_toStartOf="@+id/cardView"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.cardview.widget.CardView
