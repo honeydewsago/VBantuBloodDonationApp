@@ -114,46 +114,9 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
         if (mUserType.equals("organiser")) {
             List<Organiser> mOrganiserList = mOrganiserViewModel.getOrganiserById(mUserID);
             mOrganiser = mOrganiserList.get(0);
-
-            //organiser avatar
-            DatabaseReference mRef1 = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("Organiser").child(String.valueOf(mUserID));
-
-            mRef1.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    OrganiserImage organiserImage = snapshot.getValue(OrganiserImage.class);
-                    if (organiserImage != null) {
-                        setUserAvatar(organiserImage.getUrl(), holder.mccpIvAvatar, mUserID);
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-
         } else {
             List<User> mUserList = mUserViewModel.getUserById(mUserID);
             mUser = mUserList.get(0);
-
-            //user avatar
-            DatabaseReference mRef = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("User").child(String.valueOf(mUserID));
-
-            mRef.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    UserImage userImage = snapshot.getValue(UserImage.class);
-                    if (userImage != null) {
-                        setOrganiserAvatar(userImage.getUrl(), holder.mccpIvAvatar, mUserID);
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
         }
 
         //show post details
@@ -211,30 +174,54 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
         dateTime = communityPosts.getdateTime();
         postID = communityPosts.getPostID();
 
-//        mRef = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference().child("CommunityPost");
-//
-//        mRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                for (DataSnapshot data : snapshot.getChildren()) {
-//                    CommunityPosts communityPosts = data.getValue(CommunityPosts.class);
-//                    mCommunityPostsList.add(communityPosts);
-//                }
-//            }
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-
         //show post image
-
-        //post image
         String imageUrl = getImageLink(postID);
         setImage(imageUrl, holder.mccpIvPostImage, postID);
+
+        //user avatar
+        if (Objects.equals(communityPosts.organiserID, "0")) {
+            String userid = String.valueOf(communityPosts.getUserID());
+            DatabaseReference mRef = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("User").child(userid);
+
+            mRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    UserImage userImage = snapshot.getValue(UserImage.class);
+                    if (userImage != null) {
+                        setUserAvatar(userImage.getUrl(), holder.mccpIvAvatar, userid);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
+
+        //organiser avatar
+        if (Objects.equals(communityPosts.userID, "0")) {
+            String organiserid = String.valueOf(mOrganiser.getOrganiserID());
+            DatabaseReference mRef1 = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("Organiser").child(organiserid);
+
+            mRef1.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    OrganiserImage organiserImage = snapshot.getValue(OrganiserImage.class);
+                    if (organiserImage != null) {
+                        setOrganiserAvatar(organiserImage.getUrl(), holder.mccpIvAvatar, organiserid);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
     }
 
-    private void setUserAvatar(String avatarUrl, ImageView mccpIvAvatar, int userID) {
+    private void setUserAvatar(String avatarUrl, ImageView mccpIvAvatar, String userID) {
         if (avatarUrl != null) {
             StorageReference mStorageReference = FirebaseStorage.getInstance("gs://vbantu-blood-donation-app.appspot.com/").getReference("User/" + userID + "/" + avatarUrl);
 
@@ -258,9 +245,9 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
         }
     }
 
-    private void setOrganiserAvatar(String avatarUrl, ImageView mccpIvAvatar, int userID) {
+    private void setOrganiserAvatar(String avatarUrl, ImageView mccpIvAvatar, String organiserid) {
         if (avatarUrl != null) {
-            StorageReference mStorageReference = FirebaseStorage.getInstance("gs://vbantu-blood-donation-app.appspot.com/").getReference("Organiser/" + userID + "/" + avatarUrl);
+            StorageReference mStorageReference = FirebaseStorage.getInstance("gs://vbantu-blood-donation-app.appspot.com/").getReference("Organiser/" + organiserid + "/" + avatarUrl);
 
             try {
                 File localFile = File.createTempFile("tempfile", ".jpg");
@@ -281,53 +268,6 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
             }
         }
     }
-
-//    private void viewLikesDialog(String postID) {
-//
-//        //initialize the alert dialog and set the dialog view from borrow_book_layout.xml
-//        AlertDialog dialogBuilder = new AlertDialog.Builder(context).create();
-//        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//        View dialogView = inflater.inflate(R.layout.dialog_community_likeslist, null);
-//
-//        TextView mTvNoLikes = dialogView.findViewById(R.id.dcl_tvNolikes);
-//        RecyclerView mRvLikes = dialogView.findViewById(R.id.dcl_rvLikesList);
-//        List<String> mLikesList;
-//
-//        DatabaseReference ref = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("Likes").child(postID);
-//
-//        mRvLikes.setLayoutManager(new LinearLayoutManager(context));
-//
-//        mLikesList = new ArrayList<>();
-//        mLikesAdapter = new CommunityLikesAdapter(mActivity, mLikesList);
-//        mRvLikes.setAdapter(mLikesAdapter);
-//
-//        ref.addValueEventListener(new ValueEventListener() {
-//            @SuppressLint("NotifyDataSetChanged")
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-//                    String userID = dataSnapshot.getKey();
-//                    mLikesList.add(userID);
-//                }
-//                if (mLikesList.size() > 0) {
-//                    mTvNoLikes.setVisibility(View.INVISIBLE);
-//
-//                } else {
-//                    mTvNoLikes.setVisibility(View.VISIBLE);
-//                }
-//                mLikesAdapter.notifyDataSetChanged();
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-//
-//        //set the view and show the alert dialog
-//        dialogBuilder.setView(dialogView);
-//        dialogBuilder.show();
-//    }
 
     private void setImage(String imageUrl, ImageView mccpIvPostImage, String postID) {
         if (imageUrl != null) {
@@ -396,7 +336,7 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
         }
     }
 
-    public void communityLikesPosts(CommunityPosts communityPosts){
+    public void communityLikesPosts(CommunityPosts communityPosts) {
         String pstID = communityPosts.getPostID();
         String userID = communityPosts.getUserID();
         Intent likeIntent = new Intent(context, CommunityLikesActivity.class);
@@ -527,54 +467,6 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
 
                 }
             });
-
-
-////            likes = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference().child("Likes").child(postID).child(String.valueOf(mUserID));
-////            likes.addValueEventListener(new ValueEventListener() {
-////                @Override
-////                public void onDataChange(@NonNull DataSnapshot snapshot) {
-////                    if(snapshot.exists()){
-////                        mccpIvLike.setImageResource(R.drawable.ic_thumb_up_red);
-////                    } else {
-////                        mccpIvLike.setImageResource(R.drawable.ic_thumb_up_grey);
-////                    }
-////                }
-////
-////                @Override
-////                public void onCancelled(@NonNull DatabaseError error) {
-////
-////                }
-////            });
-//
-////            if (mccpIvLike.isPressed()) {
-////                if (mUserType.equals("organiser")) {
-////                    int organiserID = mUserID;
-////                    String postID = String.valueOf(post.getPostID());
-////                    FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference().child("Likes").child(postID)
-////                            .child(String.valueOf(organiserID)).removeValue();
-////                    mccpIvLike.setImageResource(R.drawable.ic_thumb_up_red);
-////                } else {
-////                    int userID = mUserID;
-////                    String postID = String.valueOf(post.getPostID());
-////                    FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference().child("Likes").child(postID)
-////                            .child(String.valueOf(userID)).removeValue();
-////                    mccpIvLike.setImageResource(ContextCompat.getDrawable(R.drawable.ic_thumb_up_red));
-////                }
-////            } else {
-////                if (mUserType.equals("organiser")) {
-////                    int organiserID = mUserID;
-////                    String postID = String.valueOf(post.getPostID());
-////                    FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference().child("Likes").child(postID)
-////                            .child(String.valueOf(organiserID)).setValue(true);
-////                    mccpIvLike.setImageResource(R.drawable.ic_thumb_up_grey);
-////                } else {
-////                    int userID = mUserID;
-////                    String postID = String.valueOf(post.getPostID());
-////                    FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference().child("Likes").child(postID)
-////                            .child(String.valueOf(userID)).setValue(true);
-////                    mccpIvLike.setImageResource(R.drawable.ic_thumb_up_grey);
-////                }
-////            }
             return true;
         });
     }
