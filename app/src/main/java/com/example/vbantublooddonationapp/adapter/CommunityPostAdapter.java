@@ -23,6 +23,8 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.example.vbantublooddonationapp.CommunityCommentActivity;
+import com.example.vbantublooddonationapp.Model.Comments;
 import com.example.vbantublooddonationapp.Model.CommunityPosts;
 import com.example.vbantublooddonationapp.Model.Organiser;
 import com.example.vbantublooddonationapp.Model.User;
@@ -62,6 +64,7 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
     FirebaseDatabase database;
     DatabaseReference totalComments, likes, saveLikes;
     StorageReference mStorageReference;
+    CommunityCommentAdapter mCommunityCommentAdapter;
 
     private final String USERID_KEY = "userid", USERTYPE_KEY = "usertype";
     private SharedPreferences mPreferences;
@@ -296,7 +299,7 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
     }
 
     public void communityPostComments(CommunityPosts mCommunityPost) {
-        Intent i = new Intent(context, CommunityCommentAdapter.class);
+        Intent i = new Intent(context, CommunityCommentActivity.class);
         i.putExtra("currentPostID", mCommunityPost.getPostID());
         context.startActivity(i);
     }

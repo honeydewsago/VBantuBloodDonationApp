@@ -2,14 +2,14 @@ package com.example.vbantublooddonationapp.Model;
 
 public class Comments {
 
-    String comment = "";
-    String userName = "";
-    int organiserID = 0;
-    String date = "";
-    int postID = 0;
-    int userID = 0;
+    private String comment;
+    private String userName;
+    private String organiserID;
+    private String date;
+    private String postID;
+    private String userID;
 
-    public Comments(String comment, String userName, int organiserID, String date, int postID, int userID) {
+    public Comments(String comment, String userName, String organiserID, String date, String postID, String userID) {
         this.comment = comment;
         this.userName = userName;
         this.organiserID = organiserID;
@@ -38,11 +38,11 @@ public class Comments {
         this.userName = userName;
     }
 
-    public int getOrganiserID() {
+    public String getOrganiserID() {
         return organiserID;
     }
 
-    public void setOrganiserID(int organiserID) {
+    public void setOrganiserID(String organiserID) {
         this.organiserID = organiserID;
     }
 
@@ -54,19 +54,19 @@ public class Comments {
         this.date = date;
     }
 
-    public int getPostID() {
+    public String getPostID() {
         return postID;
     }
 
-    public void setPostID(int postID) {
+    public void setPostID(String postID) {
         this.postID = postID;
     }
 
-    public int getUserID() {
+    public String getUserID() {
         return userID;
     }
 
-    public void setUserID(int userID) {
+    public void setUserID(String userID) {
         this.userID = userID;
     }
 }
