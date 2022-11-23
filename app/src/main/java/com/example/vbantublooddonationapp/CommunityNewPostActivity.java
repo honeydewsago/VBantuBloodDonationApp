@@ -17,10 +17,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.vbantublooddonationapp.Model.CommunityPost;
+//import com.example.vbantublooddonationapp.Model.CommunityPost;
 import com.example.vbantublooddonationapp.Model.Organiser;
 import com.example.vbantublooddonationapp.Model.User;
-import com.example.vbantublooddonationapp.ViewModel.CommunityPostViewModel;
+//import com.example.vbantublooddonationapp.ViewModel.CommunityPostViewModel;
 import com.example.vbantublooddonationapp.ViewModel.OrganiserViewModel;
 import com.example.vbantublooddonationapp.ViewModel.UserViewModel;
 import com.example.vbantublooddonationapp.databinding.ActivityCommunityNewPostBinding;
@@ -56,10 +56,10 @@ public class CommunityNewPostActivity extends AppCompatActivity {
 
     private Organiser mOrganiser;
     private User mUser;
-    private CommunityPost mCommunityPost;
+    //private CommunityPost mCommunityPost;
     private OrganiserViewModel mOrganiserViewModel;
     private UserViewModel mUserViewModel;
-    private CommunityPostViewModel mCommunityPostViewModel;
+    //private CommunityPostViewModel mCommunityPostViewModel;
 
     //Firebase
     private StorageTask uploadTask;
@@ -107,7 +107,7 @@ public class CommunityNewPostActivity extends AppCompatActivity {
         //initialise view model
         mOrganiserViewModel = new ViewModelProvider(this).get(OrganiserViewModel.class);
         mUserViewModel = new ViewModelProvider(this).get(UserViewModel.class);
-        mCommunityPostViewModel = new ViewModelProvider(this).get(CommunityPostViewModel.class);
+        //mCommunityPostViewModel = new ViewModelProvider(this).get(CommunityPostViewModel.class);
 
         //set toolbar and display icon
         Toolbar toolbar = mCommunityNewPostBinding.acnpToolbar;
@@ -161,6 +161,7 @@ public class CommunityNewPostActivity extends AppCompatActivity {
             mOrganiserID = mUserID;
         }
 
+        /*
         CommunityPost newPost = new CommunityPost(mUserID, mOrganiserID ,postDesc, currentDateTime, 1);
         mCommunityPostViewModel.insertCommunityPost(newPost);
 
@@ -240,6 +241,8 @@ public class CommunityNewPostActivity extends AppCompatActivity {
             progressDialog.dismiss();
             Toast.makeText(CommunityNewPostActivity.this, "No Image Selected!", Toast.LENGTH_SHORT).show();
         }
+
+         */
     }
 
 

@@ -1,5 +1,6 @@
 package com.example.vbantublooddonationapp.ViewModel;
 
+/*
 import android.app.Application;
 
 import androidx.lifecycle.AndroidViewModel;
@@ -38,3 +39,5 @@ public class CommunityPostViewModel extends AndroidViewModel {
         return mCommunityPostRepository.getCommunityPostByDateTimePostDesc(postDateTime, postDesc);
     }
 }
+
+ */

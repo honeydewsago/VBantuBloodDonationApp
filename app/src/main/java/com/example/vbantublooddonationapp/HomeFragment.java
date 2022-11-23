@@ -21,7 +21,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.vbantublooddonationapp.Model.BloodRequest;
-import com.example.vbantublooddonationapp.Model.CommunityPost;
+//import com.example.vbantublooddonationapp.Model.CommunityPost;
 import com.example.vbantublooddonationapp.Model.Organiser;
 import com.example.vbantublooddonationapp.Model.OrganiserImage;
 import com.example.vbantublooddonationapp.ViewModel.BloodRequestViewModel;

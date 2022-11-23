@@ -1,5 +1,6 @@
 package com.example.vbantublooddonationapp.adapter;
 
+/*
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +26,7 @@ public class CommunityLikesAdapter extends RecyclerView.Adapter<CommunityLikesAd
     final Context context;
     final List<String> likesList;
     final FirebaseDatabase database;
-    private List<CommunityPost> mCommunityLikesList;
+    //private List<CommunityPost> mCommunityLikesList;
     String postID = "";
 
     public CommunityLikesAdapter(Context context, List<String> likesList) {
@@ -86,3 +87,5 @@ public class CommunityLikesAdapter extends RecyclerView.Adapter<CommunityLikesAd
         }
     }
 }
+
+ */

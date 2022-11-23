@@ -1,9 +1,10 @@
 package com.example.vbantublooddonationapp.Model;
 
-
+/*
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+
 
 @Entity(tableName = "community_post_table")
 public class CommunityPost {
@@ -74,3 +75,5 @@ public class CommunityPost {
         this.postDateTime = postDateTime;
     }
 }
+
+ */
