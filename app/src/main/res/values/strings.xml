@@ -240,6 +240,8 @@
     <string name="otp">OTP</string>
     <string name="resetYourPasswordNow">Reset Your Password Now</string>
     <string name="use_now">Use Now</string>
+    <string name="newPasswordHint">New Password</string>
+    <string name="confirmNewPasswordHint">Confirm New Password</string>
 
     <string-array name="bloodGroupValues">
         <item>Select blood type</item>
