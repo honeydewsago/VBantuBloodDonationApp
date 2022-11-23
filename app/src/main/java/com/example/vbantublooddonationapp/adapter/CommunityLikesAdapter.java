@@ -62,17 +62,7 @@ public class CommunityLikesAdapter extends RecyclerView.Adapter<CommunityLikesAd
         this.mLikeList = mLikesList;
         mOrganiserViewModel = new ViewModelProvider((FragmentActivity) mActivity).get(OrganiserViewModel.class);
         mUserViewModel = new ViewModelProvider((FragmentActivity) mActivity).get(UserViewModel.class);
-    }
 
-    @NonNull
-    @Override
-    public CommunityLikesHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        CardCommunityLikesBinding mCardCommunityLikesBinding = CardCommunityLikesBinding.inflate(mActivity.getLayoutInflater());
-        return new CommunityLikesHolder(mCardCommunityLikesBinding);
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull CommunityLikesAdapter.CommunityLikesHolder holder, @SuppressLint("RecyclerView") int position) {
         mPreferences = mActivity.getSharedPreferences("com.example.vbantublooddonationapp", MODE_PRIVATE);
 
         if (mPreferences.contains(USERID_KEY) && mPreferences.contains(USERTYPE_KEY)) {
@@ -87,21 +77,45 @@ public class CommunityLikesAdapter extends RecyclerView.Adapter<CommunityLikesAd
             List<User> mUserList = mUserViewModel.getUserById(mUserID);
             mUser = mUserList.get(0);
         }
+    }
 
+    @NonNull
+    @Override
+    public CommunityLikesHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        CardCommunityLikesBinding mCardCommunityLikesBinding = CardCommunityLikesBinding.inflate(mActivity.getLayoutInflater());
+        return new CommunityLikesHolder(mCardCommunityLikesBinding);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull CommunityLikesAdapter.CommunityLikesHolder holder, @SuppressLint("RecyclerView") int position) {
         CommunityLikes communityLikes = mLikeList.get(position);
 
-        String userName = communityLikes.getUserName().toString();
+        String userName = communityLikes.getUserName();
         holder.mcclTvUsername.setText(userName);
 
         String userid = communityLikes.getUserID();
-        DatabaseReference mRef = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference().child("User").child(userid);
+
+        DatabaseReference mRef = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference();
+
+        if (communityLikes.getUserType().equals("organiser")) {
+            mRef = mRef.child("Organiser").child(userid);
+        }
+        else {
+            mRef = mRef.child("User").child(userid);
+        }
 
         mRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 UserImage userImage = snapshot.getValue(UserImage.class);
                 if (userImage != null) {
-                    setAvatar(userImage.getUrl(), holder.mcclIvAvatar, userid);
+
+                    if (communityLikes.getUserType().equals("organiser")) {
+                        setOrganiserAvatar(userImage.getUrl(), holder.mcclIvAvatar, userid);
+                    }
+                    else {
+                        setAvatar(userImage.getUrl(), holder.mcclIvAvatar, userid);
+                    }
                 }
             }
 
@@ -135,6 +149,30 @@ public class CommunityLikesAdapter extends RecyclerView.Adapter<CommunityLikesAd
     private void setAvatar(String avatarUrl, ImageView mcclIvAvatar, String userID) {
         if (avatarUrl != null) {
             StorageReference mStorageReference = FirebaseStorage.getInstance("gs://vbantu-blood-donation-app.appspot.com/").getReference("User/" + userID + "/"+ avatarUrl);
+
+            try {
+                File localFile = File.createTempFile("tempfile", ".jpg");
+                mStorageReference.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                        Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                        mcclIvAvatar.setImageBitmap(bitmap);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(mActivity.getApplicationContext(), "Failed to retrieve image", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void setOrganiserAvatar(String avatarUrl, ImageView mcclIvAvatar, String organiserid) {
+        if (avatarUrl != null) {
+            StorageReference mStorageReference = FirebaseStorage.getInstance("gs://vbantu-blood-donation-app.appspot.com/").getReference("Organiser/" + organiserid + "/" + avatarUrl);
 
             try {
                 File localFile = File.createTempFile("tempfile", ".jpg");

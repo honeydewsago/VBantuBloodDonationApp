@@ -90,6 +90,21 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
         database = FirebaseDatabase.getInstance();
         mOrganiserViewModel = new ViewModelProvider((FragmentActivity) context).get(OrganiserViewModel.class);
         mUserViewModel = new ViewModelProvider((FragmentActivity) context).get(UserViewModel.class);
+
+        //get current user id and user type
+        mPreferences = context.getSharedPreferences("com.example.vbantublooddonationapp", MODE_PRIVATE);
+
+        if (mPreferences.contains(USERID_KEY) && mPreferences.contains(USERTYPE_KEY)) {
+            mUserID = mPreferences.getInt(USERID_KEY, 1);
+            mUserType = mPreferences.getString(USERTYPE_KEY, "user");
+        }
+        if (mUserType.equals("organiser")) {
+            List<Organiser> mOrganiserList = mOrganiserViewModel.getOrganiserById(mUserID);
+            mOrganiser = mOrganiserList.get(0);
+        } else {
+            List<User> mUserList = mUserViewModel.getUserById(mUserID);
+            mUser = mUserList.get(0);
+        }
     }
 
     @NonNull
@@ -103,25 +118,11 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
     public void onBindViewHolder(@NonNull CommunityPostAdapter.CommunityPostHolder holder, @SuppressLint("RecyclerView") int position) {
         CommunityPosts communityPosts = mCommunityPostsList.get(position);
 
-        //get current user id and user type
-        mPreferences = context.getSharedPreferences("com.example.vbantublooddonationapp", MODE_PRIVATE);
-
-        if (mPreferences.contains(USERID_KEY) && mPreferences.contains(USERTYPE_KEY)) {
-            mUserID = mPreferences.getInt(USERID_KEY, 1);
-            mUserType = mPreferences.getString(USERTYPE_KEY, "user");
-        }
-
-        if (mUserType.equals("organiser")) {
-            List<Organiser> mOrganiserList = mOrganiserViewModel.getOrganiserById(mUserID);
-            mOrganiser = mOrganiserList.get(0);
-        } else {
-            List<User> mUserList = mUserViewModel.getUserById(mUserID);
-            mUser = mUserList.get(0);
-        }
-
         //show post details
+        /*
         String organiserID = communityPosts.organiserID;
         int mOrganiserID = Integer.parseInt(organiserID);
+
         if (mOrganiserID == 0) {
             holder.mccpTvUsername.setText(communityPosts.getUserName());
         }
@@ -131,7 +132,9 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
         if (mUserID == 0) {
             holder.mccpTvUsername.setText(communityPosts.getUserName());
         }
+         */
 
+        holder.mccpTvUsername.setText(communityPosts.getUserName());
         holder.mccpTvCaption.setText(communityPosts.getPostDesc());
 
         //like post
@@ -337,10 +340,10 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
     }
 
     public void communityLikesPosts(CommunityPosts communityPosts) {
-        String pstID = communityPosts.getPostID();
+        String postID = communityPosts.getPostID();
         String userID = String.valueOf(mUserID);
         Intent likeIntent = new Intent(context, CommunityLikesActivity.class);
-        likeIntent.putExtra("likePostID", pstID);
+        likeIntent.putExtra("likePostID", postID);
         likeIntent.putExtra("userPostID", userID);
         likeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         context.startActivity(likeIntent);
@@ -442,7 +445,12 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
                         likes.put("userLikes", "true");
                         likes.put("userID", userID);
                         likes.put("userType", mUserType);
-                        likes.put("userName", mUser.getUsername());
+                        if (mUserType.equals("organiser")) {
+                            likes.put("userName", mOrganiser.getCompanyName());
+                        }
+                        else {
+                            likes.put("userName", mUser.getUsername());
+                        }
                         likes.put("postID", postID);
                         saveLikes.child("Likes").child(postID).child(userID).updateChildren(likes).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
