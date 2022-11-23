@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.vbantublooddonationapp.Model.Appointment;
-import com.example.vbantublooddonationapp.Model.CommunityImage;
+import com.example.vbantublooddonationapp.Model.CommunityPosts;
 //import com.example.vbantublooddonationapp.Model.CommunityPost;
 import com.example.vbantublooddonationapp.Model.LeaderboardUser;
 //import com.example.vbantublooddonationapp.Model.OrganiserImage;
@@ -44,7 +44,7 @@ public class CommunityFragment extends Fragment {
     private LeaderboardAdapter mLeaderboardAdapter;
     //private CommunityPostAdapter mCommunityPostAdapter;
     //private CommunityPostViewModel mCommunityPostViewModel;
-    private List<CommunityImage> mCommunityImageList;
+    private List<CommunityPosts> mCommunityPostsList;
 
 
     @Override
