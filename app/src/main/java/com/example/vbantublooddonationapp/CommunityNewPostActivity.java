@@ -10,11 +10,13 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 //import com.example.vbantublooddonationapp.Model.CommunityPost;
@@ -22,10 +24,13 @@ import com.example.vbantublooddonationapp.Model.CommunityPosts;
 import com.example.vbantublooddonationapp.Model.Organiser;
 import com.example.vbantublooddonationapp.Model.User;
 //import com.example.vbantublooddonationapp.ViewModel.CommunityPostViewModel;
+import com.example.vbantublooddonationapp.Model.UserImage;
 import com.example.vbantublooddonationapp.ViewModel.OrganiserViewModel;
 import com.example.vbantublooddonationapp.ViewModel.UserViewModel;
 import com.example.vbantublooddonationapp.databinding.ActivityCommunityNewPostBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -33,10 +38,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -73,7 +80,7 @@ public class CommunityNewPostActivity extends AppCompatActivity {
     private Uri filepath;
     String myUrl = "";
 
-    private Boolean validateImage;
+    private Boolean validateImage = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,6 +141,48 @@ public class CommunityNewPostActivity extends AppCompatActivity {
             mUser = mUserList.get(0);
             mCommunityNewPostBinding.acnpTvUsername.setText(mUser.getUsername());
         }
+
+        String userid = String.valueOf(mUserID);
+        DatabaseReference mRef = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference().child("User").child(userid);
+
+        mRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                UserImage userImage = snapshot.getValue(UserImage.class);
+                if (userImage != null) {
+                    setAvatar(userImage.getUrl(), mCommunityNewPostBinding.acnpIvAvatar, userid);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void setAvatar(String avatarUrl, ImageView acnpIvAvatar, String userID) {
+        if (avatarUrl != null) {
+            StorageReference mStorageReference = FirebaseStorage.getInstance("gs://vbantu-blood-donation-app.appspot.com/").getReference("User/" + userID + "/"+ avatarUrl);
+
+            try {
+                File localFile = File.createTempFile("tempfile", ".jpg");
+                mStorageReference.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                        Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                        acnpIvAvatar.setImageBitmap(bitmap);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(CommunityNewPostActivity.this, "Failed to retrieve image", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void uploadPost() {
@@ -150,6 +199,14 @@ public class CommunityNewPostActivity extends AppCompatActivity {
             progressDialog.dismiss();
             mCommunityNewPostBinding.acnpEtCaption.setError("Write something here.");
             mCommunityNewPostBinding.acnpEtCaption.requestFocus();
+            return;
+        }
+
+        if (!validateImage){
+            progressDialog.dismiss();
+            mCommunityNewPostBinding.acnpIvPostImage.requestFocus();
+            Toast.makeText(CommunityNewPostActivity.this, "No Image Selected", Toast.LENGTH_SHORT).show();
+            return;
         }
 
         //get current date time
