@@ -61,6 +61,7 @@ public class RegisterUserActivity extends AppCompatActivity {
         String contactNo = binding.aruEtContactNo.getText().toString().trim();
         String password = binding.aruEtPassword.getText().toString().trim();
         String confirmPassword = binding.aruEtConfirmPassword.getText().toString().trim();
+        int points = 0;
 
         //validate to check if date of birth is empty
         if (dateOfBirth.equals("Click To Select")) {
@@ -137,7 +138,7 @@ public class RegisterUserActivity extends AppCompatActivity {
             return;
         }
 
-        User user = new User(username,password,fullName,email,icNo,dateOfBirth,gender,contactNo,bloodType);
+        User user = new User(username,password,fullName,email,icNo,dateOfBirth,gender,contactNo,bloodType,points);
 
         //insert the user object
         mUserViewModel.insertUser(user);
