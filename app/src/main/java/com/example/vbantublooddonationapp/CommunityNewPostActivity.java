@@ -86,7 +86,7 @@ public class CommunityNewPostActivity extends AppCompatActivity {
         mStorage = FirebaseStorage.getInstance();
         mAuth = FirebaseAuth.getInstance();
 
-        storageReference = FirebaseStorage.getInstance().getReference("CommunityPost").child(String.valueOf(mUserID));
+        //storageReference = FirebaseStorage.getInstance().getReference("CommunityPost").child(mCommunityPosts.postID);
 
         mCommunityNewPostBinding.acnpIvPostImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -181,15 +181,24 @@ public class CommunityNewPostActivity extends AppCompatActivity {
                             if (!(snapshot.child("CommunityPost").child(postID).exists())) {
                                 HashMap<String, Object> data = new HashMap<>();
 
+                                List<User> mUserList = mUserViewModel.getUserById(mUserID);
+                                mUser = mUserList.get(0);
+
+                                List<Organiser> mOrganiserList = mOrganiserViewModel.getOrganiserById(mUserID);
+                                mOrganiser = mOrganiserList.get(0);
+
                                 data.put("postDesc", postDesc);
-                                data.put("date", currentDateTime);
+                                data.put("dateTime", currentDateTime);
                                 data.put("url", myUrl);
+                                data.put("postID", postID);
                                 if (mUserType.equals("user")) {
                                     data.put("userID", String.valueOf(mUserID));
+                                    data.put("userName", mUser.getUsername());
                                     data.put("organiserID", "0");
                                 }
                                 if (mUserType.equals("organiser")) {
                                     data.put("userID", "0");
+                                    data.put("userName", mOrganiser.getCompanyName());
                                     data.put("organiserID", String.valueOf(mUserID));
                                 }
 
