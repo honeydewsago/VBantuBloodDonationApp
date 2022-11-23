@@ -1,7 +1,10 @@
 package com.example.vbantublooddonationapp.adapter;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.ViewGroup;
@@ -10,10 +13,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vbantublooddonationapp.Model.CommunityLikes;
+import com.example.vbantublooddonationapp.Model.Organiser;
+import com.example.vbantublooddonationapp.Model.User;
 import com.example.vbantublooddonationapp.Model.UserImage;
+import com.example.vbantublooddonationapp.ViewModel.OrganiserViewModel;
+import com.example.vbantublooddonationapp.ViewModel.UserViewModel;
 import com.example.vbantublooddonationapp.databinding.CardCommunityLikesBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -35,10 +44,24 @@ public class CommunityLikesAdapter extends RecyclerView.Adapter<CommunityLikesAd
 
     private final Activity mActivity;
     public final List<CommunityLikes> mLikeList;
+    private final OrganiserViewModel mOrganiserViewModel;
+    private final UserViewModel mUserViewModel;
+
+    private final String USERID_KEY = "userid", USERTYPE_KEY = "usertype";
+    private SharedPreferences mPreferences;
+    private int mUserID = 1;
+    private int mOrganiserID = 0;
+    private String mUserType = "user";
+    private Organiser mOrganiser;
+    private User mUser;
+    private String postID = "";
+    private String dateTime = "";
 
     public CommunityLikesAdapter(Activity activity, ArrayList<CommunityLikes> mLikesList) {
         mActivity = activity;
         this.mLikeList = mLikesList;
+        mOrganiserViewModel = new ViewModelProvider((FragmentActivity) mActivity).get(OrganiserViewModel.class);
+        mUserViewModel = new ViewModelProvider((FragmentActivity) mActivity).get(UserViewModel.class);
     }
 
     @NonNull
@@ -50,12 +73,27 @@ public class CommunityLikesAdapter extends RecyclerView.Adapter<CommunityLikesAd
 
     @Override
     public void onBindViewHolder(@NonNull CommunityLikesAdapter.CommunityLikesHolder holder, @SuppressLint("RecyclerView") int position) {
+        mPreferences = mActivity.getSharedPreferences("com.example.vbantublooddonationapp", MODE_PRIVATE);
+
+        if (mPreferences.contains(USERID_KEY) && mPreferences.contains(USERTYPE_KEY)) {
+            mUserID = mPreferences.getInt(USERID_KEY, 1);
+            mUserType = mPreferences.getString(USERTYPE_KEY, "user");
+        }
+
+        if (mUserType.equals("organiser")) {
+            List<Organiser> mOrganiserList = mOrganiserViewModel.getOrganiserById(mUserID);
+            mOrganiser = mOrganiserList.get(0);
+        } else {
+            List<User> mUserList = mUserViewModel.getUserById(mUserID);
+            mUser = mUserList.get(0);
+        }
+
         CommunityLikes communityLikes = mLikeList.get(position);
 
         String userName = communityLikes.getUserName().toString();
         holder.mcclTvUsername.setText(userName);
 
-        String userid = communityLikes.getUserID().toString();
+        String userid = communityLikes.getUserID();
         DatabaseReference mRef = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference().child("User").child(userid);
 
         mRef.addValueEventListener(new ValueEventListener() {
