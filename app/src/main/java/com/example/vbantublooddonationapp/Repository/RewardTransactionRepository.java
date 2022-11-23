@@ -14,14 +14,19 @@ import java.util.concurrent.ExecutionException;
 
 public class RewardTransactionRepository {
     private RewardTransactionDao mRewardsTransactionDao;
+    private LiveData<List<RewardTransaction>> mAllRewardTransactions;
     public RewardTransactionRepository(Application application) {
         BloodRoomDatabase db = BloodRoomDatabase.getINSTANCE(application);
         mRewardsTransactionDao = db.rewardTransactionDao();
+        mAllRewardTransactions = mRewardsTransactionDao.getAllRewardTransactions();
     }
 
     public void insert(RewardTransaction rewardTransaction){
         new RewardTransactionRepository.insertAsyncTask(mRewardsTransactionDao).execute(rewardTransaction);
     }
+
+    public LiveData<List<RewardTransaction>> getAllRewardTransactions() {return mAllRewardTransactions;}
+
 
     public class insertAsyncTask extends AsyncTask<RewardTransaction, Void, Void> {
         private RewardTransactionDao mSyncTaskDao;

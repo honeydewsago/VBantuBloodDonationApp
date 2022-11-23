@@ -22,5 +22,6 @@
     <color name="light_blue">#89b3e0</color>
     <color name="light_light_grey">#F1F1F1</color>
     <color name="grey">#21676262</color>
+    <color name="white_grey">#DADADA</color>
 
 </resources>

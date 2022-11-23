@@ -1,4 +1,4 @@
-/*package com.example.vbantublooddonationapp.ViewModel;
+package com.example.vbantublooddonationapp.ViewModel;
 
 import android.app.Application;
 
@@ -17,9 +17,14 @@ public class RewardViewModel extends AndroidViewModel {
     public RewardViewModel(Application application){
         super(application);
         mRepository = new RewardRepository(application);
+        mAllRewards = mRepository.getAllRewards();
     }
 
     public List<Reward> getRequestById(int id){return mRepository.getRequestById(id);}
     public LiveData<List<Reward>> getRewardByUserId(int id){return mRepository.getRewardByUserId(id);}
+    public void updateReward(Reward reward) {
+        mRepository.update(reward);
+    }
+
+    public LiveData<List<Reward>> getAllRewards() {return mAllRewards;}
 }
-*/

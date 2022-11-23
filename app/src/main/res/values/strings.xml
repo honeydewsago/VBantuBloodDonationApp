@@ -239,6 +239,7 @@
     <string name="enterYourOTPHere">Enter your OTP here</string>
     <string name="otp">OTP</string>
     <string name="resetYourPasswordNow">Reset Your Password Now</string>
+    <string name="use_now">Use Now</string>
 
     <string-array name="bloodGroupValues">
         <item>Select blood type</item>
