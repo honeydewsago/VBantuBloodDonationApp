@@ -34,7 +34,7 @@ import java.util.List;
 import java.util.Objects;
 
 
-public class CommunityCommentAdapter extends RecyclerView.Adapter<CommunityCommentAdapter.CommunityCommentHolder>{
+public class CommunityCommentAdapter extends RecyclerView.Adapter<CommunityCommentAdapter.CommunityCommentHolder> {
 
     private final Activity mActivity;
     public final List<Comments> mCommentsList;
@@ -47,6 +47,7 @@ public class CommunityCommentAdapter extends RecyclerView.Adapter<CommunityComme
     @NonNull
     @Override
     public CommunityCommentHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        //implement binding
         CardCommunityCommentsBinding mCardCommunityCommentsBinding = CardCommunityCommentsBinding.inflate(mActivity.getLayoutInflater());
         return new CommunityCommentHolder(mCardCommunityCommentsBinding);
     }
@@ -55,12 +56,13 @@ public class CommunityCommentAdapter extends RecyclerView.Adapter<CommunityComme
     public void onBindViewHolder(@NonNull CommunityCommentAdapter.CommunityCommentHolder holder, @SuppressLint("RecyclerView") int position) {
         Comments mComments = mCommentsList.get(position);
 
+        //get comment and name in model
         String comment = mComments.getComment().toString();
         String name = mComments.getUserName().toString();
         holder.mcccTvUsername.setText(name);
         holder.mcccTvComment.setText(comment);
 
-        //user avatar
+        //show user avatar
         if (Objects.equals(mComments.getOrganiserID(), "0")) {
             String userid = mComments.getUserID();
             DatabaseReference mRef = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference().child("User").child(userid);
@@ -81,7 +83,7 @@ public class CommunityCommentAdapter extends RecyclerView.Adapter<CommunityComme
             });
         }
 
-        //organiser avatar
+        //show organiser avatar
         if (Objects.equals(mComments.getUserID(), "0")) {
             String organiserid = mComments.getOrganiserID();
             DatabaseReference mRef1 = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("Organiser").child(organiserid);
@@ -113,6 +115,7 @@ public class CommunityCommentAdapter extends RecyclerView.Adapter<CommunityComme
 
     public static class CommunityCommentHolder extends RecyclerView.ViewHolder {
 
+        //components in xml file
         public final TextView mcccTvComment, mcccTvUsername;
         private final ImageView mcccIvAvatar;
 
@@ -124,9 +127,10 @@ public class CommunityCommentAdapter extends RecyclerView.Adapter<CommunityComme
         }
     }
 
+    //set user avatar with getting the image url
     private void setUserAvatar(String avatarUrl, ImageView mcccIvAvatar, String userID) {
         if (avatarUrl != null) {
-            StorageReference mStorageReference = FirebaseStorage.getInstance("gs://vbantu-blood-donation-app.appspot.com/").getReference("User/" + userID + "/"+ avatarUrl);
+            StorageReference mStorageReference = FirebaseStorage.getInstance("gs://vbantu-blood-donation-app.appspot.com/").getReference("User/" + userID + "/" + avatarUrl);
 
             try {
                 File localFile = File.createTempFile("tempfile", ".jpg");
@@ -148,6 +152,7 @@ public class CommunityCommentAdapter extends RecyclerView.Adapter<CommunityComme
         }
     }
 
+    //set organiser avatar with getting the image url
     private void setOrganiserAvatar(String avatarUrl, ImageView mcccIvAvatar, String organiserid) {
         if (avatarUrl != null) {
             StorageReference mStorageReference = FirebaseStorage.getInstance("gs://vbantu-blood-donation-app.appspot.com/").getReference("Organiser/" + organiserid + "/" + avatarUrl);

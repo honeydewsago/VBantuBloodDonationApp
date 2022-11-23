@@ -3,7 +3,6 @@ package com.example.vbantublooddonationapp;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 
@@ -15,11 +14,9 @@ import com.example.vbantublooddonationapp.Model.Appointment;
 import com.example.vbantublooddonationapp.Model.LeaderboardUser;
 import com.example.vbantublooddonationapp.Model.User;
 import com.example.vbantublooddonationapp.ViewModel.AppointmentViewModel;
-import com.example.vbantublooddonationapp.ViewModel.OrganiserViewModel;
 import com.example.vbantublooddonationapp.ViewModel.UserViewModel;
 import com.example.vbantublooddonationapp.adapter.LeaderboardAdapter;
 import com.example.vbantublooddonationapp.databinding.ActivityCommunityLeaderboardBinding;
-import com.example.vbantublooddonationapp.databinding.ActivityCommunityNewPostBinding;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -73,7 +70,7 @@ public class CommunityLeaderboardActivity extends AppCompatActivity {
             for (int j = 0; j < appointmentList.size(); j++) {
                 Appointment appointment = appointmentList.get(j);
 
-                int year = Integer.parseInt(appointment.getAppointmentDate().substring(0,4));
+                int year = Integer.parseInt(appointment.getAppointmentDate().substring(0, 4));
                 if (year == currentYear) {
                     if (appointment.getUserID() == (i + 1)) {
                         amount = amount + appointment.getBloodAmt();
@@ -87,13 +84,11 @@ public class CommunityLeaderboardActivity extends AppCompatActivity {
 
         Collections.sort(mLeaderboardUserList, new BloodAmountComparator());
 
+        //initialize adapter
         mLeaderboardAdapter = new LeaderboardAdapter(this);
         mLeaderboardAdapter.setLeaderboardUserList(mLeaderboardUserList);
         mCommunityLeaderboardBinding.aclRvYearlyTopDonorList.setAdapter(mLeaderboardAdapter);
-
         mCommunityLeaderboardBinding.aclRvYearlyTopDonorList.setLayoutManager(new GridLayoutManager(this, getResources().getInteger(R.integer.grid_column_count)));
-
-
     }
 
     public class BloodAmountComparator implements Comparator<LeaderboardUser> {
