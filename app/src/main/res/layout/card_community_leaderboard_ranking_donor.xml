@@ -47,7 +47,7 @@
         app:layout_constraintStart_toStartOf="@id/cclrd_ivPlaceNo"
         app:layout_constraintTop_toTopOf="@id/cclrd_ivPlaceNo" />
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/cclrd_ivProfilePicture"
         android:layout_width="30dp"
         android:layout_height="30dp"
@@ -56,7 +56,8 @@
         android:src="@drawable/avatar"
         app:layout_constraintBottom_toBottomOf="@id/cclrd_ivBackground"
         app:layout_constraintStart_toEndOf="@id/cclrd_ivPlaceNoLine"
-        app:layout_constraintTop_toTopOf="@id/cclrd_ivBackground" />
+        app:layout_constraintTop_toTopOf="@id/cclrd_ivBackground"
+        app:shapeAppearanceOverlay="@style/Circular" />
 
     <TextView
         android:id="@+id/cclrd_tvUsername"
