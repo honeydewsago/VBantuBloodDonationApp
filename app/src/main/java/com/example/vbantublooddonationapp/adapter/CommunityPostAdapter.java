@@ -6,10 +6,13 @@ import static com.firebase.ui.auth.AuthUI.getApplicationContext;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +23,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vbantublooddonationapp.CommunityCommentActivity;
@@ -50,6 +54,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -122,6 +127,7 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
         //like post
         isLike(communityPost, holder.mccpIvLike);
         likeCommunityPost(communityPost, holder.mccpIvLike);
+        holder.mccpTvLikes.setOnClickListener(v -> viewLikesDialog(postID));
 
         //show posted time
         getPostDuration(position, holder.mccpTvDuration);
@@ -148,6 +154,7 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
         setTotalLikes(communityPost.getPostID(), holder.mccpTvLikes);
 
         dateTime = communityPost.getPostDateTime();
+        postID = String.valueOf(communityPost.getPostID());
 
         mRef = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference().child("CommunityPost").child(postID).child(dateTime);
 
@@ -165,12 +172,61 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
             }
         });
 
-
         //show post image
         String imageUrl = getImageLink(Integer.parseInt(postID));
         setImage(imageUrl, holder.mccpIvPostImage, postID);
 
         //holder.mccpIvAvatar
+    }
+
+    private void viewLikesDialog(String postID) {
+
+        //initialize the alert dialog and set the dialog view from borrow_book_layout.xml
+        AlertDialog dialogBuilder = new AlertDialog.Builder(mActivity).create();
+        LayoutInflater inflater = (LayoutInflater) mActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View dialogView = inflater.inflate(R.layout.dialog_community_likeslist, null);
+
+        TextView mTvNoLikes = dialogView.findViewById(R.id.dcl_tvNolikes);
+        RecyclerView mRvLikes = dialogView.findViewById(R.id.dcl_rvLikesList);
+        List<String> mLikesList;
+        CommunityLikesAdapter mLikesAdapter;
+
+        DatabaseReference ref = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("Likes").child(postID);
+
+        mRvLikes.setLayoutManager(new LinearLayoutManager(mActivity));
+
+        mLikesList = new ArrayList<>();
+        mLikesAdapter = new CommunityLikesAdapter(mActivity, mLikesList);
+        mRvLikes.setAdapter(mLikesAdapter);
+
+        System.out.println("ABC" + postID);
+
+        ref.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    String userID = dataSnapshot.getKey();
+                    mLikesList.add(userID);
+                }
+                if (mLikesList.size() > 0) {
+                    mTvNoLikes.setVisibility(View.INVISIBLE);
+
+                } else {
+                    mTvNoLikes.setVisibility(View.VISIBLE);
+                }
+                mLikesAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        //set the view and show the alert dialog
+        dialogBuilder.setView(dialogView);
+        dialogBuilder.show();
     }
 
     private void setImage(String imageUrl, ImageView mccpIvPostImage, String postID) {
