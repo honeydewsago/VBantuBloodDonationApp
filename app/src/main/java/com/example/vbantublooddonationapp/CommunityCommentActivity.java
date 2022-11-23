@@ -146,7 +146,7 @@ public class CommunityCommentActivity extends AppCompatActivity {
                                 if (mUserType.equals("organiser")) {
                                     comment.put("userID", "0");
                                     comment.put("organiserID", String.valueOf(mUserID));
-                                    comment.put("userName", username);
+                                    comment.put("userName", organiserUsername);
                                 }
                                 comment.put("comment", communityComment);
                                 comment.put("date", currentDateTime);
