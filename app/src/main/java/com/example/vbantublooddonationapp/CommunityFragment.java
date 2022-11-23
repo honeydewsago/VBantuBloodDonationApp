@@ -1,5 +1,6 @@
 package com.example.vbantublooddonationapp;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -8,6 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,8 +26,15 @@ import com.example.vbantublooddonationapp.ViewModel.AppointmentViewModel;
 import com.example.vbantublooddonationapp.ViewModel.UserViewModel;
 //import com.example.vbantublooddonationapp.adapter.CommunityLikesAdapter;
 //import com.example.vbantublooddonationapp.adapter.CommunityPostAdapter;
+import com.example.vbantublooddonationapp.adapter.CommunityPostAdapter;
 import com.example.vbantublooddonationapp.adapter.LeaderboardAdapter;
 import com.example.vbantublooddonationapp.databinding.FragmentCommunityBinding;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -42,9 +51,9 @@ public class CommunityFragment extends Fragment {
     private UserViewModel mUserViewModel;
     private List<LeaderboardUser> top3UserList;
     private LeaderboardAdapter mLeaderboardAdapter;
-    //private CommunityPostAdapter mCommunityPostAdapter;
-    //private CommunityPostViewModel mCommunityPostViewModel;
     private List<CommunityPosts> mCommunityPostsList;
+    DatabaseReference mRef;
+    CommunityPostAdapter mCommunityPostAdapter;
 
 
     @Override
@@ -133,18 +142,37 @@ public class CommunityFragment extends Fragment {
             }
         });
 
-        /*
-        mCommunityPostViewModel = new ViewModelProvider(this).get(CommunityPostViewModel.class);
-        List<CommunityPost> communityPostList = mCommunityPostViewModel.getAllCommunityPost();
+        //Community Posts firebase
+        mRef = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference();
+        Query query = mRef.child("CommunityPost").orderByChild("dateTime");
+        mCommunityBinding.fcRvCommunityPosts.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
-        mCommunityImageList = new ArrayList<CommunityImage>();
-        mCommunityPostAdapter = new CommunityPostAdapter(getActivity(), mCommunityImageList);
-        mCommunityPostAdapter.setCommunityPostList(communityPostList);
+        //Community Posts adapter
+        mCommunityPostsList = new ArrayList<>();
+        mCommunityPostAdapter = new CommunityPostAdapter(view.getContext(), mCommunityPostsList);
+        mCommunityBinding.fcRvCommunityPosts.setAdapter(mCommunityPostAdapter);
 
+        query.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    CommunityPosts communityPosts = dataSnapshot.getValue(CommunityPosts.class);
+                    mCommunityPostsList.add(communityPosts);
+                }
+                Collections.reverse(mCommunityPostsList);
 
-         */
-        //mCommunityBinding.fcRvCommunityPosts.setAdapter(mCommunityPostAdapter);
-        //mCommunityBinding.fcRvCommunityPosts.setLayoutManager(new GridLayoutManager(view.getContext(), getResources().getInteger(R.integer.grid_column_count)));
+                mCommunityPostAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        mCommunityBinding.fcRvCommunityPosts.setAdapter(mCommunityPostAdapter);
+        mCommunityBinding.fcRvCommunityPosts.setLayoutManager(new GridLayoutManager(view.getContext(), getResources().getInteger(R.integer.grid_column_count)));
 
     }
 
