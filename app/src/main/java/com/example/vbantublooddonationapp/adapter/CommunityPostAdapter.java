@@ -24,11 +24,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.example.vbantublooddonationapp.CommunityCommentActivity;
-import com.example.vbantublooddonationapp.Model.Comments;
 import com.example.vbantublooddonationapp.Model.CommunityPosts;
 import com.example.vbantublooddonationapp.Model.Organiser;
 import com.example.vbantublooddonationapp.Model.User;
+import com.example.vbantublooddonationapp.Model.UserImage;
 import com.example.vbantublooddonationapp.R;
+import com.example.vbantublooddonationapp.UpdateUserProfile;
 import com.example.vbantublooddonationapp.ViewModel.OrganiserViewModel;
 import com.example.vbantublooddonationapp.ViewModel.UserViewModel;
 import com.example.vbantublooddonationapp.databinding.CardCommunityPostBinding;
@@ -97,6 +98,7 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
     public void onBindViewHolder(@NonNull CommunityPostAdapter.CommunityPostHolder holder, @SuppressLint("RecyclerView") int position) {
         CommunityPosts communityPosts = mCommunityPostsList.get(position);
 
+        //get current user id and user type
         mPreferences = context.getSharedPreferences("com.example.vbantublooddonationapp", MODE_PRIVATE);
 
         if (mPreferences.contains(USERID_KEY) && mPreferences.contains(USERTYPE_KEY)) {
@@ -112,7 +114,6 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
             List<User> mUserList = mUserViewModel.getUserById(mUserID);
             mUser = mUserList.get(0);
         }
-
 
         //show post details
         String organiserID = communityPosts.organiserID;
@@ -158,6 +159,7 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
         setTotalComments(communityPosts.getPostID(), holder.mccpTvComments);
         setTotalLikes(communityPosts.getPostID(), holder.mccpTvLikes);
 
+        //get current date time and post id
         dateTime = communityPosts.getdateTime();
         postID = communityPosts.getPostID();
 
@@ -181,7 +183,46 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
         String imageUrl = getImageLink(postID);
         setImage(imageUrl, holder.mccpIvPostImage, postID);
 
-        //holder.mccpIvAvatar
+        DatabaseReference mRef = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("User").child(String.valueOf(mUserID));
+
+        mRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                UserImage userImage = snapshot.getValue(UserImage.class);
+                if (userImage != null) {
+                    setAvatar(userImage.getUrl(), holder.mccpIvAvatar, mUserID);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void setAvatar(String avatarUrl, ImageView mccpIvAvatar, int userID) {
+        if (avatarUrl != null) {
+            StorageReference mStorageReference = FirebaseStorage.getInstance("gs://vbantu-blood-donation-app.appspot.com/").getReference("User/"+ userID +"/"+avatarUrl);
+
+            try {
+                File localFile = File.createTempFile("tempfile", ".jpg");
+                mStorageReference.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                        Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                        mccpIvAvatar.setImageBitmap(bitmap);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(context, "Failed to retrieve image", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 //    private void viewLikesDialog(String postID) {
