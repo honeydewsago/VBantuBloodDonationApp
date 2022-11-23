@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "reward_transaction_table")
+@Entity(tableName = "reward_trans_table")
 public class RewardTransaction {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "reward_transID")

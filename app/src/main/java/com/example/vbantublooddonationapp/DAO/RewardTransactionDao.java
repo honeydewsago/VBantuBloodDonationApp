@@ -19,12 +19,12 @@ public interface RewardTransactionDao {
     @Update
     void update(RewardTransaction... rewardTransaction);
 
-    @Query("Select * from reward_transaction_table where reward_transID=(:id)")
+    @Query("Select * from reward_trans_table where reward_transID=(:id)")
     List<RewardTransaction> getRequestById(int id);
 
-    @Query("Select * from reward_transaction_table where rewardID=(:id) ORDER By rewardID")
+    @Query("Select * from reward_trans_table where rewardID=(:id) ORDER By rewardID")
     LiveData<List<RewardTransaction>> getRewardsTransactionByRewardId(int id);
 
-    @Query("Select * from reward_transaction_table")
+    @Query("Select * from reward_trans_table")
     LiveData<List<RewardTransaction>> getAllRewardTransactions();
 }
