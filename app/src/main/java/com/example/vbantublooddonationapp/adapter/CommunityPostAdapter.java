@@ -32,7 +32,6 @@ import com.example.vbantublooddonationapp.Model.OrganiserImage;
 import com.example.vbantublooddonationapp.Model.User;
 import com.example.vbantublooddonationapp.Model.UserImage;
 import com.example.vbantublooddonationapp.R;
-import com.example.vbantublooddonationapp.UpdateUserProfile;
 import com.example.vbantublooddonationapp.ViewModel.OrganiserViewModel;
 import com.example.vbantublooddonationapp.ViewModel.UserViewModel;
 import com.example.vbantublooddonationapp.databinding.CardCommunityPostBinding;
@@ -110,6 +109,7 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
     @NonNull
     @Override
     public CommunityPostHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        //implement binding
         CardCommunityPostBinding mCardCommunityPostBinding = CardCommunityPostBinding.inflate(LayoutInflater.from(context));
         return new CommunityPostHolder(mCardCommunityPostBinding);
     }
@@ -122,7 +122,7 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
         holder.mccpTvUsername.setText(communityPosts.getUserName());
         holder.mccpTvCaption.setText(communityPosts.getPostDesc());
 
-        //like post
+        //like post function
         isLike(communityPosts, holder.mccpIvLike);
         likeCommunityPost(communityPosts, holder.mccpIvLike);
 
@@ -209,6 +209,7 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
         }
     }
 
+    //set user avatar
     private void setUserAvatar(String avatarUrl, ImageView mccpIvAvatar, String userID) {
         if (avatarUrl != null) {
             StorageReference mStorageReference = FirebaseStorage.getInstance("gs://vbantu-blood-donation-app.appspot.com/").getReference("User/" + userID + "/" + avatarUrl);
@@ -233,6 +234,7 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
         }
     }
 
+    //set organiser avatar, get the url
     private void setOrganiserAvatar(String avatarUrl, ImageView mccpIvAvatar, String organiserid) {
         if (avatarUrl != null) {
             StorageReference mStorageReference = FirebaseStorage.getInstance("gs://vbantu-blood-donation-app.appspot.com/").getReference("Organiser/" + organiserid + "/" + avatarUrl);
@@ -257,6 +259,7 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
         }
     }
 
+    // set community post image
     private void setImage(String imageUrl, ImageView mccpIvPostImage, String postID) {
         if (imageUrl != null) {
             mStorageReference = FirebaseStorage.getInstance("gs://vbantu-blood-donation-app.appspot.com/").getReference("CommunityPost/" + postID);
@@ -282,6 +285,7 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
         }
     }
 
+    //get community post image link
     private String getImageLink(String postID) {
         for (CommunityPosts communityPosts : mCommunityPostsList) {
             if (Objects.equals(communityPosts.getPostID(), postID)) {
@@ -300,6 +304,7 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
     }
 
     public static class CommunityPostHolder extends RecyclerView.ViewHolder {
+        //components in xml file
         private final TextView mccpTvUsername;
         private final TextView mccpTvCaption;
         private final TextView mccpTvDuration;
@@ -324,6 +329,7 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
         }
     }
 
+    //pass the post id and user id to the like post intent
     public void communityLikesPosts(CommunityPosts communityPosts) {
         String postID = communityPosts.getPostID();
         String userID = String.valueOf(mUserID);
@@ -334,12 +340,14 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
         context.startActivity(likeIntent);
     }
 
+    //pass post id into the comment activity
     public void communityPostComments(CommunityPosts mCommunityPost) {
         Intent i = new Intent(context, CommunityCommentActivity.class);
         i.putExtra("currentPostID", mCommunityPost.getPostID());
         context.startActivity(i);
     }
 
+    //show how long time ago of the post
     @SuppressLint("SetTextI18n")
     public void getPostDuration(CommunityPosts post, TextView mccpTvDuration) {
 
@@ -381,6 +389,7 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
         }
     }
 
+    //check the user is liked the post or not, if yes then remove value
     private void isLike(CommunityPosts post, ImageView mccpIvLike) {
 
         String postID = post.getPostID();
@@ -405,6 +414,7 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
         });
     }
 
+    //if user no like the post, then insert data to firebase
     @SuppressLint("ClickableViewAccessibility")
     private void likeCommunityPost(CommunityPosts post, ImageView mccpIvLike) {
 
@@ -432,8 +442,7 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
                         likes.put("userType", mUserType);
                         if (mUserType.equals("organiser")) {
                             likes.put("userName", mOrganiser.getCompanyName());
-                        }
-                        else {
+                        } else {
                             likes.put("userName", mUser.getUsername());
                         }
                         likes.put("postID", postID);
@@ -464,6 +473,7 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
         });
     }
 
+    //set total number of comments and show in the each post
     private void setTotalComments(String postID, final TextView mccpTvComments) {
 
         totalComments = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference().child("Comment").child(postID);
@@ -487,6 +497,7 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
         });
     }
 
+    //set total likes count in each post
     private void setTotalLikes(String postID, final TextView mccpTvLikes) {
         DatabaseReference totalLikes = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference().child("Likes").child(postID);
 
@@ -494,7 +505,12 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
             @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                mccpTvLikes.setText(snapshot.getChildrenCount() + " Likes");
+                long totalLikes = snapshot.getChildrenCount();
+                if (totalLikes == 0) {
+                    mccpTvLikes.setText(totalComments + " Like");
+                } else {
+                    mccpTvLikes.setText(totalComments + " Comments");
+                }
             }
 
             @Override

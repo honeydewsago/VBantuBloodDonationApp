@@ -4,9 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,12 +13,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vbantublooddonationapp.Model.LeaderboardUser;
-import com.example.vbantublooddonationapp.Model.Organiser;
-import com.example.vbantublooddonationapp.Model.OrganiserImage;
 import com.example.vbantublooddonationapp.Model.UserImage;
 import com.example.vbantublooddonationapp.R;
 import com.example.vbantublooddonationapp.databinding.CardLeaderboardRowBinding;
-import com.example.vbantublooddonationapp.databinding.CardLocationBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -34,7 +29,6 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.LeaderboardHolder> {
@@ -127,7 +121,7 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
 
     private void setAvatar(String avatarUrl, ImageView mclrIvAvatar, String userID) {
         if (avatarUrl != null) {
-            StorageReference mStorageReference = FirebaseStorage.getInstance("gs://vbantu-blood-donation-app.appspot.com/").getReference("User/"+ userID +"/"+avatarUrl);
+            StorageReference mStorageReference = FirebaseStorage.getInstance("gs://vbantu-blood-donation-app.appspot.com/").getReference("User/" + userID + "/" + avatarUrl);
 
             try {
                 File localFile = File.createTempFile("tempfile", ".jpg");

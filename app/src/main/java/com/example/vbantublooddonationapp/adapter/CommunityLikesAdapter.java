@@ -63,6 +63,7 @@ public class CommunityLikesAdapter extends RecyclerView.Adapter<CommunityLikesAd
         mOrganiserViewModel = new ViewModelProvider((FragmentActivity) mActivity).get(OrganiserViewModel.class);
         mUserViewModel = new ViewModelProvider((FragmentActivity) mActivity).get(UserViewModel.class);
 
+        //get the share preferences data, user id and user type
         mPreferences = mActivity.getSharedPreferences("com.example.vbantublooddonationapp", MODE_PRIVATE);
 
         if (mPreferences.contains(USERID_KEY) && mPreferences.contains(USERTYPE_KEY)) {
@@ -95,12 +96,12 @@ public class CommunityLikesAdapter extends RecyclerView.Adapter<CommunityLikesAd
 
         String userid = communityLikes.getUserID();
 
+        //firebase
         DatabaseReference mRef = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference();
 
         if (communityLikes.getUserType().equals("organiser")) {
             mRef = mRef.child("Organiser").child(userid);
-        }
-        else {
+        } else {
             mRef = mRef.child("User").child(userid);
         }
 
@@ -112,8 +113,7 @@ public class CommunityLikesAdapter extends RecyclerView.Adapter<CommunityLikesAd
 
                     if (communityLikes.getUserType().equals("organiser")) {
                         setOrganiserAvatar(userImage.getUrl(), holder.mcclIvAvatar, userid);
-                    }
-                    else {
+                    } else {
                         setAvatar(userImage.getUrl(), holder.mcclIvAvatar, userid);
                     }
                 }
@@ -146,9 +146,10 @@ public class CommunityLikesAdapter extends RecyclerView.Adapter<CommunityLikesAd
         }
     }
 
+    //set user avatar
     private void setAvatar(String avatarUrl, ImageView mcclIvAvatar, String userID) {
         if (avatarUrl != null) {
-            StorageReference mStorageReference = FirebaseStorage.getInstance("gs://vbantu-blood-donation-app.appspot.com/").getReference("User/" + userID + "/"+ avatarUrl);
+            StorageReference mStorageReference = FirebaseStorage.getInstance("gs://vbantu-blood-donation-app.appspot.com/").getReference("User/" + userID + "/" + avatarUrl);
 
             try {
                 File localFile = File.createTempFile("tempfile", ".jpg");
@@ -170,6 +171,7 @@ public class CommunityLikesAdapter extends RecyclerView.Adapter<CommunityLikesAd
         }
     }
 
+    //set organiser avatar
     private void setOrganiserAvatar(String avatarUrl, ImageView mcclIvAvatar, String organiserid) {
         if (avatarUrl != null) {
             StorageReference mStorageReference = FirebaseStorage.getInstance("gs://vbantu-blood-donation-app.appspot.com/").getReference("Organiser/" + organiserid + "/" + avatarUrl);
