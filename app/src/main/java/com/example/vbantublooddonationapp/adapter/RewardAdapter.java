@@ -104,7 +104,7 @@ public class RewardAdapter extends RecyclerView.Adapter<RewardAdapter.RewardHold
             mTvBtnStatus = binding.crTvBtnStatus;
         }
     }
-
+//a
     private void confirm(int id) {
         AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
         builder.setTitle("Confirm Redeem?");
