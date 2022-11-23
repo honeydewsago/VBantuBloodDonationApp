@@ -220,7 +220,7 @@ public class MakeAppointment extends AppCompatActivity {
                 "\n2. " + getText(R.string.reminder2) +
                 "\n3. " + getText(R.string.reminder3) +
                 "\n4. " + getText(R.string.reminder4) + "\n\n\n" +
-                getText(R.string.appointmentEmailEnding);
+                getText(R.string.emailEnding);
 
         JavaMailAPI javaMailAPI = new JavaMailAPI(this, email, subject, message);
         javaMailAPI.execute();
