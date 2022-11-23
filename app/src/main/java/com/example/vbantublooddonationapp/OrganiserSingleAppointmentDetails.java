@@ -1,26 +1,20 @@
 package com.example.vbantublooddonationapp;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
-
 import com.example.vbantublooddonationapp.Model.Appointment;
-import com.example.vbantublooddonationapp.Model.BloodRequest;
 import com.example.vbantublooddonationapp.Model.User;
 import com.example.vbantublooddonationapp.ViewModel.AppointmentViewModel;
-import com.example.vbantublooddonationapp.ViewModel.BloodRequestViewModel;
-import com.example.vbantublooddonationapp.ViewModel.OrganiserViewModel;
 import com.example.vbantublooddonationapp.ViewModel.UserViewModel;
-import com.example.vbantublooddonationapp.adapter.BloodTypeAdapter;
 import com.example.vbantublooddonationapp.databinding.ActivityOrganiserSingleAppointmentDetailsBinding;
-import com.example.vbantublooddonationapp.databinding.ActivitySingleBloodRequestBinding;
 
 import java.util.List;
 import java.util.Objects;
@@ -32,6 +26,7 @@ public class OrganiserSingleAppointmentDetails extends AppCompatActivity {
     private UserViewModel mUserViewModel;
     private Appointment mAppointment;
     private User mUser;
+    String bloodAmt = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +53,7 @@ public class OrganiserSingleAppointmentDetails extends AppCompatActivity {
         List<User> userList = mUserViewModel.getUserById(mAppointment.getUserID());
         mUser = userList.get(0);
 
+        bloodAmt = String.valueOf(mAppointment.getBloodAmt());
         binding.aosadTvFullName.setText(mUser.getFullName());
         binding.aosadTvIcNo.setText(mUser.getIcNo());
         binding.aosadTvContactNo.setText(mUser.getContact());
@@ -66,7 +62,7 @@ public class OrganiserSingleAppointmentDetails extends AppCompatActivity {
         binding.aosadTvDate.setText(getFullDate(mAppointment.getAppointmentDate()));
         binding.aosadTvTime.setText(mAppointment.getAppointmentTime());
         binding.aosadTvBloodGroup.setText(mUser.getBloodType());
-        binding.aosadTvDonationAmount.setText(mAppointment.getBloodAmt());
+        binding.aosadTvDonationAmount.setText(bloodAmt);
 
         if (mUser.getGender().equals("female")) {
             binding.aosadRbFemale.setChecked(true);
