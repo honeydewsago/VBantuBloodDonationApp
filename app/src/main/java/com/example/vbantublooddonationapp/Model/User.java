@@ -39,7 +39,10 @@ public class User {
     @ColumnInfo(name = "bloodType")
     public String bloodType;
 
-    public User(String username, String password, String fullName, String email, String icNo, String dateOfBirth, String gender, String contact, String bloodType) {
+    @ColumnInfo(name = "points")
+    public int points;
+
+    public User(String username, String password, String fullName, String email, String icNo, String dateOfBirth, String gender, String contact, String bloodType, int points) {
         this.username = username;
         this.password = password;
         this.fullName = fullName;
@@ -49,6 +52,7 @@ public class User {
         this.gender = gender;
         this.contact = contact;
         this.bloodType = bloodType;
+        this.points = points;
     }
 
     public int getUserID() {
@@ -130,4 +134,8 @@ public class User {
     public void setBloodType(String bloodType) {
         this.bloodType = bloodType;
     }
+
+    public int getPoints() {return points;}
+
+    public void setPoints(int points) {this.points = points;}
 }

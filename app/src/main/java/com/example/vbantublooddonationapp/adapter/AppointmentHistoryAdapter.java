@@ -38,7 +38,10 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
     }
 
 
-    public void setAppointmentList(List<Appointment> appointmentList){mAppointmentList = appointmentList;}
+    public void setAppointmentList(List<Appointment> appointmentList){
+        mAppointmentList = appointmentList;
+        notifyDataSetChanged();
+    }
 
     public void setOrganiserList(List<Organiser> organiserList){mOrganiserList = organiserList;}
 
@@ -54,6 +57,8 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
         Appointment appointment = mAppointmentList.get(position);
         String bloodAmount;
 
+        bloodAmount = "Blood Amount: " + String.valueOf(appointment.getBloodAmt()) + " ml";
+
         holder.mTvBDC.setText(getOrganiserName(appointment.getOrganiserID()));
         holder.mTvAppointmentDate.setText(getFullDate(appointment.getAppointmentDate()));
         holder.mTvAppointmentTime.setText(appointment.getAppointmentTime());
@@ -63,12 +68,16 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
         holder.mTvStatus.setText(status);
         if (status.equals("Ongoing")) {
             holder.mTvStatus.setBackgroundResource(R.color.orange);
+            holder.mTvBloodAmount.setVisibility(View.GONE);
         }
         else if (status.equals("Completed")) {
             holder.mTvStatus.setBackgroundResource(R.color.green);
+            holder.mTvBloodAmount.setVisibility(View.VISIBLE);
+            holder.mTvBloodAmount.setText(bloodAmount);
         }
         else{
             holder.mTvStatus.setBackgroundResource(R.color.light_grey);
+            holder.mTvBloodAmount.setVisibility(View.GONE);
         }
     }
 
