@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.vbantublooddonationapp.Model.Appointment;
+import com.example.vbantublooddonationapp.Model.CommunityLikes;
 import com.example.vbantublooddonationapp.Model.CommunityPosts;
 //import com.example.vbantublooddonationapp.Model.CommunityPost;
 import com.example.vbantublooddonationapp.Model.LeaderboardUser;
@@ -52,6 +53,7 @@ public class CommunityFragment extends Fragment {
     private List<LeaderboardUser> top3UserList;
     private LeaderboardAdapter mLeaderboardAdapter;
     private List<CommunityPosts> mCommunityPostsList;
+    private List<CommunityLikes> mCommunityLikesList;
     DatabaseReference mRef;
     CommunityPostAdapter mCommunityPostAdapter;
 
@@ -149,7 +151,7 @@ public class CommunityFragment extends Fragment {
 
         //Community Posts adapter
         mCommunityPostsList = new ArrayList<>();
-        mCommunityPostAdapter = new CommunityPostAdapter(view.getContext(), mCommunityPostsList);
+        mCommunityPostAdapter = new CommunityPostAdapter(view.getContext(), mCommunityPostsList, mCommunityLikesList);
         mCommunityBinding.fcRvCommunityPosts.setAdapter(mCommunityPostAdapter);
 
         query.addValueEventListener(new ValueEventListener() {

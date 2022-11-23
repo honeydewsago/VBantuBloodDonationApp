@@ -1,91 +1,59 @@
 package com.example.vbantublooddonationapp.adapter;
 
-/*
-import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.vbantublooddonationapp.Model.CommunityPost;
-import com.example.vbantublooddonationapp.Model.User;
-import com.example.vbantublooddonationapp.R;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.example.vbantublooddonationapp.Model.CommunityLikes;
+import com.example.vbantublooddonationapp.databinding.CardCommunityLikesBinding;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class CommunityLikesAdapter extends RecyclerView.Adapter<CommunityLikesAdapter.LikesHolder> {
+public class CommunityLikesAdapter extends RecyclerView.Adapter<CommunityLikesAdapter.CommunityLikesHolder> {
 
-    final Context context;
-    final List<String> likesList;
-    final FirebaseDatabase database;
-    //private List<CommunityPost> mCommunityLikesList;
-    String postID = "";
+    private final Activity mActivity;
+    public final List<CommunityLikes> mLikeList;
 
-    public CommunityLikesAdapter(Context context, List<String> likesList) {
-        this.context = context;
-        this.likesList = likesList;
-
-        database = FirebaseDatabase.getInstance();
-    }
-
-    public void setCommunityLikesList(List<CommunityPost> communityLikesList) {
-        mCommunityLikesList = communityLikesList;
+    public CommunityLikesAdapter(Activity activity, ArrayList<CommunityLikes> mLikesList) {
+        mActivity = activity;
+        this.mLikeList = mLikesList;
     }
 
     @NonNull
     @Override
-    public CommunityLikesAdapter.LikesHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.card_community_likes, parent, false);
-        return new CommunityLikesAdapter.LikesHolder(view);
+    public CommunityLikesHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        CardCommunityLikesBinding mCardCommunityLikesBinding = CardCommunityLikesBinding.inflate(mActivity.getLayoutInflater());
+        return new CommunityLikesHolder(mCardCommunityLikesBinding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CommunityLikesAdapter.LikesHolder holder, int position) {
-        CommunityPost communityPost = mCommunityLikesList.get(position);
-        postID = String.valueOf(communityPost.getPostID());
-        System.out.println(postID);
+    public void onBindViewHolder(@NonNull CommunityLikesAdapter.CommunityLikesHolder holder, @SuppressLint("RecyclerView") int position) {
+        CommunityLikes communityLikes = mLikeList.get(position);
 
-        String userID = likesList.get(position);
-
-        DatabaseReference refUser = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference().child("Likes").child(String.valueOf(postID)).child(userID);
-
-        refUser.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                User user = snapshot.getValue(User.class);
-                if (user != null) {
-                    holder.username.setText(user.getUsername());
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+        String userName = communityLikes.getUserName().toString();
+        holder.claTvUsername.setText(userName);
     }
 
     @Override
     public int getItemCount() {
-        return likesList.size();
+        if (mLikeList == null) {
+            return 0;
+        }
+        return mLikeList.size();
     }
 
-    public static class LikesHolder extends RecyclerView.ViewHolder {
-        final TextView username;
+    public static class CommunityLikesHolder extends RecyclerView.ViewHolder {
 
-        public LikesHolder(@NonNull View itemView) {
-            super(itemView);
-            username = itemView.findViewById(R.id.ccl_tvUsername);
+        public final TextView claTvUsername;
+
+        public CommunityLikesHolder(@NonNull CardCommunityLikesBinding mCardCommunityLikesBinding) {
+            super(mCardCommunityLikesBinding.getRoot());
+            claTvUsername = mCardCommunityLikesBinding.cclTvUsername;
         }
     }
 }
-
- */

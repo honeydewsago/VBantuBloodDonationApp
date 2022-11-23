@@ -24,6 +24,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.example.vbantublooddonationapp.CommunityCommentActivity;
+import com.example.vbantublooddonationapp.CommunityLikesActivity;
+import com.example.vbantublooddonationapp.Model.CommunityLikes;
 import com.example.vbantublooddonationapp.Model.CommunityPosts;
 import com.example.vbantublooddonationapp.Model.Organiser;
 import com.example.vbantublooddonationapp.Model.OrganiserImage;
@@ -61,6 +63,7 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
 
     final Context context;
     private List<CommunityPosts> mCommunityPostsList;
+    private List<CommunityLikes> mCommunityLikesList;
     private final OrganiserViewModel mOrganiserViewModel;
     private final UserViewModel mUserViewModel;
     FirebaseDatabase database;
@@ -79,10 +82,11 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
     private String dateTime = "";
     private DatabaseReference mRef;
 
-    public CommunityPostAdapter(Context context, List<CommunityPosts> communityPostsList) {
+    public CommunityPostAdapter(Context context, List<CommunityPosts> communityPostsList, List<CommunityLikes> communityLikesList) {
         //initialize
         this.context = context;
         this.mCommunityPostsList = communityPostsList;
+        this.mCommunityLikesList = communityLikesList;
         database = FirebaseDatabase.getInstance();
         mOrganiserViewModel = new ViewModelProvider((FragmentActivity) context).get(OrganiserViewModel.class);
         mUserViewModel = new ViewModelProvider((FragmentActivity) context).get(UserViewModel.class);
@@ -170,7 +174,14 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
         //like post
         isLike(communityPosts, holder.mccpIvLike);
         likeCommunityPost(communityPosts, holder.mccpIvLike);
-//        holder.mccpTvLikes.setOnClickListener(v -> viewLikesDialog(postID));
+
+        holder.mccpTvLikes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CommunityPosts communityPosts = mCommunityPostsList.get(position);
+                communityLikesPosts(communityPosts);
+            }
+        });
 
         //show posted time
         getPostDuration(communityPosts, holder.mccpTvDuration);
@@ -221,10 +232,6 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
         //post image
         String imageUrl = getImageLink(postID);
         setImage(imageUrl, holder.mccpIvPostImage, postID);
-
-
-
-
     }
 
     private void setUserAvatar(String avatarUrl, ImageView mccpIvAvatar, int userID) {
@@ -389,6 +396,16 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
         }
     }
 
+    public void communityLikesPosts(CommunityPosts communityPosts){
+        String pstID = communityPosts.getPostID();
+        String userID = communityPosts.getUserID();
+        Intent likeIntent = new Intent(context, CommunityLikesActivity.class);
+        likeIntent.putExtra("likePostID", pstID);
+        likeIntent.putExtra("userPostID", userID);
+        likeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        context.startActivity(likeIntent);
+    }
+
     public void communityPostComments(CommunityPosts mCommunityPost) {
         Intent i = new Intent(context, CommunityCommentActivity.class);
         i.putExtra("currentPostID", mCommunityPost.getPostID());
@@ -438,9 +455,10 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
 
     private void isLike(CommunityPosts post, ImageView mccpIvLike) {
 
-        postID = String.valueOf(post.getPostID());
+        String postID = post.getPostID();
+        String userID = post.getUserID();
         likes = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app")
-                .getReference().child("Likes").child(postID).child(String.valueOf(mUserID));
+                .getReference().child("Likes").child(postID).child(userID);
 
         likes.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -472,7 +490,8 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
             // don't handle event unless its ACTION_UP so "doSomething()" only runs once.
             if (event.getAction() != MotionEvent.ACTION_UP) return false;
 
-            String userID = String.valueOf(mUserID);
+            String userID = post.getUserID();
+            String postID = post.getPostID();
 
             saveLikes = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference();
             saveLikes.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -480,11 +499,12 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if (!snapshot.child("Likes").child(postID).child(userID).exists()) {
                         HashMap<String, Object> likes = new HashMap<>();
-                        likes.put(String.valueOf(mUserID), true);
+                        likes.put("userLikes", "true");
                         likes.put("userID", userID);
                         likes.put("userType", mUserType);
                         likes.put("userName", mUser.getUsername());
-                        saveLikes.child("Likes").child(postID).child(String.valueOf(mUserID)).updateChildren(likes).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        likes.put("postID", postID);
+                        saveLikes.child("Likes").child(postID).child(userID).updateChildren(likes).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
