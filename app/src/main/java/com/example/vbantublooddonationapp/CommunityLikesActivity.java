@@ -15,15 +15,12 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.example.vbantublooddonationapp.Model.Comments;
 import com.example.vbantublooddonationapp.Model.CommunityLikes;
 import com.example.vbantublooddonationapp.Model.Organiser;
 import com.example.vbantublooddonationapp.Model.User;
 import com.example.vbantublooddonationapp.ViewModel.OrganiserViewModel;
 import com.example.vbantublooddonationapp.ViewModel.UserViewModel;
-import com.example.vbantublooddonationapp.adapter.CommunityCommentAdapter;
 import com.example.vbantublooddonationapp.adapter.CommunityLikesAdapter;
-import com.example.vbantublooddonationapp.databinding.ActivityCommunityCommentBinding;
 import com.example.vbantublooddonationapp.databinding.ActivityCommunityLikesBinding;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -67,17 +64,20 @@ public class CommunityLikesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_community_likes);
 
+        //implement binding
         mActivityCommunityLikesBinding = ActivityCommunityLikesBinding.inflate(getLayoutInflater());
         View v = mActivityCommunityLikesBinding.getRoot();
         setContentView(v);
 
         Toolbar toolbar = mActivityCommunityLikesBinding.aclToolbar;
 
+        //back button
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbar.setNavigationIcon(ContextCompat.getDrawable(this, R.drawable.ic_arrow_back_ios));
 
+        //get current date time
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault());
         currentDateTime = sdf.format(new Date());
 
@@ -88,6 +88,7 @@ public class CommunityLikesActivity extends AppCompatActivity {
         mOrganiserViewModel = new ViewModelProvider(this).get(OrganiserViewModel.class);
         mUserViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
+        //get current user id and user type
         mPreferences = getSharedPreferences("com.example.vbantublooddonationapp", MODE_PRIVATE);
 
         if (mPreferences.contains(USERID_KEY) && mPreferences.contains(USERTYPE_KEY)) {
@@ -135,6 +136,7 @@ public class CommunityLikesActivity extends AppCompatActivity {
                 //update the adapter
                 mCommunityLikesAdapter.notifyDataSetChanged();
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 

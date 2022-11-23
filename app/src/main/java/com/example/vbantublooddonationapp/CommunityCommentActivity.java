@@ -18,7 +18,6 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.vbantublooddonationapp.Model.Comments;
-import com.example.vbantublooddonationapp.Model.CommunityPosts;
 import com.example.vbantublooddonationapp.Model.Organiser;
 import com.example.vbantublooddonationapp.Model.User;
 import com.example.vbantublooddonationapp.ViewModel.OrganiserViewModel;
@@ -76,11 +75,13 @@ public class CommunityCommentActivity extends AppCompatActivity {
 
         Toolbar toolbar = mActivityCommunityCommentBinding.accToolbar;
 
+        //set back button
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbar.setNavigationIcon(ContextCompat.getDrawable(this, R.drawable.ic_arrow_back_ios));
 
+        //get current date time
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault());
         currentDateTime = sdf.format(new Date());
 
@@ -91,6 +92,7 @@ public class CommunityCommentActivity extends AppCompatActivity {
         mOrganiserViewModel = new ViewModelProvider(this).get(OrganiserViewModel.class);
         mUserViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
+        //get current user id and user type
         mPreferences = getSharedPreferences("com.example.vbantublooddonationapp", MODE_PRIVATE);
 
         if (mPreferences.contains(USERID_KEY) && mPreferences.contains(USERTYPE_KEY)) {
@@ -199,6 +201,7 @@ public class CommunityCommentActivity extends AppCompatActivity {
                 //update the adapter
                 mCommunityCommentAdapter.notifyDataSetChanged();
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
