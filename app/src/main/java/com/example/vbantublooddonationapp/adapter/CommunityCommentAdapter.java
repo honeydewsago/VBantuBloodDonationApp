@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vbantublooddonationapp.Model.Comments;
+import com.example.vbantublooddonationapp.Model.OrganiserImage;
 import com.example.vbantublooddonationapp.Model.UserImage;
 import com.example.vbantublooddonationapp.databinding.CardCommunityCommentsBinding;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -30,6 +31,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 public class CommunityCommentAdapter extends RecyclerView.Adapter<CommunityCommentAdapter.CommunityCommentHolder>{
@@ -58,23 +60,47 @@ public class CommunityCommentAdapter extends RecyclerView.Adapter<CommunityComme
         holder.mcccTvUsername.setText(name);
         holder.mcccTvComment.setText(comment);
 
-        String userid = mComments.getUserID();
-        DatabaseReference mRef = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference().child("User").child(userid);
+        //user avatar
+        if (Objects.equals(mComments.getOrganiserID(), "0")) {
+            String userid = mComments.getUserID();
+            DatabaseReference mRef = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference().child("User").child(userid);
 
-        mRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                UserImage userImage = snapshot.getValue(UserImage.class);
-                if (userImage != null) {
-                    setAvatar(userImage.getUrl(), holder.mcccIvAvatar, userid);
+            mRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    UserImage userImage = snapshot.getValue(UserImage.class);
+                    if (userImage != null) {
+                        setUserAvatar(userImage.getUrl(), holder.mcccIvAvatar, userid);
+                    }
                 }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
+                }
+            });
+        }
+
+        //organiser avatar
+        if (Objects.equals(mComments.getUserID(), "0")) {
+            String organiserid = mComments.getOrganiserID();
+            DatabaseReference mRef1 = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("Organiser").child(organiserid);
+
+            mRef1.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    OrganiserImage organiserImage = snapshot.getValue(OrganiserImage.class);
+                    if (organiserImage != null) {
+                        setOrganiserAvatar(organiserImage.getUrl(), holder.mcccIvAvatar, organiserid);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
     }
 
     @Override
@@ -98,9 +124,33 @@ public class CommunityCommentAdapter extends RecyclerView.Adapter<CommunityComme
         }
     }
 
-    private void setAvatar(String avatarUrl, ImageView mcccIvAvatar, String userID) {
+    private void setUserAvatar(String avatarUrl, ImageView mcccIvAvatar, String userID) {
         if (avatarUrl != null) {
             StorageReference mStorageReference = FirebaseStorage.getInstance("gs://vbantu-blood-donation-app.appspot.com/").getReference("User/" + userID + "/"+ avatarUrl);
+
+            try {
+                File localFile = File.createTempFile("tempfile", ".jpg");
+                mStorageReference.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                        Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                        mcccIvAvatar.setImageBitmap(bitmap);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(mActivity.getApplicationContext(), "Failed to retrieve image", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void setOrganiserAvatar(String avatarUrl, ImageView mcccIvAvatar, String organiserid) {
+        if (avatarUrl != null) {
+            StorageReference mStorageReference = FirebaseStorage.getInstance("gs://vbantu-blood-donation-app.appspot.com/").getReference("Organiser/" + organiserid + "/" + avatarUrl);
 
             try {
                 File localFile = File.createTempFile("tempfile", ".jpg");
