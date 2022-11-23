@@ -1,12 +1,5 @@
 package com.example.vbantublooddonationapp;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,13 +11,18 @@ import android.provider.MediaStore;
 import android.util.Patterns;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.vbantublooddonationapp.Model.Organiser;
 import com.example.vbantublooddonationapp.Model.OrganiserImage;
 import com.example.vbantublooddonationapp.ViewModel.OrganiserViewModel;
-import com.example.vbantublooddonationapp.databinding.ActivityMakeAppointmentBinding;
 import com.example.vbantublooddonationapp.databinding.ActivityUpdateOrganiserProfileBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -177,8 +175,8 @@ public class UpdateOrganiserProfile extends AppCompatActivity {
             return;
         }
 
-        if (picContact.length()<10){
-            binding.auopEtContactNo.setError(getText(R.string.contactNumAtLeast10Char));
+        if (picContact.length()<9){
+            binding.auopEtContactNo.setError(getText(R.string.contactNumAtLeast9Char));
             binding.auopEtContactNo.requestFocus();
             return;
         }
