@@ -119,21 +119,6 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
         CommunityPosts communityPosts = mCommunityPostsList.get(position);
 
         //show post details
-        /*
-        String organiserID = communityPosts.organiserID;
-        int mOrganiserID = Integer.parseInt(organiserID);
-
-        if (mOrganiserID == 0) {
-            holder.mccpTvUsername.setText(communityPosts.getUserName());
-        }
-
-        String userID = String.valueOf(mUserID);
-        int mUserID = Integer.parseInt(userID);
-        if (mUserID == 0) {
-            holder.mccpTvUsername.setText(communityPosts.getUserName());
-        }
-         */
-
         holder.mccpTvUsername.setText(communityPosts.getUserName());
         holder.mccpTvCaption.setText(communityPosts.getPostDesc());
 
@@ -204,7 +189,7 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
 
         //organiser avatar
         if (Objects.equals(communityPosts.userID, "0")) {
-            String organiserid = String.valueOf(mOrganiser.getOrganiserID());
+            String organiserid = communityPosts.getOrganiserID();
             DatabaseReference mRef1 = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("Organiser").child(organiserid);
 
             mRef1.addValueEventListener(new ValueEventListener() {
