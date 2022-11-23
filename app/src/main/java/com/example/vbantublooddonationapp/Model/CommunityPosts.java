@@ -7,16 +7,14 @@ public class CommunityPosts {
     public String organiserID;
     public String postDesc;
     public String dateTime;
-    public String active;
     public String url;
 
-    public CommunityPosts(String postID, String userID, String organiserID, String postDesc, String dateTime, String active) {
+    public CommunityPosts(String postID, String userID, String organiserID, String postDesc, String dateTime) {
         this.postID = postID;
         this.userID = userID;
         this.organiserID = organiserID;
         this.postDesc = postDesc;
         this.dateTime = dateTime;
-        this.active = active;
         this.userName = userName;
         this.url = url;
     }
@@ -63,14 +61,6 @@ public class CommunityPosts {
 
     public void setDateTime(String dateTime) {
         this.dateTime = dateTime;
-    }
-
-    public String getActive() {
-        return active;
-    }
-
-    public void setActive(String active) {
-        this.active = active;
     }
 
     public String getUserName() {

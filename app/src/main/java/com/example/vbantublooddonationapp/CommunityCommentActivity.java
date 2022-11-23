@@ -195,7 +195,6 @@ public class CommunityCommentActivity extends AppCompatActivity {
                     Comments cmt = dataSnapshot.getValue(Comments.class);
                     //add the data to the array list
                     mCommentsList.add(cmt);
-                    System.out.println(cmt);
                 }
                 //update the adapter
                 mCommunityCommentAdapter.notifyDataSetChanged();
