@@ -15,15 +15,15 @@ import android.view.ViewGroup;
 
 import com.example.vbantublooddonationapp.Model.Appointment;
 import com.example.vbantublooddonationapp.Model.CommunityImage;
-import com.example.vbantublooddonationapp.Model.CommunityPost;
+//import com.example.vbantublooddonationapp.Model.CommunityPost;
 import com.example.vbantublooddonationapp.Model.LeaderboardUser;
-import com.example.vbantublooddonationapp.Model.OrganiserImage;
+//import com.example.vbantublooddonationapp.Model.OrganiserImage;
 import com.example.vbantublooddonationapp.Model.User;
 import com.example.vbantublooddonationapp.ViewModel.AppointmentViewModel;
-import com.example.vbantublooddonationapp.ViewModel.CommunityPostViewModel;
+//import com.example.vbantublooddonationapp.ViewModel.CommunityPostViewModel;
 import com.example.vbantublooddonationapp.ViewModel.UserViewModel;
-import com.example.vbantublooddonationapp.adapter.CommunityLikesAdapter;
-import com.example.vbantublooddonationapp.adapter.CommunityPostAdapter;
+//import com.example.vbantublooddonationapp.adapter.CommunityLikesAdapter;
+//import com.example.vbantublooddonationapp.adapter.CommunityPostAdapter;
 import com.example.vbantublooddonationapp.adapter.LeaderboardAdapter;
 import com.example.vbantublooddonationapp.databinding.FragmentCommunityBinding;
 
@@ -42,8 +42,8 @@ public class CommunityFragment extends Fragment {
     private UserViewModel mUserViewModel;
     private List<LeaderboardUser> top3UserList;
     private LeaderboardAdapter mLeaderboardAdapter;
-    private CommunityPostAdapter mCommunityPostAdapter;
-    private CommunityPostViewModel mCommunityPostViewModel;
+    //private CommunityPostAdapter mCommunityPostAdapter;
+    //private CommunityPostViewModel mCommunityPostViewModel;
     private List<CommunityImage> mCommunityImageList;
 
 
@@ -133,6 +133,7 @@ public class CommunityFragment extends Fragment {
             }
         });
 
+        /*
         mCommunityPostViewModel = new ViewModelProvider(this).get(CommunityPostViewModel.class);
         List<CommunityPost> communityPostList = mCommunityPostViewModel.getAllCommunityPost();
 
@@ -140,8 +141,10 @@ public class CommunityFragment extends Fragment {
         mCommunityPostAdapter = new CommunityPostAdapter(getActivity(), mCommunityImageList);
         mCommunityPostAdapter.setCommunityPostList(communityPostList);
 
-        mCommunityBinding.fcRvCommunityPosts.setAdapter(mCommunityPostAdapter);
-        mCommunityBinding.fcRvCommunityPosts.setLayoutManager(new GridLayoutManager(view.getContext(), getResources().getInteger(R.integer.grid_column_count)));
+
+         */
+        //mCommunityBinding.fcRvCommunityPosts.setAdapter(mCommunityPostAdapter);
+        //mCommunityBinding.fcRvCommunityPosts.setLayoutManager(new GridLayoutManager(view.getContext(), getResources().getInteger(R.integer.grid_column_count)));
 
     }
 

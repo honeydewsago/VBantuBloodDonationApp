@@ -1,5 +1,6 @@
 package com.example.vbantublooddonationapp.adapter;
 
+/*
 import static android.content.Context.MODE_PRIVATE;
 
 import static com.firebase.ui.auth.AuthUI.getApplicationContext;
@@ -521,3 +522,5 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
         });
     }
 }
+
+ */

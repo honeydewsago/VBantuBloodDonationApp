@@ -1,5 +1,6 @@
 package com.example.vbantublooddonationapp;
 
+/*
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -221,3 +222,5 @@ public class CommunityCommentActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 }
+
+ */
