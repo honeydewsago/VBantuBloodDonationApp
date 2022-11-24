@@ -13,7 +13,7 @@ import java.util.List;
 public class RewardViewModel extends AndroidViewModel {
     private RewardRepository mRepository;
 
-
+    //constructor
     public RewardViewModel(Application application){
         super(application);
         mRepository = new RewardRepository(application);
@@ -29,5 +29,6 @@ public class RewardViewModel extends AndroidViewModel {
         mRepository.update(reward);
     }
     //get all reward
+
     public List<Reward> getAllRewards() {return mRepository.getAllReward();}
 }

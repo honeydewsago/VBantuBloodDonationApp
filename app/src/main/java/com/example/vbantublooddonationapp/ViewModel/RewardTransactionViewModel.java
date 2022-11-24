@@ -13,6 +13,7 @@ import java.util.List;
 public class RewardTransactionViewModel extends AndroidViewModel {
     private RewardTransactionRepository mRepository;
 
+    //constructor
     public RewardTransactionViewModel(Application application) {
         super(application);
         mRepository = new RewardTransactionRepository(application);

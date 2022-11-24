@@ -42,11 +42,13 @@ public class AppointmentDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //binding with the layout xml file
         binding = ActivityAppointmentDetailBinding.inflate(getLayoutInflater());
 
         View v = binding.getRoot();
+        //set content view
         setContentView(v);
-
+        //binding toolbar
         Toolbar toolbar = binding.aadToolbar;
 
         setSupportActionBar(toolbar);
@@ -54,24 +56,27 @@ public class AppointmentDetailActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbar.setNavigationIcon(ContextCompat.getDrawable(this, R.drawable.ic_arrow_back_ios));
 
+        //getting the intent
         Intent i = getIntent();
+        //getting value stored in intent
         int appointmentID = i.getIntExtra("currentAppointmentID", 1);
-
+        //initialize view model
         mUserViewModel = new ViewModelProvider(this).get(UserViewModel.class);
         mOrganiserViewModel = new ViewModelProvider(this).get(OrganiserViewModel.class);
         mAppointmentViewModel = new ViewModelProvider(this).get(AppointmentViewModel.class);
 
+        //get appointment list with  appointment id
         List<Appointment> mAppointmentList = mAppointmentViewModel.getAppointmentById(appointmentID);
         mAppointment = mAppointmentList.get(0);
         mAppointmentID = mAppointment.getOrganiserID();
-
+        //get shared pref
         mPreferences = getSharedPreferences("com.example.vbantublooddonationapp", MODE_PRIVATE);
-
+        //get values from shared pref
         if (mPreferences.contains(USERID_KEY) && mPreferences.contains(USERTYPE_KEY)){
             mUserID = mPreferences.getInt(USERID_KEY, 1);
             mUserType = mPreferences.getString(USERTYPE_KEY, "user");
         }
-
+        //get user list with user id
         List<User> userList = mUserViewModel.getUserById(mUserID);
         mUser = userList.get(0);
 
@@ -79,17 +84,20 @@ public class AppointmentDetailActivity extends AppCompatActivity {
         List<Organiser> mOrganiserList = mOrganiserViewModel.getOrganiserById(mOrganiserID);
         mOrganiser = mOrganiserList.get(0);
 
+        //initialize appointment info
         initAppointmentInfo(mUser, mAppointment, mOrganiser);
     }
 
 
     private void initAppointmentInfo(User user, Appointment appointment, Organiser organiser) {
+        //setting all the details of the appointment
         binding.aadTvFullName.setText(user.getFullName());
         binding.aadTvIcNo.setText(user.getIcNo());
         binding.aadTvContactNo.setText(user.getContact());
         binding.aadTvEmail.setText(user.getEmail());
         binding.aadTvAddress.setText(appointment.getAddress());
         String gender = user.getGender();
+        //set all radio button to be non clickable
         if (gender.equals("female")){
             binding.aadRbFemale.setChecked(true);
             binding.aadRbFemale.setClickable(false);
@@ -130,6 +138,7 @@ public class AppointmentDetailActivity extends AppCompatActivity {
         }
     }
 
+    //function that convert date into a readable format
     public String getFullDate(String dateTime) {
         String year = dateTime.substring(0,4);
         int month = Integer.parseInt(dateTime.substring(4,6));
@@ -169,6 +178,7 @@ public class AppointmentDetailActivity extends AppCompatActivity {
         }
     }
 
+    //back function
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {

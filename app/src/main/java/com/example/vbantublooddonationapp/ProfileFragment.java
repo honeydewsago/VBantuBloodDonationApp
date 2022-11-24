@@ -42,6 +42,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class ProfileFragment extends Fragment {
+    //Initialize Variable and Data
     private final String USERID_KEY = "userid", USERTYPE_KEY = "usertype";
     private SharedPreferences mPreferences;
     private int mUserID = 1;
@@ -49,6 +50,7 @@ public class ProfileFragment extends Fragment {
     private List<User> mUserList;
     private List<Organiser> mOrganiserList;
 
+    //Getting view model needed
     private UserViewModel mUserViewModel;
     private OrganiserViewModel mOrganiserViewModel;
     private FragmentProfileBinding profileBinding;
@@ -59,6 +61,7 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        //setting the binding to link it to the respective layout xml
         profileBinding = FragmentProfileBinding.inflate(getLayoutInflater());
 
         return profileBinding.getRoot();
@@ -67,14 +70,15 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        //shared pref
         mPreferences = getActivity().getSharedPreferences("com.example.vbantublooddonationapp",MODE_PRIVATE);
         initViewModel();
-
+        //setting the toolbar
         toolbar = (Toolbar)getView().findViewById(R.id.fp_toolbar);
         AppCompatActivity activity = (AppCompatActivity)getActivity();
         activity.setSupportActionBar(toolbar);
         activity.getSupportActionBar().setDisplayShowTitleEnabled(false);
-
+        //new intent to the setting page
         profileBinding.fpBtnSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -85,28 +89,25 @@ public class ProfileFragment extends Fragment {
 
 
 
-
+        //getting values form shared pref
         if (mPreferences.contains(USERID_KEY) && mPreferences.contains(USERTYPE_KEY)) {
             mUserID = mPreferences.getInt(USERID_KEY,1);
             mUserType = mPreferences.getString(USERTYPE_KEY, "user");
         }
 
 
-
-
-
-
+        //if its organiser
         if (mUserType.equals("organiser")) {
             List<Organiser> mOrganiserList = mOrganiserViewModel.getOrganiserById(mUserID);
             Organiser organiser = mOrganiserList.get(0);
-
+            // locating all elements in xml layout and setting text
             profileBinding.fpTvUsername.setText(organiser.getPicName());
             profileBinding.fpTvUserType.setText(R.string.user_type_o);
             profileBinding.fpTvInfoType.setText(R.string.info_type_o);
             profileBinding.fpTvCompany.setText(organiser.getCompanyName());
             profileBinding.fpTvContactNo.setText(organiser.getContact());
             profileBinding.fpTvAddress.setText(organiser.getAddress());
-
+            // setting visibility to text view or layout that are not needed for organiser
             profileBinding.fpClPersonal.setVisibility(View.GONE);
             profileBinding.fpClOrganiser.setVisibility(View.VISIBLE);
             profileBinding.fpIvQrCode.setVisibility(View.GONE);
@@ -114,11 +115,13 @@ public class ProfileFragment extends Fragment {
             profileBinding.fpTvRewards.setVisibility(View.GONE);
             profileBinding.fpTvUserAppointments.setVisibility(View.VISIBLE);
         }
+        //if it is user
         else {
+            //getting user list with user id
             List<User> mUserList = mUserViewModel.getUserById(mUserID);
             User user = mUserList.get(0);
             DatabaseReference mRef = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("User").child(String.valueOf(user.getUserID()));
-
+            //Event listener to get data from the firebase / realtime database
             mRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -133,7 +136,7 @@ public class ProfileFragment extends Fragment {
 
                 }
             });
-
+            // locating all elements in xml layout and setting text for each responding data
             profileBinding.fpTvUserType.setText(R.string.user_type_bd);
             profileBinding.fpTvUserAppointments.setVisibility(View.GONE);
             profileBinding.fpTvUsername.setText(user.username);
@@ -142,11 +145,12 @@ public class ProfileFragment extends Fragment {
             profileBinding.fpTvIC.setText(user.icNo);
             profileBinding.fpTvDOB.setText(user.dateOfBirth);
             profileBinding.fpTvBloodGroup.setText(user.bloodType);
-
+            // setting visibility to text view or layout that are not needed for user
             profileBinding.fpClPersonal.setVisibility(View.VISIBLE);
             profileBinding.fpClOrganiser.setVisibility(View.GONE);
         }
 
+        //New intent to the qr code page
         profileBinding.fpIvQrCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -154,6 +158,7 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        //New intent to the appointment history page
         profileBinding.fpTvAppointmentHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -161,13 +166,14 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        //New intent to my rewards page
         profileBinding.fpTvRewards.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), RewardsActivity.class));
             }
         });
-
+        //Intent to user appointment history (for organiser only)
         profileBinding.fpTvUserAppointments.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -176,6 +182,7 @@ public class ProfileFragment extends Fragment {
         });
     }
 
+    //Used to display user avatar
     private void setUserImage(String imageUrl, int userID) {
         if (imageUrl != null) {
             StorageReference mStorageReference = FirebaseStorage.getInstance("gs://vbantu-blood-donation-app.appspot.com/").getReference("User/"+ userID +"/"+imageUrl);
@@ -186,8 +193,10 @@ public class ProfileFragment extends Fragment {
                     @Override
                     public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
                         Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                        //setting the avatar if success
                         profileBinding.fpIvUserAvatar.setImageBitmap(bitmap);
                     }
+                    //checking for error
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
@@ -203,7 +212,7 @@ public class ProfileFragment extends Fragment {
 
 
 
-
+    //initialize the live data with observer
     private void initViewModel(){
         mUserViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 

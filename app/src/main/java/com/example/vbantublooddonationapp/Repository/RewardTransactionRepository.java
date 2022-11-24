@@ -15,16 +15,19 @@ import java.util.concurrent.ExecutionException;
 
 public class RewardTransactionRepository {
     private RewardTransactionDao mRewardsTransactionDao;
+
     //initialize database and dao
     public RewardTransactionRepository(Application application) {
         BloodRoomDatabase db = BloodRoomDatabase.getINSTANCE(application);
         mRewardsTransactionDao = db.rewardTransactionDao();
     }
 
+
     //function insert rewardtransaction into rewardtransaction_table
     public void insert(RewardTransaction rewardTransaction){
         new RewardTransactionRepository.insertAsyncTask(mRewardsTransactionDao).execute(rewardTransaction);
     }
+
 
     //function get all reward transaction
     public List<RewardTransaction> getAllRewardTransactions() {
@@ -40,6 +43,7 @@ public class RewardTransactionRepository {
     }
 
 
+    //async task for getting all rewards transaction
     private static class getAllRewardsTransactionAsyncTask extends AsyncTask<Void, Void, List<RewardTransaction>> {
         private RewardTransactionDao mSyncTaskDao;
 
@@ -54,6 +58,7 @@ public class RewardTransactionRepository {
         }
     }
 
+    //insert async task
     public class insertAsyncTask extends AsyncTask<RewardTransaction, Void, Void> {
         private RewardTransactionDao mSyncTaskDao;
         public insertAsyncTask(RewardTransactionDao dao) {
@@ -66,7 +71,7 @@ public class RewardTransactionRepository {
             return null;
         }
     }
-
+    
     //function retrieve request by id
     public List<RewardTransaction> getRequestById(int id) {
         List<RewardTransaction> list = null;
@@ -81,6 +86,8 @@ public class RewardTransactionRepository {
         return list;
     }
 
+
+
     //function retrieve reward transaction with reward id
     public LiveData<List<RewardTransaction>> getRewardTransactionByRewardId(int id) {
         LiveData<List<RewardTransaction>> list = null;
@@ -94,6 +101,7 @@ public class RewardTransactionRepository {
         return list;
     }
 
+    //get reward transaction with id async task
     public class getRequestByIdAsyncTask extends AsyncTask<Integer, Void, List<RewardTransaction>> {
         private RewardTransactionDao mSyncTaskDao;
         public getRequestByIdAsyncTask(RewardTransactionDao dao) {mSyncTaskDao = dao;}
@@ -105,6 +113,7 @@ public class RewardTransactionRepository {
         }
     }
 
+    // async task for getting reward transaction with id
     public class getRewardTransactionByIdAsyncTask extends AsyncTask<Integer,Void,LiveData<List<RewardTransaction>>>{
         private RewardTransactionDao mSyncTaskDao;
         public getRewardTransactionByIdAsyncTask(RewardTransactionDao dao) {mSyncTaskDao=dao;}
@@ -116,11 +125,15 @@ public class RewardTransactionRepository {
         }
     }
 
+
+
+
     //function update reward transaction data
     public void update(RewardTransaction rewardTransaction) {
         new RewardTransactionRepository.updateAsyncTask(mRewardsTransactionDao).execute(rewardTransaction);
     }
 
+    //update async task
     private static class updateAsyncTask extends AsyncTask<RewardTransaction, Void, Void> {
         private RewardTransactionDao mSyncTaskDao;
 

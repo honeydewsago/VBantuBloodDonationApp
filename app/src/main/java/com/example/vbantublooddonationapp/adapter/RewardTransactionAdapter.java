@@ -29,18 +29,21 @@ import java.util.List;
 import java.util.Locale;
 
 public class RewardTransactionAdapter extends RecyclerView.Adapter<RewardTransactionAdapter.RewardTransactionHolder> {
+    //initialize variable
     private Activity mActivity;
     private List<RewardTransaction> mRewardTransList;
     private List<Reward> mRewardList;
     private RewardViewModel mRewardViewModel;
     private RewardTransactionViewModel mRewardTransactionViewModel;
 
+    //constructor
     public RewardTransactionAdapter(Activity activity){
         mActivity = activity;
         mRewardTransactionViewModel = new ViewModelProvider((FragmentActivity)mActivity).get(RewardTransactionViewModel.class);
         mRewardViewModel = new ViewModelProvider((FragmentActivity)mActivity).get(RewardViewModel.class);
     }
 
+    //setting the reward trans list
     public void setRewardTransList(List<RewardTransaction> rewardTransactionList){
         mRewardTransList = rewardTransactionList;
         notifyDataSetChanged();
@@ -49,22 +52,32 @@ public class RewardTransactionAdapter extends RecyclerView.Adapter<RewardTransac
     @NonNull
     @Override
     public RewardTransactionHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        //binding with the cardview layout xml file
         CardRewardBinding binding = CardRewardBinding.inflate(mActivity.getLayoutInflater());
         return new RewardTransactionHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RewardTransactionAdapter.RewardTransactionHolder holder, int position) {
+        //get each reward transaction from the list using the position
         RewardTransaction rewardTransaction = mRewardTransList.get(position);
+        //get reward id to retrieve from reward table
         int rewardId = rewardTransaction.getRewardID();
+        //check if the reward has expired
         String status = updateRewardTransactionStatus(rewardTransaction);
+        //getting list of reward using id
         mRewardList = mRewardViewModel.getRequestById(rewardId);
         Reward reward = mRewardList.get(0);
+
+        //setting text according to the data from reward and reward trans
         String minSpend = "Min. Spend RM " + reward.getMinSpend();
         holder.mTvDiscount.setText(reward.getDiscount());
         holder.mTvMinSpend.setText(minSpend);
         holder.mTvStoreName.setText(reward.getStoreName());
+        //set visiblity since the reward is claimed
         holder.mTvPoints.setVisibility(View.GONE);
+
+        //validate the status of the reward
         if(status.equals("Available")){
             holder.mTvBtnStatus.setText(R.string.use_now);
         }else{
@@ -76,6 +89,7 @@ public class RewardTransactionAdapter extends RecyclerView.Adapter<RewardTransac
             holder.mTvBtnStatus.setBackgroundResource(R.color.white_grey);
         }else {
             holder.mTvBtnStatus.setBackgroundResource(R.color.medium_pink);
+            //onclick listener for "Available" to confirm on redeeming reward
             holder.mTvBtnStatus.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -85,6 +99,7 @@ public class RewardTransactionAdapter extends RecyclerView.Adapter<RewardTransac
         }
     }
 
+    //get item count
     @Override
     public int getItemCount() {
         if (mRewardTransList == null) {
@@ -93,11 +108,13 @@ public class RewardTransactionAdapter extends RecyclerView.Adapter<RewardTransac
         return mRewardTransList.size();
     }
 
+    //Recylcer view holder
     public class RewardTransactionHolder extends RecyclerView.ViewHolder {
         private TextView mTvDiscount, mTvMinSpend, mTvStoreName, mTvPoints, mTvBtnStatus;
 
         public RewardTransactionHolder(CardRewardBinding binding) {
             super(binding.getRoot());
+            //bind all attribute in the layout to a variable
             mTvDiscount = binding.crTvDiscount;
             mTvMinSpend = binding.crTvMinSpend;
             mTvStoreName = binding.crTvStoreName;
@@ -105,6 +122,8 @@ public class RewardTransactionAdapter extends RecyclerView.Adapter<RewardTransac
             mTvBtnStatus = binding.crTvBtnStatus;
         }
     }
+
+    //the confirm function to check if user want to redeem the reward
     private void confirm(RewardTransaction rewardTransaction) {
         AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
         builder.setTitle("Confirm Use?");
@@ -115,6 +134,7 @@ public class RewardTransactionAdapter extends RecyclerView.Adapter<RewardTransac
                 "Yes",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+                        //call function if yes is clicked
                         updateRewardTrans(rewardTransaction);
                         dialog.cancel();
                     }
@@ -123,6 +143,7 @@ public class RewardTransactionAdapter extends RecyclerView.Adapter<RewardTransac
         builder.setNegativeButton(
                 "No",
                 new DialogInterface.OnClickListener() {
+                    //return if no is clicked
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
                     }
@@ -132,6 +153,7 @@ public class RewardTransactionAdapter extends RecyclerView.Adapter<RewardTransac
         alert.show();
     }
 
+    //if user click yes this function would update the redeemed date and send them to RewardQR
     private void updateRewardTrans(RewardTransaction rewardTransaction) {
         rewardTransaction.setStatus("Used");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
@@ -147,6 +169,8 @@ public class RewardTransactionAdapter extends RecyclerView.Adapter<RewardTransac
         mActivity.startActivity(i);
     }
 
+
+    //validate if the reward is expired or not
     private String updateRewardTransactionStatus(RewardTransaction rewardTransaction) {
         String status = rewardTransaction.getStatus();
 
