@@ -55,9 +55,11 @@ public class CommunityLikesActivity extends AppCompatActivity {
     private UserViewModel mUserViewModel;
 
     RecyclerView.LayoutManager mLayoutManager;
-    private DatabaseReference mRef;
+    private DatabaseReference mRefOrganiser;
+    private DatabaseReference mRefUser;
 
-    ArrayList<CommunityLikes> mLikesList;
+    ArrayList<CommunityLikes> mOrLikesList;
+    ArrayList<CommunityLikes> mUserLikesList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,12 +112,19 @@ public class CommunityLikesActivity extends AppCompatActivity {
         //get intent and current post id
         Intent mIntent = getIntent();
         String postID = mIntent.getStringExtra("likePostID");
-        String userID = mIntent.getStringExtra("userPostID");
-        mRef = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference().child("Likes").child(postID);
-        mLikesList = new ArrayList<>();
-        mCommunityLikesAdapter = new CommunityLikesAdapter(CommunityLikesActivity.this, mLikesList);
+
+        mRefOrganiser = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference().child("Likes").child(postID).child("organiser");
+        mRefUser = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference().child("Likes").child(postID).child("user");
+
+        mOrLikesList = new ArrayList<>();
+        mUserLikesList = new ArrayList<>();
+
+        mOrLikesList.addAll(mUserLikesList);
+
+        mCommunityLikesAdapter = new CommunityLikesAdapter(CommunityLikesActivity.this, mOrLikesList);
         mActivityCommunityLikesBinding.aclRvLikes.setAdapter(mCommunityLikesAdapter);
         mActivityCommunityLikesBinding.aclRvLikes.setHasFixedSize(true);
+
         mLayoutManager = new LinearLayoutManager(this);
         mActivityCommunityLikesBinding.aclRvLikes.setLayoutManager(mLayoutManager);
     }
@@ -124,14 +133,33 @@ public class CommunityLikesActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         //read data from database
-        mRef.addValueEventListener(new ValueEventListener() {
+        mRefOrganiser.addValueEventListener(new ValueEventListener() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    CommunityLikes likes = dataSnapshot.getValue(CommunityLikes.class);
+                    CommunityLikes likesOr = dataSnapshot.getValue(CommunityLikes.class);
                     //add the data to the array list
-                    mLikesList.add(likes);
+                    mOrLikesList.add(likesOr);
+                }
+                //update the adapter
+                mCommunityLikesAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        mRefUser.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    CommunityLikes likesUser = dataSnapshot.getValue(CommunityLikes.class);
+                    //add the data to the array list
+                    mUserLikesList.add(likesUser);
                 }
                 //update the adapter
                 mCommunityLikesAdapter.notifyDataSetChanged();

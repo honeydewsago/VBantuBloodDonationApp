@@ -395,7 +395,7 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
         String postID = post.getPostID();
         String userID = String.valueOf(mUserID);
         likes = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app")
-                .getReference().child("Likes").child(postID).child(userID);
+                .getReference().child("Likes").child(postID).child(mUserType).child(userID);
 
         likes.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
