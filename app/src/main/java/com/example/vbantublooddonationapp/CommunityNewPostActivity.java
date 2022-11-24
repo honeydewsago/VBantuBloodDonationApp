@@ -19,12 +19,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-//import com.example.vbantublooddonationapp.Model.CommunityPost;
 import com.example.vbantublooddonationapp.Model.CommunityPosts;
 import com.example.vbantublooddonationapp.Model.Organiser;
 import com.example.vbantublooddonationapp.Model.OrganiserImage;
 import com.example.vbantublooddonationapp.Model.User;
-//import com.example.vbantublooddonationapp.ViewModel.CommunityPostViewModel;
 import com.example.vbantublooddonationapp.Model.UserImage;
 import com.example.vbantublooddonationapp.ViewModel.OrganiserViewModel;
 import com.example.vbantublooddonationapp.ViewModel.UserViewModel;
@@ -91,9 +89,11 @@ public class CommunityNewPostActivity extends AppCompatActivity {
         View v = mCommunityNewPostBinding.getRoot();
         setContentView(v);
 
+        //firebase
         mStorage = FirebaseStorage.getInstance();
         mAuth = FirebaseAuth.getInstance();
 
+        //new post intent, let user select image
         mCommunityNewPostBinding.acnpIvPostImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,6 +104,7 @@ public class CommunityNewPostActivity extends AppCompatActivity {
             }
         });
 
+        //submit post
         mCommunityNewPostBinding.acnpIvDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -122,7 +123,7 @@ public class CommunityNewPostActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbar.setNavigationIcon(ContextCompat.getDrawable(this, R.drawable.ic_arrow_back_ios));
 
-        //get data in sp file
+        //get data in sp file: user id and user type
         mPreferences = getSharedPreferences("com.example.vbantublooddonationapp", MODE_PRIVATE);
 
         if (mPreferences.contains(USERID_KEY) && mPreferences.contains(USERTYPE_KEY)) {
@@ -212,7 +213,7 @@ public class CommunityNewPostActivity extends AppCompatActivity {
 
     private void setUserAvatar(String avatarUrl, ImageView acnpIvAvatar, String userID) {
         if (avatarUrl != null) {
-            StorageReference mStorageReference = FirebaseStorage.getInstance("gs://vbantu-blood-donation-app.appspot.com/").getReference("User/" + userID + "/"+ avatarUrl);
+            StorageReference mStorageReference = FirebaseStorage.getInstance("gs://vbantu-blood-donation-app.appspot.com/").getReference("User/" + userID + "/" + avatarUrl);
 
             try {
                 File localFile = File.createTempFile("tempfile", ".jpg");
@@ -234,6 +235,7 @@ public class CommunityNewPostActivity extends AppCompatActivity {
         }
     }
 
+    //submit post
     public void uploadPost() {
 
         final ProgressDialog progressDialog = new ProgressDialog(CommunityNewPostActivity.this);
@@ -251,7 +253,8 @@ public class CommunityNewPostActivity extends AppCompatActivity {
             return;
         }
 
-        if (!validateImage){
+        //must let user select image
+        if (!validateImage) {
             progressDialog.dismiss();
             mCommunityNewPostBinding.acnpIvPostImage.requestFocus();
             Toast.makeText(CommunityNewPostActivity.this, "No Image Selected", Toast.LENGTH_SHORT).show();

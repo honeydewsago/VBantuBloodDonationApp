@@ -10,6 +10,7 @@ import com.google.android.material.tabs.TabLayout;
 
 public class LoginActivity extends AppCompatActivity {
 
+    //declare variables
     private ActivityLoginBinding binding;
     LoginViewPagerAdapter mViewPagerAdapter;
 
@@ -20,6 +21,7 @@ public class LoginActivity extends AppCompatActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        //set view pager for login and register tabs
         mViewPagerAdapter = new LoginViewPagerAdapter(this);
         binding.alViewPager.setAdapter(mViewPagerAdapter);
 

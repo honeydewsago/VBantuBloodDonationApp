@@ -29,6 +29,7 @@ import java.util.Objects;
 
 public class MakeBloodRequest extends AppCompatActivity {
 
+    //declare variables
     private final String USERID_KEY = "userid", USERTYPE_KEY = "usertype";
     private SharedPreferences mPreferences;
     private int mUserID = 1;
@@ -45,9 +46,11 @@ public class MakeBloodRequest extends AppCompatActivity {
         binding = ActivityMakeBloodRequestBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        //initialize view model
         mOrganiserViewModel = new ViewModelProvider(this).get(OrganiserViewModel.class);
         mBloodRequestViewModel = new ViewModelProvider(this).get(BloodRequestViewModel.class);
 
+        //set toolbar
         Toolbar toolbar = binding.ambrToolbar;
 
         setSupportActionBar(toolbar);
@@ -55,6 +58,7 @@ public class MakeBloodRequest extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbar.setNavigationIcon(ContextCompat.getDrawable(this, R.drawable.ic_arrow_back_ios));
 
+        //get current logged in user from shared preferences
         mPreferences = getSharedPreferences("com.example.vbantublooddonationapp",MODE_PRIVATE);
 
         if (mPreferences.contains(USERID_KEY) && mPreferences.contains(USERTYPE_KEY)) {
@@ -62,13 +66,16 @@ public class MakeBloodRequest extends AppCompatActivity {
             mUserType = mPreferences.getString(USERTYPE_KEY, "user");
         }
 
+        //get current organiser object
         List<Organiser> organiserList = mOrganiserViewModel.getOrganiserById(mUserID);
         mOrganiser = organiserList.get(0);
 
+        //set the organiser information
         binding.ambrTvDonationCenter.setText(mOrganiser.getCompanyName());
         binding.ambrTvContactNo.setText(mOrganiser.getContact());
         binding.ambrTvAddress.setText(mOrganiser.getAddress());
 
+        //disable new line in the input
         binding.ambrEtRequestInfo.setFilters(new InputFilter[]{new InputFilter() {
             @Override
             public CharSequence filter(CharSequence charSequence, int i, int i1, Spanned spanned, int i2, int i3) {
@@ -94,13 +101,14 @@ public class MakeBloodRequest extends AppCompatActivity {
         String bloodTypeAB="", bloodTypeA="", bloodTypeB="", bloodTypeO="", combinedBloodType="";
         String requestInfo = binding.ambrEtRequestInfo.getText().toString().trim();
 
-        //validate to check if email is empty
+        //validate to check if request info is empty
         if (requestInfo.isEmpty()) {
             binding.ambrEtRequestInfo.setError(getText(R.string.requestInfoRequired));
             binding.ambrEtRequestInfo.requestFocus();
             return;
         }
 
+        //valiate to check if all blood type checkbox is not checked
         if (!binding.ambrChbABPov.isChecked() && !binding.ambrChbAPov.isChecked() && !binding.ambrChbBPov.isChecked() && !binding.ambrChbOPov.isChecked() &&
                 !binding.ambrChbABNeg.isChecked() && !binding.ambrChbANeg.isChecked() && !binding.ambrChbBNeg.isChecked() && !binding.ambrChbONeg.isChecked()) {
             Toast.makeText(this, R.string.bloodTypeNeeded, Toast.LENGTH_SHORT).show();
@@ -108,10 +116,12 @@ public class MakeBloodRequest extends AppCompatActivity {
             return;
         }
 
+        //replace any new line characters in the input
         if (requestInfo.contains("\n")) {
             requestInfo.replaceAll("\n", "");
         }
 
+        //summarize the list of blood type checked
         bloodTypeAB = checkBloodType(binding.ambrChbABPov, binding.ambrChbABNeg);
         bloodTypeA = checkBloodType(binding.ambrChbAPov, binding.ambrChbANeg);
         bloodTypeB = checkBloodType(binding.ambrChbBPov, binding.ambrChbBNeg);
@@ -119,17 +129,21 @@ public class MakeBloodRequest extends AppCompatActivity {
 
         combinedBloodType = bloodTypeAB + bloodTypeA + bloodTypeB + bloodTypeO;
 
+        //get the current date and time
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault());
         String currentDateTime = sdf.format(new Date());
 
         BloodRequest bloodRequest = new BloodRequest(mUserID,requestInfo,combinedBloodType,currentDateTime,1);
 
+        //insert the urgent request to database
         mBloodRequestViewModel.insertBloodRequest(bloodRequest);
 
+        //finish the activity
         Toast.makeText(this, R.string.requestSubmittedSuccessfully, Toast.LENGTH_SHORT).show();
         finish();
     }
 
+    //generate a string consisting the blood type checked
     private String checkBloodType(CheckBox bloodPositive, CheckBox bloodNegative) {
         String bloodType="";
 

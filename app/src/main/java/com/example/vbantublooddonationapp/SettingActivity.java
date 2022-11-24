@@ -1,19 +1,17 @@
 package com.example.vbantublooddonationapp;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.vbantublooddonationapp.Model.User;
 import com.example.vbantublooddonationapp.ViewModel.OrganiserViewModel;
 import com.example.vbantublooddonationapp.ViewModel.UserViewModel;
-import com.example.vbantublooddonationapp.databinding.ActivityAppointmentSuccessBinding;
 import com.example.vbantublooddonationapp.databinding.ActivitySettingBinding;
 
 import java.util.List;
@@ -43,6 +41,7 @@ public class SettingActivity extends AppCompatActivity {
         }
 
         binding.asBtnBack.setOnClickListener(new View.OnClickListener() {
+            //return to profile
             @Override
             public void onClick(View view) {
                 finish();
@@ -57,6 +56,7 @@ public class SettingActivity extends AppCompatActivity {
         });
 
         binding.asTvChangePassword.setOnClickListener(new View.OnClickListener() {
+            //go to change password
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(SettingActivity.this, ChangePassword.class));
@@ -64,6 +64,7 @@ public class SettingActivity extends AppCompatActivity {
         });
 
         binding.asTvCustomerSupport.setOnClickListener(new View.OnClickListener() {
+            //go to customer support
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(SettingActivity.this, CustomerSupport.class));
@@ -71,6 +72,7 @@ public class SettingActivity extends AppCompatActivity {
         });
 
         binding.asTvLogout.setOnClickListener(new View.OnClickListener() {
+            //logout
             @Override
             public void onClick(View view) {
                 logout();
@@ -80,6 +82,7 @@ public class SettingActivity extends AppCompatActivity {
     }
 
     private void checkUsertype(String userType) {
+        //check whether usertype is user or organiser
         if (userType.equals("organiser")) {
             startActivity(new Intent(SettingActivity.this, UpdateOrganiserProfile.class));
         }
@@ -89,6 +92,8 @@ public class SettingActivity extends AppCompatActivity {
     }
 
     private void logout() {
+
+        //set alertdialog to confirm whether user want to logout
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.logout);
         builder.setMessage("Do you want to logout your account?");
@@ -128,7 +133,9 @@ public class SettingActivity extends AppCompatActivity {
         spEditor.clear();
         spEditor.apply();
 
+        //clear all activity in background
         super.finish();
+        //set transition animation
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 }

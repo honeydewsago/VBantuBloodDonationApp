@@ -4,9 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,12 +13,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vbantublooddonationapp.Model.LeaderboardUser;
-import com.example.vbantublooddonationapp.Model.Organiser;
-import com.example.vbantublooddonationapp.Model.OrganiserImage;
 import com.example.vbantublooddonationapp.Model.UserImage;
 import com.example.vbantublooddonationapp.R;
 import com.example.vbantublooddonationapp.databinding.CardLeaderboardRowBinding;
-import com.example.vbantublooddonationapp.databinding.CardLocationBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -34,7 +29,6 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.LeaderboardHolder> {
@@ -48,6 +42,7 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
 
     @SuppressLint("NotifyDataSetChanged")
     public void setLeaderboardUserList(List<LeaderboardUser> leaderboardUserList) {
+        //set the list for leaderboard Users
         mLeaderboardUserList = leaderboardUserList;
         notifyDataSetChanged();
     }
@@ -55,6 +50,7 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
     @NonNull
     @Override
     public LeaderboardHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        //set the view for each holder
         CardLeaderboardRowBinding itemBinding = CardLeaderboardRowBinding.inflate(mActivity.getLayoutInflater());
         return new LeaderboardHolder(itemBinding);
     }
@@ -62,10 +58,12 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull LeaderboardHolder holder, int position) {
+        //set leaderboard user info
         LeaderboardUser leaderboardUser = mLeaderboardUserList.get(position);
         holder.mTvUsername.setText(leaderboardUser.getUsername());
         holder.mTvBloodAmt.setText(leaderboardUser.getBloodAmt() + "ml");
 
+        //add leaderboard rank position
         if (position == 0) {
             holder.mIvPlaceNoBg.setImageResource(R.color.yellow);
             holder.mIvPlaceBg.setImageResource(R.color.yellow);
@@ -80,6 +78,7 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
 
         String userid = String.valueOf(leaderboardUser.getUserID());
 
+        //get user avatar image url from firebase
         DatabaseReference mRef = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("User").child(userid);
 
         mRef.addValueEventListener(new ValueEventListener() {
@@ -125,9 +124,10 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
         }
     }
 
+    //set user avatar image
     private void setAvatar(String avatarUrl, ImageView mclrIvAvatar, String userID) {
         if (avatarUrl != null) {
-            StorageReference mStorageReference = FirebaseStorage.getInstance("gs://vbantu-blood-donation-app.appspot.com/").getReference("User/"+ userID +"/"+avatarUrl);
+            StorageReference mStorageReference = FirebaseStorage.getInstance("gs://vbantu-blood-donation-app.appspot.com/").getReference("User/" + userID + "/" + avatarUrl);
 
             try {
                 File localFile = File.createTempFile("tempfile", ".jpg");

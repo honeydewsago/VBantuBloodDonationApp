@@ -10,6 +10,7 @@ public class LoginViewPagerAdapter extends FragmentStateAdapter {
         super(fragmentActivity);
     }
 
+    //set the login or register fragment in the view pager
     @NonNull
     @Override
     public Fragment createFragment(int position) {

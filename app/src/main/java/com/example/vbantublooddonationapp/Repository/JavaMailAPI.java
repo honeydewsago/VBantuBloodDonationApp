@@ -29,6 +29,7 @@ public class JavaMailAPI extends AsyncTask<Void, Void, Void> {
         this.message = message;
     }
 
+    //set mail path in background
     @Override
     protected Void doInBackground(Void... voids) {
         Properties properties = new Properties();
@@ -44,6 +45,7 @@ public class JavaMailAPI extends AsyncTask<Void, Void, Void> {
             }
         });
 
+        //set mimemessage to send mail
         MimeMessage mimeMessage = new MimeMessage(mSession);
         try {
             mimeMessage.setFrom(new InternetAddress(Email.EMAIL));

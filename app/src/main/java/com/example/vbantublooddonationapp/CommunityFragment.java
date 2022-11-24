@@ -18,15 +18,10 @@ import android.view.ViewGroup;
 import com.example.vbantublooddonationapp.Model.Appointment;
 import com.example.vbantublooddonationapp.Model.CommunityLikes;
 import com.example.vbantublooddonationapp.Model.CommunityPosts;
-//import com.example.vbantublooddonationapp.Model.CommunityPost;
 import com.example.vbantublooddonationapp.Model.LeaderboardUser;
-//import com.example.vbantublooddonationapp.Model.OrganiserImage;
 import com.example.vbantublooddonationapp.Model.User;
 import com.example.vbantublooddonationapp.ViewModel.AppointmentViewModel;
-//import com.example.vbantublooddonationapp.ViewModel.CommunityPostViewModel;
 import com.example.vbantublooddonationapp.ViewModel.UserViewModel;
-//import com.example.vbantublooddonationapp.adapter.CommunityLikesAdapter;
-//import com.example.vbantublooddonationapp.adapter.CommunityPostAdapter;
 import com.example.vbantublooddonationapp.adapter.CommunityPostAdapter;
 import com.example.vbantublooddonationapp.adapter.LeaderboardAdapter;
 import com.example.vbantublooddonationapp.databinding.FragmentCommunityBinding;
@@ -65,7 +60,7 @@ public class CommunityFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        // Inflate the layout for this fragment, binding
         mCommunityBinding = FragmentCommunityBinding.inflate(inflater, container, false);
         return mCommunityBinding.getRoot();
     }
@@ -74,15 +69,18 @@ public class CommunityFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        //initialize view model
         mAppointmentViewModel = new ViewModelProvider(this).get(AppointmentViewModel.class);
         mUserViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
+        //top 3 yearly donors
         top3UserList = new ArrayList<>();
         List<LeaderboardUser> leaderboardUserList = new ArrayList<>();
         List<Appointment> appointmentList = mAppointmentViewModel.getAllCompletedAppointment();
 
         List<User> userList = mUserViewModel.getUserList();
 
+        //get current year
         Calendar calendar = Calendar.getInstance();
         int currentYear = calendar.get(Calendar.YEAR);
 
@@ -96,7 +94,7 @@ public class CommunityFragment extends Fragment {
             for (int j = 0; j < appointmentList.size(); j++) {
                 Appointment appointment = appointmentList.get(j);
 
-                int year = Integer.parseInt(appointment.getAppointmentDate().substring(0,4));
+                int year = Integer.parseInt(appointment.getAppointmentDate().substring(0, 4));
                 if (year == currentYear) {
                     if (appointment.getUserID() == (i + 1)) {
                         amount = amount + appointment.getBloodAmt();
@@ -108,6 +106,7 @@ public class CommunityFragment extends Fragment {
             leaderboardUserList.add(leaderboardUser);
         }
 
+        //sort by the blood amount
         Collections.sort(leaderboardUserList, new BloodAmountComparator());
 
         for (int i = 0; i < 3; i++) {
@@ -120,6 +119,7 @@ public class CommunityFragment extends Fragment {
 
         mCommunityBinding.fcRvLeaderboard.setLayoutManager(new GridLayoutManager(view.getContext(), getResources().getInteger(R.integer.grid_column_count)));
 
+        //view full list of donors
         mCommunityBinding.fcTvViewFullRanking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -136,6 +136,7 @@ public class CommunityFragment extends Fragment {
             }
         });
 
+        //add new post
         mCommunityBinding.fcBtnNewPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -23,6 +23,7 @@ public class OTPActivity extends AppCompatActivity {
         View v = binding.getRoot();
         setContentView(v);
 
+        //get data from last activity
         Intent i = getIntent();
         userType = i.getStringExtra("userType");
         userID = i.getIntExtra("userID", 1);
@@ -32,6 +33,7 @@ public class OTPActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String valOtp = binding.aoEtOTP.getText().toString();
+                //check whether otp is correct
                 if (valOtp.equals(otp)){
                     Intent rp = new Intent(OTPActivity.this, ResetPassword.class);
                     rp.putExtra("userType", userType);

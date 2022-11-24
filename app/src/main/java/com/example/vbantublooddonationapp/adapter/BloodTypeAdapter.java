@@ -21,6 +21,7 @@ public class BloodTypeAdapter extends RecyclerView.Adapter<BloodTypeAdapter.Bloo
         mActivity = activity;
     }
 
+    //set the list for blood type
     public void setBloodTypeList(List<String> bloodTypeList) {
         mBloodTypeList = bloodTypeList;
     }
@@ -28,12 +29,14 @@ public class BloodTypeAdapter extends RecyclerView.Adapter<BloodTypeAdapter.Bloo
     @NonNull
     @Override
     public BloodTypeHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        //set the view for each holder
         CardBloodTypeBinding itemBinding = CardBloodTypeBinding.inflate(mActivity.getLayoutInflater());
         return new BloodTypeHolder(itemBinding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull BloodTypeHolder holder, int position) {
+        //set the blood type name
         String bloodType = mBloodTypeList.get(position);
         holder.mBloodType.setText(bloodType);
     }

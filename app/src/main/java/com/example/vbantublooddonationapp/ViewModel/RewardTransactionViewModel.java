@@ -18,15 +18,19 @@ public class RewardTransactionViewModel extends AndroidViewModel {
         super(application);
         mRepository = new RewardTransactionRepository(application);
     }
-    //get reward with id
+
+    //get request by id
     public List<RewardTransaction> getRequestById(int id){return mRepository.getRequestById(id);}
-    //get live data with id
+    //get reward transaction by reward id
     public LiveData<List<RewardTransaction>> getRewardTransactionByRewardId(int id){return mRepository.getRewardTransactionByRewardId(id);}
-    //insert data into database
+
+    //send repo to insert reward transaction
     public void insertRewardTransaction(RewardTransaction rewardTransaction) {mRepository.insert(rewardTransaction);}
-    //update data to the database
+
+    //send repo to update reward transaction detail
     public void updateRewardTransaction(RewardTransaction rewardTransaction) {mRepository.update(rewardTransaction);}
 
-    //getting all rewards trans from database
+
+    //get all rewards
     public List<RewardTransaction> getAllRewards() {return mRepository.getAllRewardTransactions();}
 }

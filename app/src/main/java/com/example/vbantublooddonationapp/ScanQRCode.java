@@ -26,6 +26,7 @@ import java.util.Objects;
 
 public class ScanQRCode extends AppCompatActivity {
 
+    //declare variables
     private static final int CAMERA_REQUEST_CODE = 101;
     private CodeScanner mCodeScanner;
 
@@ -38,6 +39,7 @@ public class ScanQRCode extends AppCompatActivity {
         binding = ActivityScanQrcodeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        //set toolbar
         Toolbar toolbar = binding.asqToolbar;
 
         setSupportActionBar(toolbar);
@@ -45,18 +47,22 @@ public class ScanQRCode extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbar.setNavigationIcon(ContextCompat.getDrawable(this, R.drawable.ic_arrow_back_ios));
 
+        //get current appointment and appointment user
         Intent i = getIntent();
         appointmentID = i.getIntExtra("currentAppointmentID", 1);
         appointmentUserID = i.getIntExtra("appointmentUserID", 1);
 
+        //setup camera and enable scan function
         setupCameraPermissions();
         scanCode();
     }
 
     private void scanCode() {
+        //enable scan
         CodeScannerView scannerView = binding.asqScannerView;
         mCodeScanner = new CodeScanner(this, scannerView);
 
+        //decode the QR code
         mCodeScanner.setDecodeCallback(new DecodeCallback() {
             @Override
             public void onDecoded(@NonNull final Result result) {
@@ -67,6 +73,7 @@ public class ScanQRCode extends AppCompatActivity {
 
                         builder.setCancelable(false);
 
+                        //when user ID from QR code is correct and verified, launch next activity to confirm appointment
                         if (Integer.parseInt(result.getText().trim()) == appointmentUserID) {
                             builder.setTitle("User Identity Verified!")
                                     .setMessage("Press OK to continue")
@@ -80,6 +87,7 @@ public class ScanQRCode extends AppCompatActivity {
                                     });
                         }
                         else {
+                            //when user ID from QR code is invalid, prompt organiser to try again
                             builder.setTitle("Invalid user identity!")
                                     .setMessage("Press try again")
                                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -104,6 +112,7 @@ public class ScanQRCode extends AppCompatActivity {
         });
     }
 
+    //make sure camera function is ongoing
     @Override
     protected void onResume() {
         super.onResume();
@@ -116,6 +125,7 @@ public class ScanQRCode extends AppCompatActivity {
         super.onPause();
     }
 
+    //prompt user to allow camera permissions
     private void setupCameraPermissions() {
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED) {
             ActivityCompat.requestPermissions(this, new String[] {android.Manifest.permission.CAMERA}, CAMERA_REQUEST_CODE);

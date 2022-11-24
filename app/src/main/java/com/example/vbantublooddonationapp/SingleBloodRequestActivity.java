@@ -67,6 +67,7 @@ public class SingleBloodRequestActivity extends AppCompatActivity {
         binding = ActivitySingleBloodRequestBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        //initialize view model
         mBloodRequestViewModel = new ViewModelProvider(this).get(BloodRequestViewModel.class);
         mOrganiserViewModel = new ViewModelProvider(this).get(OrganiserViewModel.class);
         mBloodTypeAdapter = new BloodTypeAdapter(this);
@@ -78,6 +79,7 @@ public class SingleBloodRequestActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbar.setNavigationIcon(ContextCompat.getDrawable(this, R.drawable.ic_arrow_back_ios));
 
+        //get current logged in user from shared preferences
         mPreferences = getSharedPreferences("com.example.vbantublooddonationapp",MODE_PRIVATE);
 
         if (mPreferences.contains(USERID_KEY) && mPreferences.contains(USERTYPE_KEY)) {
@@ -85,23 +87,29 @@ public class SingleBloodRequestActivity extends AppCompatActivity {
             mUserType = mPreferences.getString(USERTYPE_KEY, "user");
         }
 
+        //get current requestID from adapter view model
         Intent i = getIntent();
         int requestID = i.getIntExtra("currentRequestID", 1);
 
+        //get blood request object
         List<BloodRequest> mBloodRequestList = mBloodRequestViewModel.getRequestById(requestID);
         mBloodRequest = mBloodRequestList.get(0);
 
+        //set the requet information
         binding.asbrTvRequestInfo.setText(getString(R.string.fullRequestInformation,mBloodRequest.getRequestInfo()));
 
         //Date format in YYYYMMDD_HHMMSS
         String dateTime = mBloodRequest.getDateTime();
 
+        //set the date and time
         binding.asbrTvDate.setText(getFullDate(dateTime));
         binding.asbrTvTime.setText(convertTimeTo12HFormat(dateTime));
 
+        //get the organiser of the blood request
         List<Organiser> mOrganiserList = mOrganiserViewModel.getOrganiserById(mBloodRequest.getOrganiserID());
         mOrganiser = mOrganiserList.get(0);
 
+        //get the organiser cover photo from firebase
         mRef = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("Organiser").child(String.valueOf(mOrganiser.getOrganiserID()));
 
         mRef.addValueEventListener(new ValueEventListener() {
@@ -119,10 +127,12 @@ public class SingleBloodRequestActivity extends AppCompatActivity {
             }
         });
 
+        //set organiser information
         binding.asbrTvOrganiser.setText(mOrganiser.getCompanyName());
         binding.asbrTvAddress.setText(mOrganiser.getAddress());
         binding.asbrTvContact.setText(mOrganiser.getContact());
 
+        //set the blood type adapter for blood shortage list
         mBloodTypeList = Arrays.asList(mBloodRequest.getShortageType().split(","));
         mBloodTypeAdapter.setBloodTypeList(mBloodTypeList);
         binding.asbrRvBloodType.setAdapter(mBloodTypeAdapter);
@@ -130,6 +140,7 @@ public class SingleBloodRequestActivity extends AppCompatActivity {
         //set the layout manager
         binding.asbrRvBloodType.setLayoutManager(new GridLayoutManager(this, 4));
 
+        //disable make appointment button for organisers
         if (mUserType.equals("organiser")){
             binding.asbrBtnMakeAppointment.setEnabled(false);
             binding.asbrBtnMakeAppointment.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.medium_grey));
@@ -139,6 +150,7 @@ public class SingleBloodRequestActivity extends AppCompatActivity {
             binding.asbrBtnMakeAppointment.setEnabled(true);
         }
 
+        //button to make appointment
         binding.asbrBtnMakeAppointment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -149,6 +161,7 @@ public class SingleBloodRequestActivity extends AppCompatActivity {
         });
     }
 
+    //set the organiser cover photo from image url
     private void setImage(String imageUrl, int organiserID) {
         if (imageUrl != null) {
             mStorageReference = FirebaseStorage.getInstance("gs://vbantu-blood-donation-app.appspot.com/").getReference("Organiser/"+ organiserID +"/"+imageUrl);
@@ -173,6 +186,7 @@ public class SingleBloodRequestActivity extends AppCompatActivity {
         }
     }
 
+    //convert the numerical date to full date with month labelled
     public String getFullDate(String dateTime) {
         String year = dateTime.substring(0,4);
         int month = Integer.parseInt(dateTime.substring(4,6));
@@ -181,6 +195,7 @@ public class SingleBloodRequestActivity extends AppCompatActivity {
         return day + " "+ getMonthName(month) + " " + year;
     }
 
+    //get the month name
     public String getMonthName(int month_value){
         switch (month_value) {
             case 1:
@@ -212,6 +227,7 @@ public class SingleBloodRequestActivity extends AppCompatActivity {
         }
     }
 
+    //convert 24H time to 12H format
     public String convertTimeTo12HFormat(String dateTime) {
         String time24H = dateTime.substring(9,15);
         int hour = Integer.parseInt(time24H.substring(0,2));

@@ -43,6 +43,7 @@ import java.util.Objects;
 
 public class HomeFragment extends Fragment {
 
+    //declare variables
     private final String USERID_KEY = "userid", USERTYPE_KEY = "usertype";
     private SharedPreferences mPreferences;
     private int mUserID = 1;
@@ -74,6 +75,7 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        //get current logged in user from shared preferences
         mPreferences = getActivity().getSharedPreferences("com.example.vbantublooddonationapp",MODE_PRIVATE);
 
         if (mPreferences.contains(USERID_KEY) && mPreferences.contains(USERTYPE_KEY)) {
@@ -81,6 +83,7 @@ public class HomeFragment extends Fragment {
             mUserType = mPreferences.getString(USERTYPE_KEY, "user");
         }
 
+        //disable blood request history for user
         if (mUserType.equals("organiser")) {
             homeBinding.fhIvBloodRequestHistory.setVisibility(View.VISIBLE);
         }
@@ -91,18 +94,22 @@ public class HomeFragment extends Fragment {
         homeBinding.fhIvBloodRequestHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //launch blood request history activity
                 Intent i = new Intent(getActivity(),BloodRequestHistory.class);
                 startActivity(i);
             }
         });
 
+        //set urgent request adapter to the recycler view
         mUrgentRequestAdapter = new UrgentRequestAdapter(getActivity());
         homeBinding.fhRvUrgentRequest.setAdapter(mUrgentRequestAdapter);
 
+        //set blood bank location adapter to the recycler view
         mOrganiserImageList = new ArrayList<OrganiserImage>();
         mLocationAdapter = new LocationAdapter(getActivity(), mOrganiserImageList);
         homeBinding.fhRvLocation.setAdapter(mLocationAdapter);
 
+        //get organiser image from firebase
         mRef = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("Organiser");
 
         mRef.addValueEventListener(new ValueEventListener() {
@@ -125,6 +132,7 @@ public class HomeFragment extends Fragment {
         homeBinding.fhRvUrgentRequest.setLayoutManager(new GridLayoutManager(view.getContext(),getResources().getInteger(R.integer.grid_column_count)));
         homeBinding.fhRvLocation.setLayoutManager(new GridLayoutManager(view.getContext(), getResources().getInteger(R.integer.grid_column_count)));
 
+        //initialize view model
         initUrgentRequestViewModel();
         initOrganiserViewModel();
     }
@@ -141,6 +149,7 @@ public class HomeFragment extends Fragment {
             }
         };
 
+        //get all active urgent requests
         mBloodRequestViewModel.getAllActiveRequests().observe(getViewLifecycleOwner(),requestListObserver);
     }
 
@@ -156,6 +165,7 @@ public class HomeFragment extends Fragment {
             }
         };
 
+        //get all organisers
         mOrganiserViewModel.getAllOrganisers().observe(getViewLifecycleOwner(),organiserListObserver);
     }
 }
