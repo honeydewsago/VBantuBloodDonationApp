@@ -57,6 +57,7 @@ public class MakeAppointment extends AppCompatActivity {
         View v = binding.getRoot();
         setContentView(v);
 
+        //setup toolbar
         Toolbar toolbar = binding.amaTbToolBar;
 
         setSupportActionBar(toolbar);
@@ -100,6 +101,7 @@ public class MakeAppointment extends AppCompatActivity {
     }
 
     private void initUserInfo(User user) {
+        //initialize all user personal info in appointment form
         binding.amaTvFullName.setText(user.getFullName());
         binding.amaTvIcNo.setText(user.getIcNo());
         binding.amaTvContactNo.setText(user.getContact());
@@ -140,7 +142,7 @@ public class MakeAppointment extends AppCompatActivity {
     }
 
     private void resetForm() {
-        //reset to user initial data(eg User named Ze Yun came into this page and the initial value at full name should be Ze Yun, and following value based on Ze Yun's profile)
+        //reset to user initial data
         initUserInfo(mUser);
     }
 
@@ -223,12 +225,16 @@ public class MakeAppointment extends AppCompatActivity {
                 getText(R.string.emailEnding);
 
         JavaMailAPI javaMailAPI = new JavaMailAPI(this, email, subject, message);
+        //send email
         javaMailAPI.execute();
     }
 
     private String getFullDate(String dateTime) {
+        //get year based on string
         String year = dateTime.substring(0,4);
+        //get month based on string
         int month = Integer.parseInt(dateTime.substring(4,6));
+        //get day based on string
         String day = dateTime.substring(6,8);
 
         return day + " "+ getMonthName(month) + " " + year;
@@ -291,6 +297,7 @@ public class MakeAppointment extends AppCompatActivity {
             binding.amaTvPickDate.setText(date);
         };
 
+        //get calendar and set as alert dialog
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
@@ -301,7 +308,7 @@ public class MakeAppointment extends AppCompatActivity {
         datePickerDialog = new DatePickerDialog(this, style, dateSetListener, year, month, day);
 
         //no go back to past and make appointment
-        //datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
 
     }
 

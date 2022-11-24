@@ -81,6 +81,7 @@ public class UpdateOrganiserProfile extends AppCompatActivity {
 
         mOrganiserViewModel = new ViewModelProvider(this).get(OrganiserViewModel.class);
 
+        //get shared preferences
         mPreferences = getSharedPreferences("com.example.vbantublooddonationapp", MODE_PRIVATE);
         if (mPreferences.contains(USERID_KEY) && mPreferences.contains(USERTYPE_KEY)){
             mUserID = mPreferences.getInt(USERID_KEY, 1);
@@ -104,6 +105,7 @@ public class UpdateOrganiserProfile extends AppCompatActivity {
         });
 
         binding.auopBtnSubmit.setOnClickListener(new View.OnClickListener() {
+            //overwrite organiser profile info
             @Override
             public void onClick(View view) {
                 updateProfile();
@@ -120,6 +122,7 @@ public class UpdateOrganiserProfile extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 OrganiserImage organiserImage = snapshot.getValue(OrganiserImage.class);
+                //set image if found child for Organiser firebase
                 if (organiserImage != null) {
                     setImage(organiserImage.getUrl(), mUserID);
                 }
@@ -144,6 +147,7 @@ public class UpdateOrganiserProfile extends AppCompatActivity {
         progressDialog.show();
 
 
+        //get value from each text box
         String picName = binding.auopEtPersonInCharge.getText().toString();
         String picIC = binding.auopEtIcNo.getText().toString();
         String picContact = binding.auopEtContactNo.getText().toString();
@@ -151,48 +155,56 @@ public class UpdateOrganiserProfile extends AppCompatActivity {
         String organisationAddress = binding.auopEtAddress.getText().toString();
 
 
+        //validate person in charge name whether is empty
         if (picName.isEmpty()){
             binding.auopEtPersonInCharge.setError(getText(R.string.nameOfPicRequired));
             binding.auopEtPersonInCharge.requestFocus();
             return;
         }
 
+        //validate ic no length
         if (picIC.length()!= 12){
             binding.auopEtIcNo.setError(getText(R.string.icNoFormat));
             binding.auopEtIcNo.requestFocus();
             return;
         }
 
+        //validate ic no whether is empty
         if (picIC.isEmpty()){
             binding.auopEtIcNo.setError(getText(R.string.icNumberRequired));
             binding.auopEtIcNo.requestFocus();
             return;
         }
 
+        //validate Contact No whether is empty
         if (picContact.isEmpty()){
             binding.auopEtContactNo.setError(getText(R.string.contactNumberRequired));
             binding.auopEtContactNo.requestFocus();
             return;
         }
 
+        //validate length of Contact No
         if (picContact.length()<9){
             binding.auopEtContactNo.setError(getText(R.string.contactNumAtLeast9Char));
             binding.auopEtContactNo.requestFocus();
             return;
         }
 
+        //validate whether email is empty
         if (picEmail.isEmpty()){
             binding.auopEtEmail.setError(getText(R.string.emailRequired));
             binding.auopEtEmail.requestFocus();
             return;
         }
 
+        //validate email format
         if (!Patterns.EMAIL_ADDRESS.matcher(picEmail).matches()){
             binding.auopEtEmail.setError(getText(R.string.emailInvalid));
             binding.auopEtEmail.requestFocus();
             return;
         }
 
+        //validate company address input whether is empty
         if (organisationAddress.isEmpty()){
             binding.auopEtAddress.setError(getText(R.string.orgnAddressRequired));
             binding.auopEtAddress.requestFocus();
@@ -209,6 +221,7 @@ public class UpdateOrganiserProfile extends AppCompatActivity {
 
 
 
+        //check filepath
         if (filepath != null) {
             String receiverImage = uploadImage();
             database = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("Organiser").child(String.valueOf(mUserID));
@@ -218,6 +231,7 @@ public class UpdateOrganiserProfile extends AppCompatActivity {
                     HashMap<String, Object> data = new HashMap<>();
                     data.put("organiserID", String.valueOf(mUserID));
                     data.put("url", receiverImage);
+                    //update data to firebase
                     database.updateChildren(data);
                     progressDialog.dismiss();
                     finish();
@@ -235,6 +249,7 @@ public class UpdateOrganiserProfile extends AppCompatActivity {
         }
     }
 
+    //uploadImage to firebase storage
     private String uploadImage() {
         String imageURL = UUID.randomUUID().toString();
         if (binding.auopIvOrganisationCoverPhoto!= null){
@@ -247,6 +262,7 @@ public class UpdateOrganiserProfile extends AppCompatActivity {
     }
 
 
+    //set image if got url
     private void setImage(String imageUrl,  int organiserID) {
         if (imageUrl != null) {
             StorageReference mStorageReference = FirebaseStorage.getInstance("gs://vbantu-blood-donation-app.appspot.com/").getReference("Organiser/"+ organiserID +"/"+imageUrl);
@@ -257,6 +273,7 @@ public class UpdateOrganiserProfile extends AppCompatActivity {
                     @Override
                     public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
                         Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                        //set imageView with organiser cover photo
                         binding.auopIvOrganisationCoverPhoto.setImageBitmap(bitmap);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -270,6 +287,7 @@ public class UpdateOrganiserProfile extends AppCompatActivity {
             }
         }
     }
+
 
     private void selectImage() {
         Intent i = new Intent();

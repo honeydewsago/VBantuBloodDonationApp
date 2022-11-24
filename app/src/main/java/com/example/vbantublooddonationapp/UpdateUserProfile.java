@@ -1,12 +1,5 @@
 package com.example.vbantublooddonationapp;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,6 +12,13 @@ import android.util.Patterns;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.vbantublooddonationapp.Model.User;
 import com.example.vbantublooddonationapp.Model.UserImage;
@@ -90,6 +90,7 @@ public class UpdateUserProfile extends AppCompatActivity {
         List<User> userList = mUserViewModel.getUserById(mUserID);
         mUser = userList.get(0);
 
+        //initialize user information
         initProfile(mUser);
 
         mStorage = FirebaseStorage.getInstance();
@@ -111,6 +112,7 @@ public class UpdateUserProfile extends AppCompatActivity {
 
     }
 
+    //select image from gallery
     private void selectImage() {
         Intent i = new Intent();
         i.setType("image/*");
@@ -144,35 +146,41 @@ public class UpdateUserProfile extends AppCompatActivity {
         String contact = binding.auupEtContact.getText().toString();
         String email = binding.auupEtEmail.getText().toString();
 
+        //check whether username is empty
         if (userName.isEmpty()){
             binding.auupEtUsername.setError(getText(R.string.usernameRequired));
             binding.auupEtUsername.requestFocus();
             return;
         }
 
+        //check whether contact no is empty
         if (contact.isEmpty()){
             binding.auupEtContact.setError(getText(R.string.contactNumberRequired));
             binding.auupEtContact.requestFocus();
             return;
         }
 
+        //check length of contact no
         if (contact.length()<10){
             binding.auupEtContact.setError(getText(R.string.contactNumAtLeast10Char));
             binding.auupEtContact.requestFocus();
             return;
         }
 
+        //validate email format
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             binding.auupEtEmail.setError(getText(R.string.emailInvalid));
             binding.auupEtEmail.requestFocus();
             return;
         }
 
+        //check whether email is empty
         if (email.isEmpty()){
             binding.auupEtEmail.setError(getText(R.string.emailRequired));
             binding.auupEtEmail.requestFocus();
             return;
         }
+
 
         //update room database
         mUser.setUsername(userName);
@@ -187,6 +195,7 @@ public class UpdateUserProfile extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     HashMap<String, Object> data = new HashMap<>();
+                    //set new value into firebase database
                     data.put("userID", String.valueOf(mUserID));
                     data.put("url", receiverImage);
                     database.updateChildren(data);
@@ -246,6 +255,7 @@ public class UpdateUserProfile extends AppCompatActivity {
 
     private void setImage(String imageUrl, int userID) {
         if (imageUrl != null) {
+            //get path and find image based on url
             StorageReference mStorageReference = FirebaseStorage.getInstance("gs://vbantu-blood-donation-app.appspot.com/").getReference("User/"+ userID +"/"+imageUrl);
 
             try {
