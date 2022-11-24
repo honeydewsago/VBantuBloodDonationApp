@@ -15,12 +15,13 @@ import java.util.concurrent.ExecutionException;
 public class BloodRequestRepository {
     private BloodRequestDao mBloodRequestDao;
 
+    //initialize database and dao
     public BloodRequestRepository(Application application) {
         BloodRoomDatabase db = BloodRoomDatabase.getINSTANCE(application);
         mBloodRequestDao = db.bloodRequestDao();
     }
 
-    //insert data into blood_request_table
+    //function insert data into blood_request_table
     public void insert(BloodRequest bloodRequest) {
         new BloodRequestRepository.insertAsyncTask(mBloodRequestDao).execute(bloodRequest);
     }
@@ -40,12 +41,12 @@ public class BloodRequestRepository {
         }
     }
 
-    //retrieve all active requests
+    //function retrieve all active requests
     public LiveData<List<BloodRequest>> getAllActiveRequests() {
         return mBloodRequestDao.getAllActiveRequests();
     }
 
-    //retrieve request using id
+    //function retrieve request using id
     public List<BloodRequest> getRequestById(int id) {
         List<BloodRequest> list = null;
 
@@ -74,7 +75,7 @@ public class BloodRequestRepository {
         }
     }
 
-    //retrieve request by organiser id
+    //function retrieve request by organiser id
     public List<BloodRequest> getRequestByOrganiserId(int id) {
         List<BloodRequest> list = null;
 
@@ -103,7 +104,7 @@ public class BloodRequestRepository {
         }
     }
 
-    //update data in blood_request table
+    //function update data in blood_request table
     public void update(BloodRequest bloodRequest) {
         new BloodRequestRepository.updateAsyncTask(mBloodRequestDao).execute(bloodRequest);
     }

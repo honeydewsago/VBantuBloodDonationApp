@@ -18,19 +18,20 @@ public class UserRepository {
     private UserDao mUserDao;
     private LiveData<List<User>> mAllUsers;
 
+    //initialize database and dao
     public UserRepository(Application application) {
         BloodRoomDatabase db = BloodRoomDatabase.getINSTANCE(application);
         mUserDao = db.userDao();
         mAllUsers = mUserDao.getAllUsers();
     }
 
-    //insert user data into user table
+    //function insert user data into user table
     public void insert(User user) {
         new insertAsyncTask(mUserDao).execute(user);
     }
 
 
-    //retrieve all users
+    //function retrieve all users
     public LiveData<List<User>> getAllUsers(){return mAllUsers;}
     private static class insertAsyncTask extends AsyncTask<User, Void, Void> {
         private UserDao mSyncTaskDao;
@@ -46,7 +47,7 @@ public class UserRepository {
         }
     }
 
-    //retrieve all user emails
+    //function retrieve all user emails
     public List<String> getAllUserEmails() {
         List<String> list = null;
         try {
@@ -73,7 +74,7 @@ public class UserRepository {
         }
     }
 
-    //login for user
+    //function login for user
     public List<User> loginUser(String email, String password) {
         LoginParams params = new LoginParams(email, password);
 
@@ -103,7 +104,7 @@ public class UserRepository {
         }
     }
 
-    //retrieve user by id
+    //function retrieve user by id
     public List<User> getUserById(int id) {
         List<User> list = null;
 
@@ -131,7 +132,7 @@ public class UserRepository {
         }
     }
 
-    //update the user details
+    //function update the user details
     public void update(User user) {
         new UserRepository.updateAsyncTask(mUserDao).execute(user);
     }
@@ -148,7 +149,7 @@ public class UserRepository {
         }
     }
 
-
+    //function get user list
     public List<User> getUserList() {
         List<User> list = null;
         try {

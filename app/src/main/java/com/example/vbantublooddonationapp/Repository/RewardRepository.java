@@ -15,17 +15,18 @@ import java.util.concurrent.ExecutionException;
 public class RewardRepository {
     private RewardDao mRewardDao;
 
+    //initialize database and dao
     public RewardRepository(Application application){
         BloodRoomDatabase db = BloodRoomDatabase.getINSTANCE(application);
         mRewardDao = db.rewardDao();
     }
 
-    //insert reward into reward_table
+    //function insert reward into reward_table
     public void insert(Reward reward){
         new RewardRepository.insertAsyncTask(mRewardDao).execute(reward);
     }
 
-    //get all reward
+    //function get all reward
     public List<Reward> getAllReward() {
         List<Reward> list = null;
         try {
@@ -67,7 +68,7 @@ public class RewardRepository {
         }
     }
 
-    //retrieve request by id
+    //function retrieve request by id
     public List<Reward> getRequestById(int id){
         List<Reward> list = null;
 
@@ -95,7 +96,7 @@ public class RewardRepository {
         }
     }
 
-    //retrieve reward by user id
+    //function retrieve reward by user id
     public LiveData<List<Reward>> getRewardByUserId(int id){
         LiveData<List<Reward>> list = null;
         try {
@@ -123,7 +124,7 @@ public class RewardRepository {
         }
     }
 
-    //update reward info
+    //function update reward info
     public void update(Reward reward) {
         new RewardRepository.updateAsyncTask(mRewardDao).execute(reward);
     }

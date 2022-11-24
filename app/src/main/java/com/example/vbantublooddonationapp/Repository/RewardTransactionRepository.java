@@ -12,19 +12,21 @@ import com.example.vbantublooddonationapp.Model.RewardTransaction;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+
 public class RewardTransactionRepository {
     private RewardTransactionDao mRewardsTransactionDao;
+    //initialize database and dao
     public RewardTransactionRepository(Application application) {
         BloodRoomDatabase db = BloodRoomDatabase.getINSTANCE(application);
         mRewardsTransactionDao = db.rewardTransactionDao();
     }
 
-    //insert rewardtransaction into rewardtransaction_table
+    //function insert rewardtransaction into rewardtransaction_table
     public void insert(RewardTransaction rewardTransaction){
         new RewardTransactionRepository.insertAsyncTask(mRewardsTransactionDao).execute(rewardTransaction);
     }
 
-    //get all reward transaction
+    //function get all reward transaction
     public List<RewardTransaction> getAllRewardTransactions() {
         List<RewardTransaction> list = null;
         try {
@@ -65,7 +67,7 @@ public class RewardTransactionRepository {
         }
     }
 
-    //retrieve request by id
+    //function retrieve request by id
     public List<RewardTransaction> getRequestById(int id) {
         List<RewardTransaction> list = null;
 
@@ -79,7 +81,7 @@ public class RewardTransactionRepository {
         return list;
     }
 
-    //retrieve reward transaction with reward id
+    //function retrieve reward transaction with reward id
     public LiveData<List<RewardTransaction>> getRewardTransactionByRewardId(int id) {
         LiveData<List<RewardTransaction>> list = null;
         try {
@@ -114,7 +116,7 @@ public class RewardTransactionRepository {
         }
     }
 
-    //update reward transaction data
+    //function update reward transaction data
     public void update(RewardTransaction rewardTransaction) {
         new RewardTransactionRepository.updateAsyncTask(mRewardsTransactionDao).execute(rewardTransaction);
     }

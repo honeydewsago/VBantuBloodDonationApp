@@ -17,6 +17,7 @@ public class OrganiserRepository {
     private OrganiserDao mOrganiserDao;
     private LiveData<List<Organiser>> mAllOrganisers;
 
+    //initialize database and dao
     public OrganiserRepository(Application application) {
         BloodRoomDatabase db = BloodRoomDatabase.getINSTANCE(application);
         mOrganiserDao = db.organiserDao();
@@ -24,12 +25,12 @@ public class OrganiserRepository {
         mAllOrganisers = mOrganiserDao.getAllOrganisers();
     }
 
-    //retrieve all orgarniser
+    //function retrieve all organiser
     public LiveData<List<Organiser>> getAllOrganisers() {
         return mAllOrganisers;
     }
 
-    //insert data into organiser_table
+    //function insert data into organiser_table
     public void insert(Organiser organiser) {
         new insertAsyncTask(mOrganiserDao).execute(organiser);
     }
@@ -48,7 +49,7 @@ public class OrganiserRepository {
         }
     }
 
-    //login as organiser
+    //function login as organiser
     public List<Organiser> loginOrganiser(String email, String password) {
         LoginParams params = new LoginParams(email, password);
 
@@ -78,7 +79,7 @@ public class OrganiserRepository {
         }
     }
 
-    //get all organiser email
+    //function get all organiser email
     public List<String> getAllOrganiserEmails() {
         List<String> list = null;
         try {
@@ -132,7 +133,7 @@ public class OrganiserRepository {
         }
     }
 
-    //update organiser detail into organiser table
+    //function update organiser detail into organiser table
     public void update(Organiser organiser) {
         new OrganiserRepository.updateAsyncTask(mOrganiserDao).execute(organiser);
     }
