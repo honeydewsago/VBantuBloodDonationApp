@@ -42,6 +42,7 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
 
     @SuppressLint("NotifyDataSetChanged")
     public void setLeaderboardUserList(List<LeaderboardUser> leaderboardUserList) {
+        //set the list for leaderboard Users
         mLeaderboardUserList = leaderboardUserList;
         notifyDataSetChanged();
     }
@@ -49,6 +50,7 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
     @NonNull
     @Override
     public LeaderboardHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        //set the view for each holder
         CardLeaderboardRowBinding itemBinding = CardLeaderboardRowBinding.inflate(mActivity.getLayoutInflater());
         return new LeaderboardHolder(itemBinding);
     }
@@ -56,10 +58,12 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull LeaderboardHolder holder, int position) {
+        //set leaderboard user info
         LeaderboardUser leaderboardUser = mLeaderboardUserList.get(position);
         holder.mTvUsername.setText(leaderboardUser.getUsername());
         holder.mTvBloodAmt.setText(leaderboardUser.getBloodAmt() + "ml");
 
+        //add leaderboard rank position
         if (position == 0) {
             holder.mIvPlaceNoBg.setImageResource(R.color.yellow);
             holder.mIvPlaceBg.setImageResource(R.color.yellow);
@@ -74,6 +78,7 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
 
         String userid = String.valueOf(leaderboardUser.getUserID());
 
+        //get user avatar image url from firebase
         DatabaseReference mRef = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("User").child(userid);
 
         mRef.addValueEventListener(new ValueEventListener() {
@@ -119,6 +124,7 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
         }
     }
 
+    //set user avatar image
     private void setAvatar(String avatarUrl, ImageView mclrIvAvatar, String userID) {
         if (avatarUrl != null) {
             StorageReference mStorageReference = FirebaseStorage.getInstance("gs://vbantu-blood-donation-app.appspot.com/").getReference("User/" + userID + "/" + avatarUrl);

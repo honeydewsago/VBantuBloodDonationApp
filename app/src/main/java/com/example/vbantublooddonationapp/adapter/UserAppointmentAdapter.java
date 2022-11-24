@@ -44,23 +44,26 @@ public class UserAppointmentAdapter extends RecyclerView.Adapter<UserAppointment
     }
 
     public void setAppointmentList(List<Appointment> appointmentList) {
-        mAppointmentList = appointmentList;
+        //set the list for user appointments
         notifyDataSetChanged();
     }
 
     @NonNull
     @Override
     public AppointmentHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        //set the view for each holder
         CardUserAppointmentsBinding itemBinding = CardUserAppointmentsBinding.inflate(mActivity.getLayoutInflater());
         return new AppointmentHolder(itemBinding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull AppointmentHolder holder, int position) {
+        //set appointment information
         Appointment appointment = mAppointmentList.get(position);
 
         String status = updateAppointmentStatus(appointment);
 
+        //set different status colour
         holder.mTvStatus.setText(status);
         if (status.equals("Ongoing")) {
             holder.mTvStatus.setBackgroundResource(R.color.orange);
@@ -118,6 +121,7 @@ public class UserAppointmentAdapter extends RecyclerView.Adapter<UserAppointment
         }
     }
 
+    //launch single appointment activity
     public void startSingleAppointmentActivity(int position){
         Appointment currentAppointment = mAppointmentList.get(position);
 
@@ -128,18 +132,21 @@ public class UserAppointmentAdapter extends RecyclerView.Adapter<UserAppointment
         mActivity.startActivity(i);
     }
 
+    //get user blood type by user id
     private String getUserBloodType(int id) {
         List<User> userList = mUserViewModel.getUserById(id);
         User user = userList.get(0);
         return user.getBloodType();
     }
 
+    //get user full name by user id
     private String getUserFullname(int id) {
         List<User> userList = mUserViewModel.getUserById(id);
         User user = userList.get(0);
         return user.getFullName();
     }
 
+    //convert the numerical date to full date with month labelled
     public String getFullDate(String dateTime) {
         String year = dateTime.substring(0,4);
         int month = Integer.parseInt(dateTime.substring(4,6));
@@ -148,6 +155,7 @@ public class UserAppointmentAdapter extends RecyclerView.Adapter<UserAppointment
         return day + " "+ getMonthName(month) + " " + year;
     }
 
+    //get the month name
     public String getMonthName(int month_value){
         switch (month_value) {
             case 1:
@@ -179,6 +187,7 @@ public class UserAppointmentAdapter extends RecyclerView.Adapter<UserAppointment
         }
     }
 
+    //update appointment status to check for ongoing or expired
     private String updateAppointmentStatus(Appointment appointment) {
         String status = appointment.getStatus();
 
