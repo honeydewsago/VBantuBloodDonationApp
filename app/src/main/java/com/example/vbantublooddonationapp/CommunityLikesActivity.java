@@ -159,6 +159,8 @@ public class CommunityLikesActivity extends AppCompatActivity {
                     //add the data to the array list
                     mUserLikesList.add(likesUser);
                 }
+                mOrLikesList.addAll(mUserLikesList);
+                mCommunityLikesAdapter.setLikesList(mOrLikesList);
             }
 
             @Override
@@ -166,9 +168,6 @@ public class CommunityLikesActivity extends AppCompatActivity {
 
             }
         });
-
-        mOrLikesList.addAll(mUserLikesList);
-        mCommunityLikesAdapter.setLikesList(mOrLikesList);
     }
 
     //back button
