@@ -191,10 +191,12 @@ public class UserAppointmentAdapter extends RecyclerView.Adapter<UserAppointment
     private String updateAppointmentStatus(Appointment appointment) {
         String status = appointment.getStatus();
 
+        //get current date
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
         int currentDate = Integer.parseInt(sdf.format(new Date()));
         int date = Integer.parseInt(appointment.getAppointmentDate());
 
+        //compare appointment date to current date
         if (status.equals("Ongoing") && currentDate > date) {
             appointment.setStatus("Expired");
             mAppointmentViewModel.updateAppointment(appointment);
