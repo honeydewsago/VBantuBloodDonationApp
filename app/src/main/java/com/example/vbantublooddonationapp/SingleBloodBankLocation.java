@@ -65,6 +65,7 @@ public class SingleBloodBankLocation extends AppCompatActivity {
         binding = ActivitySingleBloodBankLocationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        //initialize view model
         mOrganiserViewModel = new ViewModelProvider(this).get(OrganiserViewModel.class);
         mBloodTypeAdapter = new BloodTypeAdapter(this);
         mBloodTypeList = new ArrayList<String>();
@@ -76,6 +77,7 @@ public class SingleBloodBankLocation extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbar.setNavigationIcon(ContextCompat.getDrawable(this, R.drawable.ic_arrow_back_ios));
 
+        //get current logged in user from shared preferences
         mPreferences = getSharedPreferences("com.example.vbantublooddonationapp",MODE_PRIVATE);
 
         if (mPreferences.contains(USERID_KEY) && mPreferences.contains(USERTYPE_KEY)) {
@@ -83,12 +85,15 @@ public class SingleBloodBankLocation extends AppCompatActivity {
             mUserType = mPreferences.getString(USERTYPE_KEY, "user");
         }
 
+        //get the organiser id from the adapter view holder
         Intent i = getIntent();
         int organiserID = i.getIntExtra("currentOrganiserID", 1);
 
+        //get organiser object
         List<Organiser> mOrganiserList = mOrganiserViewModel.getOrganiserById(organiserID);
         mOrganiser = mOrganiserList.get(0);
 
+        //get organiser cover photo from firebase
         mRef = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("Organiser").child(String.valueOf(organiserID));
 
         mRef.addValueEventListener(new ValueEventListener() {
@@ -106,10 +111,12 @@ public class SingleBloodBankLocation extends AppCompatActivity {
             }
         });
 
+        //set blood bank location information
         binding.asbblTvOrganiser.setText(mOrganiser.getCompanyName());
         binding.asbblTvAddress.setText(mOrganiser.getAddress());
         binding.asbblTvContact.setText(mOrganiser.getContact());
 
+        //set the adapter for blood shortage type recycler view
         mBloodTypeList.add("AB");
         mBloodTypeList.add("A");
         mBloodTypeList.add("B");
@@ -129,6 +136,7 @@ public class SingleBloodBankLocation extends AppCompatActivity {
             binding.asbblBtnMakeAppointment.setEnabled(true);
         }
 
+        //button to make appointment
         binding.asbblBtnMakeAppointment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -139,6 +147,7 @@ public class SingleBloodBankLocation extends AppCompatActivity {
         });
     }
 
+    //set organiser cover photo from image url
     private void setImage(String imageUrl, int organiserID) {
         if (imageUrl != null) {
             mStorageReference = FirebaseStorage.getInstance("gs://vbantu-blood-donation-app.appspot.com/").getReference("Organiser/"+ organiserID +"/"+imageUrl);

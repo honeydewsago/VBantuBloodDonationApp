@@ -33,10 +33,12 @@ public class RegisterOrganiserActivity extends AppCompatActivity {
         binding = ActivityRegisterOrganiserBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        //initialize view model
         mOrganiserViewModel = new ViewModelProvider(this).get(OrganiserViewModel.class);
 
         mPreferences = getSharedPreferences("com.example.vbantublooddonationapp",MODE_PRIVATE);
 
+        //get the organiser email and company name entered previously
         Intent i = getIntent();
         String email = i.getStringExtra("organiser_email");
         String companyName = i.getStringExtra("company_name");
@@ -120,7 +122,7 @@ public class RegisterOrganiserActivity extends AppCompatActivity {
 
         Organiser organiser = new Organiser(email,companyName,password,picName,contactNo,icNo,address);
 
-        //insert the organiser object
+        //insert the organiser object into database
         mOrganiserViewModel.insertOrganiser(organiser);
 
         List<Organiser> mOrganiserList = mOrganiserViewModel.loginOrganiser(email,password);
@@ -130,6 +132,7 @@ public class RegisterOrganiserActivity extends AppCompatActivity {
         status = true;
 
         if (status) {
+            //add the user info in the shared preferences file
             SharedPreferences.Editor spEditor = mPreferences.edit();
             spEditor.putInt(USERID_KEY, mUserID);
             spEditor.putString(USERTYPE_KEY, mUserType);
@@ -139,6 +142,7 @@ public class RegisterOrganiserActivity extends AppCompatActivity {
         //toast message to inform organisers the registration is successful
         Toast.makeText(RegisterOrganiserActivity.this, R.string.userRegisterSuccessfully, Toast.LENGTH_SHORT).show();
 
+        //login user after registration
         startActivity(new Intent(RegisterOrganiserActivity.this, HomeActivity.class));
 
     }

@@ -46,9 +46,12 @@ public class RegisterFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        //initialize view model
         mOrganiserViewModel = new ViewModelProvider(this).get(OrganiserViewModel.class);
         mUserViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
+        //check if user want to register for donor or organiser account
         binding.frToggleBtnGrp.addOnButtonCheckedListener(new MaterialButtonToggleGroup.OnButtonCheckedListener() {
             @Override
             public void onButtonChecked(MaterialButtonToggleGroup group, int checkedId, boolean isChecked) {
@@ -104,6 +107,7 @@ public class RegisterFragment extends Fragment {
             return;
         }
 
+        //check if any account with the same email existed
         List<String> organiserEmailsList= mOrganiserViewModel.getAllOrganiserEmails();
         List<String> userEmailsList= mUserViewModel.getAllUserEmails();
 
@@ -121,6 +125,7 @@ public class RegisterFragment extends Fragment {
             }
         }
 
+        //continue to next register page
         if (userType.equals("donor")) {
             Intent ru = new Intent(getActivity(), RegisterUserActivity.class);
             ru.putExtra("user_email", email);
