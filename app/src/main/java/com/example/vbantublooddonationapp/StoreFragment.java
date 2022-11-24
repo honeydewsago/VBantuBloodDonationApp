@@ -8,9 +8,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.vbantublooddonationapp.Model.Reward;
 import com.example.vbantublooddonationapp.ViewModel.RewardViewModel;
@@ -38,25 +37,15 @@ public class StoreFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        mRewardAdapter =  new RewardAdapter(getActivity());
-        binding.fsRv.setAdapter(mRewardAdapter);
-        binding.fsRv.setLayoutManager(new GridLayoutManager(view.getContext(), 1));
-        initRewardViewModel();
-    }
-
-    private void initRewardViewModel() {
-        //initialize the view model from the OrganiserViewModel
         mRewardViewModel = new ViewModelProvider(this).get(RewardViewModel.class);
+        List<Reward> mRewardList = mRewardViewModel.getAllRewards();
+        mRewardAdapter =  new RewardAdapter(getActivity());
+        mRewardAdapter.setRewardList(mRewardList);
+        binding.fsRv.setAdapter(mRewardAdapter);
+        binding.fsRv.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        //initialize the observer to observe the Live Data
-        final Observer<List<Reward>> rewardListObserver = new Observer<List<Reward>>() {
-            @Override
-            public void onChanged(List<Reward> rewards) {
-                mRewardAdapter.setRewardList(rewards);
-            }
-        };
 
-        mRewardViewModel.getAllRewards().observe(getViewLifecycleOwner(),rewardListObserver);
     }
+
+
 }

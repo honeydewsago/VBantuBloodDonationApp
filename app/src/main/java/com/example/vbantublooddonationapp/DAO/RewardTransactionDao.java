@@ -26,5 +26,5 @@ public interface RewardTransactionDao {
     LiveData<List<RewardTransaction>> getRewardsTransactionByRewardId(int id);
 
     @Query("Select * from reward_trans_table")
-    LiveData<List<RewardTransaction>> getAllRewardTransactions();
+    List<RewardTransaction> getAllRewardsTransaction();
 }

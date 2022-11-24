@@ -14,19 +14,41 @@ import java.util.concurrent.ExecutionException;
 
 public class RewardTransactionRepository {
     private RewardTransactionDao mRewardsTransactionDao;
-    private LiveData<List<RewardTransaction>> mAllRewardTransactions;
     public RewardTransactionRepository(Application application) {
         BloodRoomDatabase db = BloodRoomDatabase.getINSTANCE(application);
         mRewardsTransactionDao = db.rewardTransactionDao();
-        mAllRewardTransactions = mRewardsTransactionDao.getAllRewardTransactions();
     }
 
     public void insert(RewardTransaction rewardTransaction){
         new RewardTransactionRepository.insertAsyncTask(mRewardsTransactionDao).execute(rewardTransaction);
     }
 
-    public LiveData<List<RewardTransaction>> getAllRewardTransactions() {return mAllRewardTransactions;}
+    public List<RewardTransaction> getAllRewardTransactions() {
+        List<RewardTransaction> list = null;
+        try {
+            list = new RewardTransactionRepository.getAllRewardsTransactionAsyncTask(mRewardsTransactionDao).execute().get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 
+
+    private static class getAllRewardsTransactionAsyncTask extends AsyncTask<Void, Void, List<RewardTransaction>> {
+        private RewardTransactionDao mSyncTaskDao;
+
+        getAllRewardsTransactionAsyncTask(RewardTransactionDao dao) {
+            mSyncTaskDao = dao;
+        }
+
+        @Override
+        protected List<RewardTransaction> doInBackground(Void...params) {
+            List<RewardTransaction> rewardTransactionList = mSyncTaskDao.getAllRewardsTransaction();
+            return rewardTransactionList;
+        }
+    }
 
     public class insertAsyncTask extends AsyncTask<RewardTransaction, Void, Void> {
         private RewardTransactionDao mSyncTaskDao;

@@ -12,12 +12,10 @@ import java.util.List;
 
 public class RewardTransactionViewModel extends AndroidViewModel {
     private RewardTransactionRepository mRepository;
-    private LiveData<List<RewardTransaction>> mAllRewardTransactions;
 
     public RewardTransactionViewModel(Application application) {
         super(application);
         mRepository = new RewardTransactionRepository(application);
-        mAllRewardTransactions = mRepository.getAllRewardTransactions();
     }
 
     public List<RewardTransaction> getRequestById(int id){return mRepository.getRequestById(id);}
@@ -27,6 +25,6 @@ public class RewardTransactionViewModel extends AndroidViewModel {
 
     public void updateRewardTransaction(RewardTransaction rewardTransaction) {mRepository.update(rewardTransaction);}
 
-    public LiveData<List<RewardTransaction>> getAllRewardTransactions() {return mAllRewardTransactions;}
 
+    public List<RewardTransaction> getAllRewards() {return mRepository.getAllRewardTransactions();}
 }

@@ -18,9 +18,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vbantublooddonationapp.Model.Reward;
 import com.example.vbantublooddonationapp.Model.RewardTransaction;
+import com.example.vbantublooddonationapp.Model.User;
 import com.example.vbantublooddonationapp.R;
 import com.example.vbantublooddonationapp.ViewModel.RewardTransactionViewModel;
 import com.example.vbantublooddonationapp.ViewModel.RewardViewModel;
+import com.example.vbantublooddonationapp.ViewModel.UserViewModel;
 import com.example.vbantublooddonationapp.databinding.CardRewardBinding;
 
 import java.text.SimpleDateFormat;
@@ -37,13 +39,18 @@ public class RewardAdapter extends RecyclerView.Adapter<RewardAdapter.RewardHold
 
     private Activity mActivity;
     private List<Reward> mRewardList;
+    private List<User> mUserList;
     private RewardViewModel mRewardViewModel;
+    private UserViewModel mUserViewModel;
     private int rewardId;
     private RewardTransactionViewModel mRewardTransactionViewModel;
 
     public RewardAdapter(Activity activity) {
         mActivity = activity;
         mRewardViewModel = new ViewModelProvider((FragmentActivity) mActivity).get(RewardViewModel.class);
+        mUserViewModel = new ViewModelProvider((FragmentActivity)mActivity).get(UserViewModel.class);
+        mRewardTransactionViewModel = new ViewModelProvider((FragmentActivity)mActivity).get(RewardTransactionViewModel.class);
+
     }
 
     public void setRewardList(List<Reward> rewardList) {
@@ -67,7 +74,8 @@ public class RewardAdapter extends RecyclerView.Adapter<RewardAdapter.RewardHold
             mUserID = mPreferences.getInt(USERID_KEY,1);
             mUserType = mPreferences.getString(USERTYPE_KEY, "user");
         }
-
+        mUserList = mUserViewModel.getUserById(mUserID);
+        User user = mUserList.get(0);
         Reward reward = mRewardList.get(position);
         String status = updateRewardStatus(reward);
         String points = reward.getPoints() + " points";
@@ -85,7 +93,12 @@ public class RewardAdapter extends RecyclerView.Adapter<RewardAdapter.RewardHold
             holder.mTvBtnStatus.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(mActivity, "click", Toast.LENGTH_SHORT).show();
+                    if(user.getPoints()<reward.getPoints()){
+                        Toast.makeText(mActivity, "Not enough points to redeem this reward!", Toast.LENGTH_SHORT).show();
+                    }else{
+                        confirm(reward,user);
+                    }
+
                 }
             });
         }
@@ -109,23 +122,10 @@ public class RewardAdapter extends RecyclerView.Adapter<RewardAdapter.RewardHold
             mTvStoreName = binding.crTvStoreName;
             mTvPoints = binding.crTvPoints;
             mTvBtnStatus = binding.crTvBtnStatus;
-
-            mTvBtnStatus.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Toast.makeText(mActivity, "click", Toast.LENGTH_SHORT).show();
-                }
-            });
-            binding.getRoot().setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Toast.makeText(mActivity, "c", Toast.LENGTH_SHORT).show();
-                }
-            });
         }
     }
 //a
-    private void confirm(int id) {
+    private void confirm(Reward reward, User user) {
         AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
         builder.setTitle("Confirm Redeem?");
         builder.setMessage("Do you want to redeem this reward?");
@@ -135,8 +135,12 @@ public class RewardAdapter extends RecyclerView.Adapter<RewardAdapter.RewardHold
                 "Yes",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        setRewardQuantity(id);
-                        updateUserRewardTrans(mUserID,id);
+                        int points = user.getPoints()-reward.getPoints();
+                        user.setPoints(points);
+                        mUserViewModel.updateUser(user);
+                        Toast.makeText(mActivity, "Successfully claimed this reward!", Toast.LENGTH_SHORT).show();
+                        setRewardQuantity(reward);
+                        updateUserRewardTrans(reward, user);
                     }
                 });
 
@@ -152,9 +156,7 @@ public class RewardAdapter extends RecyclerView.Adapter<RewardAdapter.RewardHold
         alert.show();
     }
 
-    private void setRewardQuantity(int id) {
-        List<Reward> rewardList = mRewardViewModel.getRequestById(id);
-        Reward reward = rewardList.get(0);
+    private void setRewardQuantity(Reward reward) {
         reward.setQuantity(reward.getQuantity() - 1);
     }
 
@@ -169,7 +171,7 @@ public class RewardAdapter extends RecyclerView.Adapter<RewardAdapter.RewardHold
         return status;
     }
 
-    private void updateUserRewardTrans(int userId, int rewardId){
+    private void updateUserRewardTrans(Reward reward, User user){
         Calendar calendar = Calendar.getInstance();
         Date currentDate = calendar.getTime();
         calendar.add(Calendar.MONTH,1);
@@ -177,9 +179,10 @@ public class RewardAdapter extends RecyclerView.Adapter<RewardAdapter.RewardHold
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
         String curDate = sdf.format(currentDate);
         String expDate = sdf.format(expiryDate);
-        RewardTransaction rewardTransaction = new RewardTransaction(rewardId,userId,curDate,expDate,"","Available");
+        RewardTransaction rewardTransaction = new RewardTransaction(reward.getRewardID(),user.getUserID(),curDate,expDate,"","Available");
         mRewardTransactionViewModel.insertRewardTransaction(rewardTransaction);
         Toast.makeText(mActivity, "Reward successfully claimed", Toast.LENGTH_SHORT).show();
+        mActivity.finish();
     }
 
 }

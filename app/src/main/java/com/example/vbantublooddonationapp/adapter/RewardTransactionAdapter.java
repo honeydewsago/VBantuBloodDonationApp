@@ -2,6 +2,7 @@ package com.example.vbantublooddonationapp.adapter;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.vbantublooddonationapp.Model.Reward;
 import com.example.vbantublooddonationapp.Model.RewardTransaction;
 import com.example.vbantublooddonationapp.R;
+import com.example.vbantublooddonationapp.RewardQR;
 import com.example.vbantublooddonationapp.ViewModel.RewardTransactionViewModel;
 import com.example.vbantublooddonationapp.ViewModel.RewardViewModel;
 import com.example.vbantublooddonationapp.databinding.CardRewardBinding;
@@ -56,22 +58,24 @@ public class RewardTransactionAdapter extends RecyclerView.Adapter<RewardTransac
         RewardTransaction rewardTransaction = mRewardTransList.get(position);
         int rewardId = rewardTransaction.getRewardID();
         String status = updateRewardTransactionStatus(rewardTransaction);
-        Reward reward = mRewardList.get(position);
+        mRewardList = mRewardViewModel.getRequestById(rewardId);
+        Reward reward = mRewardList.get(0);
         String minSpend = "Min. Spend RM " + reward.getMinSpend();
-        int id = reward.getRewardID();
         holder.mTvDiscount.setText(reward.getDiscount());
         holder.mTvMinSpend.setText(minSpend);
         holder.mTvStoreName.setText(reward.getStoreName());
         holder.mTvPoints.setVisibility(View.GONE);
-
+        if(status.equals("Available")){
+            holder.mTvBtnStatus.setText(R.string.use_now);
+        }else{
+            holder.mTvBtnStatus.setText(status);
+        }
         if(status.equals("Used")){
-            holder.mTvBtnStatus.setText(reward.getStatus());
             holder.mTvBtnStatus.setBackgroundResource(R.color.white_grey);
         }else if(status.equals("Expired")){
-            holder.mTvBtnStatus.setText(reward.getStatus());
             holder.mTvBtnStatus.setBackgroundResource(R.color.white_grey);
-        }else{
-            holder.mTvBtnStatus.setText(R.string.use_now);
+        }else {
+            holder.mTvBtnStatus.setBackgroundResource(R.color.medium_pink);
             holder.mTvBtnStatus.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -137,6 +141,10 @@ public class RewardTransactionAdapter extends RecyclerView.Adapter<RewardTransac
         rewardTransaction.setRedeemDate(curDate);
         mRewardTransactionViewModel.updateRewardTransaction(rewardTransaction);
         Toast.makeText(mActivity, "Reward successfully redeemed", Toast.LENGTH_SHORT).show();
+        int rewardTransID = rewardTransaction.getReward_transID();
+        Intent i = new Intent(mActivity, RewardQR.class );
+        i.putExtra("rewardTransID", rewardTransID);
+        mActivity.startActivity(i);
     }
 
     private String updateRewardTransactionStatus(RewardTransaction rewardTransaction) {
@@ -153,4 +161,6 @@ public class RewardTransactionAdapter extends RecyclerView.Adapter<RewardTransac
 
         return status;
     }
+
+
 }

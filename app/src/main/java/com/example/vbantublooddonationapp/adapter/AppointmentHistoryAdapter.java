@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
@@ -76,6 +77,7 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
             holder.mTvBloodAmount.setText(bloodAmount);
         }
         else{
+            Toast.makeText(mActivity, "ias", Toast.LENGTH_SHORT).show();
             holder.mTvStatus.setBackgroundResource(R.color.light_grey);
             holder.mTvBloodAmount.setVisibility(View.GONE);
         }

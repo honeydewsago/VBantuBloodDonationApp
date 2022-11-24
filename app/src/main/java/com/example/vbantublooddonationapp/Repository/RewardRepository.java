@@ -7,7 +7,6 @@ import androidx.lifecycle.LiveData;
 
 import com.example.vbantublooddonationapp.BloodRoomDatabase;
 import com.example.vbantublooddonationapp.DAO.RewardDao;
-import com.example.vbantublooddonationapp.Model.Organiser;
 import com.example.vbantublooddonationapp.Model.Reward;
 
 import java.util.List;
@@ -15,19 +14,43 @@ import java.util.concurrent.ExecutionException;
 
 public class RewardRepository {
     private RewardDao mRewardDao;
-    private LiveData<List<Reward>> mAllRewards;
 
     public RewardRepository(Application application){
         BloodRoomDatabase db = BloodRoomDatabase.getINSTANCE(application);
         mRewardDao = db.rewardDao();
-        mAllRewards = mRewardDao.getAllRewards();
     }
 
     public void insert(Reward reward){
         new RewardRepository.insertAsyncTask(mRewardDao).execute(reward);
     }
 
-    public LiveData<List<Reward>> getAllRewards() {return mAllRewards;}
+    public List<Reward> getAllReward() {
+        List<Reward> list = null;
+        try {
+            list = new RewardRepository.getRewardAsyncTask(mRewardDao).execute().get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    private static class getRewardAsyncTask extends AsyncTask<Void, Void, List<Reward>> {
+        private RewardDao mSyncTaskDao;
+
+        getRewardAsyncTask(RewardDao dao) {
+            mSyncTaskDao = dao;
+        }
+
+        @Override
+        protected List<Reward> doInBackground(Void...params) {
+            List<Reward> rewardList = mSyncTaskDao.getAllRewards();
+            return rewardList;
+        }
+    }
+
+
 
     public class insertAsyncTask extends AsyncTask<Reward, Void, Void> {
         private RewardDao mSyncTaskDao;
