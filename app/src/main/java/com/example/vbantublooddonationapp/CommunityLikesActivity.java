@@ -14,6 +14,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.vbantublooddonationapp.Model.CommunityLikes;
 import com.example.vbantublooddonationapp.Model.Organiser;
@@ -119,9 +120,8 @@ public class CommunityLikesActivity extends AppCompatActivity {
         mOrLikesList = new ArrayList<>();
         mUserLikesList = new ArrayList<>();
 
-        mOrLikesList.addAll(mUserLikesList);
-
-        mCommunityLikesAdapter = new CommunityLikesAdapter(CommunityLikesActivity.this, mOrLikesList);
+        Toast.makeText(this, ""+mUserLikesList.size(), Toast.LENGTH_SHORT).show();
+        mCommunityLikesAdapter = new CommunityLikesAdapter(CommunityLikesActivity.this);
         mActivityCommunityLikesBinding.aclRvLikes.setAdapter(mCommunityLikesAdapter);
         mActivityCommunityLikesBinding.aclRvLikes.setHasFixedSize(true);
 
@@ -142,8 +142,6 @@ public class CommunityLikesActivity extends AppCompatActivity {
                     //add the data to the array list
                     mOrLikesList.add(likesOr);
                 }
-                //update the adapter
-                mCommunityLikesAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -161,8 +159,6 @@ public class CommunityLikesActivity extends AppCompatActivity {
                     //add the data to the array list
                     mUserLikesList.add(likesUser);
                 }
-                //update the adapter
-                mCommunityLikesAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -170,6 +166,9 @@ public class CommunityLikesActivity extends AppCompatActivity {
 
             }
         });
+
+        mOrLikesList.addAll(mUserLikesList);
+        mCommunityLikesAdapter.setLikesList(mOrLikesList);
     }
 
     //back button
