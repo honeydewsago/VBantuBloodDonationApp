@@ -15,17 +15,18 @@ import java.util.concurrent.ExecutionException;
 public class AppointmentRepository {
     private AppointmentDao mAppointmentDao;
 
+    //initialize database and dao
     public AppointmentRepository(Application application) {
         BloodRoomDatabase db = BloodRoomDatabase.getINSTANCE(application);
         mAppointmentDao = db.appointmentDao();
     }
 
-    //insert data into appointment_table
+    //function to insert appointment to database
     public void insert(Appointment appointment) {
         new AppointmentRepository.insertAsyncTask(mAppointmentDao).execute(appointment);
     }
 
-    //retrieve request using user id
+    //function to get all the blood requests of a user by user id
     public LiveData<List<Appointment>> getRequestByUserId(int id) {
         LiveData<List<Appointment>> list = null;
 
@@ -39,7 +40,7 @@ public class AppointmentRepository {
         return list;
     }
 
-    //get appointment id
+    //function get a specific request by request id
     public List<Appointment> getRequestById(int id) {
         List<Appointment> list = null;
 
@@ -52,7 +53,6 @@ public class AppointmentRepository {
         }
         return list;
     }
-
 
     public class insertAsyncTask extends AsyncTask<Appointment, Void, Void> {
         private AppointmentDao mSyncTaskDao;
@@ -68,7 +68,7 @@ public class AppointmentRepository {
         }
     }
 
-    //retrieve appointment using organiser id
+    //function to get all appointment of a single organiser by organiser id
     public LiveData<List<Appointment>> getAppointmentByOrganiserID(int id) {
         LiveData<List<Appointment>> list = null;
 
@@ -128,7 +128,6 @@ public class AppointmentRepository {
         }
     }
 
-    //get appointment by id
     public List<Appointment> getAppointmentById(int id) {
         List<Appointment> list = null;
 

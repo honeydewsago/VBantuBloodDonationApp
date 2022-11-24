@@ -48,6 +48,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Locati
 
         mBloodTypeAdapter = new BloodTypeAdapter(mActivity);
 
+        //set general blood type list for all blood bank locations
         mBloodTypeList = new ArrayList<String>();
         mBloodTypeList.add("AB");
         mBloodTypeList.add("A");
@@ -55,6 +56,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Locati
         mBloodTypeList.add("O");
     }
 
+    //set the list for blood bank locations
     public void setOrganiserList(List<Organiser> organiserList) {
         mOrganiserList = organiserList;
         notifyDataSetChanged();
@@ -63,18 +65,21 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Locati
     @NonNull
     @Override
     public LocationHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        //set the view for each holder
         CardLocationBinding itemBinding = CardLocationBinding.inflate(mActivity.getLayoutInflater());
         return new LocationHolder(itemBinding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull LocationHolder holder, int position) {
+        //set blood bank location information
         Organiser organiser = mOrganiserList.get(position);
         holder.mTvOrganiser.setText(organiser.getCompanyName());
 
         String imageUrl = getImageLink(organiser.getOrganiserID());
         setImage(imageUrl, holder.mIvOrganiserImage, organiser.getOrganiserID());
 
+        //limit address display length
         String address = organiser.getAddress();
         if (address.length() > 50) {
             address = address.substring(0,47);
@@ -82,6 +87,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Locati
         }
         holder.mTvAddress.setText(address);
 
+        //set the adapter to show blood shortage type recycler view
         mBloodTypeAdapter.setBloodTypeList(mBloodTypeList);
         holder.mRvBloodType.setAdapter(mBloodTypeAdapter);
 
@@ -127,6 +133,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Locati
         }
     }
 
+    //launch single blood bank location activity
     public void startSingleLocationActivity(int position){
         Organiser currentOrganiser = mOrganiserList.get(position);
 
@@ -137,6 +144,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Locati
         mActivity.startActivity(i);
     }
 
+    //set organiser cover photo
     private void setImage(String imageUrl, ImageView imageView, int organiserID) {
         if (imageUrl != null) {
             mStorageReference = FirebaseStorage.getInstance("gs://vbantu-blood-donation-app.appspot.com/").getReference("Organiser/"+ organiserID +"/"+imageUrl);
@@ -161,6 +169,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Locati
         }
     }
 
+    //get organiser cover photo by organiser id
     private String getImageLink(int id) {
         for (OrganiserImage organiserImage : mOrganiserImageList) {
             if (Integer.parseInt(organiserImage.getOrganiserID()) == id) {
