@@ -48,6 +48,7 @@ public class LoginFragment extends Fragment {
         //get the shared preferences file
         mPreferences = getActivity().getSharedPreferences("com.example.vbantublooddonationapp",MODE_PRIVATE);
 
+        //if user have not logged out previously, enable auto login
         if (mPreferences.contains(USERID_KEY) && mPreferences.contains(USERTYPE_KEY)) {
             Intent i = new Intent(getActivity(), HomeActivity.class);
             startActivity(i);
@@ -132,6 +133,7 @@ public class LoginFragment extends Fragment {
         binding.flTvForgotPassLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //launch forgot password page
                 Intent forgotPass = new Intent(getActivity(),ForgotPasswordActivity.class);
                 startActivity(forgotPass);
             }

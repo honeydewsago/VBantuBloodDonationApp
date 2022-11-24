@@ -41,6 +41,7 @@ public class UserAppointmentsActivity extends AppCompatActivity {
         binding = ActivityUserAppointmentsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        //set toolbar
         Toolbar toolbar = binding.auaToolbar;
 
         setSupportActionBar(toolbar);
@@ -48,6 +49,7 @@ public class UserAppointmentsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbar.setNavigationIcon(ContextCompat.getDrawable(this, R.drawable.ic_arrow_back_ios));
 
+        //get current logged in user from shared preferences
         mPreferences = getSharedPreferences("com.example.vbantublooddonationapp",MODE_PRIVATE);
 
         if (mPreferences.contains(USERID_KEY) && mPreferences.contains(USERTYPE_KEY)) {
@@ -55,17 +57,19 @@ public class UserAppointmentsActivity extends AppCompatActivity {
             mUserType = mPreferences.getString(USERTYPE_KEY, "user");
         }
 
+        //set user appointment adapter to the recycler view
         mUserAppointmentAdapter = new UserAppointmentAdapter(this);
         binding.auaRvAppointments.setAdapter(mUserAppointmentAdapter);
 
         //set the layout manager
         binding.auaRvAppointments.setLayoutManager(new GridLayoutManager(this,getResources().getInteger(R.integer.grid_column_count)));
 
+        //initialize view model
         initAppointmentViewModel();
     }
 
     private void initAppointmentViewModel() {
-        //initialize the view model from the BloodRequestViewModel
+        //initialize the view model from the AppointmentViewModel
         mAppointmentViewModel = new ViewModelProvider(this).get(AppointmentViewModel.class);
 
         //initialize the observer to observe the Live Data
@@ -76,9 +80,11 @@ public class UserAppointmentsActivity extends AppCompatActivity {
             }
         };
 
+        //get all the appointments of a specific organiser
         mAppointmentViewModel.getAppointmentByOrganiserID(mUserID).observe(this,appointmentListObserver);
     }
 
+    //back button navigation
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {

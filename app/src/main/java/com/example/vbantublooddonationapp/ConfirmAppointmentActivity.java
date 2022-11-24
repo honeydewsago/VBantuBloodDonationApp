@@ -27,6 +27,7 @@ import java.util.Objects;
 
 public class ConfirmAppointmentActivity extends AppCompatActivity {
 
+    //declare variables
     private final String USERID_KEY = "userid", USERTYPE_KEY = "usertype";
     private SharedPreferences mPreferences;
     private int mUserID = 1;
@@ -44,10 +45,12 @@ public class ConfirmAppointmentActivity extends AppCompatActivity {
         binding = ActivityConfirmAppointmentBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        //initialize view model
         mOrganiserViewModel = new ViewModelProvider(this).get(OrganiserViewModel.class);
         mAppointmentViewModel = new ViewModelProvider(this).get(AppointmentViewModel.class);
         mUserViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
+        //set toolbar
         Toolbar toolbar = binding.acaToolbar;
 
         setSupportActionBar(toolbar);
@@ -55,6 +58,7 @@ public class ConfirmAppointmentActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbar.setNavigationIcon(ContextCompat.getDrawable(this, R.drawable.ic_arrow_back_ios));
 
+        //get current logged in user from shared preferences
         mPreferences = getSharedPreferences("com.example.vbantublooddonationapp",MODE_PRIVATE);
 
         if (mPreferences.contains(USERID_KEY) && mPreferences.contains(USERTYPE_KEY)) {
@@ -62,19 +66,24 @@ public class ConfirmAppointmentActivity extends AppCompatActivity {
             mUserType = mPreferences.getString(USERTYPE_KEY, "user");
         }
 
+        //get appointment info from intent
         Intent i = getIntent();
         int appointmentID = i.getIntExtra("currentAppointmentID", 1);
         int appointmentUserID = i.getIntExtra("appointmentUserID", 1);
 
+        //get the organiser object from the organiser ID
         List<Organiser> organiserList = mOrganiserViewModel.getOrganiserById(mUserID);
         Organiser mOrganiser = organiserList.get(0);
 
+        //get the user object from the user ID
         List<User> userList = mUserViewModel.getUserById(appointmentUserID);
         User mUser = userList.get(0);
 
+        //get the appointment object from the appointment ID
         List<Appointment> appointmentList = mAppointmentViewModel.getAppointmentById(appointmentID);
         mAppointment = appointmentList.get(0);
 
+        //set the appointment details
         binding.acaTvLocation.setText(mOrganiser.getCompanyName());
         binding.acaTvDonorName.setText(mUser.getFullName());
         binding.acaTvDate.setText(getFullDate(mAppointment.getAppointmentDate()));
@@ -89,26 +98,30 @@ public class ConfirmAppointmentActivity extends AppCompatActivity {
     }
 
     private void confirmAppointment() {
+        //let organiser select the blood amount
         String bloodAmtStr = binding.acaSpinnerBloodAmt.getSelectedItem().toString().trim();
 
-        //validate to check if date of birth is empty
+        //validate to check if blood amount is empty
         if (bloodAmtStr.equals("Select amount")) {
             Toast.makeText(this, R.string.bloodAmountRequiredToast, Toast.LENGTH_SHORT).show();
             binding.acaSpinnerBloodAmt.requestFocus();
             return;
         }
 
+        //set the blood amount and appointment status in database
         int bloodAmt = getBloodAmt(bloodAmtStr);
         mAppointment.setBloodAmt(bloodAmt);
         mAppointment.setStatus("Completed");
         mAppointmentViewModel.updateAppointment(mAppointment);
 
+        //inform user and navigate back to home
         Toast.makeText(this, R.string.userAppointmentConfirmedToast, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(ConfirmAppointmentActivity.this, HomeActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
+    //convert string of blood amount to integer
     public int getBloodAmt(String bloodMl) {
         switch (bloodMl) {
             case "200 ml":
@@ -129,6 +142,7 @@ public class ConfirmAppointmentActivity extends AppCompatActivity {
         return 0;
     }
 
+    //convert the numerical date to full date with month labelled
     public String getFullDate(String dateTime) {
         String year = dateTime.substring(0,4);
         int month = Integer.parseInt(dateTime.substring(4,6));
@@ -137,6 +151,7 @@ public class ConfirmAppointmentActivity extends AppCompatActivity {
         return day + " "+ getMonthName(month) + " " + year;
     }
 
+    //get the month name
     public String getMonthName(int month_value){
         switch (month_value) {
             case 1:
@@ -168,6 +183,7 @@ public class ConfirmAppointmentActivity extends AppCompatActivity {
         }
     }
 
+    //set back button navigation
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
