@@ -6,10 +6,8 @@ import android.os.AsyncTask;
 import androidx.lifecycle.LiveData;
 
 import com.example.vbantublooddonationapp.BloodRoomDatabase;
-import com.example.vbantublooddonationapp.DAO.OrganiserDao;
 import com.example.vbantublooddonationapp.DAO.UserDao;
 import com.example.vbantublooddonationapp.Model.LoginParams;
-import com.example.vbantublooddonationapp.Model.Organiser;
 import com.example.vbantublooddonationapp.Model.User;
 
 import java.util.List;
@@ -26,11 +24,13 @@ public class UserRepository {
         mAllUsers = mUserDao.getAllUsers();
     }
 
+    //insert user data into user table
     public void insert(User user) {
         new insertAsyncTask(mUserDao).execute(user);
     }
 
 
+    //retrieve all users
     public LiveData<List<User>> getAllUsers(){return mAllUsers;}
     private static class insertAsyncTask extends AsyncTask<User, Void, Void> {
         private UserDao mSyncTaskDao;
@@ -46,6 +46,7 @@ public class UserRepository {
         }
     }
 
+    //retrieve all user emails
     public List<String> getAllUserEmails() {
         List<String> list = null;
         try {
@@ -72,6 +73,7 @@ public class UserRepository {
         }
     }
 
+    //login for user
     public List<User> loginUser(String email, String password) {
         LoginParams params = new LoginParams(email, password);
 
@@ -101,6 +103,7 @@ public class UserRepository {
         }
     }
 
+    //retrieve user by id
     public List<User> getUserById(int id) {
         List<User> list = null;
 
@@ -128,6 +131,7 @@ public class UserRepository {
         }
     }
 
+    //update the user details
     public void update(User user) {
         new UserRepository.updateAsyncTask(mUserDao).execute(user);
     }

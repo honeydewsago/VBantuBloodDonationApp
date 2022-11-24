@@ -20,10 +20,12 @@ public class AppointmentRepository {
         mAppointmentDao = db.appointmentDao();
     }
 
+    //insert data into appointment_table
     public void insert(Appointment appointment) {
         new AppointmentRepository.insertAsyncTask(mAppointmentDao).execute(appointment);
     }
 
+    //retrieve request using user id
     public LiveData<List<Appointment>> getRequestByUserId(int id) {
         LiveData<List<Appointment>> list = null;
 
@@ -37,6 +39,7 @@ public class AppointmentRepository {
         return list;
     }
 
+    //get appointment id
     public List<Appointment> getRequestById(int id) {
         List<Appointment> list = null;
 
@@ -49,6 +52,7 @@ public class AppointmentRepository {
         }
         return list;
     }
+
 
     public class insertAsyncTask extends AsyncTask<Appointment, Void, Void> {
         private AppointmentDao mSyncTaskDao;
@@ -64,6 +68,7 @@ public class AppointmentRepository {
         }
     }
 
+    //retrieve appointment using organiser id
     public LiveData<List<Appointment>> getAppointmentByOrganiserID(int id) {
         LiveData<List<Appointment>> list = null;
 
@@ -123,6 +128,7 @@ public class AppointmentRepository {
         }
     }
 
+    //get appointment by id
     public List<Appointment> getAppointmentById(int id) {
         List<Appointment> list = null;
 

@@ -20,10 +20,12 @@ public class RewardRepository {
         mRewardDao = db.rewardDao();
     }
 
+    //insert reward into reward_table
     public void insert(Reward reward){
         new RewardRepository.insertAsyncTask(mRewardDao).execute(reward);
     }
 
+    //get all reward
     public List<Reward> getAllReward() {
         List<Reward> list = null;
         try {
@@ -65,6 +67,7 @@ public class RewardRepository {
         }
     }
 
+    //retrieve request by id
     public List<Reward> getRequestById(int id){
         List<Reward> list = null;
 
@@ -92,6 +95,7 @@ public class RewardRepository {
         }
     }
 
+    //retrieve reward by user id
     public LiveData<List<Reward>> getRewardByUserId(int id){
         LiveData<List<Reward>> list = null;
         try {
@@ -118,6 +122,8 @@ public class RewardRepository {
             return rewardList;
         }
     }
+
+    //update reward info
     public void update(Reward reward) {
         new RewardRepository.updateAsyncTask(mRewardDao).execute(reward);
     }

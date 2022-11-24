@@ -7,10 +7,8 @@ import androidx.lifecycle.LiveData;
 
 import com.example.vbantublooddonationapp.BloodRoomDatabase;
 import com.example.vbantublooddonationapp.DAO.OrganiserDao;
-import com.example.vbantublooddonationapp.DAO.UserDao;
 import com.example.vbantublooddonationapp.Model.LoginParams;
 import com.example.vbantublooddonationapp.Model.Organiser;
-import com.example.vbantublooddonationapp.Model.User;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -26,10 +24,12 @@ public class OrganiserRepository {
         mAllOrganisers = mOrganiserDao.getAllOrganisers();
     }
 
+    //retrieve all orgarniser
     public LiveData<List<Organiser>> getAllOrganisers() {
         return mAllOrganisers;
     }
 
+    //insert data into organiser_table
     public void insert(Organiser organiser) {
         new insertAsyncTask(mOrganiserDao).execute(organiser);
     }
@@ -48,6 +48,7 @@ public class OrganiserRepository {
         }
     }
 
+    //login as organiser
     public List<Organiser> loginOrganiser(String email, String password) {
         LoginParams params = new LoginParams(email, password);
 
@@ -77,6 +78,7 @@ public class OrganiserRepository {
         }
     }
 
+    //get all organiser email
     public List<String> getAllOrganiserEmails() {
         List<String> list = null;
         try {
@@ -130,6 +132,7 @@ public class OrganiserRepository {
         }
     }
 
+    //update organiser detail into organiser table
     public void update(Organiser organiser) {
         new OrganiserRepository.updateAsyncTask(mOrganiserDao).execute(organiser);
     }

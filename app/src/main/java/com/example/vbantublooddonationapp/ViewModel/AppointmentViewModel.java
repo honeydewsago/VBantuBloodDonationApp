@@ -19,26 +19,32 @@ public class AppointmentViewModel extends AndroidViewModel {
         mRepository = new AppointmentRepository(application);
     }
 
+    //send to repo to insert appoinment
     public void insertAppointment(Appointment appointment) {
         mRepository.insert(appointment);
     }
 
+    //send to repo to retrieve appointment by organiser id
     public LiveData<List<Appointment>> getAppointmentByOrganiserID(int id) {
         return mRepository.getAppointmentByOrganiserID(id);
     }
 
+    //send to repo to update appointment details
     public void updateAppointment(Appointment appointment) {
         mRepository.update(appointment);
     }
 
+    //send to repo and get request by user id
     public LiveData<List<Appointment>> getRequestByUserId(int id) {
         return mRepository.getRequestByUserId(id);
     }
 
+    //send to repo and get appointment by id
     public List<Appointment> getAppointmentById(int id) {
         return mRepository.getRequestById(id);
     }
 
+    //send to repo and get all completed appointment
     public List<Appointment> getAllCompletedAppointment() {
         return mRepository.getAllCompletedAppointment();
     }
