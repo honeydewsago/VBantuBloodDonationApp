@@ -1,12 +1,13 @@
 package com.example.vbantublooddonationapp;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 
@@ -27,30 +28,26 @@ public class MyRewardFragment extends Fragment {
     private RewardTransactionViewModel mRewardTransactionViewModel;
     private RewardTransactionAdapter mRewardTransactionAdapter;
 
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        binding = FragmentMyRewardsBinding.inflate(getLayoutInflater());
+        return binding.getRoot();
+    }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mRewardTransactionViewModel = new ViewModelProvider(this).get(RewardTransactionViewModel.class);
+        mRewardViewModel = new ViewModelProvider(this).get(RewardViewModel.class);
+        List<RewardTransaction> mRewardTransList = mRewardTransactionViewModel.getAllRewards();
         mRewardTransactionAdapter = new RewardTransactionAdapter(getActivity());
+        mRewardTransactionAdapter.setRewardTransList(mRewardTransList);
+        List<Reward> mRewardList = mRewardViewModel.getAllRewards();
+        mRewardAdapter =  new RewardAdapter(getActivity());
+        mRewardAdapter.setRewardList(mRewardList);
         binding.fmyRv.setAdapter(mRewardTransactionAdapter);
         binding.fmyRv.setLayoutManager(new GridLayoutManager(view.getContext(),1));
-        initRewardTransactionViewModel();
     }
-    private void initRewardTransactionViewModel(){
-        mRewardTransactionViewModel = new ViewModelProvider(this).get(RewardTransactionViewModel.class);
 
-        final Observer<List<RewardTransaction>> rewardTransListObserver = new Observer<List<RewardTransaction>>() {
-            @Override
-            public void onChanged(List<RewardTransaction> rewardTransactions) {mRewardTransactionAdapter.setRewardTransList(rewardTransactions);}
-        };
-        mRewardTransactionViewModel.getAllRewardTransactions().observe(getViewLifecycleOwner(),rewardTransListObserver);
-
-        mRewardViewModel = new ViewModelProvider(this).get(RewardViewModel.class);
-        Observer<List<Reward>> rewardListObserver = new Observer<List<Reward>>() {
-            @Override
-            public void onChanged(List<Reward> rewards) {
-                mRewardAdapter.setRewardList(rewards);
-            }
-        };
-        mRewardViewModel.getAllRewards().observe(getViewLifecycleOwner(),rewardListObserver);
-    }
 }

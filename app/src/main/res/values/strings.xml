@@ -242,6 +242,8 @@
     <string name="use_now">Use Now</string>
     <string name="newPasswordHint">New Password</string>
     <string name="confirmNewPasswordHint">Confirm New Password</string>
+    <string name="contactNumAtLeast9Char">Contact number must be at least 9 characters!</string>
+    <string name="show_qr">Show this QR Code to the blood donation center to confirm your identity</string>
 
     <string-array name="bloodGroupValues">
         <item>Select blood type</item>
