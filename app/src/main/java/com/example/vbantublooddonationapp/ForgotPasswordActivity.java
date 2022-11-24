@@ -50,6 +50,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         String email = binding.afpEtEmail.getText().toString();
         mUserViewModel = new ViewModelProvider(this).get(UserViewModel.class);
         mOrganiserViewModel = new ViewModelProvider(this).get(OrganiserViewModel.class);
+        //set otp
         String otp = getAlphaNumericString(6);
         String userName ="";
 
@@ -69,6 +70,8 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
         List<String> organiserEmailsList= mOrganiserViewModel.getAllOrganiserEmails();
         List<String> userEmailsList= mUserViewModel.getAllUserEmails();
+
+        //check whether email inputted is in registered organiser email list
         for (String organiserEmail : organiserEmailsList) {
             if (organiserEmail.equals(email)) {
                 userType = "organiser";
@@ -79,6 +82,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             }
         }
 
+        //check whether email inputted is in registered user email list
         for (String userEmail : userEmailsList) {
             if (userEmail.equals(email)) {
                 userType = "user";
@@ -94,6 +98,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         otpa.putExtra("userType", userType);
         otpa.putExtra("userID", userID);
         otpa.putExtra("otp", otp);
+        //send user email the otp to reset password
         sendEmail(userName, email, otp);
         startActivity(otpa);
         finish();
@@ -104,6 +109,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
     }
 
+    //send email function
     private void sendEmail(String userName, String email, String otp) {
         String receiver = email;
         String subject = "Reset your password";
@@ -117,6 +123,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     }
 
 
+    //generate otp
     private String getAlphaNumericString(int n) {
         String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 + "0123456789";
