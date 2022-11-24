@@ -30,6 +30,7 @@ public class StoreFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        //binding with the layout xml file
         binding = FragmentStoreBinding.inflate(getLayoutInflater());
         return binding.getRoot();
     }
@@ -37,10 +38,15 @@ public class StoreFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        //initialize view model and get all rewards into a list
         mRewardViewModel = new ViewModelProvider(this).get(RewardViewModel.class);
         List<Reward> mRewardList = mRewardViewModel.getAllRewards();
+        //making a new adapter
         mRewardAdapter =  new RewardAdapter(getActivity());
+        //setting the reward list to the adapter
         mRewardAdapter.setRewardList(mRewardList);
+        //set the adapter to the recycler view
         binding.fsRv.setAdapter(mRewardAdapter);
         binding.fsRv.setLayoutManager(new LinearLayoutManager(getContext()));
 

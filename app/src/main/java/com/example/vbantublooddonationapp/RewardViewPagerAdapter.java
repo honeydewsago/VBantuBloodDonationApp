@@ -12,15 +12,16 @@ public class RewardViewPagerAdapter extends FragmentStateAdapter {
     @Override
     public Fragment createFragment(int position) {
         switch (position){
-            case 0:
+            case 0://go storefragment if selected
                 return new StoreFragment();
-            case 1:
+            case 1://go myrewardfragment if selected
                 return new MyRewardFragment();
-            default:
+            default://default page
                 return new StoreFragment();
         }
     }
 
+    //number of fragment
     @Override
     public int getItemCount() {
         return 2;

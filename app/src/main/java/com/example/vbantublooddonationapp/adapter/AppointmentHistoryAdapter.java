@@ -27,28 +27,33 @@ import java.util.Locale;
 
 public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentHistoryAdapter.AppointmentHistoryHolder> {
 
+    //initialize variable
     private Activity mActivity;
     private List<Appointment> mAppointmentList;
     private List<Organiser> mOrganiserList;
     private OrganiserViewModel mOrganiserViewModel;
     private AppointmentViewModel mAppointmentViewModel;
 
+    //constructur
     public AppointmentHistoryAdapter(Activity activity){
         mActivity = activity;
         mOrganiserViewModel = new ViewModelProvider((FragmentActivity) mActivity).get(OrganiserViewModel.class);
     }
 
 
+    //setting appointment list
     public void setAppointmentList(List<Appointment> appointmentList){
         mAppointmentList = appointmentList;
         notifyDataSetChanged();
     }
 
+    //setting organiser list
     public void setOrganiserList(List<Organiser> organiserList){mOrganiserList = organiserList;}
 
     @NonNull
     @Override
     public AppointmentHistoryHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        //binding with the layout xml file
         CardAppointmentBinding itemBinding = CardAppointmentBinding.inflate(mActivity.getLayoutInflater());
         return new AppointmentHistoryHolder(itemBinding);
     }
@@ -58,6 +63,7 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
         Appointment appointment = mAppointmentList.get(position);
         String bloodAmount;
 
+        //setting the data from the appointment table
         bloodAmount = "Blood Amount: " + String.valueOf(appointment.getBloodAmt()) + " ml";
 
         holder.mTvBDC.setText(getOrganiserName(appointment.getOrganiserID()));
@@ -67,6 +73,7 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
         String status = updateAppointmentStatus(appointment);
 
         holder.mTvStatus.setText(status);
+        //validation for status by change text and color
         if (status.equals("Ongoing")) {
             holder.mTvStatus.setBackgroundResource(R.color.orange);
             holder.mTvBloodAmount.setVisibility(View.GONE);
@@ -83,6 +90,7 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
         }
     }
 
+    //get item count
     @Override
     public int getItemCount() {
         if(mAppointmentList==null){
@@ -95,6 +103,7 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
         private TextView mTvBDC, mTvAppointmentDate, mTvAppointmentTime, mTvBloodAmount,mTvStatus, mTvAppointmentDetails;
         public AppointmentHistoryHolder(CardAppointmentBinding itemBinding) {
             super(itemBinding.getRoot());
+            //binding with the layout xml file
             mTvBDC = itemBinding.caTvBDC;
             mTvAppointmentDate = itemBinding.caTvAppointmentDate;
             mTvAppointmentTime = itemBinding.caTvAppointmentTime;
@@ -102,6 +111,7 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
             mTvStatus = itemBinding.caTvStatus;
             mTvAppointmentDetails = itemBinding.caTvAppointmentDetails;
 
+            //onclick listener to bring them to the appointment details
             itemBinding.getRoot().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -120,6 +130,7 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
 
     }
 
+    //start appointment details with intent
     public void startAppointmentDetails(int position){
         Appointment currentAppointment = mAppointmentList.get(position);
         Intent i = new Intent(mActivity, AppointmentDetailActivity.class);
@@ -129,12 +140,14 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
         mActivity.startActivity(i);
     }
 
+    //getting organiser name from the organiser table
     public String getOrganiserName(int id){
         List<Organiser> organiserList = mOrganiserViewModel.getOrganiserById(id);
         Organiser organiser = organiserList.get(0);
         return organiser.getCompanyName();
     }
 
+    //formatting date from database into readable date format
     public String getFullDate(String dateTime) {
         String year = dateTime.substring(0,4);
         int month = Integer.parseInt(dateTime.substring(4,6));
@@ -174,6 +187,7 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
         }
     }
 
+    //update status if there is expire appointment
     private String updateAppointmentStatus(Appointment appointment) {
         String status = appointment.getStatus();
 
