@@ -40,6 +40,7 @@ public class UrgentRequestAdapter extends RecyclerView.Adapter<UrgentRequestAdap
         mBloodTypeAdapter = new BloodTypeAdapter(mActivity);
     }
 
+    //set the list for blood requests
     public void setRequestList(List<BloodRequest> requestList) {
         mRequestList = requestList;
         notifyDataSetChanged();
@@ -48,15 +49,18 @@ public class UrgentRequestAdapter extends RecyclerView.Adapter<UrgentRequestAdap
     @NonNull
     @Override
     public UrgentRequestHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        //set the view for each holder
         CardUrgentRequestBinding itemBinding = CardUrgentRequestBinding.inflate(mActivity.getLayoutInflater());
         return new UrgentRequestHolder(itemBinding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull UrgentRequestHolder holder, int position) {
+        //set the blood request information
         BloodRequest request = mRequestList.get(position);
         holder.mTvOrganiser.setText(getOrganiserName(request.getOrganiserID()));
 
+        //limit request info display length
         String requestInfo = request.getRequestInfo();
         if (requestInfo.length() > 55) {
             requestInfo = requestInfo.substring(0,52);
@@ -64,9 +68,11 @@ public class UrgentRequestAdapter extends RecyclerView.Adapter<UrgentRequestAdap
         }
         holder.mTvRequestInfo.setText(requestInfo);
 
+        //derive the array list of blood shortage type
         String bloodShortage = request.getShortageType();
         mBloodTypeList = Arrays.asList(bloodShortage.split(","));
 
+        //set the adapter to show blood shortage type recycler view
         mBloodTypeAdapter.setBloodTypeList(mBloodTypeList);
         holder.mRvBloodType.setAdapter(mBloodTypeAdapter);
 
@@ -110,6 +116,7 @@ public class UrgentRequestAdapter extends RecyclerView.Adapter<UrgentRequestAdap
         }
     }
 
+    //launch single blood urgent request activity
     public void startSingleRequestActivity(int position){
         BloodRequest currentRequest = mRequestList.get(position);
 
@@ -120,6 +127,7 @@ public class UrgentRequestAdapter extends RecyclerView.Adapter<UrgentRequestAdap
         mActivity.startActivity(i);
     }
 
+    //get the organiser name from organiser id
     public String getOrganiserName(int id){
         List<Organiser> organiserList = mOrganiserViewModel.getOrganiserById(id);
         Organiser organiser = organiserList.get(0);

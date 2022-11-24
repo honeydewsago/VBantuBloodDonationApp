@@ -39,6 +39,7 @@ public class BloodRequestHistoryAdapter extends RecyclerView.Adapter<BloodReques
         mBloodRequestViewModel = new ViewModelProvider((FragmentActivity)mActivity).get(BloodRequestViewModel.class);
     }
 
+    //set the list for blood request
     public void setRequestList(List<BloodRequest> requestList) {
         mRequestList = requestList;
     }
@@ -46,26 +47,31 @@ public class BloodRequestHistoryAdapter extends RecyclerView.Adapter<BloodReques
     @NonNull
     @Override
     public BloodRequestHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        //set the view for each holder
         CardBloodRequestHistoryBinding itemBinding = CardBloodRequestHistoryBinding.inflate(mActivity.getLayoutInflater());
         return new BloodRequestHolder(itemBinding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull BloodRequestHolder holder, int position) {
+        //set the blood request information in the holder
         BloodRequest request = mRequestList.get(position);
         holder.mTvRequestInfo.setText(mActivity.getString(R.string.fullRequestInformation,request.getRequestInfo()));
         holder.mTvDate.setText(getFullDate(request.getDateTime()));
         holder.mTvTime.setText(convertTimeTo12HFormat(request.getDateTime()));
 
+        //get the array list of blood shortage type
         String bloodShortage = request.getShortageType();
         mBloodTypeList = Arrays.asList(bloodShortage.split(","));
 
+        //set the adapter to show the recycle view for blood shortage type
         mBloodTypeAdapter.setBloodTypeList(mBloodTypeList);
         holder.mRvBloodType.setAdapter(mBloodTypeAdapter);
 
         //set the layout manager
         holder.mRvBloodType.setLayoutManager(new GridLayoutManager(mActivity.getApplicationContext(), 4));
 
+        //set status switch
         setActiveSwitchListener(request, holder.mScActive);
     }
 
@@ -95,10 +101,12 @@ public class BloodRequestHistoryAdapter extends RecyclerView.Adapter<BloodReques
     }
 
     public void setActiveSwitchListener(BloodRequest request, SwitchCompat activeSwitch){
+        //get initial request status
         if(request.getActive() == 1) {
             activeSwitch.setChecked(true);
         }
 
+        //switch to set status to active or inactive
         activeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
@@ -113,6 +121,7 @@ public class BloodRequestHistoryAdapter extends RecyclerView.Adapter<BloodReques
         });
     }
 
+    //convert the numerical date to full date with month labelled
     public String getFullDate(String dateTime) {
         String year = dateTime.substring(0,4);
         int month = Integer.parseInt(dateTime.substring(4,6));
@@ -121,6 +130,7 @@ public class BloodRequestHistoryAdapter extends RecyclerView.Adapter<BloodReques
         return day + " "+ getMonthName(month) + " " + year;
     }
 
+    //get the month name
     public String getMonthName(int month_value){
         switch (month_value) {
             case 1:
@@ -152,6 +162,7 @@ public class BloodRequestHistoryAdapter extends RecyclerView.Adapter<BloodReques
         }
     }
 
+    //convert 24Hr Time format to 12Hr
     public String convertTimeTo12HFormat(String dateTime) {
         String time24H = dateTime.substring(9,15);
         int hour = Integer.parseInt(time24H.substring(0,2));

@@ -20,7 +20,6 @@ public interface AppointmentDao {
     @Query("Select * from appointment_table where userID=(:id)")
     List<Appointment> getRequestByUserId(int id);
 
-
     @Update
     void update(Appointment... appointments);
 
