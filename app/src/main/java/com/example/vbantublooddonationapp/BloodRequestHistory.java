@@ -25,6 +25,7 @@ import java.util.Objects;
 
 public class BloodRequestHistory extends AppCompatActivity {
 
+    //declare variables
     private final String USERID_KEY = "userid", USERTYPE_KEY = "usertype";
     private SharedPreferences mPreferences;
     private int mUserID = 1;
@@ -40,9 +41,11 @@ public class BloodRequestHistory extends AppCompatActivity {
         binding = ActivityBloodRequestHistoryBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        //initialize view model and adapter
         mBloodRequestViewModel = new ViewModelProvider(this).get(BloodRequestViewModel.class);
         mBloodRequestHistoryAdapter = new BloodRequestHistoryAdapter(this);
 
+        //set toolbar
         Toolbar toolbar = binding.abrhToolbar;
 
         setSupportActionBar(toolbar);
@@ -50,6 +53,7 @@ public class BloodRequestHistory extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbar.setNavigationIcon(ContextCompat.getDrawable(this, R.drawable.ic_arrow_back_ios));
 
+        //get current logged in user from shared preferences
         mPreferences = getSharedPreferences("com.example.vbantublooddonationapp",MODE_PRIVATE);
 
         if (mPreferences.contains(USERID_KEY) && mPreferences.contains(USERTYPE_KEY)) {
@@ -60,11 +64,13 @@ public class BloodRequestHistory extends AppCompatActivity {
         binding.abrhBtnMakeBloodRequest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //launch make blood request activity
                 Intent i = new Intent(BloodRequestHistory.this,MakeBloodRequest.class);
                 startActivity(i);
             }
         });
 
+        //get the list of blood requests of the organiser from database and set to adapter
         List<BloodRequest> mBloodRequestList = mBloodRequestViewModel.getRequestByOrganiserId(mUserID);
         mBloodRequestHistoryAdapter.setRequestList(mBloodRequestList);
         binding.abrhRvBloodRequest.setAdapter(mBloodRequestHistoryAdapter);
@@ -73,6 +79,7 @@ public class BloodRequestHistory extends AppCompatActivity {
         binding.abrhRvBloodRequest.setLayoutManager(new GridLayoutManager(this,getResources().getInteger(R.integer.grid_column_count)));
     }
 
+    //back button navigation
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {

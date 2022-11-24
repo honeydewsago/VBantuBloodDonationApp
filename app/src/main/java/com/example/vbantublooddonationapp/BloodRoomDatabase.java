@@ -28,10 +28,10 @@ public abstract class BloodRoomDatabase extends RoomDatabase {
     public abstract BloodRequestDao bloodRequestDao();
     public abstract RewardDao rewardDao();
     public abstract RewardTransactionDao rewardTransactionDao();
-    //public abstract CommunityPostDao communityPostDao();
 
     public static BloodRoomDatabase INSTANCE;
 
+    //build the database instance and import in the pre-populated data
     public static BloodRoomDatabase getINSTANCE(Context context){
 
         if(INSTANCE == null){

@@ -37,10 +37,12 @@ public class RegisterUserActivity extends AppCompatActivity {
         binding = ActivityRegisterUserBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        //initialize view model
         mUserViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
         mPreferences = getSharedPreferences("com.example.vbantublooddonationapp",MODE_PRIVATE);
 
+        //get user email and full name entered previously
         Intent i = getIntent();
         String email = i.getStringExtra("user_email");
         String fullName = i.getStringExtra("user_fullName");
@@ -140,7 +142,7 @@ public class RegisterUserActivity extends AppCompatActivity {
 
         User user = new User(username,password,fullName,email,icNo,dateOfBirth,gender,contactNo,bloodType,points);
 
-        //insert the user object
+        //insert the user object into database
         mUserViewModel.insertUser(user);
 
         List<User> mUserList = mUserViewModel.loginUser(email,password);
@@ -150,6 +152,7 @@ public class RegisterUserActivity extends AppCompatActivity {
         status = true;
 
         if (status) {
+            //add user info in the shared preferences file
             SharedPreferences.Editor spEditor = mPreferences.edit();
             spEditor.putInt(USERID_KEY, mUserID);
             spEditor.putString(USERTYPE_KEY, mUserType);
@@ -159,9 +162,11 @@ public class RegisterUserActivity extends AppCompatActivity {
         //toast message to inform users the registration is successful
         Toast.makeText(RegisterUserActivity.this, R.string.userRegisterSuccessfully, Toast.LENGTH_SHORT).show();
 
+        //login user after registration
         startActivity(new Intent(RegisterUserActivity.this, HomeActivity.class));
     }
 
+    //set the calendar function to select dob
     public void tvSelectDateOfBirth_clicked(View view) {
         final Calendar c = Calendar.getInstance();
         int year = c.get(Calendar.YEAR);
@@ -186,6 +191,7 @@ public class RegisterUserActivity extends AppCompatActivity {
         birthDate.show();
     }
 
+    //get the gender that is selected
     public void rgGender_clicked(View view) {
         int x = binding.aruRgGender.getCheckedRadioButtonId();
         RadioButton r = findViewById(x);

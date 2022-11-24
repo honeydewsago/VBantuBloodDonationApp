@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         View v = binding.getRoot();
         setContentView(v);
 
+        //set splash screen when app launch
         Animation slideUp = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.slide_up);
         binding.appLabel.startAnimation(slideUp);
 
