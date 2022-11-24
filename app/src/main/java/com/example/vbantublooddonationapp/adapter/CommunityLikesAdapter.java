@@ -17,6 +17,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.vbantublooddonationapp.Model.Appointment;
 import com.example.vbantublooddonationapp.Model.CommunityLikes;
 import com.example.vbantublooddonationapp.Model.Organiser;
 import com.example.vbantublooddonationapp.Model.User;
@@ -43,7 +44,7 @@ import java.util.List;
 public class CommunityLikesAdapter extends RecyclerView.Adapter<CommunityLikesAdapter.CommunityLikesHolder> {
 
     private final Activity mActivity;
-    public final List<CommunityLikes> mLikeList;
+    public List<CommunityLikes> mLikeList;
     private final OrganiserViewModel mOrganiserViewModel;
     private final UserViewModel mUserViewModel;
 
@@ -57,9 +58,10 @@ public class CommunityLikesAdapter extends RecyclerView.Adapter<CommunityLikesAd
     private String postID = "";
     private String dateTime = "";
 
-    public CommunityLikesAdapter(Activity activity, ArrayList<CommunityLikes> mLikesList) {
+    public CommunityLikesAdapter(Activity activity) {
         mActivity = activity;
-        this.mLikeList = mLikesList;
+        //ArrayList<CommunityLikes> mLikesList
+        //this.mLikeList = mLikesList;
         mOrganiserViewModel = new ViewModelProvider((FragmentActivity) mActivity).get(OrganiserViewModel.class);
         mUserViewModel = new ViewModelProvider((FragmentActivity) mActivity).get(UserViewModel.class);
 
@@ -78,6 +80,11 @@ public class CommunityLikesAdapter extends RecyclerView.Adapter<CommunityLikesAd
             List<User> mUserList = mUserViewModel.getUserById(mUserID);
             mUser = mUserList.get(0);
         }
+    }
+
+    public void setLikesList(List<CommunityLikes> mLikesList){
+        this.mLikeList = mLikesList;
+        notifyDataSetChanged();
     }
 
     @NonNull

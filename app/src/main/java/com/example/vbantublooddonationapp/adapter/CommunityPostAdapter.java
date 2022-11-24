@@ -81,6 +81,10 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
     private String dateTime = "";
     private DatabaseReference mRef;
 
+    int userTlike;
+    int organiserTLike;
+    int totalLikeCommunity;
+
     public CommunityPostAdapter(Context context, List<CommunityPosts> communityPostsList, List<CommunityLikes> communityLikesList) {
         //initialize
         this.context = context;
@@ -395,7 +399,7 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
         String postID = post.getPostID();
         String userID = String.valueOf(mUserID);
         likes = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app")
-                .getReference().child("Likes").child(postID).child(userID);
+                .getReference().child("Likes").child(postID).child(mUserType).child(userID);
 
         likes.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -435,7 +439,7 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
             saveLikes.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if (!snapshot.child("Likes").child(postID).child(userID).exists()) {
+                    if (!snapshot.child("Likes").child(postID).child(mUserType).child(userID).exists()) {
                         HashMap<String, Object> likes = new HashMap<>();
                         likes.put("userLikes", "true");
                         likes.put("userID", userID);
@@ -446,7 +450,7 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
                             likes.put("userName", mUser.getUsername());
                         }
                         likes.put("postID", postID);
-                        saveLikes.child("Likes").child(postID).child(userID).updateChildren(likes).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        saveLikes.child("Likes").child(postID).child(mUserType).child(userID).updateChildren(likes).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
@@ -458,7 +462,7 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
                             }
                         });
                     } else {
-                        saveLikes.child("Likes").child(postID).child(String.valueOf(mUserID)).removeValue();
+                        saveLikes.child("Likes").child(postID).child(mUserType).child(userID).removeValue();
                         mccpIvLike.setImageResource(R.drawable.ic_thumb_up_grey);
                     }
                 }
@@ -497,18 +501,37 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
     }
 
     //set total likes count in each post
+    @SuppressLint("SetTextI18n")
     private void setTotalLikes(String postID, final TextView mccpTvLikes) {
-        totalLikes = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference().child("Likes").child(postID);
+
+        totalLikes = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference().child("Likes").child(postID).child("organiser");
 
         totalLikes.addValueEventListener(new ValueEventListener() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 long totalLikes = snapshot.getChildrenCount();
-                if (totalLikes == 0) {
-                    mccpTvLikes.setText(totalLikes + " Like");
+                organiserTLike = (int) totalLikes;
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        DatabaseReference userTotalLike = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference().child("Likes").child(postID).child("user");
+        userTotalLike.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                long usertotalLikes = snapshot.getChildrenCount();
+                userTlike = (int) usertotalLikes;
+
+                totalLikeCommunity = userTlike + organiserTLike;
+                if (totalLikeCommunity == 0) {
+                    mccpTvLikes.setText(totalLikeCommunity + " Like");
                 } else {
-                    mccpTvLikes.setText(totalLikes + " Likes");
+                    mccpTvLikes.setText(totalLikeCommunity + " Likes");
                 }
             }
 
