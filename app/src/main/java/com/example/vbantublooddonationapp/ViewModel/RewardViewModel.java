@@ -20,11 +20,14 @@ public class RewardViewModel extends AndroidViewModel {
 
     }
 
+    //get request by id
     public List<Reward> getRequestById(int id){return mRepository.getRequestById(id);}
+    //get reward by user id
     public LiveData<List<Reward>> getRewardByUserId(int id){return mRepository.getRewardByUserId(id);}
+    //send repo to update reward detail
     public void updateReward(Reward reward) {
         mRepository.update(reward);
     }
-
+    //get all reward
     public List<Reward> getAllRewards() {return mRepository.getAllReward();}
 }

@@ -20,25 +20,32 @@ public class UserViewModel extends AndroidViewModel {
         mRepository = new UserRepository(application);
         mAllUsers = mRepository.getAllUsers();
     }
+    //get all users
     public LiveData<List<User>> getAllUsers(){return mAllUsers; }
+    //get all user emails
     public List<String> getAllUserEmails() {
         return mRepository.getAllUserEmails();
     }
+    //get user List
     public List<User> getUserList() {
         return mRepository.getUserList();
     }
 
+    //send to repo to insert user
     public void insertUser(User user){
         mRepository.insert(user);
     }
 
+    //login user
     public List<User> loginUser(String email, String password){
         return mRepository.loginUser(email,password);
     }
 
+    //get user by id
     public List<User> getUserById(int id){
         return mRepository.getUserById(id);
     }
 
+    //send repo to update user details
     public void updateUser(User user){mRepository.update(user);}
 }

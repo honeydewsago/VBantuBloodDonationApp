@@ -7,9 +7,7 @@ import androidx.lifecycle.LiveData;
 
 import com.example.vbantublooddonationapp.BloodRoomDatabase;
 import com.example.vbantublooddonationapp.DAO.BloodRequestDao;
-import com.example.vbantublooddonationapp.DAO.OrganiserDao;
 import com.example.vbantublooddonationapp.Model.BloodRequest;
-import com.example.vbantublooddonationapp.Model.Organiser;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -17,14 +15,17 @@ import java.util.concurrent.ExecutionException;
 public class BloodRequestRepository {
     private BloodRequestDao mBloodRequestDao;
 
+    //initialize database and dao
     public BloodRequestRepository(Application application) {
         BloodRoomDatabase db = BloodRoomDatabase.getINSTANCE(application);
         mBloodRequestDao = db.bloodRequestDao();
     }
 
+    //function insert data into blood_request_table
     public void insert(BloodRequest bloodRequest) {
         new BloodRequestRepository.insertAsyncTask(mBloodRequestDao).execute(bloodRequest);
     }
+
 
     private static class insertAsyncTask extends AsyncTask<BloodRequest, Void, Void> {
         private BloodRequestDao mSyncTaskDao;
@@ -40,10 +41,12 @@ public class BloodRequestRepository {
         }
     }
 
+    //function retrieve all active requests
     public LiveData<List<BloodRequest>> getAllActiveRequests() {
         return mBloodRequestDao.getAllActiveRequests();
     }
 
+    //function retrieve request using id
     public List<BloodRequest> getRequestById(int id) {
         List<BloodRequest> list = null;
 
@@ -56,6 +59,7 @@ public class BloodRequestRepository {
         }
         return list;
     }
+
 
     private static class getRequestAsyncTask extends AsyncTask<Integer, Void, List<BloodRequest>> {
         private BloodRequestDao mSyncTaskDao;
@@ -71,6 +75,7 @@ public class BloodRequestRepository {
         }
     }
 
+    //function retrieve request by organiser id
     public List<BloodRequest> getRequestByOrganiserId(int id) {
         List<BloodRequest> list = null;
 
@@ -83,6 +88,7 @@ public class BloodRequestRepository {
         }
         return list;
     }
+
 
     private static class getOrganiserRequestAsyncTask extends AsyncTask<Integer, Void, List<BloodRequest>> {
         private BloodRequestDao mSyncTaskDao;
@@ -98,9 +104,11 @@ public class BloodRequestRepository {
         }
     }
 
+    //function update data in blood_request table
     public void update(BloodRequest bloodRequest) {
         new BloodRequestRepository.updateAsyncTask(mBloodRequestDao).execute(bloodRequest);
     }
+
 
     private static class updateAsyncTask extends AsyncTask<BloodRequest, Void, Void> {
         private BloodRequestDao mSyncTaskDao;

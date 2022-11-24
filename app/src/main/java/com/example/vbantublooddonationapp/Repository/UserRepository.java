@@ -6,10 +6,8 @@ import android.os.AsyncTask;
 import androidx.lifecycle.LiveData;
 
 import com.example.vbantublooddonationapp.BloodRoomDatabase;
-import com.example.vbantublooddonationapp.DAO.OrganiserDao;
 import com.example.vbantublooddonationapp.DAO.UserDao;
 import com.example.vbantublooddonationapp.Model.LoginParams;
-import com.example.vbantublooddonationapp.Model.Organiser;
 import com.example.vbantublooddonationapp.Model.User;
 
 import java.util.List;
@@ -20,17 +18,20 @@ public class UserRepository {
     private UserDao mUserDao;
     private LiveData<List<User>> mAllUsers;
 
+    //initialize database and dao
     public UserRepository(Application application) {
         BloodRoomDatabase db = BloodRoomDatabase.getINSTANCE(application);
         mUserDao = db.userDao();
         mAllUsers = mUserDao.getAllUsers();
     }
 
+    //function insert user data into user table
     public void insert(User user) {
         new insertAsyncTask(mUserDao).execute(user);
     }
 
 
+    //function retrieve all users
     public LiveData<List<User>> getAllUsers(){return mAllUsers;}
     private static class insertAsyncTask extends AsyncTask<User, Void, Void> {
         private UserDao mSyncTaskDao;
@@ -46,6 +47,7 @@ public class UserRepository {
         }
     }
 
+    //function retrieve all user emails
     public List<String> getAllUserEmails() {
         List<String> list = null;
         try {
@@ -72,6 +74,7 @@ public class UserRepository {
         }
     }
 
+    //function login for user
     public List<User> loginUser(String email, String password) {
         LoginParams params = new LoginParams(email, password);
 
@@ -101,6 +104,7 @@ public class UserRepository {
         }
     }
 
+    //function retrieve user by id
     public List<User> getUserById(int id) {
         List<User> list = null;
 
@@ -128,6 +132,7 @@ public class UserRepository {
         }
     }
 
+    //function update the user details
     public void update(User user) {
         new UserRepository.updateAsyncTask(mUserDao).execute(user);
     }
@@ -144,7 +149,7 @@ public class UserRepository {
         }
     }
 
-
+    //function get user list
     public List<User> getUserList() {
         List<User> list = null;
         try {
