@@ -435,7 +435,7 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
             saveLikes.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if (!snapshot.child("Likes").child(postID).child(userID).exists()) {
+                    if (!snapshot.child("Likes").child(postID).child(mUserType).child(userID).exists()) {
                         HashMap<String, Object> likes = new HashMap<>();
                         likes.put("userLikes", "true");
                         likes.put("userID", userID);
@@ -446,7 +446,7 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
                             likes.put("userName", mUser.getUsername());
                         }
                         likes.put("postID", postID);
-                        saveLikes.child("Likes").child(postID).child(userID).updateChildren(likes).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        saveLikes.child("Likes").child(postID).child(mUserType).child(userID).updateChildren(likes).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
@@ -458,7 +458,7 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
                             }
                         });
                     } else {
-                        saveLikes.child("Likes").child(postID).child(String.valueOf(mUserID)).removeValue();
+                        saveLikes.child("Likes").child(postID).child(mUserType).child(userID).removeValue();
                         mccpIvLike.setImageResource(R.drawable.ic_thumb_up_grey);
                     }
                 }
