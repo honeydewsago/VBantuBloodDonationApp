@@ -120,7 +120,6 @@ public class CommunityLikesActivity extends AppCompatActivity {
         mOrLikesList = new ArrayList<>();
         mUserLikesList = new ArrayList<>();
 
-        Toast.makeText(this, ""+mUserLikesList.size(), Toast.LENGTH_SHORT).show();
         mCommunityLikesAdapter = new CommunityLikesAdapter(CommunityLikesActivity.this);
         mActivityCommunityLikesBinding.aclRvLikes.setAdapter(mCommunityLikesAdapter);
         mActivityCommunityLikesBinding.aclRvLikes.setHasFixedSize(true);

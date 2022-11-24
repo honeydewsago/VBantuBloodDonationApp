@@ -512,11 +512,6 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 long totalLikes = snapshot.getChildrenCount();
                 organiserTLike = (int) totalLikes;
-//                if (totalLikes == 0) {
-//                    mccpTvLikes.setText(totalLikes + " Like");
-//                } else {
-//                    mccpTvLikes.setText(totalLikes + " Likes");
-//                }
             }
 
             @Override
@@ -525,12 +520,19 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
             }
         });
 
-        DatabaseReference userTotalLike = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference().child("Likes").child(postID).child("organiser");
+        DatabaseReference userTotalLike = FirebaseDatabase.getInstance("https://vbantu-blood-donation-app-default-rtdb.asia-southeast1.firebasedatabase.app").getReference().child("Likes").child(postID).child("user");
         userTotalLike.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 long usertotalLikes = snapshot.getChildrenCount();
                 userTlike = (int) usertotalLikes;
+
+                totalLikeCommunity = userTlike + organiserTLike;
+                if (totalLikeCommunity == 0) {
+                    mccpTvLikes.setText(totalLikeCommunity + " Like");
+                } else {
+                    mccpTvLikes.setText(totalLikeCommunity + " Likes");
+                }
             }
 
             @Override
@@ -538,12 +540,5 @@ public class CommunityPostAdapter extends RecyclerView.Adapter<CommunityPostAdap
 
             }
         });
-
-        totalLikeCommunity = userTlike + organiserTLike;
-        if (totalLikeCommunity == 0) {
-            mccpTvLikes.setText(totalLikeCommunity + " Like");
-        } else {
-            mccpTvLikes.setText(totalLikeCommunity + " Likes");
-        }
     }
 }
