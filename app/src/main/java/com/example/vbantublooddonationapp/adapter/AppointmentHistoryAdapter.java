@@ -38,6 +38,7 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
     public AppointmentHistoryAdapter(Activity activity){
         mActivity = activity;
         mOrganiserViewModel = new ViewModelProvider((FragmentActivity) mActivity).get(OrganiserViewModel.class);
+        mAppointmentViewModel = new ViewModelProvider((FragmentActivity) mActivity).get(AppointmentViewModel.class);
     }
 
 
