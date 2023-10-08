@@ -43,7 +43,7 @@ public class MyRewardFragment extends Fragment {
         mRewardTransactionViewModel = new ViewModelProvider(this).get(RewardTransactionViewModel.class);
         //initialize view model and get all rewards into a list
         mRewardViewModel = new ViewModelProvider(this).get(RewardViewModel.class);
-        List<RewardTransaction> mRewardTransList = mRewardTransactionViewModel.getAllRewards();
+        List<RewardTransaction> mRewardTransList = mRewardTransactionViewModel.getAllRewards("Available");
         mRewardTransactionAdapter = new RewardTransactionAdapter(getActivity());
         //setting the reward trans list to the adapter'
         mRewardTransactionAdapter.setRewardTransList(mRewardTransList);
