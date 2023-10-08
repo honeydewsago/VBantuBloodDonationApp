@@ -45,6 +45,7 @@ public class UserAppointmentAdapter extends RecyclerView.Adapter<UserAppointment
 
     public void setAppointmentList(List<Appointment> appointmentList) {
         //set the list for user appointments
+        mAppointmentList = appointmentList;
         notifyDataSetChanged();
     }
 
