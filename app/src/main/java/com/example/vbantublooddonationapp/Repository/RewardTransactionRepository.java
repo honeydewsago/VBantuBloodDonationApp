@@ -30,10 +30,10 @@ public class RewardTransactionRepository {
 
 
     //function get all reward transaction
-    public List<RewardTransaction> getAllRewardTransactions() {
+    public List<RewardTransaction> getAllRewardTransactions(String status) {
         List<RewardTransaction> list = null;
         try {
-            list = new RewardTransactionRepository.getAllRewardsTransactionAsyncTask(mRewardsTransactionDao).execute().get();
+            list = new RewardTransactionRepository.getAllRewardsTransactionAsyncTask(mRewardsTransactionDao).execute(status).get();
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -44,7 +44,7 @@ public class RewardTransactionRepository {
 
 
     //async task for getting all rewards transaction
-    private static class getAllRewardsTransactionAsyncTask extends AsyncTask<Void, Void, List<RewardTransaction>> {
+    private static class getAllRewardsTransactionAsyncTask extends AsyncTask<String, Void, List<RewardTransaction>> {
         private RewardTransactionDao mSyncTaskDao;
 
         getAllRewardsTransactionAsyncTask(RewardTransactionDao dao) {
@@ -52,8 +52,8 @@ public class RewardTransactionRepository {
         }
 
         @Override
-        protected List<RewardTransaction> doInBackground(Void...params) {
-            List<RewardTransaction> rewardTransactionList = mSyncTaskDao.getAllRewardsTransaction();
+        protected List<RewardTransaction> doInBackground(String... status) {
+            List<RewardTransaction> rewardTransactionList = mSyncTaskDao.getAllRewardsTransaction(status[0]);
             return rewardTransactionList;
         }
     }

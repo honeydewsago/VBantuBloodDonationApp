@@ -307,8 +307,16 @@ public class MakeAppointment extends AppCompatActivity {
 
         datePickerDialog = new DatePickerDialog(this, style, dateSetListener, year, month, day);
 
-        //no go back to past and make appointment
-        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
+        // Get the current time in milliseconds
+        long currentTimeMillis = System.currentTimeMillis();
+
+        // Subtract a day's worth of milliseconds from the current time
+        long oneDayInMillis = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+        long minDateInMillis = currentTimeMillis - oneDayInMillis;
+
+        // Set the minimum date for the DatePickerDialog
+        datePickerDialog.getDatePicker().setMinDate(minDateInMillis);
+
 
     }
 

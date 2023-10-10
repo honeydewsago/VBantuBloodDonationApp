@@ -38,6 +38,7 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
     public AppointmentHistoryAdapter(Activity activity){
         mActivity = activity;
         mOrganiserViewModel = new ViewModelProvider((FragmentActivity) mActivity).get(OrganiserViewModel.class);
+        mAppointmentViewModel = new ViewModelProvider((FragmentActivity) mActivity).get(AppointmentViewModel.class);
     }
 
 
@@ -84,7 +85,6 @@ public class AppointmentHistoryAdapter extends RecyclerView.Adapter<AppointmentH
             holder.mTvBloodAmount.setText(bloodAmount);
         }
         else{
-            Toast.makeText(mActivity, "ias", Toast.LENGTH_SHORT).show();
             holder.mTvStatus.setBackgroundResource(R.color.light_grey);
             holder.mTvBloodAmount.setVisibility(View.GONE);
         }

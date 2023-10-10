@@ -22,9 +22,9 @@ public interface RewardTransactionDao {
     @Query("Select * from reward_trans_table where reward_transID=(:id)")
     List<RewardTransaction> getRequestById(int id);
 
-    @Query("Select * from reward_trans_table where rewardID=(:id) ORDER By rewardID")
+    @Query("Select * from reward_trans_table where rewardID=(:id) ORDER By reward_transID DESC")
     LiveData<List<RewardTransaction>> getRewardsTransactionByRewardId(int id);
 
-    @Query("Select * from reward_trans_table")
-    List<RewardTransaction> getAllRewardsTransaction();
+    @Query("Select * from reward_trans_table ORDER BY status=(:status) DESC")
+    List<RewardTransaction> getAllRewardsTransaction(String status);
 }

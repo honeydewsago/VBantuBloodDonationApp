@@ -32,5 +32,5 @@ public class RewardTransactionViewModel extends AndroidViewModel {
 
 
     //get all rewards
-    public List<RewardTransaction> getAllRewards() {return mRepository.getAllRewardTransactions();}
+    public List<RewardTransaction> getAllRewards(String status) {return mRepository.getAllRewardTransactions(status);}
 }

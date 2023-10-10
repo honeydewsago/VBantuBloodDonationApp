@@ -24,6 +24,16 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/fragment_profile.xml" value="0.33" />
         <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/fragment_register.xml" value="0.2015625" />
         <entry key="..\:/Users/User/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/mipmap-anydpi-v26/profile_info.xml" value="0.1105" />
+        <entry key="..\:/Users/pmlie/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/activity_appointment_history.xml" value="0.33" />
+        <entry key="..\:/Users/pmlie/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/card_appointment.xml" value="0.5" />
+        <entry key="..\:/Users/pmlie/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/card_blood_request_history.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/pmlie/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/card_blood_type.xml" value="0.1" />
+        <entry key="..\:/Users/pmlie/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/card_community_comments.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/pmlie/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/card_community_likes.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/pmlie/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/card_community_post.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/pmlie/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/card_location.xml" value="0.5" />
+        <entry key="..\:/Users/pmlie/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/card_urgent_request.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/pmlie/AndroidStudioProjects/VBantuBloodDonationApp/app/src/main/res/layout/fragment_home.xml" value="0.1" />
       </map>
     </option>
   </component>
